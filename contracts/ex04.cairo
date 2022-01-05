@@ -1,11 +1,10 @@
-######### Ex 03
-# Using contract functions to manipulate contract variables
+######### Ex 04
+# Public/private variables
 # In this exercice, you need to:
-# - Use this contract's functions in order to manipulate an internal counter unique to your address
-# - Once this counter reaches a certain value, call a specific function
+# - Use a function to get assigned a private variable
+# - Use a function to duplicate this variable in a public variable
+# - Use a function to show you know the correct value of the private variable
 # - Your points are credited by the contract
-
-
 
 
 
@@ -41,7 +40,6 @@ end
 # Declaring getters
 # Public variables should be declared explicitely with a getter
 #
-
 
 @view
 func user_counters{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt) -> (user_counter: felt):
@@ -96,8 +94,4 @@ func decrement_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 	user_counters_storage.write(sender_address, current_counter_value-1)
 	return()
 end
-
-
-
-
 

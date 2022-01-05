@@ -14,31 +14,15 @@ from starkware.cairo.common.uint256 import (
 )
 from starkware.cairo.common.math import assert_not_zero
 from contracts.utils.IAccountContract import IAccountContract
+from contracts.utils.ex00_base import (
+    tderc20_address,
+    has_validated_exercice,
+    distribute_points,
+    validate_exercice,
+    ex_initializer
+)
 
 
-#
-# Declaring storage vars
-# Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
-#
-
-@storage_var
-func tderc20_address_storage() -> (tderc20_address_storage : felt):
-end
-
-@storage_var
-func has_validated_exercice(account: felt) -> (has_validated_exercice: felt):
-end
-
-#
-# Declaring getters
-# Public variables should be declared explicitely with a getter
-#
-
-@view
-func tderc20_address{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_tderc20_address: felt):
-    let (_tderc20_address) = tderc20_address_storage.read()
-    return (_tderc20_address)
-end
 
 #
 # Constructor
@@ -46,7 +30,7 @@ end
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         _tderc20_address : felt):
-    tderc20_address_storage.write(_tderc20_address)
+    ex_initializer(_tderc20_address)
     return ()
 end
 
@@ -66,41 +50,6 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
 	distribute_points(sender_address, 2)
     return ()
 end
-
-#
-# Internal functions
-# These functions can not be called directly by a transaction
-# Similar to internal functions in Solidity
-#
-
-func distribute_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(to: felt, amount: felt):
-	
-	# Converting felt to uint256. We assume it's a small number 
-	let points_to_credit: Uint256 = Uint256(0,amount)
-
-	# Calling the ERC20 contract to distribute points
-	ITDERC20.distribute_points(contract_address=tderc20_address, to = to, amount = points_to_credit)
-	return()
-end
-
-
-func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(to: felt):
-	# Checking if the user has deployed an account contract
-	let (account_contract_signer) = IAccountContract.get_signer(contract_address=to)
-	assert_not_zero(account_contract_signer)
-
-	# Checking if the user already validater this exercice
-	let (has_current_user_validated_exercice) = has_validated_exercice.read(to)
-	assert (has_current_user_validated_exercice) = 0
-
-	# Marking the exercice as completed
-	has_validated_exercice.write(to, 1)
-
-	return()
-end
-
-
-
 
 
 
