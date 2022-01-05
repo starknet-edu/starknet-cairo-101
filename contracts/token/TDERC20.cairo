@@ -142,15 +142,6 @@ func only_teacher_or_exercice{
     return ()
 end
 
-func only_during_setup{
-        syscall_ptr : felt*, 
-        pedersen_ptr : HashBuiltin*,
-        range_check_ptr
-    }():
-    let (permission) = setup_is_finished.read()
-    assert permission = 0
-    return ()
-end
 
 @external
 func distribute_points{
@@ -175,17 +166,6 @@ func set_teacher{
     return ()
 end
 
-@external
-func finish_setup{
-        syscall_ptr: felt*,
-        pedersen_ptr: HashBuiltin*,
-        range_check_ptr
-    }():
-    only_teacher_or_exercice()
-    setup_is_finished.write(1)
-
-    return ()
-end
 
 
 @view
@@ -196,4 +176,62 @@ func isTeacher{
     }(account: felt) -> (permission: felt):
     let (permission: felt) = Teacher_accounts.read(account)
     return (permission)
+end
+
+##
+## Temporary functions, will remove once account contracts are live and usable with Nile
+##
+##
+
+func only_during_setup{
+        syscall_ptr : felt*, 
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }():
+    let (permission) = setup_is_finished.read()
+    assert permission = 0
+    return ()
+end
+
+@external
+func finish_setup{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        range_check_ptr
+    }():
+    only_during_setup()
+    setup_is_finished.write(1)
+
+    return ()
+end
+
+@external
+func set_teacher_temp{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        range_check_ptr
+    }(accounts_len: felt, accounts: felt*):
+    only_during_setup()
+    set_teacher_internal(accounts_len, accounts)
+    return ()
+end
+
+func set_teacher_internal{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        range_check_ptr
+    }(accounts_len: felt, accounts: felt*):
+    only_during_setup()
+
+    if accounts_len == 0:
+        # Start with sum=0.
+        return ()
+    end
+
+    # If length is NOT zero, then the function calls itself again, by moving forward one slot
+    set_teacher_internal(accounts_len=accounts_len - 1, accounts=accounts + 1)
+
+    # This part of the function is first reached when length=0.
+    Teacher_accounts.write([accounts], 1)
+    return ()
 end

@@ -65,10 +65,10 @@ end
 func distribute_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(to: felt, amount: felt):
 	
 	# Converting felt to uint256. We assume it's a small number 
-	let points_to_credit: Uint256 = Uint256(0,amount)
-
+	let points_to_credit: Uint256 = Uint256(amount*1000000000000000000, 0)
+	let (contract_address) = tderc20_address_storage.read()
 	# Calling the ERC20 contract to distribute points
-	ITDERC20.distribute_points(contract_address=tderc20_address, to = to, amount = points_to_credit)
+	ITDERC20.distribute_points(contract_address=contract_address, to = to, amount = points_to_credit)
 	return()
 end
 
