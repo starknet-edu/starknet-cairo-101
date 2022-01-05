@@ -1,8 +1,6 @@
-######### Ex 01
-## Using a simple public contract function
-# In this exercice, you need to:
-# - Use this contract's claim_points() function
-# - Your points are credited by the contract
+######### Ex 02
+## Asserts
+
 
 
 
@@ -16,6 +14,7 @@ from starkware.cairo.common.uint256 import (
 )
 from starkware.cairo.common.math import assert_not_zero
 from contracts.utils.IAccountContract import IAccountContract
+
 
 #
 # Declaring storage vars
@@ -57,7 +56,10 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, my_value: felt):
+	# Checking that the value sent is correct
+	# Using assert this way is similar to using "require" in Solidity
+	assert my_value = 180618
 	# Checking if the user has validated the exercice before
 	validate_exercice(sender_address)
 	# Sending points to the address specified as parameter
@@ -96,6 +98,8 @@ func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 
 	return()
 end
+
+
 
 
 

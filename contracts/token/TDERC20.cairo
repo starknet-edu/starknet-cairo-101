@@ -21,6 +21,10 @@ from contracts.token.ERC20_base import (
 func Teacher_accounts(account: felt) -> (balance: felt):
 end
 
+@storage_var
+func setup_is_finished() -> (setup_is_finished : felt):
+end
+
 @constructor
 func constructor{
         syscall_ptr: felt*, 
@@ -138,6 +142,15 @@ func only_teacher_or_exercice{
     return ()
 end
 
+func only_during_setup{
+        syscall_ptr : felt*, 
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }():
+    let (permission) = setup_is_finished.read()
+    assert permission = 0
+    return ()
+end
 
 @external
 func distribute_points{
@@ -161,6 +174,19 @@ func set_teacher{
 
     return ()
 end
+
+@external
+func finish_setup{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        range_check_ptr
+    }():
+    only_teacher_or_exercice()
+    setup_is_finished.write(1)
+
+    return ()
+end
+
 
 @view
 func isTeacher{
