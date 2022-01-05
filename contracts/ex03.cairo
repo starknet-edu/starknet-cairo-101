@@ -61,7 +61,6 @@ end
 
 #
 # External functions
-# Calling this function will simply credit 2 points to the address specified in parameter
 #
 
 @external
