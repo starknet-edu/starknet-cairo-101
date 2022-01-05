@@ -4,7 +4,8 @@ Get started with Cairo with this simple tutorial. Complete the puzzles, get poin
 ## Introduction
 ### Disclaimer
 Don't expect any kind of benefit from using this, other than learning a bunch of cool stuff about StarNet, the first general purpose validity rollup on the Ethereum Mainnnet. 
-StarkNet is still in Alpha. This means that develpment is ongoing, and the paint is not dry everywhere. Things will get better, and in the meanwhile, we make things work with a bit of duct tape here and there!
+StarkNet is still in Alpha. This means that develpment is ongoing, and the paint is not dry everywhere. 
+Things will get better, and in the meanwhile, we make things work with a bit of duct tape here and there!
 
 ### How it works
 This workshop is a set of smart contracts deployed on StarkNet Alpha on testnet. Each smart contract is an exercice/puzzle; each one outlines a feature of the Cairo Smart contract language. Completing the exercice will credit you with points, in the form of an [ERC20 token](contracts/token/TDERC20.cairo).
