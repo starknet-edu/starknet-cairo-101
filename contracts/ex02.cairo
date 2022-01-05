@@ -7,13 +7,8 @@
 %lang starknet
 %builtins pedersen range_check
 
-from contracts.token.ITDERC20 import ITDERC20
 from starkware.cairo.common.cairo_builtins import HashBuiltin
-from starkware.cairo.common.uint256 import (
-    Uint256, uint256_add, uint256_sub, uint256_le, uint256_lt, uint256_check
-)
 from starkware.cairo.common.math import assert_not_zero
-from contracts.utils.IAccountContract import IAccountContract
 from contracts.utils.ex00_base import (
     tderc20_address,
     has_validated_exercice,
