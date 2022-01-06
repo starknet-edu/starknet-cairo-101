@@ -86,7 +86,9 @@ func reset_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check
 end
 
 @external
-func increment_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+func increment_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, salt: felt):
+	# Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
+	# Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
 	# Reading counter from storage
 	let (current_counter_value) = user_counters_storage.read(sender_address)
 	# Writing updated value to storage
@@ -95,7 +97,9 @@ func increment_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 end
 
 @external
-func decrement_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+func decrement_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, salt: felt):
+# Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
+	# Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
 	# Reading counter from storage
 	let (current_counter_value) = user_counters_storage.read(sender_address)
 	# Writing updated value to storage
