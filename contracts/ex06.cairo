@@ -59,7 +59,7 @@ func user_slots{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_pt
 end
 
 @view
-func user_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(slot: felt) -> (user_value: felt):
+func user_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt) -> (user_value: felt):
     let (value) = user_values_public_storage.read(slot)
     return (value)
 end

@@ -26,6 +26,8 @@ from contracts.utils.ex00_base import (
 # Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
 #
 
+# You will need to read values in these storage slots. But not all of them have getters!
+
 @storage_var
 func user_slots_storage(account: felt) -> (user_slot_storage: felt):
 end
@@ -59,7 +61,7 @@ func user_slots{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_pt
 end
 
 @view
-func user_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(slot: felt) -> (user_value: felt):
+func user_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt) -> (user_value: felt):
     let (value) = user_values_public_storage.read(slot)
     return (value)
 end
