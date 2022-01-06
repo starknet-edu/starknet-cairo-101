@@ -40,6 +40,27 @@ For example, reading your points balance [through voyager](https://goerli.voyage
 
 To overcome this limitation, always convert your hexadecimal value to decimal. I use [this website](https://www.rapidtables.com/convert/number/hex-to-decimal.html).
 
+### Getting points
+Each exercice is a separate smart contract. It contains code that, when executed properly, will distribute points to your address. Since there is no way currently to send a transaction easily through your account contract, you'll have to specify your address for each call.
+
+Points are distributed by the function `distribute_points()` while the function `validate_exercice` records that you completed the exercice (you can get points only once). Your goal is to: 
+- Read the code of the exercices in the current repo
+- Find where the calls to `distribute_points()` are in the code
+- Read the comments of the code to get further instructions if needed
+- Manage to call the functions correctly to trigger it.
+
+### Contract addresses 
+[Points counter ERC20](contracts/token/TDERC20.cairo):  [0x008302f50cf440df1f8355adf9ecaa4604f1b699a05c66e54e876c584a31813e](https://goerli.voyager.online/contract/0x008302f50cf440df1f8355adf9ecaa4604f1b699a05c66e54e876c584a31813e)
+[Ex01](contracts/ex01.cairo) : [0x00474e9eba95864f9a2745bc49c11b8c3c46a15d4c44934032aab796ca77eff7](https://goerli.voyager.online/contract/0x00474e9eba95864f9a2745bc49c11b8c3c46a15d4c44934032aab796ca77eff7)
+[Ex02](contracts/ex02.cairo) : [0x0413333a44f4566f2fc9b771402dd283e7362b4c5ce8912dddc2f472564b96c2](https://goerli.voyager.online/contract/0x0413333a44f4566f2fc9b771402dd283e7362b4c5ce8912dddc2f472564b96c2)
+[Ex03](contracts/ex03.cairo) : [0x006bc4ce9d850c5f019726d352cdd579d0c25a7cfa16755ef6c0a8151d3cabe0](https://goerli.voyager.online/contract/0x006bc4ce9d850c5f019726d352cdd579d0c25a7cfa16755ef6c0a8151d3cabe0)
+[Ex04](contracts/ex04.cairo) : [0x020793c7a7f3800e86ed781a91b52bf54d57fbb994727ff9e3d5a83877fcea85](https://goerli.voyager.online/contract/0x020793c7a7f3800e86ed781a91b52bf54d57fbb994727ff9e3d5a83877fcea85)
+[Ex05](contracts/ex05.cairo) : [0x01469176d66b0c2231e245457844774e4ea450878f405fd5462499200e206f1b](https://goerli.voyager.online/contract/0x01469176d66b0c2231e245457844774e4ea450878f405fd5462499200e206f1b)
+[Ex06](contracts/ex06.cairo) : [0x01867f305fda8f77c99125203c3b3b60af55876259c52a09730f3b9735151ff8](https://goerli.voyager.online/contract/0x01867f305fda8f77c99125203c3b3b60af55876259c52a09730f3b9735151ff8)
+[Ex07](contracts/ex07.cairo) : [0x065954cb7f21e1c54bef36d4f7e75a4812a56ef33b1976e647cdea183a816a96](https://goerli.voyager.online/contract/0x065954cb7f21e1c54bef36d4f7e75a4812a56ef33b1976e647cdea183a816a96)
+[Ex08](contracts/ex08.cairo) : [0x06baca2e4a5f08bf534138eb6fd8eea26c91886b5192c93db5a0cf256af9f611](https://goerli.voyager.online/contract/0x06baca2e4a5f08bf534138eb6fd8eea26c91886b5192c93db5a0cf256af9f611)
+
+
 ## Contributing
 ### Help is welcome!
 This project can be made better, and will evolve in the coming weeks. Your contributions are welcome! Here are things that you can do to help:

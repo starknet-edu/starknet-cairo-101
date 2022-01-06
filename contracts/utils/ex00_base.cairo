@@ -42,7 +42,8 @@ func has_validated_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, ra
 end
 
 #
-# Constructor
+# Internal constructor
+# This function is used to initialize the contract. It can be called from the constructor
 #
 
 func ex_initializer{
@@ -65,7 +66,9 @@ end
 func distribute_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(to: felt, amount: felt):
 	
 	# Converting felt to uint256. We assume it's a small number 
+	# We also add the required number of decimals
 	let points_to_credit: Uint256 = Uint256(amount*1000000000000000000, 0)
+	# Retrieving contract address from storage
 	let (contract_address) = tderc20_address_storage.read()
 	# Calling the ERC20 contract to distribute points
 	ITDERC20.distribute_points(contract_address=contract_address, to = to, amount = points_to_credit)
@@ -76,6 +79,7 @@ end
 func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(to: felt):
 	# Checking if the user has deployed an account contract
 	let (account_contract_signer) = IAccountContract.get_signer(contract_address=to)
+	# Veryfing that the account contract has a valid signer
 	assert_not_zero(account_contract_signer)
 
 	# Checking if the user already validater this exercice

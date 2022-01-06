@@ -4,7 +4,13 @@
 # - Use this contract's claim_points() function
 # - Your points are credited by the contract
 
+## What you'll learn
+# - General smart contract syntax
+# - Calling a function
 
+######### General directives and imports
+#
+#
 
 %lang starknet
 %builtins pedersen range_check
@@ -21,8 +27,8 @@ from contracts.utils.ex00_base import (
 )
 
 
-#
-# Constructor
+######### Constructor
+# This function is called when the contract is deployed
 #
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
@@ -31,11 +37,13 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     return ()
 end
 
-#
-# External functions
-# Calling this function will simply credit 2 points to the address specified in parameter
+######### External functions
+# These functions are callable by other contracts
 #
 
+# This function is called claim_points
+# It takes one argument as a parameter (sender_address), which is a felt. Read more about felts here TODO
+# It also has implicit arguments (syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr). Read more about implicit arguments here TODO
 @external
 func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
 	# Checking if the user has validated the exercice before

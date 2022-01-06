@@ -5,8 +5,14 @@
 # - Once this counter reaches a certain value, call a specific function
 # - Your points are credited by the contract
 
+## What you'll learn
+# - How to declare mappings
+# - How to read and write to mappings
+# - How to use a function to manipulate storage variables
 
-
+######### General directives and imports
+#
+#
 
 
 %lang starknet
