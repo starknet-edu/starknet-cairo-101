@@ -25,7 +25,7 @@ In order to complete the tutorial you need to collect points. These points will 
 - The easiest way to set one up is currently to use Argent X([download the chrome extension](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/) or [check their repo](https://github.com/argentlabs/argent-x). 
 - Follow the instructions to install the extension and deploy an account contract 
 - Make sure you are on the Goerli testnet network
-- The tutorial's points are held in contract `0x008302f50cf440df1f8355adf9ecaa4604f1b699a05c66e54e876c584a31813e`. Click on "add token" in Argent X to get your points balance to show up there!
+- The tutorial's points are held in contract `0x014d8d1062be7fcee39931bc36678981e19ab4376ddb90b65f7a1b0768bf8457`. Click on "add token" in Argent X to get your points balance to show up there!
 
 ### Using voyager
 For this tutorial we'll interact with our contracts through [Voyager](https://goerli.voyager.online/), StarkNet's block explorer. When looking for a contract / transaction, always make sure you are on the Goerli version of Voyager!
@@ -36,7 +36,7 @@ For this tutorial we'll interact with our contracts through [Voyager](https://go
 ### Using decimals instead of hexadecimal
 Voyager currently has issues dealing with hexadecimal values when writing values to contracts. 
 
-For example, reading your points balance [through voyager](https://goerli.voyager.online/contract/0x008302f50cf440df1f8355adf9ecaa4604f1b699a05c66e54e876c584a31813e#readContract) currently does not work if you input your Argent X address as hexadecimal.
+For example, reading your points balance [through voyager](https://goerli.voyager.online/contract/0x014d8d1062be7fcee39931bc36678981e19ab4376ddb90b65f7a1b0768bf8457#readContract) currently does not work if you input your Argent X address as hexadecimal.
 
 To overcome this limitation, always convert your hexadecimal value to decimal. I use [this website](https://www.rapidtables.com/convert/number/hex-to-decimal.html).
 
@@ -50,10 +50,10 @@ Points are distributed by the function `distribute_points()` while the function 
 - Manage to call the functions correctly to trigger it.
 
 ### Contract addresses 
-[Points counter ERC20](contracts/token/TDERC20.cairo):  [0x008302f50cf440df1f8355adf9ecaa4604f1b699a05c66e54e876c584a31813e](https://goerli.voyager.online/contract/0x008302f50cf440df1f8355adf9ecaa4604f1b699a05c66e54e876c584a31813e)
+[Points counter ERC20](contracts/token/TDERC20.cairo):  [0x014d8d1062be7fcee39931bc36678981e19ab4376ddb90b65f7a1b0768bf8457](https://goerli.voyager.online/contract/0x014d8d1062be7fcee39931bc36678981e19ab4376ddb90b65f7a1b0768bf8457)
 [Ex01](contracts/ex01.cairo) : [0x00474e9eba95864f9a2745bc49c11b8c3c46a15d4c44934032aab796ca77eff7](https://goerli.voyager.online/contract/0x00474e9eba95864f9a2745bc49c11b8c3c46a15d4c44934032aab796ca77eff7)
 [Ex02](contracts/ex02.cairo) : [0x0413333a44f4566f2fc9b771402dd283e7362b4c5ce8912dddc2f472564b96c2](https://goerli.voyager.online/contract/0x0413333a44f4566f2fc9b771402dd283e7362b4c5ce8912dddc2f472564b96c2)
-[Ex03](contracts/ex03.cairo) : [0x006bc4ce9d850c5f019726d352cdd579d0c25a7cfa16755ef6c0a8151d3cabe0](https://goerli.voyager.online/contract/0x006bc4ce9d850c5f019726d352cdd579d0c25a7cfa16755ef6c0a8151d3cabe0)
+[Ex03](contracts/ex03.cairo) : [0x07bca8f4f947a5e933026a41b7810bf395cd233310b5daefa834158c78bdd06f](https://goerli.voyager.online/contract/0x07bca8f4f947a5e933026a41b7810bf395cd233310b5daefa834158c78bdd06f)
 [Ex04](contracts/ex04.cairo) : [0x020793c7a7f3800e86ed781a91b52bf54d57fbb994727ff9e3d5a83877fcea85](https://goerli.voyager.online/contract/0x020793c7a7f3800e86ed781a91b52bf54d57fbb994727ff9e3d5a83877fcea85)
 [Ex05](contracts/ex05.cairo) : [0x01469176d66b0c2231e245457844774e4ea450878f405fd5462499200e206f1b](https://goerli.voyager.online/contract/0x01469176d66b0c2231e245457844774e4ea450878f405fd5462499200e206f1b)
 [Ex06](contracts/ex06.cairo) : [0x01867f305fda8f77c99125203c3b3b60af55876259c52a09730f3b9735151ff8](https://goerli.voyager.online/contract/0x01867f305fda8f77c99125203c3b3b60af55876259c52a09730f3b9735151ff8)
