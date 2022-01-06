@@ -51,7 +51,7 @@ Points are distributed by the function `distribute_points()` while the function 
 
 ### Contract addresses 
 - [Points counter ERC20](contracts/token/TDERC20.cairo):  [0x0787863b321f439cd1f6b477540cc3b5611905842843649d79d7fd3f2031704c](https://goerli.voyager.online/contract/0x0787863b321f439cd1f6b477540cc3b5611905842843649d79d7fd3f2031704c)
--[Ex01](contracts/ex01.cairo) : [0x055f2b023cd75378fa31dc9be3069724ecb9c68901f2adf96548343e7d9b0a37](https://goerli.voyager.online/contract/0x055f2b023cd75378fa31dc9be3069724ecb9c68901f2adf96548343e7d9b0a37)
+- [Ex01](contracts/ex01.cairo) : [0x055f2b023cd75378fa31dc9be3069724ecb9c68901f2adf96548343e7d9b0a37](https://goerli.voyager.online/contract/0x055f2b023cd75378fa31dc9be3069724ecb9c68901f2adf96548343e7d9b0a37)
 - [Ex02](contracts/ex02.cairo) : [0x020aeb6768fd9f41af0f8a5a9ab0b37cc196ea94db981c9ed9bc4dadc70f1361](https://goerli.voyager.online/contract/0x020aeb6768fd9f41af0f8a5a9ab0b37cc196ea94db981c9ed9bc4dadc70f1361)
 - [Ex03](contracts/ex03.cairo) : [0x014864bb0bfdf3ec097f5a10d7c3757dda9badd07d882dbdaf0326c059deeb86](https://goerli.voyager.online/contract/0x014864bb0bfdf3ec097f5a10d7c3757dda9badd07d882dbdaf0326c059deeb86)
 - [Ex04](contracts/ex04.cairo) : [0x01d2e241f121e517f8c61d3d3cc57921169a5648077c1f8eb1562eb09994e1a5](https://goerli.voyager.online/contract/0x01d2e241f121e517f8c61d3d3cc57921169a5648077c1f8eb1562eb09994e1a5)
