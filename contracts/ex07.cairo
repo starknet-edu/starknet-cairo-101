@@ -53,7 +53,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     assert_not_equal(value_a, value_b)
     assert_le(value_a, 75)
     assert_in_range(value_a, 40, 70)
-    assert_lt(value_b, 0)
+    assert_lt(value_b, 1)
 	# Checking if the user has validated the exercice before
 	validate_exercice(sender_address)
 	# Sending points to the address specified as parameter

@@ -200,6 +200,7 @@ func finish_setup{
         range_check_ptr
     }():
     only_during_setup()
+    Teacher_accounts.write(0, 0)
     setup_is_finished.write(1)
 
     return ()
