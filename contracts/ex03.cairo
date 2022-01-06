@@ -34,6 +34,7 @@ from contracts.utils.ex00_base import (
 # Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
 #
 
+# Declaring a mapping called user_counters_storage. For each 'account' key, which is a felt, we store a value which is a felt also.
 @storage_var
 func user_counters_storage(account: felt) -> (user_counters_storage: felt):
 end
@@ -43,7 +44,7 @@ end
 # Public variables should be declared explicitely with a getter
 #
 
-
+# Declaring a getter for our mappings. It takes one argument as a parameter, the account you wish to read the counter of
 @view
 func user_counters{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt) -> (user_counter: felt):
     let (user_counter) = user_counters_storage.read(account)
@@ -79,20 +80,25 @@ end
 
 @external
 func reset_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+	# Reinitializing the user counter
 	user_counters_storage.write(sender_address, 0)
 	return()
 end
 
 @external
 func increment_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+	# Reading counter from storage
 	let (current_counter_value) = user_counters_storage.read(sender_address)
+	# Writing updated value to storage
 	user_counters_storage.write(sender_address, current_counter_value+2)
 	return()
 end
 
 @external
 func decrement_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+	# Reading counter from storage
 	let (current_counter_value) = user_counters_storage.read(sender_address)
+	# Writing updated value to storage
 	user_counters_storage.write(sender_address, current_counter_value-1)
 	return()
 end
