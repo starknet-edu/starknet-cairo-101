@@ -25,7 +25,7 @@ In order to complete the tutorial you need to collect points. These points will 
 - The easiest way to set one up is currently to use Argent X([download the chrome extension](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/) or [check their repo](https://github.com/argentlabs/argent-x). 
 - Follow the instructions to install the extension and deploy an account contract 
 - Make sure you are on the Goerli testnet network
-- The tutorial's points are held in contract `0x0787863b321f439cd1f6b477540cc3b5611905842843649d79d7fd3f2031704c`. Click on "add token" in Argent X to get your points balance to show up there!
+- The tutorial's points are held in contract `0x03a621290763c4a77f75bf44d7caac421c32210d01a47fd9e4ddd942e09eb7aa`. Click on "add token" in Argent X to get your points balance to show up there!
 
 ### Using voyager
 For this tutorial we'll interact with our contracts through [Voyager](https://goerli.voyager.online/), StarkNet's block explorer. When looking for a contract / transaction, always make sure you are on the Goerli version of Voyager!
@@ -36,7 +36,7 @@ For this tutorial we'll interact with our contracts through [Voyager](https://go
 ### Using decimals instead of hexadecimal
 Voyager currently has issues dealing with hexadecimal values when writing values to contracts. 
 
-For example, reading your points balance [through voyager](https://goerli.voyager.online/contract/0x0787863b321f439cd1f6b477540cc3b5611905842843649d79d7fd3f2031704c#readContract) currently does not work if you input your Argent X address as hexadecimal.
+For example, reading your points balance [through voyager](https://goerli.voyager.online/contract/0x03a621290763c4a77f75bf44d7caac421c32210d01a47fd9e4ddd942e09eb7aa#readContract) currently does not work if you input your Argent X address as hexadecimal.
 
 To overcome this limitation, always convert your hexadecimal value to decimal. I use [this website](https://www.rapidtables.com/convert/number/hex-to-decimal.html).
 
@@ -50,15 +50,15 @@ Points are distributed by the function `distribute_points()` while the function 
 - Manage to call the functions correctly to trigger it.
 
 ### Contract addresses 
-- [Points counter ERC20](contracts/token/TDERC20.cairo):  [0x0787863b321f439cd1f6b477540cc3b5611905842843649d79d7fd3f2031704c](https://goerli.voyager.online/contract/0x0787863b321f439cd1f6b477540cc3b5611905842843649d79d7fd3f2031704c)
-- [Ex01](contracts/ex01.cairo) : [0x055f2b023cd75378fa31dc9be3069724ecb9c68901f2adf96548343e7d9b0a37](https://goerli.voyager.online/contract/0x055f2b023cd75378fa31dc9be3069724ecb9c68901f2adf96548343e7d9b0a37)
-- [Ex02](contracts/ex02.cairo) : [0x020aeb6768fd9f41af0f8a5a9ab0b37cc196ea94db981c9ed9bc4dadc70f1361](https://goerli.voyager.online/contract/0x020aeb6768fd9f41af0f8a5a9ab0b37cc196ea94db981c9ed9bc4dadc70f1361)
-- [Ex03](contracts/ex03.cairo) : [0x014864bb0bfdf3ec097f5a10d7c3757dda9badd07d882dbdaf0326c059deeb86](https://goerli.voyager.online/contract/0x014864bb0bfdf3ec097f5a10d7c3757dda9badd07d882dbdaf0326c059deeb86)
-- [Ex04](contracts/ex04.cairo) : [0x01d2e241f121e517f8c61d3d3cc57921169a5648077c1f8eb1562eb09994e1a5](https://goerli.voyager.online/contract/0x01d2e241f121e517f8c61d3d3cc57921169a5648077c1f8eb1562eb09994e1a5)
-- [Ex05](contracts/ex05.cairo) : [0x036479a8fcb4013cef302c9d9570f568a0d6da76ed40e2e3a1dc7ec4d1572af1](https://goerli.voyager.online/contract/0x036479a8fcb4013cef302c9d9570f568a0d6da76ed40e2e3a1dc7ec4d1572af1)
-- [Ex06](contracts/ex06.cairo) : [0x03417923cfc61dc399c45330c2637f9cc1bd427669c1515d0b0d6129cac87e48](https://goerli.voyager.online/contract/0x03417923cfc61dc399c45330c2637f9cc1bd427669c1515d0b0d6129cac87e48)
-- [Ex07](contracts/ex07.cairo) : [0x0473f4831661b995db03f9a43eb91937a0e26c41ad134a1f64a31ccf7b9891a8](https://goerli.voyager.online/contract/0x0473f4831661b995db03f9a43eb91937a0e26c41ad134a1f64a31ccf7b9891a8)
-- [Ex08](contracts/ex08.cairo) : [0x03ddefd7c3109a0de4c270054ea40d5b51a96347284bab35c1d4957c58f8d458](https://goerli.voyager.online/contract/0x03ddefd7c3109a0de4c270054ea40d5b51a96347284bab35c1d4957c58f8d458)
+- [Points counter ERC20](contracts/token/TDERC20.cairo):  [0x03a621290763c4a77f75bf44d7caac421c32210d01a47fd9e4ddd942e09eb7aa](https://goerli.voyager.online/contract/0x03a621290763c4a77f75bf44d7caac421c32210d01a47fd9e4ddd942e09eb7aa)
+- [Ex01](contracts/ex01.cairo) : [0x015884be0178d84bcba488ce5f4eb8e1c5be5218e4b7effd4ff62c78d8a2c10e](https://goerli.voyager.online/contract/0x015884be0178d84bcba488ce5f4eb8e1c5be5218e4b7effd4ff62c78d8a2c10e)
+- [Ex02](contracts/ex02.cairo) : [0x004586f9d8397381661f284e9c8f5633265414f71c59f05b41d51cad79613474](https://goerli.voyager.online/contract/0x004586f9d8397381661f284e9c8f5633265414f71c59f05b41d51cad79613474)
+- [Ex03](contracts/ex03.cairo) : [0x0112f6c1e24f86aab303909faffe6e26958188b401edbb33ec0931c5345538c4](https://goerli.voyager.online/contract/0x0112f6c1e24f86aab303909faffe6e26958188b401edbb33ec0931c5345538c4)
+- [Ex04](contracts/ex04.cairo) : [0x00b3bca0e2055e2b7337902b41f1b94ef0274471283a70483729f73487cb4597](https://goerli.voyager.online/contract/0x00b3bca0e2055e2b7337902b41f1b94ef0274471283a70483729f73487cb4597)
+- [Ex05](contracts/ex05.cairo) : [0x01a3bbe62dab562076e2784bd86cb76e3887ffbea5d320352b919f836f1b2b1f](https://goerli.voyager.online/contract/0x01a3bbe62dab562076e2784bd86cb76e3887ffbea5d320352b919f836f1b2b1f)
+- [Ex06](contracts/ex06.cairo) : [0x06e9bfcdbbb9c96e9a294701918ebb36386778a246e96b24c17bd4e17fe68208](https://goerli.voyager.online/contract/0x06e9bfcdbbb9c96e9a294701918ebb36386778a246e96b24c17bd4e17fe68208)
+- [Ex07](contracts/ex07.cairo) : [0x06c9420f32d063b06a4159079eb2a0c73333ca20ea22da99cda39fb3a69d6860](https://goerli.voyager.online/contract/0x06c9420f32d063b06a4159079eb2a0c73333ca20ea22da99cda39fb3a69d6860)
+- [Ex08](contracts/ex08.cairo) : [0x00f663c3019345a40f0b6ff20a56fe54e39c020ba9f318626be51e69422688a6](https://goerli.voyager.online/contract/0x00f663c3019345a40f0b6ff20a56fe54e39c020ba9f318626be51e69422688a6)
 
 
 ## Contributing
