@@ -155,6 +155,17 @@ func distribute_points{
 end
 
 @external
+func remove_points{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        range_check_ptr
+    }(to: felt, amount: Uint256):
+    only_teacher_or_exercice()
+    ERC20_burn(to, amount)
+    return ()
+end
+
+@external
 func set_teacher{
         syscall_ptr: felt*,
         pedersen_ptr: HashBuiltin*,

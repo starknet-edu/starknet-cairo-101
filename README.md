@@ -59,6 +59,9 @@ Points are distributed by the function `distribute_points()` while the function 
 - [Ex06](contracts/ex06.cairo) : [0x06e9bfcdbbb9c96e9a294701918ebb36386778a246e96b24c17bd4e17fe68208](https://goerli.voyager.online/contract/0x06e9bfcdbbb9c96e9a294701918ebb36386778a246e96b24c17bd4e17fe68208)
 - [Ex07](contracts/ex07.cairo) : [0x06c9420f32d063b06a4159079eb2a0c73333ca20ea22da99cda39fb3a69d6860](https://goerli.voyager.online/contract/0x06c9420f32d063b06a4159079eb2a0c73333ca20ea22da99cda39fb3a69d6860)
 - [Ex08](contracts/ex08.cairo) : [0x00f663c3019345a40f0b6ff20a56fe54e39c020ba9f318626be51e69422688a6](https://goerli.voyager.online/contract/0x00f663c3019345a40f0b6ff20a56fe54e39c020ba9f318626be51e69422688a6)
+- [Ex09](contracts/ex09.cairo) : [0x06cdff0bfa7d3bcb1538dde7ac200fbba645cd2234fd314aa77df5c6f6ddf060](https://goerli.voyager.online/contract/0x06cdff0bfa7d3bcb1538dde7ac200fbba645cd2234fd314aa77df5c6f6ddf060)
+- [Ex10](contracts/ex10.cairo) : [0x03851333cf0e864e3c9783095ca366cf8680b5bcb661364616531e7a391c30b3](https://goerli.voyager.online/contract/0x03851333cf0e864e3c9783095ca366cf8680b5bcb661364616531e7a391c30b3)
+- [Ex11](contracts/ex11.cairo) : [0x07bab6962016ab0b510056eb3745e5f3cd0fd08ac625ebac5cb90f9e89ef946b](https://goerli.voyager.online/contract/0x07bab6962016ab0b510056eb3745e5f3cd0fd08ac625ebac5cb90f9e89ef946b)
 
 
 ## Contributing

@@ -6,6 +6,8 @@ from starkware.cairo.common.uint256 import (
 namespace ITDERC20:
     func distribute_points(to: felt, amount: Uint256):
     end
+    func remove_points(to: felt, amount: Uint256):
+    end
     func set_teacher(account: felt, permission: felt):
     end
     func isTeacher(account: felt) -> (permission: felt):

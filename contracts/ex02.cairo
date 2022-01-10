@@ -11,6 +11,7 @@
 # - How to create getter functions
 # Asserts are a basic building bloc allowing you to verify that two values are the same. 
 # They are similar to require() in Solidity
+# More information about basic storage https://www.cairo-by-example.com/basics/storage
 
 ######### General directives and imports
 #
