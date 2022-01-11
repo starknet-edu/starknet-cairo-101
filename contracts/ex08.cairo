@@ -57,12 +57,14 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt, salt: felt):
+    # Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
+    # Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
 
     # Checking the value of user_values_storage for the user, at slot 10
     let (user_value_at_slot_ten) = user_values_storage.read(account, 10)
 
-    # This value should be equal to 180618
+    # This value should be equal to 10
     assert user_value_at_slot_ten = 10
 
     # Checking if the user has validated the exercice before

@@ -218,13 +218,24 @@ func finish_setup{
 end
 
 @external
-func set_teacher_temp{
+func set_teachers_temp{
         syscall_ptr: felt*,
         pedersen_ptr: HashBuiltin*,
         range_check_ptr
     }(accounts_len: felt, accounts: felt*):
     only_during_setup()
     set_teacher_internal(accounts_len, accounts)
+    return ()
+end
+
+@external
+func set_teacher_temp{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        range_check_ptr
+    }(account: felt):
+    only_during_setup()
+    Teacher_accounts.write(account, 1)
     return ()
 end
 

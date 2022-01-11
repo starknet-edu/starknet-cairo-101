@@ -20,7 +20,8 @@ from contracts.utils.ex11_base import (
     distribute_points,
     validate_exercice,
     ex_initializer,
-    validate_answers
+    validate_answers,
+    ex11_secret_value
 )
 
 #
@@ -30,6 +31,7 @@ from contracts.utils.ex11_base import (
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         _tderc20_address : felt):
     ex_initializer(_tderc20_address)
+
     return ()
 end
 

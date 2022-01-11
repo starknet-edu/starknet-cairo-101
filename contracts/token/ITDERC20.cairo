@@ -12,6 +12,10 @@ namespace ITDERC20:
     end
     func isTeacher(account: felt) -> (permission: felt):
     end
+    func set_teachers_temp(accounts_len: felt, accounts: felt*):
+    end
+    func set_teacher_temp(account: felt):
+    end
     # func transfer(recipient: felt, amount: Uint256) -> (success: felt):
     # end
     # func transferFrom(

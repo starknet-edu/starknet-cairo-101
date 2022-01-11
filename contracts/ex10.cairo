@@ -86,7 +86,7 @@ func setup_is_finished() -> (setup_is_finished : felt):
 end
 
 @external
-func set_ex_10b_address{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(ex_10b_address: felt):
+func set_ex_10b_address{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(ex10b_address: felt):
     let (permission) = setup_is_finished.read()
     assert permission = 0
     ex10b_address_storage.write(ex10b_address)

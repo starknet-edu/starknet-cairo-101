@@ -10,7 +10,9 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import (assert_not_zero, assert_le)
-from starkware.starknet.common.syscalls import get_caller_address
+from starkware.starknet.common.syscalls import (
+    get_contract_address, get_caller_address)
+from contracts.utils.Iex10 import Iex10
 
 #
 # Declaring storage vars
@@ -47,6 +49,8 @@ end
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(ex10_address: felt):
     ex10_address_storage.write(ex10_address)
+    let (current_contract_address) = get_contract_address()
+    Iex10.set_ex_10b_address(contract_address=ex10_address, ex_10b_address_=current_contract_address)
     return ()
 end
 
