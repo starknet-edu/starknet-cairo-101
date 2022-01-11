@@ -15,6 +15,9 @@ This workshop focuses on *reading* Cairo code and StarkNet smart contracts, in o
 This workshop is the first in a serie that will cover broad smart contract concepts (writing and deploying ERC20/ERC721, bridging assets, L1 <-> L2 messaging...). 
 Interested in helping writing those? [Reach out](https://twitter.com/HenriLieutaud)!
 
+### Providing feedback
+Once you are done working on this tutorial, your feedback would be greatly appreciated! Please fill [this form](https://forms.reform.app/starkware/untitled-form-4/kaes2e) to let us know what we can do to make it better. And if you struggle to move forward, do let us know! This workshop is meant to be as accessible as possible; we want to know if it's not the case.
+
 ## Getting started
 As of 05/01/2021, transactions in StarkNet can still be done without an account contract. This tutorial currently leverages this possibility. Once account contracts become more widespread and usable, it will change to reflect that.
 
