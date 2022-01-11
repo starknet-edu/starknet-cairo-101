@@ -36,7 +36,7 @@ from contracts.utils.ex00_base import (
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         _tderc20_address : felt):
-	ex_initializer(_tderc20_address)
+    ex_initializer(_tderc20_address)
     return ()
 end
 
@@ -54,10 +54,10 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     assert_le(value_a, 75)
     assert_in_range(value_a, 40, 70)
     assert_lt(value_b, 1)
-	# Checking if the user has validated the exercice before
-	validate_exercice(sender_address)
-	# Sending points to the address specified as parameter
-	distribute_points(sender_address, 2)
+    # Checking if the user has validated the exercice before
+    validate_exercice(sender_address)
+    # Sending points to the address specified as parameter
+    distribute_points(sender_address, 2)
     return ()
 end
 

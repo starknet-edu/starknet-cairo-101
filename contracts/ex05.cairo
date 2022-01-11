@@ -73,7 +73,7 @@ end
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         _tderc20_address : felt):
-	ex_initializer(_tderc20_address)
+    ex_initializer(_tderc20_address)
     return ()
 end
 

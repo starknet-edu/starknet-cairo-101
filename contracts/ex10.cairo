@@ -48,7 +48,7 @@ end
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         _tderc20_address : felt):
-	ex_initializer(_tderc20_address)
+    ex_initializer(_tderc20_address)
     return ()
 end
 
@@ -62,7 +62,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
 
     # Retrieve secret value by READING 
     let (ex10b_address) = ex10b_address_storage.read()
-	let (secret_value) = Iex10b.secret_value(contract_address=ex10b_address)
+    let (secret_value) = Iex10b.secret_value(contract_address=ex10b_address)
     assert secret_value = secret_value_i_guess
 
     # chosing next secret_value for contract 10b. We don't want 0, it's not funny
@@ -70,9 +70,9 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     Iex10b.change_secret_value(contract_address=ex10b_address, new_secret_value= next_secret_value_i_chose)
 
     # Checking if the user has validated the exercice before
-	validate_exercice(sender_address)
-	# Sending points to the address specified as parameter
-	distribute_points(sender_address, 2)
+    validate_exercice(sender_address)
+    # Sending points to the address specified as parameter
+    distribute_points(sender_address, 2)
     return ()
 end
 

@@ -65,10 +65,10 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     # This value should be equal to 180618
     assert user_value_at_slot_ten = 10
 
-	# Checking if the user has validated the exercice before
-	validate_exercice(account)
-	# Sending points to the address specified as parameter
-	distribute_points(account, 2)
+    # Checking if the user has validated the exercice before
+    validate_exercice(account)
+    # Sending points to the address specified as parameter
+    distribute_points(account, 2)
     return ()
 end
 

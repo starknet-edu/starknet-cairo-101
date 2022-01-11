@@ -67,44 +67,44 @@ end
 
 @external
 func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
-	# Checking that user's counter is equal to 7
-	let (current_counter_value) = user_counters_storage.read(sender_address)
-	assert current_counter_value = 7
+    # Checking that user's counter is equal to 7
+    let (current_counter_value) = user_counters_storage.read(sender_address)
+    assert current_counter_value = 7
 
-	# Checking if the user has validated the exercice before
-	validate_exercice(sender_address)
-	# Sending points to the address specified as parameter
-	distribute_points(sender_address, 2)
+    # Checking if the user has validated the exercice before
+    validate_exercice(sender_address)
+    # Sending points to the address specified as parameter
+    distribute_points(sender_address, 2)
     return ()
 end
 
 @external
 func reset_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
-	# Reinitializing the user counter
-	user_counters_storage.write(sender_address, 0)
-	return()
+    # Reinitializing the user counter
+    user_counters_storage.write(sender_address, 0)
+    return()
 end
 
 @external
 func increment_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, salt: felt):
-	# Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
-	# Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
-	# Reading counter from storage
-	let (current_counter_value) = user_counters_storage.read(sender_address)
-	# Writing updated value to storage
-	user_counters_storage.write(sender_address, current_counter_value+2)
-	return()
+    # Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
+    # Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
+    # Reading counter from storage
+    let (current_counter_value) = user_counters_storage.read(sender_address)
+    # Writing updated value to storage
+    user_counters_storage.write(sender_address, current_counter_value+2)
+    return()
 end
 
 @external
 func decrement_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, salt: felt):
-# Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
-	# Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
-	# Reading counter from storage
-	let (current_counter_value) = user_counters_storage.read(sender_address)
-	# Writing updated value to storage
-	user_counters_storage.write(sender_address, current_counter_value-1)
-	return()
+    # Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
+    # Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
+    # Reading counter from storage
+    let (current_counter_value) = user_counters_storage.read(sender_address)
+    # Writing updated value to storage
+    user_counters_storage.write(sender_address, current_counter_value-1)
+    return()
 end
 
 

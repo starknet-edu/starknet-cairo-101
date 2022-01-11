@@ -72,13 +72,13 @@ end
 func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, my_value: felt):
     # Reading stored value from storage
     let (my_secret_value) = my_secret_value_storage.read()
-	# Checking that the value sent is correct
-	# Using assert this way is similar to using "require" in Solidity
-	assert my_value = my_secret_value
-	# Checking if the user has validated the exercice before
-	validate_exercice(sender_address)
-	# Sending points to the address specified as parameter
-	distribute_points(sender_address, 2)
+    # Checking that the value sent is correct
+    # Using assert this way is similar to using "require" in Solidity
+    assert my_value = my_secret_value
+    # Checking if the user has validated the exercice before
+    validate_exercice(sender_address)
+    # Sending points to the address specified as parameter
+    distribute_points(sender_address, 2)
     return ()
 end
 

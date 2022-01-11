@@ -78,35 +78,35 @@ end
 
 @external
 func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, expected_value: felt):
-	# Checking that the user got a slot assigned
-	let (user_slot) = user_slots_storage.read(sender_address)
-	assert_not_zero(user_slot)
+    # Checking that the user got a slot assigned
+    let (user_slot) = user_slots_storage.read(sender_address)
+    assert_not_zero(user_slot)
 
-	# Checking that the value provided by the user is the one we expect
-	# Yes, I'm sneaky
-	let (value) = values_mapped_storage.read(user_slot)
-	assert value = expected_value + 32
+    # Checking that the value provided by the user is the one we expect
+    # Yes, I'm sneaky
+    let (value) = values_mapped_storage.read(user_slot)
+    assert value = expected_value + 32
 
-	# Checking if the user has validated the exercice before
-	validate_exercice(sender_address)
-	# Sending points to the address specified as parameter
-	distribute_points(sender_address, 2)
+    # Checking if the user has validated the exercice before
+    validate_exercice(sender_address)
+    # Sending points to the address specified as parameter
+    distribute_points(sender_address, 2)
     return ()
 end
 
 @external
 func assign_user_slot{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
-	# user_counters_storage.write(sender_address, 0)
-	let (next_slot_temp) = next_slot.read()
-	let (next_value) = values_mapped_storage.read(next_slot_temp + 1)
-	if next_value == 0:
-		user_slots_storage.write(sender_address, 0)
-		next_slot.write(0)
-	else:
-		user_slots_storage.write(sender_address, next_slot_temp + 1)
-		next_slot.write(next_slot_temp + 1)
-	end
-	return()
+    # user_counters_storage.write(sender_address, 0)
+    let (next_slot_temp) = next_slot.read()
+    let (next_value) = values_mapped_storage.read(next_slot_temp + 1)
+    if next_value == 0:
+        user_slots_storage.write(sender_address, 0)
+        next_slot.write(0)
+    else:
+        user_slots_storage.write(sender_address, next_slot_temp + 1)
+        next_slot.write(next_slot_temp + 1)
+    end
+    return()
 end
 
 #
@@ -117,17 +117,17 @@ end
 @external
 func set_random_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(values_len: felt, values: felt*):
 
-	# Check if the random values were already initialized
-	let (was_initialized_read) = was_initialized.read()
-	assert was_initialized_read = 0
+    # Check if the random values were already initialized
+    let (was_initialized_read) = was_initialized.read()
+    assert was_initialized_read = 0
 	
-	# Storing passed values in the store
-	set_a_random_value(values_len, values)
+    # Storing passed values in the store
+    set_a_random_value(values_len, values)
 
-	# Mark that value store was initialized
-	was_initialized.write(1)
-	# user_counters_storage.write(sender_address, 0)
-	return()
+    # Mark that value store was initialized
+    was_initialized.write(1)
+    # user_counters_storage.write(sender_address, 0)
+    return()
 end
 
 func set_a_random_value{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(values_len: felt, values: felt*):
