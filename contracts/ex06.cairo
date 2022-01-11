@@ -88,7 +88,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     # Checking that the value provided by the user is the one we expect
     # Still sneaky.
     let (value) = values_mapped_secret_storage.read(user_slot)
-    assert value = expected_value + 23
+    assert value = expected_value
 
     # Checking if the user has validated the exercice before
     validate_exercice(sender_address)
@@ -136,7 +136,7 @@ func copy_secret_value_to_readable_mapping{syscall_ptr : felt*, pedersen_ptr : H
     let (secret_value) = values_mapped_secret_storage.read(user_slot)
 
     # Copying the value from non accessible values_mapped_secret_storage to 
-    user_values_public_storage.write(sender_address, secret_value-23)
+    user_values_public_storage.write(sender_address, secret_value)
     return()
 end
 

@@ -47,7 +47,7 @@ Points are distributed by the function `distribute_points()` while the function 
 - Read the code of the exercices in the current repo
 - Find where the calls to `distribute_points()` are in the code
 - Read the comments of the code to get further instructions if needed
-- Manage to call the functions correctly to trigger it.
+- Manage to call the functions correctly through voyager to trigger it.
 
 ### Contract addresses 
 - [Points counter ERC20](contracts/token/TDERC20.cairo):  [0x00430530c613f9dd6aaf049ccee9f4a70b22b7de3515ed096cb6256e63f73090](https://goerli.voyager.online/contract/0x00430530c613f9dd6aaf049ccee9f4a70b22b7de3515ed096cb6256e63f73090)
