@@ -177,8 +177,6 @@ func set_teacher{
     return ()
 end
 
-
-
 @view
 func isTeacher{
         syscall_ptr : felt*, 
