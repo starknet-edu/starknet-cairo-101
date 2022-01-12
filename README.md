@@ -67,7 +67,7 @@ You can (and should) check the status of your transaction with the following URL
 
 ### Contract addresses 
 |Topic|Contract code|Contract on voyager|
-|---|---|
+|---|---|---|
 |Points counter ERC20|[Points counter ERC20](contracts/token/TDERC20.cairo)|[Link](https://goerli.voyager.online/contract/0x0555750f277a7abd2d7abf4c16806554bd750eb26d87ce58c6cb13b2158dcbc1)|
 |General syntax|[Ex01](contracts/ex01.cairo)|[Link](https://goerli.voyager.online/contract/0x00e51aba7c075e73fb8c62d02e6bd084ecc5162b70316707b6bc4fbd7de84d26)|
 |Storage variables, getters, asserts|[Ex02](contracts/ex02.cairo)|[Link](https://goerli.voyager.online/contract/0x045603e670f950536042455059aa88c0f117d70091335e5bd18fbda42e9a27f2)|
