@@ -5,20 +5,20 @@ Get started with Cairo with this simple tutorial. Complete the puzzles, get poin
 ### Disclaimer
 Don't expect any kind of benefit from using this, other than learning a bunch of cool stuff about StarNet, the first general purpose validity rollup on the Ethereum Mainnnet. 
 
-StarkNet is still in Alpha. This means that develpment is ongoing, and the paint is not dry everywhere. Things will get better, and in the meanwhile, we make things work with a bit of duct tape here and there!
+StarkNet is still in Alpha. This means that development is ongoing, and the paint is not dry everywhere. Things will get better, and in the meanwhile, we make things work with a bit of duct tape here and there!
 
 ### How it works
 This workshop is a set of smart contracts deployed on StarkNet Alpha on testnet. Each smart contract is an exercice/puzzle; each one outlines a feature of the Cairo Smart contract language. Completing the exercice will credit you with points, in the form of an [ERC20 token](contracts/token/TDERC20.cairo).
 
 This workshop focuses on *reading* Cairo code and StarkNet smart contracts, in order to understand its syntax. You don't need to code or install anything on your machine in order to follow and complete it. Getting started (doing the first two exercises) will take you some time, in order to get into the tutorial. Hang on! Once there, things will flow more easily. You're learning!
 
-This workshop is the first in a serie that will cover broad smart contract concepts (writing and deploying ERC20/ERC721, bridging assets, L1 <-> L2 messaging...). 
+This workshop is the first in a series that will cover broad smart contract concepts (writing and deploying ERC20/ERC721, bridging assets, L1 <-> L2 messaging...). 
 Interested in helping writing those? [Reach out](https://twitter.com/HenriLieutaud)!
 
 ### Providing feedback & getting support 
 Once you are done working on this tutorial, your feedback would be greatly appreciated! Please fill [this form](https://forms.reform.app/starkware/untitled-form-4/kaes2e) to let us know what we can do to make it better. And if you struggle to move forward, do let us know! This workshop is meant to be as accessible as possible; we want to know if it's not the case.
 
-Do you have a question? Join our [Discord server](https://discord.gg/YHz7drT3), register and join chanel #tutorials-support
+Do you have a question? Join our [Discord server](https://discord.gg/YHz7drT3), register and join channel #tutorials-support
 
 ## Getting started
 ### What will change soon
@@ -61,7 +61,7 @@ Your points will get credited in Argent X; though this make take so time. If you
 - Enter your address in decimal in the "balanceOf" function
 
 #### Transaction status
-You sent a transaction, and it is shown as "undected" in voyager? This can mean two things:
+You sent a transaction, and it is shown as "undetected" in voyager? This can mean two things:
 - Your transaction is pending, and will be included in a block shortly. It will then be visible in voyager.
 - Your transaction was invalid, and will NOT be included in a block (there is no such thing as a failed transaction in StarkNet). 
 
