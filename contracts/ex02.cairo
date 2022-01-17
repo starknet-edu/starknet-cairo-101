@@ -35,7 +35,7 @@ from contracts.utils.ex00_base import (
 # Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
 #
 # This variable is a felt and is called my_secret_value_storage
-# It can be read wtht my_secret_value_storage.read() or written to with my_secret_value_storage.write()
+# From within a smart contract, it can be read wtht my_secret_value_storage.read() or written to with my_secret_value_storage.write()
 
 @storage_var
 func my_secret_value_storage() -> (my_secret_value_storage: felt):
