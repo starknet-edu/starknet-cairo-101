@@ -65,7 +65,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     let (secret_value) = Iex10b.secret_value(contract_address=ex10b_address)
     assert secret_value = secret_value_i_guess
 
-    # chosing next secret_value for contract 10b. We don't want 0, it's not funny
+    # choosing next secret_value for contract 10b. We don't want 0, it's not funny
     assert_not_zero(next_secret_value_i_chose)
     Iex10b.change_secret_value(contract_address=ex10b_address, new_secret_value= next_secret_value_i_chose)
 

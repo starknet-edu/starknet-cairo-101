@@ -35,7 +35,7 @@ end
 
 #
 # Declaring getters
-# Public variables should be declared explicitely with a getter
+# Public variables should be declared explicitly with a getter
 #
 
 @view
@@ -99,10 +99,10 @@ end
 func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(to: felt):
     # Checking if the user has deployed an account contract
     let (account_contract_signer) = IAccountContract.get_signer(contract_address=to)
-    # Veryfing that the account contract has a valid signer
+    # Verifying that the account contract has a valid signer
     assert_not_zero(account_contract_signer)
 
-    # Checking if the user already validater this exercice
+    # Checking if the user already validated this exercice
     let (has_current_user_validated_exercice) = has_validated_exercice_storage.read(to)
     assert (has_current_user_validated_exercice) = 0
 

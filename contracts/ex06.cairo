@@ -49,7 +49,7 @@ end
 
 #
 # Declaring getters
-# Public variables should be declared explicitely with a getter
+# Public variables should be declared explicitly with a getter
 #
 
 @view

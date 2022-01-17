@@ -41,7 +41,7 @@ end
 
 #
 # Declaring getters
-# Public variables should be declared explicitely with a getter
+# Public variables should be declared explicitly with a getter
 #
 
 # Declaring a getter for our mappings. It takes one argument as a parameter, the account you wish to read the counter of
