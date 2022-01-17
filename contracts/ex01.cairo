@@ -42,7 +42,7 @@ end
 #
 
 # This function is called claim_points
-# It takes one argument as a parameter (sender_address), which is a felt. Read more about felts here TODO
+# It takes one argument as a parameter (sender_address), which is a felt. Read more about felts here https://www.cairo-lang.org/docs/hello_cairo/intro.html#field-element
 # It also has implicit arguments (syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr). Read more about implicit arguments here TODO
 @external
 func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
