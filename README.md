@@ -3,12 +3,12 @@ Get started with Cairo with this simple tutorial. Complete the puzzles, get poin
 
 ## Introduction
 ### Disclaimer
-Don't expect any kind of benefit from using this, other than learning a bunch of cool stuff about StarNet, the first general purpose validity rollup on the Ethereum Mainnnet. 
+Don't expect any kind of benefit from using this, other than learning a bunch of cool stuff about StarkNet, the first general purpose validity rollup on the Ethereum Mainnnet. 
 
 StarkNet is still in Alpha. This means that development is ongoing, and the paint is not dry everywhere. Things will get better, and in the meanwhile, we make things work with a bit of duct tape here and there!
 
 ### How it works
-This workshop is a set of smart contracts deployed on StarkNet Alpha on testnet. Each smart contract is an exercice/puzzle; each one outlines a feature of the Cairo Smart contract language. Completing the exercice will credit you with points, in the form of an [ERC20 token](contracts/token/TDERC20.cairo).
+This workshop is a set of smart contracts deployed on StarkNet Alpha on testnet. Each smart contract is an exercise/puzzle; each one outlines a feature of the Cairo Smart contract language. Completing the exercice will credit you with points, in the form of an [ERC20 token](contracts/token/TDERC20.cairo).
 
 This workshop focuses on *reading* Cairo code and StarkNet smart contracts, in order to understand its syntax. You don't need to code or install anything on your machine in order to follow and complete it. Getting started (doing the first two exercises) will take you some time, in order to get into the tutorial. Hang on! Once there, things will flow more easily. You're learning!
 
@@ -56,7 +56,7 @@ Points are distributed by the function `distribute_points()` while the function 
 
 ### Checking your progress
 #### Counting your points
-Your points will get credited in Argent X; though this make take so time. If you want to monitor your points count in real time, you can also see your balance in voyager!
+Your points will get credited in Argent X; though this may take some time. If you want to monitor your points count in real time, you can also see your balance in voyager!
 - Go to the [ERC20 counter](https://goerli.voyager.online/contract/0x0555750f277a7abd2d7abf4c16806554bd750eb26d87ce58c6cb13b2158dcbc1#readContract) in voyager, in the "read contract" tab 
 - Enter your address in decimal in the "balanceOf" function
 
@@ -88,8 +88,8 @@ You can (and should) check the status of your transaction with the following URL
 ### Help is welcome!
 This project can be made better, and will evolve in the coming weeks. Your contributions are welcome! Here are things that you can do to help:
 - Correct bugs if you find some
-- Add explanation in the comments of the exercice if you feel it needs more explanation
-- Add exercices showcasing your favorite Cairo feature
+- Add explanation in the comments of the exercise if you feel it needs more explanation
+- Add exercises showcasing your favorite Cairo feature
 
 ### Reusing this project
 This project uses [Nile](https://github.com/OpenZeppelin/nile).
