@@ -29,11 +29,11 @@ from contracts.utils.ex00_base import (
 #
 
 @storage_var
-func user_slots_storage(account: felt) -> (user_slot_storage: felt):
+func user_slots_storage(account: felt) -> (user_slots_storage: felt):
 end
 
 @storage_var
-func values_mapped_storage(slot: felt) -> (value_mapped_storage: felt):
+func values_mapped_storage(slot: felt) -> (values_mapped_storage: felt):
 end
 
 @storage_var
@@ -41,7 +41,7 @@ func was_initialized() -> (was_initialized: felt):
 end
 
 @storage_var
-func next_slot() -> (was_initialized: felt):
+func next_slot() -> (next_slot: felt):
 end
 
 
@@ -96,7 +96,6 @@ end
 
 @external
 func assign_user_slot{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
-    # user_counters_storage.write(sender_address, 0)
     let (next_slot_temp) = next_slot.read()
     let (next_value) = values_mapped_storage.read(next_slot_temp + 1)
     if next_value == 0:
@@ -126,7 +125,6 @@ func set_random_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 
     # Mark that value store was initialized
     was_initialized.write(1)
-    # user_counters_storage.write(sender_address, 0)
     return()
 end
 
