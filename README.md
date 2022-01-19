@@ -70,7 +70,8 @@ To overcome this limitation, always convert your hexadecimal value to decimal. I
 **Each exercice is a separate smart contract.** It contains code that, when executed properly, will distribute points to your address. Since there is no way currently to send a transaction easily through your account contract, you'll have to specify your address for each call.
 ​
 Points are distributed by the function `distribute_points()` while the function `validate_exercice` records that you completed the exercice (you can get points only once). Your goal is to: 
-[Graph](assets/diagram.png)
+
+![Graph](assets/diagram.png)
 ​
 ​
 ​
