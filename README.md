@@ -38,7 +38,7 @@ Do you have a question? Join our [Discord server](https://discord.gg/YHz7drT3), 
 ### What will change soon
 ​
 -   As of 05/01/2021, transactions in StarkNet can still be done without an account contract. This tutorial currently leverages this possibility. Once account contracts become more widespread and usable, it will change to reflect that.
--   Voyager struggles with hexadecimal / decimal conversion. For now, you should input all your value in voyager in the decimal format
+-   Voyager struggles with hexadecimal / decimal conversion. For now, you should input all your values in voyager in decimal format
 ​
 ### Creating an account contract
 **In order to complete the tutorial you need to collect points.** These points will be owned by a smart contract wallet, that you need to deploy.
