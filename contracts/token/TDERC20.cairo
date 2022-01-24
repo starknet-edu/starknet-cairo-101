@@ -22,7 +22,7 @@ from contracts.token.ERC20_base import (
 )
 
 @storage_var
-func Teacher_accounts(account: felt) -> (balance: felt):
+func teachers_and_exercises_accounts(account: felt) -> (balance: felt):
 end
 
 @storage_var
@@ -42,7 +42,7 @@ func constructor{
         owner: felt
     ):
     ERC20_initializer(name, symbol, initial_supply, recipient)
-    Teacher_accounts.write(owner, 1)
+    teachers_and_exercises_accounts.write(owner, 1)
     return ()
 end
 
@@ -179,7 +179,7 @@ func only_teacher_or_exercice{
         range_check_ptr
     }():
     let (caller) = get_caller_address()
-    let (permission) = Teacher_accounts.read(account=caller)
+    let (permission) = teachers_and_exercises_accounts.read(account=caller)
     assert permission = 1
     return ()
 end
@@ -214,7 +214,7 @@ func set_teacher{
         range_check_ptr
     }(account: felt, permission: felt):
     only_teacher_or_exercice()
-    Teacher_accounts.write(account, permission)
+    teachers_and_exercises_accounts.write(account, permission)
 
     return ()
 end
@@ -231,12 +231,12 @@ func set_teachers{
 end
 
 @view
-func isTeacher{
+func is_teacher_or_exercise{
         syscall_ptr : felt*, 
         pedersen_ptr : HashBuiltin*,
         range_check_ptr
     }(account: felt) -> (permission: felt):
-    let (permission: felt) = Teacher_accounts.read(account)
+    let (permission: felt) = teachers_and_exercises_accounts.read(account)
     return (permission)
 end
 
@@ -256,6 +256,6 @@ func _set_teacher{
     _set_teacher(accounts_len=accounts_len - 1, accounts=accounts + 1)
 
     # This part of the function is first reached when length=0.
-    Teacher_accounts.write([accounts], 1)
+    teachers_and_exercises_accounts.write([accounts], 1)
     return ()
 end
