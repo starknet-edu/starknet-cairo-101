@@ -72,8 +72,6 @@ func ex_initializer{
     ):
     tderc20_address_storage.write(_tderc20_address)
     ex11_secret_value.write(_tderc20_address)
-    let (current_contract_address) = get_contract_address()
-    ITDERC20.set_teacher_temp(contract_address=_tderc20_address, account=current_contract_address)
     return ()
 end
 

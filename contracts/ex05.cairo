@@ -104,7 +104,7 @@ func assign_user_slot{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
     let (next_slot_temp) = next_slot.read()
     let (next_value) = values_mapped_secret_storage.read(next_slot_temp + 1)
     if next_value == 0:
-        user_slots_storage.write(sender_address, 0)
+        user_slots_storage.write(sender_address, 1)
         next_slot.write(0)
     else:
         user_slots_storage.write(sender_address, next_slot_temp + 1)
