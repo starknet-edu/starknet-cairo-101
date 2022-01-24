@@ -8,12 +8,12 @@
 %lang starknet
 
 from contracts.token.ITDERC20 import ITDERC20
+from contracts.utils.Iplayers_registry import Iplayers_registry
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.uint256 import (
     Uint256, uint256_add, uint256_sub, uint256_le, uint256_lt, uint256_check
 )
 from starkware.cairo.common.math import assert_not_zero
-from contracts.utils.IAccountContract import IAccountContract
 from starkware.starknet.common.syscalls import (get_contract_address)
 
 #
@@ -26,9 +26,17 @@ func tderc20_address_storage() -> (tderc20_address_storage : felt):
 end
 
 @storage_var
-func has_validated_exercice_storage(account: felt) -> (has_validated_exercice_storage: felt):
+func players_registry_storage() -> (tderc20_address_storage : felt):
 end
 
+@storage_var
+func workshop_id_storage() -> (workshop_id_storage : felt):
+end
+
+@storage_var
+func exercise_id_storage() -> (exercise_id_storage : felt):
+end
+#
 @storage_var
 func ex11_secret_value() -> (secret_value: felt):
 end
@@ -45,9 +53,32 @@ func tderc20_address{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_che
 end
 
 @view
+func players_registry{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_players_registry: felt):
+    let (_players_registry) = players_registry_storage.read()
+    return (_players_registry)
+end
+
+@view
+func workshop_id{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_workshop_id: felt):
+    let (_workshop_id) = workshop_id_storage.read()
+    return (_workshop_id)
+end
+
+@view
+func exercise_id{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_exercise_id: felt):
+    let (_exercise_id) = exercise_id_storage.read()
+    return (_exercise_id)
+end
+
+@view
 func has_validated_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt) -> (has_validated_exercice: felt):
-    let (has_validated_exercice) = has_validated_exercice_storage.read(account)
-    return (has_validated_exercice)
+    # reading player registry
+    let (_players_registry) = players_registry_storage.read()
+    let (_workshop_id) = workshop_id_storage.read()
+    let (_exercise_id) = exercise_id_storage.read()
+    # Checking if the user already validated this exercice
+    let (has_current_user_validated_exercice) = Iplayers_registry.has_validated_exercice(contract_address=_players_registry, account=account, workshop=_workshop_id, exercise = _exercise_id)
+    return (has_current_user_validated_exercice)
 end
 
 @view
@@ -68,9 +99,15 @@ func ex_initializer{
         pedersen_ptr : HashBuiltin*,
         range_check_ptr
     }(
-        _tderc20_address: felt
+        _tderc20_address: felt,
+        _players_registry: felt,
+        _workshop_id: felt,
+        _exercise_id: felt  
     ):
     tderc20_address_storage.write(_tderc20_address)
+    players_registry_storage.write(_players_registry)
+    workshop_id_storage.write(_workshop_id)
+    exercise_id_storage.write(_exercise_id)
     ex11_secret_value.write(_tderc20_address)
     return ()
 end
@@ -94,18 +131,18 @@ func distribute_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 end
 
 
-func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(to: felt):
-    # Checking if the user has deployed an account contract
-    let (account_contract_signer) = IAccountContract.get_signer(contract_address=to)
-    # Verifying that the account contract has a valid signer
-    assert_not_zero(account_contract_signer)
-
+func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt):
+    # reading player registry
+    let (_players_registry) = players_registry_storage.read()
+    let (_workshop_id) = workshop_id_storage.read()
+    let (_exercise_id) = exercise_id_storage.read()
     # Checking if the user already validated this exercice
-    let (has_current_user_validated_exercice) = has_validated_exercice_storage.read(to)
+    let (has_current_user_validated_exercice) = Iplayers_registry.has_validated_exercice(contract_address=_players_registry, account=account, workshop=_workshop_id, exercise = _exercise_id)
     assert (has_current_user_validated_exercice) = 0
 
     # Marking the exercice as completed
-    has_validated_exercice_storage.write(to, 1)
+    Iplayers_registry.validate_exercice(contract_address=_players_registry, account=account, workshop=_workshop_id, exercise = _exercise_id)
+    
 
     return()
 end
