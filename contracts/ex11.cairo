@@ -29,9 +29,12 @@ from contracts.utils.ex11_base import (
 #
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        _tderc20_address : felt):
-    ex_initializer(_tderc20_address)
-
+        _tderc20_address: felt,
+        _players_registry: felt,
+        _workshop_id: felt,
+        _exercise_id: felt  
+    ):
+    ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id)
     return ()
 end
 
