@@ -66,7 +66,7 @@ Points are distributed by the function `distribute_points()` while the function 
 Your points will get credited in Argent X; though this may take some time. If you want to monitor your points count in real time, you can also see your balance in voyager!
 ​
 -   Go to the  [ERC20 counter](https://goerli.voyager.online/contract/0x07e8ddf3b76d9ed6367ad73bdfceb9f1ea242c26ed9f531af86e18fdd97febf7#readContract)  in voyager, in the "read contract" tab
--   Enter your address in decimal in the "balanceOf" function
+-   Enter your address in the "balanceOf" function
 ​
 #### Transaction status
 ​
