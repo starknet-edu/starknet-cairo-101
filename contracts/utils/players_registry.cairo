@@ -78,9 +78,10 @@ end
 # This function is used to initialize the contract. It can be called from the constructor
 #
 
-func ex_initializer{
-        syscall_ptr : felt*, 
-        pedersen_ptr : HashBuiltin*,
+@constructor
+func constructor{
+        syscall_ptr: felt*, 
+        pedersen_ptr: HashBuiltin*,
         range_check_ptr
     }(
         first_admin: felt

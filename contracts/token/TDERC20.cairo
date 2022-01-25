@@ -26,7 +26,7 @@ func teachers_and_exercises_accounts(account: felt) -> (balance: felt):
 end
 
 @storage_var
-func setup_is_finished() -> (setup_is_finished : felt):
+func is_transferable_storage() -> (is_transferable_storage : felt):
 end
 
 @constructor
@@ -49,6 +49,16 @@ end
 #
 # Getters
 #
+
+@view
+func is_transferable{
+        syscall_ptr : felt*,
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }() -> (is_transferable: felt):
+    let (is_transferable) = is_transferable_storage.read()
+    return (is_transferable)
+end
 
 @view
 func name{
@@ -120,9 +130,10 @@ func transfer{
         pedersen_ptr : HashBuiltin*,
         range_check_ptr
     }(recipient: felt, amount: Uint256) -> (success: felt):
-    # ERC20_transfer(recipient, amount)
-    # Cairo equivalent to 'return (false)'
-    return (0)
+    _is_transferable()
+    ERC20_transfer(recipient, amount)
+    # Cairo equivalent to 'return (true)'
+    return (1)
 end
 
 @external
@@ -135,9 +146,10 @@ func transferFrom{
         recipient: felt, 
         amount: Uint256
     ) -> (success: felt):
-    # ERC20_transferFrom(sender, recipient, amount)
-    # Cairo equivalent to 'return (false)'
-    return (0)
+    _is_transferable()
+    ERC20_transferFrom(sender, recipient, amount)
+    # Cairo equivalent to 'return (true)'
+    return (1)
 end
 
 @external
@@ -172,18 +184,6 @@ func decreaseAllowance{
     # Cairo equivalent to 'return (true)'
     return (1)
 end
-
-func only_teacher_or_exercice{
-        syscall_ptr : felt*, 
-        pedersen_ptr : HashBuiltin*,
-        range_check_ptr
-    }():
-    let (caller) = get_caller_address()
-    let (permission) = teachers_and_exercises_accounts.read(account=caller)
-    assert permission = 1
-    return ()
-end
-
 
 @external
 func distribute_points{
@@ -230,6 +230,17 @@ func set_teachers{
     return ()
 end
 
+@external
+func set_transferable{
+        syscall_ptr: felt*,
+        pedersen_ptr: HashBuiltin*,
+        range_check_ptr
+    }(permission: felt):
+    only_teacher_or_exercice()
+    _set_transferable(permission)
+    return ()
+end
+
 @view
 func is_teacher_or_exercise{
         syscall_ptr : felt*, 
@@ -259,3 +270,36 @@ func _set_teacher{
     teachers_and_exercises_accounts.write([accounts], 1)
     return ()
 end
+
+func only_teacher_or_exercice{
+        syscall_ptr : felt*, 
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }():
+    let (caller) = get_caller_address()
+    let (permission) = teachers_and_exercises_accounts.read(account=caller)
+    assert permission = 1
+    return ()
+end
+
+func _is_transferable{
+        syscall_ptr : felt*, 
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }():
+    let (permission) = is_transferable_storage.read()
+    assert permission = 1
+    return ()
+end
+
+func _set_transferable{
+        syscall_ptr : felt*, 
+        pedersen_ptr : HashBuiltin*,
+        range_check_ptr
+    }(permission: felt):
+    is_transferable_storage.write(permission)
+    return()
+end
+
+
+
