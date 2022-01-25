@@ -10,7 +10,7 @@ namespace ITDERC20:
     end
     func set_teacher(account: felt, permission: felt):
     end
-    func isTeacher(account: felt) -> (permission: felt):
+    func is_teacher_or_exercise(account: felt) -> (permission: felt):
     end
     func set_teachers_temp(accounts_len: felt, accounts: felt*):
     end
