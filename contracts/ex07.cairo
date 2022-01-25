@@ -12,6 +12,7 @@
 %builtins pedersen range_check
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
+from starkware.starknet.common.syscalls import (get_caller_address)
 from starkware.cairo.common.math import (
         assert_not_zero,
         assert_not_equal,
@@ -50,7 +51,9 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, value_a: felt, value_b: felt):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(value_a: felt, value_b: felt):
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Checking that the passed values are correct
     assert_not_zero(value_a)
     assert_nn(value_b)

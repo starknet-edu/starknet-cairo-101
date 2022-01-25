@@ -13,7 +13,7 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import (assert_not_zero, assert_le)
-
+from starkware.starknet.common.syscalls import (get_caller_address)
 from contracts.utils.ex00_base import (
     tderc20_address,
     has_validated_exercice,
@@ -62,7 +62,9 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, secret_value_i_guess: felt, next_secret_value_i_chose: felt):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(secret_value_i_guess: felt, next_secret_value_i_chose: felt):
+    # Reading caller address
+    let (sender_address) = get_caller_address()
 
     # Retrieve secret value by READING 
     let (ex10b_address) = ex10b_address_storage.read()

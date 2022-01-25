@@ -20,6 +20,7 @@
 %lang starknet
 %builtins pedersen range_check
 
+from starkware.starknet.common.syscalls import (get_caller_address)
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import assert_not_zero
 from contracts.utils.ex00_base import (
@@ -74,7 +75,9 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, my_value: felt):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(my_value: felt):
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Reading stored value from storage
     let (my_secret_value) = my_secret_value_storage.read()
     # Checking that the value sent is correct

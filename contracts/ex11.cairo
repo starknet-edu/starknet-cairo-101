@@ -12,6 +12,7 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import (assert_not_zero, assert_le)
+from starkware.starknet.common.syscalls import (get_caller_address)
 
 # This contract imports functions from another file than other exercices, be careful
 from contracts.utils.ex11_base import (
@@ -44,10 +45,13 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, secret_value_i_guess: felt, next_secret_value_i_chose: felt):
-
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(secret_value_i_guess: felt, next_secret_value_i_chose: felt):
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Check if your answer is correct
     validate_answers(sender_address, secret_value_i_guess, next_secret_value_i_chose)
+    # Reading caller address again, revoked references I love you
+    let (sender_address) = get_caller_address()
     # Checking if the user has validated the exercice before
     validate_exercice(sender_address)
     # Sending points to the address specified as parameter

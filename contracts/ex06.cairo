@@ -12,6 +12,7 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import assert_not_zero
+from starkware.starknet.common.syscalls import (get_caller_address)
 
 from contracts.utils.ex00_base import (
     tderc20_address,
@@ -84,13 +85,16 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, expected_value: felt):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(expected_value: felt):
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Checking that the user got a slot assigned
     let (user_slot) = user_slots_storage.read(sender_address)
     assert_not_zero(user_slot)
 
     # Checking that the value provided by the user is the one we expect
     # Still sneaky.
+    # Or not. Is this psyops?
     let (value) = values_mapped_secret_storage.read(user_slot)
     assert value = expected_value
 
@@ -102,7 +106,9 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
 end
 
 @external
-func assign_user_slot{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+func assign_user_slot{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     let (next_slot_temp) = next_slot.read()
     let (next_value) = values_mapped_secret_storage.read(next_slot_temp + 1)
     if next_value == 0:
@@ -116,7 +122,9 @@ func assign_user_slot{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
 end
 
 @external
-func external_handler_for_internal_function{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, a_value: felt):
+func external_handler_for_internal_function{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(a_value: felt):
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Just for fun
     assert a_value = 0
     # Calling internal function

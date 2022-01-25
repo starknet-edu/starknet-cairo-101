@@ -18,6 +18,7 @@
 %lang starknet
 %builtins pedersen range_check
 
+from starkware.starknet.common.syscalls import (get_caller_address)
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import assert_not_zero
 from contracts.utils.ex00_base import (
@@ -70,7 +71,9 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Checking that user's counter is equal to 7
     let (current_counter_value) = user_counters_storage.read(sender_address)
     assert current_counter_value = 7
@@ -83,16 +86,18 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
 end
 
 @external
-func reset_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+func reset_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Reinitializing the user counter
     user_counters_storage.write(sender_address, 0)
     return()
 end
 
 @external
-func increment_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, salt: felt):
-    # Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
-    # Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
+func increment_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Reading counter from storage
     let (current_counter_value) = user_counters_storage.read(sender_address)
     # Writing updated value to storage
@@ -101,9 +106,9 @@ func increment_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 end
 
 @external
-func decrement_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt, salt: felt):
-    # Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
-    # Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
+func decrement_counter{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Reading counter from storage
     let (current_counter_value) = user_counters_storage.read(sender_address)
     # Writing updated value to storage

@@ -17,6 +17,7 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import assert_not_zero
+from starkware.starknet.common.syscalls import (get_caller_address)
 
 from contracts.utils.ex00_base import (
     tderc20_address,
@@ -49,7 +50,9 @@ end
 # It takes one argument as a parameter (sender_address), which is a felt. Read more about felts here https://www.cairo-lang.org/docs/hello_cairo/intro.html#field-element
 # It also has implicit arguments (syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr). Read more about implicit arguments here TODO
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(sender_address: felt):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
+    # Reading caller address
+    let (sender_address) = get_caller_address()
     # Checking if the user has validated the exercice before
     validate_exercice(sender_address)
     # Sending points to the address specified as parameter

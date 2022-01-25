@@ -11,7 +11,7 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import (assert_not_zero, assert_le)
-
+from starkware.starknet.common.syscalls import (get_caller_address)
 from contracts.utils.ex00_base import (
     tderc20_address,
     has_validated_exercice,
@@ -61,20 +61,20 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt, salt: felt):
-    # Important: due to the way transaction hashes are calculated currently, you'll need to change salt everytime you call this function.
-    # Otherwise, the transaction hash will stay the same and your transaction won't execute the following iteration
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
+    # Reading caller address
+    let (sender_address) = get_caller_address()
 
     # Checking the value of user_values_storage for the user, at slot 10
-    let (user_value_at_slot_ten) = user_values_storage.read(account, 10)
+    let (user_value_at_slot_ten) = user_values_storage.read(sender_address, 10)
 
     # This value should be equal to 10
     assert user_value_at_slot_ten = 10
 
     # Checking if the user has validated the exercice before
-    validate_exercice(account)
+    validate_exercice(sender_address)
     # Sending points to the address specified as parameter
-    distribute_points(account, 2)
+    distribute_points(sender_address, 2)
     return ()
 end
 
