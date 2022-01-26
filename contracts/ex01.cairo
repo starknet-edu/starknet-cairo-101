@@ -21,9 +21,9 @@ from starkware.starknet.common.syscalls import (get_caller_address)
 
 from contracts.utils.ex00_base import (
     tderc20_address,
-    has_validated_exercice,
+    has_validated_exercise,
     distribute_points,
-    validate_exercice,
+    validate_exercise,
     ex_initializer
 )
 
@@ -54,7 +54,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     # Reading caller address
     let (sender_address) = get_caller_address()
     # Checking if the user has validated the exercice before
-    validate_exercice(sender_address)
+    validate_exercise(sender_address)
     # Sending points to the address specified as parameter
     distribute_points(sender_address, 2)
     return ()

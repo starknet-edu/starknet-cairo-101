@@ -71,7 +71,7 @@ func exercise_id{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
 end
 
 @view
-func has_validated_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt) -> (has_validated_exercice: felt):
+func has_validated_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt) -> (has_validated_exercice: felt):
     # reading player registry
     let (_players_registry) = players_registry_storage.read()
     let (_workshop_id) = workshop_id_storage.read()
@@ -131,7 +131,7 @@ func distribute_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 end
 
 
-func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt):
+func validate_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt):
     # reading player registry
     let (_players_registry) = players_registry_storage.read()
     let (_workshop_id) = workshop_id_storage.read()

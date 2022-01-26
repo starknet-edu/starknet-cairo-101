@@ -14,9 +14,9 @@ from starkware.cairo.common.math import (assert_not_zero, assert_le)
 from starkware.starknet.common.syscalls import (get_caller_address)
 from contracts.utils.ex00_base import (
     tderc20_address,
-    has_validated_exercice,
+    has_validated_exercise,
     distribute_points,
-    validate_exercice,
+    validate_exercise,
     ex_initializer
 )
 
@@ -72,7 +72,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     assert user_value_at_slot_ten = 10
 
     # Checking if the user has validated the exercice before
-    validate_exercice(sender_address)
+    validate_exercise(sender_address)
     # Sending points to the address specified as parameter
     distribute_points(sender_address, 2)
     return ()

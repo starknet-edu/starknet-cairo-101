@@ -74,6 +74,22 @@ func player_ranks{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
 end
 
 #
+# Events
+# Keeping tracks of what happened
+#
+@event
+func modificate_exercise_or_admin(account : felt, permission : felt):
+end
+
+@event
+func new_player(account: felt, rank: felt):
+end
+
+@event
+func new_validation(account: felt, workshop: felt, exercise: felt):
+end
+
+#
 # Internal constructor
 # This function is used to initialize the contract. It can be called from the constructor
 #
@@ -87,6 +103,7 @@ func constructor{
         first_admin: felt
     ):
     exercises_and_admins_accounts.write(first_admin, 1)
+    modificate_exercise_or_admin.emit(account=first_admin, permission=1)
     next_player_rank_storage.write(1)
     return ()
 end
@@ -124,6 +141,8 @@ func _set_exercises_or_admins{
 
     # This part of the function is first reached when length=0.
     exercises_and_admins_accounts.write([accounts], 1)
+    modificate_exercise_or_admin.emit(account=[accounts], permission=1)
+
     return ()
 end
 
@@ -141,6 +160,7 @@ func set_exercise_or_admin{
     }(account: felt, permission: felt):
     only_exercise_or_admin()
     exercises_and_admins_accounts.write(account, permission)
+    modificate_exercise_or_admin.emit(account=account, permission=permission)
 
     return ()
 end
@@ -165,6 +185,27 @@ func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 
 	# Marking the exercice as completed
 	has_validated_exercice_storage.write(account, workshop, exercise, 1)
+    new_validation.emit(account=account, workshop=workshop, exercise=exercise)
+
+    # Recording player if he is not yet recorded
+    let (player_rank) = players_ranks_storage.read(account)
+    
+    if player_rank == 0:
+        # Player is not yet record, let's record
+        let (next_player_rank) = next_player_rank_storage.read()
+        players_registry_storage.write(next_player_rank, account)
+        players_ranks_storage.write(account, next_player_rank)
+        let next_player_rank_plus_one = next_player_rank + 1
+        next_player_rank_storage.write(next_player_rank_plus_one)
+        new_player.emit(account=account, rank=next_player_rank)
+        tempvar syscall_ptr = syscall_ptr
+        tempvar pedersen_ptr = pedersen_ptr
+        tempvar range_check_ptr = range_check_ptr
+    else:
+        tempvar syscall_ptr = syscall_ptr
+        tempvar pedersen_ptr = pedersen_ptr
+        tempvar range_check_ptr = range_check_ptr
+    end
 
 	return()
 end
