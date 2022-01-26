@@ -40,9 +40,13 @@ Do you have a question? Join our [Discord server](https://discord.gg/YHz7drT3), 
 -   Follow the instructions to install the extension and deploy an account contract
 -   Make sure you are on the Goerli testnet network
 -   The tutorial's points are held in contract  `0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83`. Click on "add token" in Argent X to get your points balance to show up there!
+- Connect Voyager to your account contract! This will allow you to broadast your transactions through your wallet.
 ​
 ### Using voyager
 For this tutorial we'll interact with our contracts through [Voyager](https://goerli.voyager.online/), StarkNet's block explorer. 
+
+-> Connect Voyager to your account contract! This will allow you to broadast your transactions through your wallet.
+
 When looking for a contract / transaction, always make sure you are on the Goerli version of Voyager!
 -   Access your transactions with URL  [https://goerli.voyager.online/tx/your-tx-hash](https://goerli.voyager.online/tx/your-tx-hash)
 -   Access a contract with URL  [https://goerli.voyager.online/contract/your-contract-address](https://goerli.voyager.online/contract/your-contract-address)
