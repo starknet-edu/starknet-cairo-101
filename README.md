@@ -39,7 +39,7 @@ Do you have a question? Join our [Discord server](https://discord.gg/YHz7drT3), 
 -   The easiest way to set one up is currently to use Argent X ([download the chrome extension](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/)  or  [check their repo](https://github.com/argentlabs/argent-x)).
 -   Follow the instructions to install the extension and deploy an account contract
 -   Make sure you are on the Goerli testnet network
--   The tutorial's points are held in contract  `0x07e8ddf3b76d9ed6367ad73bdfceb9f1ea242c26ed9f531af86e18fdd97febf7`. Click on "add token" in Argent X to get your points balance to show up there!
+-   The tutorial's points are held in contract  `0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83`. Click on "add token" in Argent X to get your points balance to show up there!
 ​
 ### Using voyager
 For this tutorial we'll interact with our contracts through [Voyager](https://goerli.voyager.online/), StarkNet's block explorer. 
@@ -65,7 +65,7 @@ Points are distributed by the function `distribute_points()` while the function 
 ​
 Your points will get credited in Argent X; though this may take some time. If you want to monitor your points count in real time, you can also see your balance in voyager!
 ​
--   Go to the  [ERC20 counter](https://goerli.voyager.online/contract/0x07e8ddf3b76d9ed6367ad73bdfceb9f1ea242c26ed9f531af86e18fdd97febf7#readContract)  in voyager, in the "read contract" tab
+-   Go to the  [ERC20 counter](https://goerli.voyager.online/contract/0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83#readContract)  in voyager, in the "read contract" tab
 -   Enter your address in the "balanceOf" function
 ​
 #### Transaction status
@@ -81,18 +81,18 @@ You can (and should) check the status of your transaction with the following URL
 ### Contract addresses 
 |Topic|Contract code|Contract on voyager|
 |---|---|---|
-|Points counter ERC20|[Points counter ERC20](contracts/token/TDERC20.cairo)|[Link](https://goerli.voyager.online/contract/0x07e8ddf3b76d9ed6367ad73bdfceb9f1ea242c26ed9f531af86e18fdd97febf7)|
-|General syntax|[Ex01](contracts/ex01.cairo)|[Link](https://goerli.voyager.online/contract/0x000e49f618cfe176bb495ca17152d8b8817582f5b60bc0434381922ab34dd326)|
-|Storage variables, getters, asserts|[Ex02](contracts/ex02.cairo)|[Link](https://goerli.voyager.online/contract/0x03675817f3e5c3eeaefba6e64276da3287800921cd06764e331a6ce66c8fc3fa)|
-|Reading and writing storage variables|[Ex03](contracts/ex03.cairo)|[Link](https://goerli.voyager.online/contract/0x051e98b40301139204f5411706c222a65512dcb7f61880520e65d0fe6e87ec26)|
-|Mappings|[Ex04](contracts/ex04.cairo)|[Link](https://goerli.voyager.online/contract/0x0037c28654a4b27a19520643e4fef1d7cf1f0ed5e1359dc51830807ffb0a7bc8)|
-|Variable visibility|[Ex05](contracts/ex05.cairo)|[Link](https://goerli.voyager.online/contract/0x03b51051fe054a3a16cacbdc1f8abb15c222d99f8ff7b4cca0313eaae7d70583)|
-|Functions visibility|[Ex06](contracts/ex06.cairo)|[Link](https://goerli.voyager.online/contract/0x0504bb1ab12a068071c2502d6e9f3e186a42a9267a9a09898feca7874b61123f)|
-|Comparing values|[Ex07](contracts/ex07.cairo)|[Link](https://goerli.voyager.online/contract/0x0304ddd8c3c86ffe83d01673139b7ba637c6190e2a341630bbeda2e387c86474)|
-|Recursions level 1|[Ex08](contracts/ex08.cairo)|[Link](https://goerli.voyager.online/contract/0x0621856bf10e84e7234ed3dca758bc160ba5784fd95db179f50d40402d02552e)|
-|Recursions level 2|[Ex09](contracts/ex09.cairo)|[Link](https://goerli.voyager.online/contract/0x04805edfa65f6cc1fc26d92f3fb09969c739605235a8540f3a5f58045415fe3e)|
-|Composability|[Ex10](contracts/ex10.cairo)|[Link](https://goerli.voyager.online/contract/0x00faa4d8ca3505e58a12b36f84b0df79157dc1d00a440fa062279ef43c6ce388)|
-|Importing functions|[Ex11](contracts/ex11.cairo)|[Link](https://goerli.voyager.online/contract/0x058aae6966b49a3d947a94d81d55a1fb56a62c0874df4b737944c0e42c81af55)|
+|Points counter ERC20|[Points counter ERC20](contracts/token/TDERC20.cairo)|[Link](https://goerli.voyager.online/contract/0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83)|
+|General syntax|[Ex01](contracts/ex01.cairo)|[Link](https://goerli.voyager.online/contract/0x04b9b3cea3d4b21f7f272a26cf0d54f40348a9d8509f951b217e33d4e9c80af2)|
+|Storage variables, getters, asserts|[Ex02](contracts/ex02.cairo)|[Link](https://goerli.voyager.online/contract/0x06511a41c0620d756ff9e3c6b27d5aea2d9b65e162abdec72c4d746c0a1aca05)|
+|Reading and writing storage variables|[Ex03](contracts/ex03.cairo)|[Link](https://goerli.voyager.online/contract/0x044a68c9052a5208a46aee5d0af6f6a3e30686ab9ce3e852c4b817d0a76f2f09)|
+|Mappings|[Ex04](contracts/ex04.cairo)|[Link](https://goerli.voyager.online/contract/0x04e701814214c5d82215a134c31029986b0d05a2592c0c977fe2330263dc7304)|
+|Variable visibility|[Ex05](contracts/ex05.cairo)|[Link](https://goerli.voyager.online/contract/0x01e7285636d7d147df6e2eacb044611e13ce79048c4ac21d0209c8c923108975)|
+|Functions visibility|[Ex06](contracts/ex06.cairo)|[Link](https://goerli.voyager.online/contract/0x02abaa69541bd4630225cd69fa87d08a6e8fb80f4c7c2e8d3568fa59e71eec26)|
+|Comparing values|[Ex07](contracts/ex07.cairo)|[Link](https://goerli.voyager.online/contract/0x07d9f4f818592b7a97f2c7e5915733ed022f96313cb61bde2c27a9fbd729a5a4)|
+|Recursions level 1|[Ex08](contracts/ex08.cairo)|[Link](https://goerli.voyager.online/contract/0x072d42eb599c9ec14d1f7209223226cb1436898c6930480c6a2f6998c6ceb9fe)|
+|Recursions level 2|[Ex09](contracts/ex09.cairo)|[Link](https://goerli.voyager.online/contract/0x035203b6c0b68ef87127a7d77f36de4279ceb79ea2d8099f854f51fc28074de4)|
+|Composability|[Ex10](contracts/ex10.cairo)|[Link](https://goerli.voyager.online/contract/0x071e59fbd7e724b94ad1f6d4bba1ff7161a834c6b19c4b88719ad640d5a6105c)|
+|Importing functions|[Ex11](contracts/ex11.cairo)|[Link](https://goerli.voyager.online/contract/0x06e124eba8dcf1ebe207d6adb366193511373801b49742b39ace5c868b795e68)|
 
 ​
 ​
