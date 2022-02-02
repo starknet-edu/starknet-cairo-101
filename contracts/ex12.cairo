@@ -43,7 +43,7 @@ func next_slot() -> (next_slot: felt):
 end
 
 @event
-func assign_user_slot_called(current_balance : felt):
+func assign_user_slot_called(account: felt, secret_value : felt):
 end
 
 #
@@ -114,7 +114,7 @@ func assign_user_slot{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_ch
     let (user_slot) = user_slots_storage.read(sender_address)
     let (secret_value) = values_mapped_secret_storage.read(user_slot)
     # Emit an event with secret value
-    assign_user_slot_called.emit(secret_value+32)
+    assign_user_slot_called.emit(sender_address, secret_value+32)
     return()
 end
 
