@@ -110,12 +110,10 @@ This project can be made better, and will evolve in the coming weeks. Your contr
 - Add exercices showcasing your favorite Cairo feature
 ​
 ### Reusing this project
-This project uses [Nile](https://github.com/OpenZeppelin/nile).
+- Clone the repo on your machine
+- Set up the environment following [these instructions](https://starknet.io/docs/quickstart.html#quickstart)
+- Install [Nile](https://github.com/OpenZeppelin/nile).
+- Test that you are able to compile the project
 ```
-git clone https://github.com/l-henri/starknet-cairo-101
-cd starknet-cairo-101
-python3 -m venv env
-source env/bin/activate
-pip install cairo-nile
 nile compile
 ```
