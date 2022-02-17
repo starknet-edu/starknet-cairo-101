@@ -1,6 +1,6 @@
 ######### Ex 04
 # Reading a mapping
-# In this exercice, you need to:
+# In this exercise, you need to:
 # - Use a function to read a variable
 # - Use a function to read a value in a mapping, where the slot you read is the value from the first call
 # - Use a function to show you know the correct value of the value in the mapping
