@@ -20,7 +20,6 @@
 
 from starkware.starknet.common.syscalls import (get_caller_address)
 from starkware.cairo.common.cairo_builtins import HashBuiltin
-from starkware.cairo.common.math import assert_not_zero
 from contracts.utils.ex00_base import (
     tderc20_address,
     has_validated_exercise,
