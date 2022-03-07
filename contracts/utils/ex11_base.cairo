@@ -172,16 +172,22 @@ func validate_answers{
         tempvar pedersen_ptr = pedersen_ptr
         tempvar range_check_ptr = range_check_ptr
     else:
-        # If secret value is correct, do nothing and move on
+        # If secret value is correct, set new secret value
         if diff == 0:
+            assert_not_zero(next_secret_value_i_chose)
+            ex11_secret_value.write(next_secret_value_i_chose)
+            # This is necessary because of revoked references. Don't be scared, they won't stay around for too long...
+            tempvar syscall_ptr = syscall_ptr
+            tempvar pedersen_ptr = pedersen_ptr
+            tempvar range_check_ptr = range_check_ptr
         # If secret value is incorrect, we revert
         else:
             assert 1 = 0
+            # This is necessary because of revoked references. Don't be scared, they won't stay around for too long...
+            tempvar syscall_ptr = syscall_ptr
+            tempvar pedersen_ptr = pedersen_ptr
+            tempvar range_check_ptr = range_check_ptr
         end
-        # This is necessary because of revoked references. Don't be scared, they won't stay around for too long...
-        tempvar syscall_ptr = syscall_ptr
-        tempvar pedersen_ptr = pedersen_ptr
-        tempvar range_check_ptr = range_check_ptr
     end
 
     return ()
