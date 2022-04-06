@@ -181,7 +181,9 @@ func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 	only_exercise_or_admin()
 	# Checking if the user already validated this exercice
 	let (has_current_user_validated_exercice) = has_validated_exercice_storage.read(account, workshop, exercise)
-	assert (has_current_user_validated_exercice) = 0
+	with_attr error_message("User has already validated this exercice"):
+		assert (has_current_user_validated_exercice) = 0
+	end
 
 	# Marking the exercice as completed
 	has_validated_exercice_storage.write(account, workshop, exercise, 1)
