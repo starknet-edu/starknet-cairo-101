@@ -9,7 +9,7 @@
 # - How to declare storage variables
 # - How to read storage variables
 # - How to create getter functions
-# Asserts are a basic building bloc allowing you to verify that two values are the same. 
+# Asserts are a basic building block allowing you to verify that two values are the same.
 # They are similar to require() in Solidity
 # More information about basic storage https://www.cairo-by-example.com/basics/storage
 
@@ -88,10 +88,3 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     distribute_points(sender_address, 2)
     return ()
 end
-
-
-
-
-
-
-
