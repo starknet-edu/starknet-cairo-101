@@ -36,10 +36,10 @@ Do you have a question? Join our [Discord server](https://discord.gg/B7PevJGCCw)
 ​
 ### Creating an account contract
 **In order to complete the tutorial you need to collect points.** These points will be owned by a smart contract wallet, that you need to deploy.
--   The easiest way to set one up is currently to use Argent X ([download the chrome extension](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/)  or  [check their repo](https://github.com/argentlabs/argent-x)).
+-   The easiest way to set one up is to use Argent X ([download the chrome extension](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/)  or  [check their repo](https://github.com/argentlabs/argent-x)) or Braavos ([download the chrome extension](https://chrome.google.com/webstore/detail/braavos-wallet/jnlgamecbpmbajjfhmmmlhejkemejdma)).
 -   Follow the instructions to install the extension and deploy an account contract
 -   Make sure you are on the Goerli testnet network
--   The tutorial's points are held in contract  `0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83`. Click on "add token" in Argent X to get your points balance to show up there!
+-   The tutorial's points are held in contract  `0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83`. Click on "add token" in your installed wallet to get your points balance to show up there!
 - Connect Voyager to your account contract! This will allow you to broadast your transactions through your wallet.
 ​
 ### Using voyager
@@ -67,7 +67,7 @@ Points are distributed by the function `distribute_points()` while the function 
 ​
 #### Counting your points
 ​
-Your points will get credited in Argent X; though this may take some time. If you want to monitor your points count in real time, you can also see your balance in voyager!
+Your points will get credited in your installed wallet; though this may take some time. If you want to monitor your points count in real time, you can also see your balance in voyager!
 ​
 -   Go to the  [ERC20 counter](https://goerli.voyager.online/contract/0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83#readContract)  in voyager, in the "read contract" tab
 -   Enter your address in the "balanceOf" function
