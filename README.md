@@ -13,8 +13,8 @@ StarkNet is still in Alpha. This means that development is ongoing, and the pain
 ​
 **Complete the exercises and get tokens!**
 This workshop is a set of smart contracts deployed on StarkNet Alpha on testnet. 
-Each smart contract is an exercice/puzzle - which outlines a feature of the Cairo Smart contract language. 
-Completing the exercice will credit you with points, in the form of an [ERC20 token](contracts/token/TDERC20.cairo).
+Each smart contract is an exercise/puzzle - which outlines a feature of the Cairo Smart contract language. 
+Completing the exercise will credit you with points, in the form of an [ERC20 token](contracts/token/TDERC20.cairo).
 ​
 This workshop focuses on *reading* Cairo code and StarkNet smart contracts, in order to understand its syntax. 
 You do not need to code or install anything on your machine in order to follow and complete it. 
@@ -55,9 +55,9 @@ When looking for a contract / transaction, always make sure you are on the Goerl
 ### Getting points
 ​
 ​
-**Each exercice is a separate smart contract.** It contains code that, when executed properly, will distribute points to your address. Since there is no way currently to send a transaction easily through your account contract, you'll have to specify your address for each call.
+**Each exercise is a separate smart contract.** It contains code that, when executed properly, will distribute points to your address. Since there is no way currently to send a transaction easily through your account contract, you'll have to specify your address for each call.
 ​
-Points are distributed by the function `distribute_points()` while the function `validate_exercice` records that you completed the exercice (you can get points only once). Your goal is to: 
+Points are distributed by the function `distribute_points()` while the function `validate_exercise` records that you completed the exercise (you can get points only once). Your goal is to: 
 
 ![Graph](assets/diagram.png)
 ​
@@ -106,8 +106,8 @@ You can (and should) check the status of your transaction with the following URL
 ### Help is welcome!
 This project can be made better, and will evolve in the coming weeks. Your contributions are welcome! Here are things that you can do to help:
 - Correct bugs if you find some
-- Add explanation in the comments of the exercice if you feel it needs more explanation
-- Add exercices showcasing your favorite Cairo feature
+- Add explanation in the comments of the exercise if you feel it needs more explanation
+- Add exercises showcasing your favorite Cairo feature
 ​
 ### Reusing this project
 - Clone the repo on your machine
