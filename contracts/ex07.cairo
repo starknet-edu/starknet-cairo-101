@@ -1,25 +1,24 @@
-######### Ex 07
-## Understanding functions to compare values
+# ######## Ex 07
+# # Understanding functions to compare values
 # In this exercice, you need to:
-# - Use this contract's claim_points() function 
+# - Use this contract's claim_points() function
 # - Your points are credited by the contract
 
-######### References
+# ######## References
 # Documentation is still being written. You can find answers in this file
 # https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/math.cairo
 
 %lang starknet
-%builtins pedersen range_check
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
-from starkware.starknet.common.syscalls import (get_caller_address)
+from starkware.starknet.common.syscalls import get_caller_address
 from starkware.cairo.common.math import (
-        assert_not_zero,
-        assert_not_equal,
-        assert_nn,
-        assert_le,
-        assert_lt,
-        assert_in_range        
+    assert_not_zero,
+    assert_not_equal,
+    assert_nn,
+    assert_le,
+    assert_lt,
+    assert_in_range,
 )
 
 from contracts.utils.ex00_base import (
@@ -27,20 +26,16 @@ from contracts.utils.ex00_base import (
     has_validated_exercise,
     distribute_points,
     validate_exercise,
-    ex_initializer
+    ex_initializer,
 )
-
 
 #
 # Constructor
 #
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        _tderc20_address: felt,
-        _players_registry: felt,
-        _workshop_id: felt,
-        _exercise_id: felt  
-    ):
+    _tderc20_address : felt, _players_registry : felt, _workshop_id : felt, _exercise_id : felt
+):
     ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id)
     return ()
 end
@@ -51,7 +46,9 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(value_a: felt, value_b: felt):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    value_a : felt, value_b : felt
+):
     # Reading caller address
     let (sender_address) = get_caller_address()
     # Checking that the passed values are correct
@@ -67,6 +64,3 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     distribute_points(sender_address, 2)
     return ()
 end
-
-
-

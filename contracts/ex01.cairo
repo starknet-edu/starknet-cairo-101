@@ -1,47 +1,42 @@
-######### Ex 01
-## Using a simple public contract function
+# ######## Ex 01
+# # Using a simple public contract function
 # In this exercice, you need to:
 # - Use this contract's claim_points() function
 # - Your points are credited by the contract
 
-## What you'll learn
+# # What you'll learn
 # - General smart contract syntax
 # - Calling a function
 
-######### General directives and imports
+# ######## General directives and imports
 #
 #
 
 %lang starknet
-%builtins pedersen range_check
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
-from starkware.starknet.common.syscalls import (get_caller_address)
+from starkware.starknet.common.syscalls import get_caller_address
 
 from contracts.utils.ex00_base import (
     tderc20_address,
     has_validated_exercise,
     distribute_points,
     validate_exercise,
-    ex_initializer
+    ex_initializer,
 )
 
-
-######### Constructor
+# ######## Constructor
 # This function is called when the contract is deployed
 #
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        _tderc20_address: felt,
-        _players_registry: felt,
-        _workshop_id: felt,
-        _exercise_id: felt  
-    ):
+    _tderc20_address : felt, _players_registry : felt, _workshop_id : felt, _exercise_id : felt
+):
     ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id)
     return ()
 end
 
-######### External functions
+# ######## External functions
 # These functions are callable by other contracts
 #
 
@@ -58,6 +53,3 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     distribute_points(sender_address, 2)
     return ()
 end
-
-
-

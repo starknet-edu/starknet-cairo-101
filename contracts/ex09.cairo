@@ -1,30 +1,29 @@
-######### Ex 09
-## Recursions - advanced
+# ######## Ex 09
+# # Recursions - advanced
 # In this exercice, you need to:
 # - Use this contract's claim_points() function
 # - Your points are credited by the contract
 
-
-
 %lang starknet
-%builtins pedersen range_check
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
-from starkware.cairo.common.math import (assert_not_zero, assert_le)
-from starkware.starknet.common.syscalls import (get_caller_address)
+from starkware.cairo.common.math import assert_not_zero, assert_le
+from starkware.starknet.common.syscalls import get_caller_address
 from contracts.utils.ex00_base import (
     tderc20_address,
     has_validated_exercise,
     distribute_points,
     validate_exercise,
-    ex_initializer
+    ex_initializer,
 )
 
 #
 # View functions
 #
 @view
-func get_sum{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(array_len: felt, array: felt*) -> (array_sum: felt):
+func get_sum{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    array_len : felt, array : felt*
+) -> (array_sum : felt):
     let (array_sum) = get_sum_internal(array_len, array)
     return (array_sum)
 end
@@ -34,11 +33,8 @@ end
 #
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        _tderc20_address: felt,
-        _players_registry: felt,
-        _workshop_id: felt,
-        _exercise_id: felt  
-    ):
+    _tderc20_address : felt, _players_registry : felt, _workshop_id : felt, _exercise_id : felt
+):
     ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id)
     return ()
 end
@@ -49,7 +45,9 @@ end
 #
 
 @external
-func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(array_len: felt, array: felt*):
+func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    array_len : felt, array : felt*
+):
     # Checking that the array is at least of length 4
     assert_le(4, array_len)
 
@@ -57,7 +55,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     let (array_sum) = get_sum_internal(array_len, array)
 
     # The sum should be higher than 50
-    assert_le ( 50, array_sum)
+    assert_le(50, array_sum)
     # Reading caller address
     let (sender_address) = get_caller_address()
     # Checking if the user has validated the exercice before
@@ -72,7 +70,7 @@ end
 #
 #
 
-func get_sum_internal{ range_check_ptr}(length : felt, array : felt*) -> (sum : felt):
+func get_sum_internal{range_check_ptr}(length : felt, array : felt*) -> (sum : felt):
     # This function is used recursively to calculate the sum of all the values in an array
     # Recursively, we first go through the length of the array
     # Once at the end of the array (length = 0), we start summing
@@ -94,5 +92,3 @@ func get_sum_internal{ range_check_ptr}(length : felt, array : felt*) -> (sum : 
     # The return function targets the body of this function
     return (sum)
 end
-
-

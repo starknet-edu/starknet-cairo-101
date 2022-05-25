@@ -1,23 +1,20 @@
-######### Ex 08
-## Recursions - basics
+# ######## Ex 08
+# # Recursions - basics
 # In this exercice, you need to:
 # - Use this contract's claim_points() function
 # - Your points are credited by the contract
 
-
-
 %lang starknet
-%builtins pedersen range_check
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
-from starkware.cairo.common.math import (assert_not_zero, assert_le)
-from starkware.starknet.common.syscalls import (get_caller_address)
+from starkware.cairo.common.math import assert_not_zero, assert_le
+from starkware.starknet.common.syscalls import get_caller_address
 from contracts.utils.ex00_base import (
     tderc20_address,
     has_validated_exercise,
     distribute_points,
     validate_exercise,
-    ex_initializer
+    ex_initializer,
 )
 
 #
@@ -26,9 +23,8 @@ from contracts.utils.ex00_base import (
 #
 
 @storage_var
-func user_values_storage(account: felt, slot: felt) -> (user_values_storage: felt):
+func user_values_storage(account : felt, slot : felt) -> (user_values_storage : felt):
 end
-
 
 #
 # Declaring getters
@@ -36,7 +32,9 @@ end
 #
 
 @view
-func user_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt, slot: felt) -> (value: felt):
+func user_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    account : felt, slot : felt
+) -> (value : felt):
     let (value) = user_values_storage.read(account, slot)
     return (value)
 end
@@ -46,11 +44,8 @@ end
 #
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        _tderc20_address: felt,
-        _players_registry: felt,
-        _workshop_id: felt,
-        _exercise_id: felt  
-    ):
+    _tderc20_address : felt, _players_registry : felt, _workshop_id : felt, _exercise_id : felt
+):
     ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id)
     return ()
 end
@@ -82,8 +77,9 @@ end
 # In order to pass it, the user needs to pass both the array and its length
 # This complexity is abstracted away by voyager, where you simply need to pass an array
 @external
-func set_user_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt, array_len: felt, array: felt*):
-
+func set_user_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    account : felt, array_len : felt, array : felt*
+):
     set_user_values_internal(account, array_len, array)
     return ()
 end
@@ -93,7 +89,9 @@ end
 #
 #
 
-func set_user_values_internal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account:felt, length : felt, array : felt*):
+func set_user_values_internal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    account : felt, length : felt, array : felt*
+):
     # This function is used recursively to set all the user values
     # Recursively, we first go through the length of the array
     # Once at the end of the array (length = 0), we start summing
@@ -103,11 +101,9 @@ func set_user_values_internal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, 
     end
 
     # If length is NOT zero, then the function calls itself again, moving forward one slot
-    set_user_values_internal(account = account, length=length - 1, array=array + 1)
+    set_user_values_internal(account=account, length=length - 1, array=array + 1)
 
     # This part of the function is first reached when length=0.
     user_values_storage.write(account, length - 1, [array])
     return ()
 end
-
-
