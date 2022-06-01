@@ -95,6 +95,8 @@ Your points will get credited in your installed wallet; though this may take som
 
 - Go to the  [ERC20 counter](https://goerli.voyager.online/contract/0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83#readContract)  in voyager, in the "read contract" tab
 - Enter your address in the "balanceOf" function
+
+You can also check your overall progress [here](https://starknet-tutorials.vercel.app)
 ​
 
 #### Transaction status
