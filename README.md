@@ -56,6 +56,8 @@ Do you have a question? Join our [Discord server](https://discord.gg/B7PevJGCCw)
 - The tutorial's points are held in contract  `0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83`. Click on "add token" in your installed wallet to get your points balance to show up there!
 - Connect Voyager to your account contract! This will allow you to broadast your transactions through your wallet.
 ​
+### Get Testnet ETH
+In order to execute transactions on the Goerli StarkNet TestNet **you'll need testnet ETH to pay for gas**. To get some, go to the [faucet](https://faucet.goerli.starknet.io/) and follow the instructions. It could take several minutes but you should receive some L2 Goerli ETH in your wallet that you can use to execute transactions on the testnet.
 
 ### Using voyager
 
