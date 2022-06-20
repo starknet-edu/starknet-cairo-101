@@ -1,9 +1,5 @@
-
-
-
-
-######### Ex 00
-## A contract from which other contracts can import functions
+# ######## Ex 00
+# # A contract from which other contracts can import functions
 
 %lang starknet
 
@@ -11,10 +7,15 @@ from contracts.token.ITDERC20 import ITDERC20
 from contracts.utils.Iplayers_registry import Iplayers_registry
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.uint256 import (
-    Uint256, uint256_add, uint256_sub, uint256_le, uint256_lt, uint256_check
+    Uint256,
+    uint256_add,
+    uint256_sub,
+    uint256_le,
+    uint256_lt,
+    uint256_check,
 )
 from starkware.cairo.common.math import assert_not_zero
-from starkware.starknet.common.syscalls import (get_contract_address)
+from starkware.starknet.common.syscalls import get_contract_address
 
 #
 # Declaring storage vars
@@ -38,7 +39,7 @@ func exercise_id_storage() -> (exercise_id_storage : felt):
 end
 #
 @storage_var
-func ex11_secret_value() -> (secret_value: felt):
+func ex11_secret_value() -> (secret_value : felt):
 end
 
 #
@@ -47,63 +48,72 @@ end
 #
 
 @view
-func tderc20_address{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_tderc20_address: felt):
+func tderc20_address{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+    _tderc20_address : felt
+):
     let (_tderc20_address) = tderc20_address_storage.read()
     return (_tderc20_address)
 end
 
 @view
-func players_registry{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_players_registry: felt):
+func players_registry{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+    _players_registry : felt
+):
     let (_players_registry) = players_registry_storage.read()
     return (_players_registry)
 end
 
 @view
-func workshop_id{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_workshop_id: felt):
+func workshop_id{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+    _workshop_id : felt
+):
     let (_workshop_id) = workshop_id_storage.read()
     return (_workshop_id)
 end
 
 @view
-func exercise_id{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (_exercise_id: felt):
+func exercise_id{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+    _exercise_id : felt
+):
     let (_exercise_id) = exercise_id_storage.read()
     return (_exercise_id)
 end
 
 @view
-func has_validated_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt) -> (has_validated_exercice: felt):
+func has_validated_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    account : felt
+) -> (has_validated_exercice : felt):
     # reading player registry
     let (_players_registry) = players_registry_storage.read()
     let (_workshop_id) = workshop_id_storage.read()
     let (_exercise_id) = exercise_id_storage.read()
     # Checking if the user already validated this exercice
-    let (has_current_user_validated_exercice) = Iplayers_registry.has_validated_exercice(contract_address=_players_registry, account=account, workshop=_workshop_id, exercise = _exercise_id)
+    let (has_current_user_validated_exercice) = Iplayers_registry.has_validated_exercice(
+        contract_address=_players_registry,
+        account=account,
+        workshop=_workshop_id,
+        exercise=_exercise_id,
+    )
     return (has_current_user_validated_exercice)
 end
 
 @view
-func secret_value{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (secret_value: felt):
+func secret_value{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+    secret_value : felt
+):
     let (secret_value) = ex11_secret_value.read()
     # There is a trick here
     return (secret_value + 42069)
 end
-
 
 #
 # Internal constructor
 # This function is used to initialize the contract. It can be called from the constructor
 #
 
-func ex_initializer{
-        syscall_ptr : felt*, 
-        pedersen_ptr : HashBuiltin*,
-        range_check_ptr
-    }(
-        _tderc20_address: felt,
-        _players_registry: felt,
-        _workshop_id: felt,
-        _exercise_id: felt  
-    ):
+func ex_initializer{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    _tderc20_address : felt, _players_registry : felt, _workshop_id : felt, _exercise_id : felt
+):
     tderc20_address_storage.write(_tderc20_address)
     players_registry_storage.write(_players_registry)
     workshop_id_storage.write(_workshop_id)
@@ -118,78 +128,80 @@ end
 # Similar to internal functions in Solidity
 #
 
-func distribute_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(to: felt, amount: felt):
-    
-    # Converting felt to uint256. We assume it's a small number 
+func distribute_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    to : felt, amount : felt
+):
+    # Converting felt to uint256. We assume it's a small number
     # We also add the required number of decimals
-    let points_to_credit: Uint256 = Uint256(amount*1000000000000000000, 0)
+    let points_to_credit : Uint256 = Uint256(amount * 1000000000000000000, 0)
     # Retrieving contract address from storage
     let (contract_address) = tderc20_address_storage.read()
     # Calling the ERC20 contract to distribute points
-    ITDERC20.distribute_points(contract_address=contract_address, to = to, amount = points_to_credit)
-    return()
+    ITDERC20.distribute_points(contract_address=contract_address, to=to, amount=points_to_credit)
+    return ()
 end
 
-
-func validate_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(account: felt):
+func validate_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    account : felt
+):
     # reading player registry
     let (_players_registry) = players_registry_storage.read()
     let (_workshop_id) = workshop_id_storage.read()
     let (_exercise_id) = exercise_id_storage.read()
     # Checking if the user already validated this exercice
-    let (has_current_user_validated_exercice) = Iplayers_registry.has_validated_exercice(contract_address=_players_registry, account=account, workshop=_workshop_id, exercise = _exercise_id)
+    let (has_current_user_validated_exercice) = Iplayers_registry.has_validated_exercice(
+        contract_address=_players_registry,
+        account=account,
+        workshop=_workshop_id,
+        exercise=_exercise_id,
+    )
     assert (has_current_user_validated_exercice) = 0
 
     # Marking the exercice as completed
-    Iplayers_registry.validate_exercice(contract_address=_players_registry, account=account, workshop=_workshop_id, exercise = _exercise_id)
-    
+    Iplayers_registry.validate_exercice(
+        contract_address=_players_registry,
+        account=account,
+        workshop=_workshop_id,
+        exercise=_exercise_id,
+    )
 
-    return()
+    return ()
 end
 
-func validate_answers{
-        syscall_ptr : felt*, 
-        pedersen_ptr : HashBuiltin*,
-        range_check_ptr
-    }(sender_address: felt, secret_value_i_guess: felt, next_secret_value_i_chose: felt):
+func validate_answers{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    sender_address : felt, secret_value_i_guess : felt, next_secret_value_i_chose : felt
+):
     # CAREFUL THERE IS A TRAP FOR PEOPLE WHO WON'T READ THE CODE
     # This exercice looks like the previous one, but actually the view secret_value returns a different value than secret_value
     # Sending the wrong execution result will remove some of your points, then validate the exercice. You won't be able to get those points back later on!
     alloc_locals
     let (secret_value) = ex11_secret_value.read()
-    local diff = secret_value_i_guess - secret_value 
+    local diff = secret_value_i_guess - secret_value
     # Laying our trap here
     if diff == 42069:
-        # Converting felt to uint256. We assume it's a small number 
+        # Converting felt to uint256. We assume it's a small number
         # We also add the required number of decimals
-        let points_to_remove: Uint256 = Uint256(2*1000000000000000000, 0)
+        let points_to_remove : Uint256 = Uint256(2 * 1000000000000000000, 0)
         # # Retrieving contract address from storage
         let (contract_address) = tderc20_address_storage.read()
         # # Calling the ERC20 contract to distribute points
-        ITDERC20.remove_points(contract_address=contract_address, to = sender_address, amount = points_to_remove)
+        ITDERC20.remove_points(
+            contract_address=contract_address, to=sender_address, amount=points_to_remove
+        )
         # This is necessary because of revoked references. Don't be scared, they won't stay around for too long...
-        tempvar syscall_ptr = syscall_ptr
-        tempvar pedersen_ptr = pedersen_ptr
-        tempvar range_check_ptr = range_check_ptr
+        return ()
     else:
         # If secret value is correct, set new secret value
         if diff == 0:
-            assert_not_zero(next_secret_value_i_chose)
+            with_attr error_message("Chosen value can't be 0"):
+                assert_not_zero(next_secret_value_i_chose)
+            end
             ex11_secret_value.write(next_secret_value_i_chose)
             # This is necessary because of revoked references. Don't be scared, they won't stay around for too long...
-            tempvar syscall_ptr = syscall_ptr
-            tempvar pedersen_ptr = pedersen_ptr
-            tempvar range_check_ptr = range_check_ptr
-        # If secret value is incorrect, we revert
+            return ()
         else:
             assert 1 = 0
-            # This is necessary because of revoked references. Don't be scared, they won't stay around for too long...
-            tempvar syscall_ptr = syscall_ptr
-            tempvar pedersen_ptr = pedersen_ptr
-            tempvar range_check_ptr = range_check_ptr
+            return ()
         end
     end
-
-    return ()
 end
-

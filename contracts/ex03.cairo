@@ -71,8 +71,9 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     let (sender_address) = get_caller_address()
     # Checking that user's counter is equal to 7
     let (current_counter_value) = user_counters_storage.read(sender_address)
-    assert current_counter_value = 7
-
+    with_attr error_message("Counter is not equal to 7"):
+        assert current_counter_value = 7
+    end
     # Checking if the user has validated the exercice before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter
