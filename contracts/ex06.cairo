@@ -89,13 +89,17 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     let (sender_address) = get_caller_address()
     # Checking that the user got a slot assigned
     let (user_slot) = user_slots_storage.read(sender_address)
-    assert_not_zero(user_slot)
+    with_attr error_message("User slot not assigned. Call assign_user_slot"):
+        assert_not_zero(user_slot)
+    end
 
     # Checking that the value provided by the user is the one we expect
     # Still sneaky.
     # Or not. Is this psyops?
     let (value) = values_mapped_secret_storage.read(user_slot)
-    assert value = expected_value
+    with_attr error_message("random values already initialized"):
+        assert value = expected_value
+    end
 
     # Checking if the user has validated the exercice before
     validate_exercise(sender_address)
@@ -126,8 +130,10 @@ func external_handler_for_internal_function{
 }(a_value : felt):
     # Reading caller address
     let (sender_address) = get_caller_address()
-    # Just for fun
-    assert a_value = 0
+    with_attr error_message("Value provided is not 0"):
+        # Just for fun
+        assert a_value = 0
+    end
     # Calling internal function
     copy_secret_value_to_readable_mapping(sender_address)
     return ()
@@ -142,9 +148,11 @@ end
 func copy_secret_value_to_readable_mapping{
     syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr
 }(sender_address : felt):
-    # Checking that the user got a slot assigned
-    let (user_slot) = user_slots_storage.read(sender_address)
-    assert_not_zero(user_slot)
+    with_attr error_message("User slot not assigned. Call assign_user_slot"):
+        # Checking that the user got a slot assigned
+        let (user_slot) = user_slots_storage.read(sender_address)
+        assert_not_zero(user_slot)
+    end
 
     # Reading user secret value
     let (secret_value) = values_mapped_secret_storage.read(user_slot)
@@ -163,9 +171,11 @@ end
 func set_random_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     values_len : felt, values : felt*
 ):
-    # Check if the random values were already initialized
-    let (was_initialized_read) = was_initialized.read()
-    assert was_initialized_read = 0
+    with_attr error_message("random values already initialized"):
+        # Check if the random values were already initialized
+        let (was_initialized_read) = was_initialized.read()
+        assert was_initialized_read = 0
+    end
 
     # Storing passed values in the store
     set_a_random_value(values_len, values)

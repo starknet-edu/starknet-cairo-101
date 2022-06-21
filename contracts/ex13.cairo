@@ -80,11 +80,16 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     let (sender_address) = get_caller_address()
     # Checking that the user got a slot assigned
     let (user_slot) = user_slots_storage.read(sender_address)
-    assert_not_zero(user_slot)
 
-    # Checking that the value provided by the user is the one we expect
-    let (value) = values_mapped_secret_storage.read(user_slot)
-    assert value = expected_value
+    with_attr error_message("User slot not assigned. Call assign_user_slot"):
+        assert_not_zero(user_slot)
+    end
+
+    with_attr error_message("Input value is not the expected secret value"):
+        # Checking that the value provided by the user is the one we expect
+        let (value) = values_mapped_secret_storage.read(user_slot)
+        assert value = expected_value
+    end
 
     # Checking if the user has validated the exercice before
     validate_exercise(sender_address)
@@ -123,7 +128,9 @@ func set_random_values{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
 ):
     # Check if the random values were already initialized
     let (was_initialized_read) = was_initialized.read()
-    assert was_initialized_read = 0
+    with_attr error_message("random values already initialized"):
+        assert was_initialized_read = 0
+    end
 
     # Storing passed values in the store
     set_a_random_value(values_len, values)

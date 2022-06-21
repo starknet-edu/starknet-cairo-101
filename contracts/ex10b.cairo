@@ -81,6 +81,8 @@ end
 func only_ex10{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
     let (caller) = get_caller_address()
     let (ex10_address) = ex10_address_storage.read()
-    assert ex10_address = caller
+    with_attr error_message("Only ex10 contract can call this function"):
+        assert ex10_address = caller
+    end
     return ()
 end

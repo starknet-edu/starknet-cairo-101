@@ -63,8 +63,10 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     # Checking the value of user_values_storage for the user, at slot 10
     let (user_value_at_slot_ten) = user_values_storage.read(sender_address, 10)
 
-    # This value should be equal to 10
-    assert user_value_at_slot_ten = 10
+    with_attr error_message("User value should be 10 (you can set it with set_user_values)"):
+        # This value should be equal to 10
+        assert user_value_at_slot_ten = 10
+    end
 
     # Checking if the user has validated the exercice before
     validate_exercise(sender_address)

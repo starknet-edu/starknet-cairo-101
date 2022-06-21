@@ -83,7 +83,9 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     let (my_secret_value) = my_secret_value_storage.read()
     # Checking that the value sent is correct
     # Using assert this way is similar to using "require" in Solidity
-    assert my_value = my_secret_value
+    with_attr error_message("Wrong secret value"):
+        assert my_value = my_secret_value
+    end
     # Checking if the user has validated the exercice before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter

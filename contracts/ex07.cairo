@@ -52,12 +52,29 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     # Reading caller address
     let (sender_address) = get_caller_address()
     # Checking that the passed values are correct
-    assert_not_zero(value_a)
-    assert_nn(value_b)
-    assert_not_equal(value_a, value_b)
-    assert_le(value_a, 75)
-    assert_in_range(value_a, 40, 70)
-    assert_lt(value_b, 1)
+    with_attr error_message("value_a shouldn't be 0"):
+        assert_not_zero(value_a)
+    end
+
+    with_attr error_message("value_b shouldn't be negative"):
+        assert_nn(value_b)
+    end
+
+    with_attr error_message("value_a and value_b should be different"):
+        assert_not_equal(value_a, value_b)
+    end
+
+    with_attr error_message("value_a should be <= 75"):
+        assert_le(value_a, 75)
+    end
+
+    with_attr error_message("value_a should be between 40 and 69"):
+        assert_in_range(value_a, 40, 70)
+    end
+
+    with_attr error_message("value_b should be < 1"):
+        assert_lt(value_b, 1)
+    end
     # Checking if the user has validated the exercice before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter
