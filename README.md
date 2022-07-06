@@ -3,15 +3,12 @@
 **Get started with Cairo with this simple tutorial.
 Complete the puzzles/exercises, get tokens and learn about StarkNet smart contracts!**
 
-**A mandarin version is available 中文版本请查看这里[here](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin)**
-​
 
 ## 1. Introduction​
 
 ### 1.1 Disclaimer
 
 ​Don't expect any benefit from using this other than learning some cool stuff about StarkNet, the first general-purpose validity rollup on the Ethereum Mainnnet. 
-
 
 ​StarkNet is still in Alpha. This means that development is ongoing, and the paint is not dry everywhere. Things will get better, and in the meanwhile, we make things work with a bit of duct tape here and there!​
 
@@ -31,10 +28,21 @@ This workshop focuses on *reading* Cairo code and StarkNet smart contracts to un
 It will take you some time in order to get started (doing the first two exercises) into the tutorial. Hang on! Once there, things will flow more easily. You're learning!​
 
 ​
-This workshop is the first in a series that will cover broad smart contract concepts (writing and deploying ERC20/ERC721, bridging assets, L1 <-> L2 messaging...)—interested in helping write those? [Reach out](https://twitter.com/HenriLieutaud)!
+### 1.3 Where am I?
+
+This workshop is the first in a series aimed at teaching how to build on StarkNet. Checkout out the following:
+|Name|Topic|GitHub repo|
+|---|---|
+|Learn how to read Cairo code (you are here)|[Cairo 101](https://github.com/starknet-edu/starknet-cairo-101)|
+|Deploy and customize an ERC721 NFT|[StarkNet ERC721](https://github.com/starknet-edu/starknet-erc721)|
+|Deploy and customize an ERC20 token|[StarkNet ERC20](https://github.com/starknet-edu/starknet-erc20)|
+|Build a cross layer application|[StarkNet messaging bridge](https://github.com/starknet-edu/starknet-messaging-bridge)|
+|Debug your Cairo contracts easily|[StarkNet debug](https://github.com/starknet-edu/starknet-debug)|
+|Design your own account contract|[StarkNet account abstraction](https://github.com/starknet-edu/starknet-accounts)|
+
 ​
 
-### 1.3 Providing feedback
+### 1.3 Providing feedback & getting help
 
 Once you are done working on this tutorial, your feedback would be greatly appreciated!
 **Please fill out [this form](https://forms.reform.app/starkware/untitled-form-4/kaes2e) to let us know what we can do to make it better.**
@@ -45,6 +53,18 @@ And if you struggle to move forward, do let us know! This workshop is meant to b
 ​
 Do you have a question? Join our [Discord server](https://discord.gg/79fS9UcxHZ), register, and join channel #tutorials-support
 ​
+
+### 1.4 Contributing
+
+This project can be made better and will evolve as StarkNet matures. Your contributions are welcome! Here are things that you can do to help:
+
+- Create a branch with a translation to your language
+- Correct bugs if you find some
+- Add an explanation in the comments of the exercise if you feel it needs more explanation
+- Add exercises showcasing your favorite Cairo feature
+
+### 1.4 Languages
+A mandarin version is available 中文版本请查看这里[here](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin).
 
 ## 2. Getting started
 
@@ -77,43 +97,15 @@ When looking for a contract/transaction, always ensure you are on the Goerli ver
 
 ### 2.4 Getting points​
 ​
-**Each exercise is a separate smart contract.** It contains code that, when executed correctly, will distribute points to your address. Since there is no way currently to send a transaction easily through your account contract, you'll have to specify your address for each call.
+**Each exercise is a separate smart contract.** It contains code that, when executed correctly, will distribute points to your address. 
 ​
 Points are distributed by the function `distribute_points()` while the function `validate_exercise` records that you completed the exercise (you can get points only once). Your goal is to:
 
 ![Graph](assets/diagram.png)
 ​
 ​
-## 3. Checking your progress
 
-
-### 3.1 Counting your points
-
-​
-Your points will get credited in your installed wallet; though this may take some time. If you want to monitor your points count in real time, you can also see your balance in voyager!
-​
-
-- Go to the  [ERC20 counter](https://goerli.voyager.online/contract/0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83#readContract) in Voyager, in the "read contract" tab.
-- Enter your address in the "balanceOf" function.
-
-You can also check your overall progress [here](https://starknet-tutorials.vercel.app).
-​
-
-### 3.2 Transaction status
-
-​
-You sent a transaction, and it is shown as "undetected" in Voyager? This can mean two things:
-​
-
-- Your transaction is pending and will be included in a block shortly. It will then be visible in Voyager.
-- Your transaction was invalid and will NOT be included in a block (there is no such thing as a failed transaction in StarkNet).
-​
-You can (and should) check the status of your transaction with the following URL  [https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=), where you can append your transaction hash.
-​
-
-## 4. Addresses of the exercises and contracts
-
-### 4.1 Addresses
+## 3. Addresses of the exercises and contracts
 
 |Topic|Contract code|Contract on Voyager|
 |---|---|---|
@@ -132,21 +124,37 @@ You can (and should) check the status of your transaction with the following URL
 |Events|[Ex12](contracts/ex12.cairo)|[Link](https://goerli.voyager.online/contract/0x0658e159d61d4428b6d5fa90aa20083786674c49a645fe416fc4c35b145f8a83)|
 |Privacy on StarkNet|[Ex13](contracts/ex13.cairo)|[Link](https://goerli.voyager.online/contract/0x07b271402ce18e1bcc1b64f555cdc23693b0eb091d71644f72b6c220814c1425)|
 
+## 4. Checking your progress
+
+
+### 4.1 Counting your points
+
 ​
-​
-
-## 5. Contributing
-
-### 5.1 Help is welcome
-
-This project can be made better and will evolve in the coming weeks. Your contributions are welcome! Here are things that you can do to help:
-
-- Correct bugs if you find some
-- Add an explanation in the comments of the exercise if you feel it needs more explanation
-- Add exercises showcasing your favorite Cairo feature
+Your points will get credited in your installed wallet; though this may take some time. If you want to monitor your points count in real time, you can also see your balance in voyager!
 ​
 
-### 5.2 Reusing this project
+- Go to the  [ERC20 counter](https://goerli.voyager.online/contract/0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83#readContract) in Voyager, in the "read contract" tab.
+- Enter your address in the "balanceOf" function.
+
+You can also check your overall progress [here](https://starknet-tutorials.vercel.app).
+​
+
+### 4.2 Transaction status
+
+​
+You sent a transaction, and it is shown as "undetected" in Voyager? This can mean two things:
+​
+
+- Your transaction is pending and will be included in a block shortly. It will then be visible in Voyager.
+- Your transaction was invalid and will NOT be included in a block (there is no such thing as a failed transaction in StarkNet).
+​
+You can (and should) check the status of your transaction with the following URL  [https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=), where you can append your transaction hash.
+​
+
+
+
+
+## 5. Reusing this project
 
 - Clone the repo on your machine.
 - Set up the environment following [these instructions](https://starknet.io/docs/quickstart.html#quickstart).
