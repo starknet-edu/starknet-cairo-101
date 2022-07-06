@@ -27,7 +27,6 @@ This workshop focuses on *reading* Cairo code and StarkNet smart contracts to un
 ​
 It will take you some time in order to get started (doing the first two exercises) into the tutorial. Hang on! Once there, things will flow more easily. You're learning!​
 
-​
 ### Where am I?
 
 This workshop is the first in a series aimed at teaching how to build on StarkNet. Checkout out the following:
@@ -41,11 +40,11 @@ This workshop is the first in a series aimed at teaching how to build on StarkNe
 |Debug your Cairo contracts easily|[StarkNet debug](https://github.com/starknet-edu/starknet-debug)|
 |Design your own account contract|[StarkNet account abstraction](https://github.com/starknet-edu/starknet-accounts)|
 
-​
 
 ### Providing feedback & getting help
 
 Once you are done working on this tutorial, your feedback would be greatly appreciated!
+
 **Please fill out [this form](https://forms.reform.app/starkware/untitled-form-4/kaes2e) to let us know what we can do to make it better.**
 
 ​
@@ -66,7 +65,7 @@ This project can be made better and will evolve as StarkNet matures. Your contri
 
 ### Languages
 A mandarin version is available 中文版本请查看这里[here](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin).
-
+​
 ## Getting started
 
 ### Creating a smart contract wallet
@@ -76,21 +75,10 @@ A mandarin version is available 中文版本请查看这里[here](https://github
 - The easiest way to set one up is to use Argent X ([download the chrome extension](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/)  or  [check their repo](https://github.com/argentlabs/argent-x)) or Braavos ([download the chrome extension](https://chrome.google.com/webstore/detail/braavos-wallet/jnlgamecbpmbajjfhmmmlhejkemejdma)). These wallet solutions are similar to what Metamask is for Ethereum and allow users to initiate transactions and interact with applications on StarkNet.
 - Follow the instructions to install the extension and deploy a smart contract account (it could take about 5 minutes to be deployed). Please note that in StarkNet there is only one type of accounts - smart contract accounts (this is called Account Abstraction), in contrast to Ethereum where there are wallets and smart contracts. In other words, every wallet on StarkNet is a smart contract and there is no distinction between them and other smart contracts. Therefore, to create a new wallet, you need to deploy a transaction that publishes your smart contract wallet to the network.
 - Make sure you are on the Goerli testnet network.
-- The tutorial's points are held in contract  `0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83`. Click on "Add Token" in your installed wallet and the contract address to get your points balance to show up there! A new token called SC101 (starknet-cairo-101) will appear in your wallet.
+- The tutorial's points are held in contract  `[0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83](https://goerli.voyager.online/contract/0x074002c7df47096f490a1a89b086b8a468f2e7c686e04a024d93b7c59f934f83)`. Click on "Add Token" in your installed wallet and the contract address to get your points balance to show up there! A new token called SC101 (starknet-cairo-101) will appear in your wallet.
 - Connect [Voyager](https://voyager.online/) to your account smart contract. Voyager is the block explorer for StarkNet (the equivalent of Etherscan for Ethereum) and allows you to browse the state of the blockchain, view all transactions and their status. By connecting Voyager to your wallet, you will be able to broadcast your transactions through your wallet.
 - To execute transactions on the Goerli StarkNet testnet **you'll need testnet ETH to pay for gas**. To get some, go to the [faucet](https://faucet.goerli.starknet.io/) and follow the instructions. It could take several minutes, but you should receive some L2 Goerli ETH in your wallet that you can use to execute transactions on the testnet.
 
-### Using Voyager
-
-For this tutorial, we'll interact with our contracts through [Voyager](https://goerli.voyager.online/), StarkNet's block explorer.
-
--> Connect Voyager to your account contract! This will allow you to broadcast your transactions through your wallet.
-
-When looking for a contract/transaction, always ensure you are on the Goerli version of Voyager!
-
-- Access your transactions with a URL of the format: [https://goerli.voyager.online/tx/your-tx-hash](https://goerli.voyager.online/tx/your-tx-hash).
-- Access a contract with a URL of the format: [https://goerli.voyager.online/contract/your-contract-address](https://goerli.voyager.online/contract/your-contract-address)
-- Access read/write functions of the contract with the "read/write contract" tab in Voyager.
 
 ### Solving exercices & Getting points​
 ​
@@ -101,7 +89,19 @@ Points are distributed by the function `distribute_points()` while the function 
 ![Graph](assets/diagram.png)
 ​
 ​
+### Using Voyager
 
+For this tutorial, we'll interact with our contracts through [Voyager](https://goerli.voyager.online/), StarkNet's block explorer. Please make sure to connect Voyager to your account contract! This will allow you to broadcast your transactions through your wallet.
+
+When looking for a contract/transaction, always ensure you are on the Goerli version of Voyager!
+
+- Access your transactions with a URL of the format: [https://goerli.voyager.online/tx/your-tx-hash](https://goerli.voyager.online/tx/your-tx-hash).
+- Access a contract with a URL of the format: [https://goerli.voyager.online/contract/your-contract-address](https://goerli.voyager.online/contract/your-contract-address)
+- Access read/write functions of the contract with the "read/write contract" tab in Voyager.
+
+
+​
+​
 ## Addresses of the exercises and contracts
 
 
@@ -144,6 +144,7 @@ You sent a transaction, and it is shown as "undetected" in Voyager? This can mea
 - Your transaction was invalid and will NOT be included in a block (there is no such thing as a failed transaction in StarkNet).
 ​
 You can (and should) check the status of your transaction with the following URL  [https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=), where you can append your transaction hash.
+​
 ​
 
 
