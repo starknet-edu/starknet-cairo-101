@@ -6,6 +6,6 @@
 
 @contract_interface
 namespace IAccountContract:
-    func get_signer() -> (signer: felt):
+    func get_signer() -> (signer : felt):
     end
 end
