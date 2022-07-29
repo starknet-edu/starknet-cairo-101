@@ -93,7 +93,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     with_attr error_message("Input value is not the expected secret value"):
         assert value = expected_value + 32
     end
-    # Checking if the user has validated the exercice before
+    # Checking if the user has validated the exercise before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter
     distribute_points(sender_address, 2)
@@ -118,7 +118,7 @@ end
 
 #
 # External functions - Administration
-# Only admins can call these. You don't need to understand them to finish the exercice.
+# Only admins can call these. You don't need to understand them to finish the exercise.
 #
 
 @external

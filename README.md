@@ -79,7 +79,7 @@ A mandarin version is available 中文版本请查看这里[here](https://github
 - Connect [Voyager](https://voyager.online/) to your account smart contract. Voyager is the block explorer for StarkNet (the equivalent of Etherscan for Ethereum) and allows you to browse the state of the blockchain, view all transactions and their status. By connecting Voyager to your wallet, you will be able to broadcast your transactions through your wallet.
 - To execute transactions on the Goerli StarkNet testnet **you'll need testnet ETH to pay for gas**. To get some, go to the [faucet](https://faucet.goerli.starknet.io/) and follow the instructions. It could take several minutes, but you should receive some L2 Goerli ETH in your wallet that you can use to execute transactions on the testnet.
 
-### Solving exercices & Getting points​
+### Solving exercises & Getting points​
 
 ​
 **Each exercise is a separate smart contract.** It contains code that, when executed correctly, will distribute points to your address.

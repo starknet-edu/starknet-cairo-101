@@ -76,19 +76,19 @@ end
 @view
 func has_validated_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     account : felt
-) -> (has_validated_exercice : felt):
+) -> (has_validated_exercise : felt):
     # reading player registry
     let (_players_registry) = players_registry_storage.read()
     let (_workshop_id) = workshop_id_storage.read()
     let (_exercise_id) = exercise_id_storage.read()
-    # Checking if the user already validated this exercice
-    let (has_current_user_validated_exercice) = Iplayers_registry.has_validated_exercice(
+    # Checking if the user already validated this exercise
+    let (has_current_user_validated_exercise) = Iplayers_registry.has_validated_exercise(
         contract_address=_players_registry,
         account=account,
         workshop=_workshop_id,
         exercise=_exercise_id,
     )
-    return (has_current_user_validated_exercice)
+    return (has_current_user_validated_exercise)
 end
 
 #
@@ -132,17 +132,17 @@ func validate_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_c
     let (_players_registry) = players_registry_storage.read()
     let (_workshop_id) = workshop_id_storage.read()
     let (_exercise_id) = exercise_id_storage.read()
-    # Checking if the user already validated this exercice
-    let (has_current_user_validated_exercice) = Iplayers_registry.has_validated_exercice(
+    # Checking if the user already validated this exercise
+    let (has_current_user_validated_exercise) = Iplayers_registry.has_validated_exercise(
         contract_address=_players_registry,
         account=account,
         workshop=_workshop_id,
         exercise=_exercise_id,
     )
-    assert (has_current_user_validated_exercice) = 0
+    assert (has_current_user_validated_exercise) = 0
 
-    # Marking the exercice as completed
-    Iplayers_registry.validate_exercice(
+    # Marking the exercise as completed
+    Iplayers_registry.validate_exercise(
         contract_address=_players_registry,
         account=account,
         workshop=_workshop_id,

@@ -1,9 +1,9 @@
 # ######## Ex 10
 # # Composability
-# In this exercice, you need to:
-# - Use this contract to retrieve the address of contract ex10b.cairo, which holds the key to this exercice
+# In this exercise, you need to:
+# - Use this contract to retrieve the address of contract ex10b.cairo, which holds the key to this exercise
 # - Find the secret key in ex10b.cairo
-# - Call claim_points() in this exercice with the secret value
+# - Call claim_points() in this exercise with the secret value
 # - Your points are credited by the contract
 
 %lang starknet
@@ -82,7 +82,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
         )
     end
 
-    # Checking if the user has validated the exercice before
+    # Checking if the user has validated the exercise before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter
     distribute_points(sender_address, 2)

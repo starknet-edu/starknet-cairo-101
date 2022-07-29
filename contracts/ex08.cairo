@@ -1,6 +1,6 @@
 # ######## Ex 08
 # # Recursions - basics
-# In this exercice, you need to:
+# In this exercise, you need to:
 # - Use this contract's claim_points() function
 # - Your points are credited by the contract
 
@@ -68,7 +68,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
         assert user_value_at_slot_ten = 10
     end
 
-    # Checking if the user has validated the exercice before
+    # Checking if the user has validated the exercise before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter
     distribute_points(sender_address, 2)

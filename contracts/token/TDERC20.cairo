@@ -149,7 +149,7 @@ end
 func distribute_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     to : felt, amount : Uint256
 ):
-    only_teacher_or_exercice()
+    only_teacher_or_exercise()
     ERC20_mint(to, amount)
     return ()
 end
@@ -158,7 +158,7 @@ end
 func remove_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     to : felt, amount : Uint256
 ):
-    only_teacher_or_exercice()
+    only_teacher_or_exercise()
     ERC20_burn(to, amount)
     return ()
 end
@@ -167,7 +167,7 @@ end
 func set_teacher{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     account : felt, permission : felt
 ):
-    only_teacher_or_exercice()
+    only_teacher_or_exercise()
     teachers_and_exercises_accounts.write(account, permission)
 
     return ()
@@ -177,7 +177,7 @@ end
 func set_teachers{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     accounts_len : felt, accounts : felt*
 ):
-    only_teacher_or_exercice()
+    only_teacher_or_exercise()
     _set_teacher(accounts_len, accounts)
     return ()
 end
@@ -186,7 +186,7 @@ end
 func set_transferable{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     permission : felt
 ):
-    only_teacher_or_exercice()
+    only_teacher_or_exercise()
     _set_transferable(permission)
     return ()
 end
@@ -215,7 +215,7 @@ func _set_teacher{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     return ()
 end
 
-func only_teacher_or_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
+func only_teacher_or_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
     let (caller) = get_caller_address()
     let (permission) = teachers_and_exercises_accounts.read(account=caller)
     assert permission = 1

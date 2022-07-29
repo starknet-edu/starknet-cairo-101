@@ -2,7 +2,7 @@
 # Privacy
 # The terminology "Zero knowldge" can be confusing. Devs tend to assume things are private on Zk Rollups.
 # They are not. They can be; but they are not by default.
-# In this exercice, you need to:
+# In this exercise, you need to:
 # - Use past data from transactions sent to the contract to find a value that is supposed to be "secret"
 
 %lang starknet
@@ -91,7 +91,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
         assert value = expected_value
     end
 
-    # Checking if the user has validated the exercice before
+    # Checking if the user has validated the exercise before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter
     distribute_points(sender_address, 2)
@@ -119,7 +119,7 @@ end
 
 #
 # External functions - Administration
-# Only admins can call these. You don't need to understand them to finish the exercice.
+# Only admins can call these. You don't need to understand them to finish the exercise.
 #
 
 @external

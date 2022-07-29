@@ -1,5 +1,5 @@
 # ######## Ex 13
-# All in one exercice
+# All in one exercise
 # It's your time to shine.
 # Deploy a contract that validates various exercises in a single transaction to get 2 points
 # Do you want to agregate your points in a single account? Use this https://github.com/starknet-edu/points-migrator
@@ -68,15 +68,20 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     )
     # Verifying that caller collected some points
     let (has_caller_collected_points) = uint256_lt(balance_pre_call, balance_post_call)
-    assert has_caller_collected_points = 1
+    with_attr error_message("You did not collect any points"):
+        assert has_caller_collected_points = 1
+    end
     # Read how many points were collected
     let collected_points : Uint256 = uint256_sub(balance_post_call, balance_pre_call)
     # Check that at least 20 points were collected
     let points_objective : Uint256 = Uint256(20, 0)
-    let (has_caller_collected_enough_points) = uint256_le(points_objective,collected_points)
-    assert has_caller_collected_enough_points = 1
+    let (has_caller_collected_enough_points) = uint256_le(points_objective, collected_points)
 
-    # Checking if the user has validated the exercice before
+    with_attr error_message("You did not collect enough points"):
+        assert has_caller_collected_enough_points = 1
+    end
+
+    # Checking if the user has validated the exercise before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter
     distribute_points(sender_address, 2)

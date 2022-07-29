@@ -1,6 +1,6 @@
 # ######## Ex 10b
 # # Composability
-# This exercice was deployed as a complement to ex10, but you don't know where!
+# This exercise was deployed as a complement to ex10, but you don't know where!
 # Use ex10 to find its address, then voyager to read from ex10b
 # Then use ex10 to claim points
 

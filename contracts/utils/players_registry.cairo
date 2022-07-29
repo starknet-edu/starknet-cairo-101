@@ -20,8 +20,8 @@ from starkware.starknet.common.syscalls import get_caller_address
 #
 
 @storage_var
-func has_validated_exercice_storage(account : felt, workshop : felt, exercise : felt) -> (
-    has_validated_exercice_storage : felt
+func has_validated_exercise_storage(account : felt, workshop : felt, exercise : felt) -> (
+    has_validated_exercise_storage : felt
 ):
 end
 
@@ -47,11 +47,11 @@ end
 #
 
 @view
-func has_validated_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+func has_validated_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     account : felt, workshop : felt, exercise : felt
-) -> (has_validated_exercice : felt):
-    let (has_validated_exercice) = has_validated_exercice_storage.read(account, workshop, exercise)
-    return (has_validated_exercice)
+) -> (has_validated_exercise : felt):
+    let (has_validated_exercise) = has_validated_exercise_storage.read(account, workshop, exercise)
+    return (has_validated_exercise)
 end
 
 @view
@@ -175,20 +175,20 @@ func set_exercises_or_admins{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, r
 end
 
 @external
-func validate_exercice{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+func validate_exercise{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     account : felt, workshop : felt, exercise : felt
 ):
     only_exercise_or_admin()
-    # Checking if the user already validated this exercice
-    let (has_current_user_validated_exercice) = has_validated_exercice_storage.read(
+    # Checking if the user already validated this exercise
+    let (has_current_user_validated_exercise) = has_validated_exercise_storage.read(
         account, workshop, exercise
     )
-    with_attr error_message("User has already validated this exercice"):
-        assert (has_current_user_validated_exercice) = 0
+    with_attr error_message("User has already validated this exercise"):
+        assert (has_current_user_validated_exercise) = 0
     end
 
-    # Marking the exercice as completed
-    has_validated_exercice_storage.write(account, workshop, exercise, 1)
+    # Marking the exercise as completed
+    has_validated_exercise_storage.write(account, workshop, exercise, 1)
     new_validation.emit(account=account, workshop=workshop, exercise=exercise)
 
     # Recording player if he is not yet recorded

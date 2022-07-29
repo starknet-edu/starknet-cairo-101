@@ -1,6 +1,6 @@
 # ######## Ex 06
 # External vs internal functions
-# In this exercice, you need to:
+# In this exercise, you need to:
 # - Use a function to get assigned a private variable
 # - Use an internal function to duplicate this variable in a public variable
 # - Use a function to show you know the correct value of the private variable
@@ -101,7 +101,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
         assert value = expected_value
     end
 
-    # Checking if the user has validated the exercice before
+    # Checking if the user has validated the exercise before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter
     distribute_points(sender_address, 2)
@@ -164,7 +164,7 @@ end
 
 #
 # External functions - Administration
-# Only admins can call these. You don't need to understand them to finish the exercice.
+# Only admins can call these. You don't need to understand them to finish the exercise.
 #
 
 @external

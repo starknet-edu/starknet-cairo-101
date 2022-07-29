@@ -1,6 +1,6 @@
 # ######## Ex 02
 # # Understanding asserts
-# In this exercice, you need to:
+# In this exercise, you need to:
 # - Use this contract's claim_points() function
 # - Your points are credited by the contract
 
@@ -86,7 +86,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     with_attr error_message("Wrong secret value"):
         assert my_value = my_secret_value
     end
-    # Checking if the user has validated the exercice before
+    # Checking if the user has validated the exercise before
     validate_exercise(sender_address)
     # Sending points to the address specified as parameter
     distribute_points(sender_address, 2)
