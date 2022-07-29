@@ -73,7 +73,7 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     let collected_points : Uint256 = uint256_sub(balance_post_call, balance_pre_call)
     # Check that at least 20 points were collected
     let points_objective : Uint256 = Uint256(20, 0)
-    let (has_caller_collected_enough_points) = uint256_le(collected_points, points_objective)
+    let (has_caller_collected_enough_points) = uint256_le(points_objective,collected_points)
     assert has_caller_collected_enough_points = 1
 
     # Checking if the user has validated the exercice before
