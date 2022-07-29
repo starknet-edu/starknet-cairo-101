@@ -1,7 +1,7 @@
 # ######## Ex 13
 # All in one exercice
 # It's your time to shine.
-# Deploy a contract that validates various exercices in a single transaction to get 2 points
+# Deploy a contract that validates various exercises in a single transaction to get 2 points
 # Do you want to agregate your points in a single account? Use this https://github.com/starknet-edu/points-migrator
 
 %lang starknet
@@ -28,7 +28,7 @@ from contracts.utils.ex00_base import (
 
 @contract_interface
 namespace IAllInOneContract:
-    func validate_various_exercices():
+    func validate_various_exercises():
     end
 end
 
@@ -59,8 +59,8 @@ func claim_points{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
         contract_address=erc20_address, account=sender_address
     )
 
-    # Calling caller's validate_various_exercices() function
-    IAllInOneContract.validate_various_exercices(contract_address=sender_address)
+    # Calling caller's validate_various_exercises() function
+    IAllInOneContract.validate_various_exercises(contract_address=sender_address)
 
     # Reading contract balance before calling
     let (balance_post_call) = IERC20.balanceOf(
