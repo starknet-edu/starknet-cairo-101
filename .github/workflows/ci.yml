@@ -1,0 +1,19 @@
+name: Run StarkNet compilation
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Compile all the contracts
+        run: >
+          for cairo_file in $(find contracts/ -type f -name "*.cairo"); do
+            docker run --mount type=bind,source=$(pwd)/contracts/,target=/contracts/ shardlabs/cairo-cli:latest starknet-compile $cairo_file >/dev/null;
+          done
