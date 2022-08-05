@@ -6,21 +6,12 @@
 
 %lang starknet
 
-from starkware.cairo.common.math import assert_not_zero
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.starknet.common.syscalls import get_caller_address
-from starkware.cairo.common.uint256 import (
-    Uint256,
-    uint256_add,
-    uint256_sub,
-    uint256_le,
-    uint256_lt,
-    uint256_check,
-)
+from starkware.cairo.common.uint256 import Uint256, uint256_sub, uint256_le, uint256_lt
 from contracts.token.IERC20 import IERC20
 from contracts.utils.ex00_base import (
     tderc20_address,
-    has_validated_exercise,
     distribute_points,
     validate_exercise,
     ex_initializer,

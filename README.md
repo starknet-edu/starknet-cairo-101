@@ -126,7 +126,7 @@ When looking for a contract/transaction, always ensure you are on the Goerli ver
 | Composability                         | [Ex10](contracts/ex10.cairo)                          | [Link](https://goerli.voyager.online/contract/0x8415762f4b0b0f44e42ac1d103ac93c3ea94450a15bb65b99bbcc816a9388) |
 | Importing functions                   | [Ex11](contracts/ex11.cairo)                          | [Link](https://goerli.voyager.online/contract/0xab5577b9be8948d89dbdba63370a3de92e72a23c4cacaea38b3a74eec3a872) |
 | Events                                | [Ex12](contracts/ex12.cairo)                          | [Link](https://goerli.voyager.online/contract/0x24d15e02ddaa19d7ecd77204d35ed9bfff00a0cabc62eb3da5ba7680e44baf9) |
-| Privacy on StarkNet                   | [Ex13](contracts/ex13.cairo)                          | [Link](https://goerli.voyager.online/contract/0x71ba139845802fa0cc434f8ada5e557e702992a566f414d61800485cf3f984a) |
+| Privacy on StarkNet                   | [Ex13](contracts/ex13.cairo)                          | [Link](https://goerli.voyager.online/contract/0x2bae9190076c4252289b8a8671277cef57318192cff20c736808b0c71095895) |
 | Multicall                             | [Ex14](contracts/ex14.cairo)                          | [Link](https://goerli.voyager.online/contract/0xed7ddffe1370fbbc1974ab8122d1d9bd7e3da8d829ead9177ea4249b4caef1) |
 
 ### Counting your points

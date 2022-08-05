@@ -4,6 +4,7 @@
 # They are not. They can be; but they are not by default.
 # In this exercise, you need to:
 # - Use past data from transactions sent to the contract to find a value that is supposed to be "secret"
+# you might need this endpoint https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=
 
 %lang starknet
 
@@ -11,13 +12,7 @@ from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import assert_not_zero
 from starkware.starknet.common.syscalls import get_caller_address
 
-from contracts.utils.ex00_base import (
-    tderc20_address,
-    has_validated_exercise,
-    distribute_points,
-    validate_exercise,
-    ex_initializer,
-)
+from contracts.utils.ex00_base import distribute_points, validate_exercise, ex_initializer
 
 #
 # Declaring storage vars
@@ -62,9 +57,15 @@ end
 #
 @constructor
 func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    _tderc20_address : felt, _players_registry : felt, _workshop_id : felt, _exercise_id : felt
+    _tderc20_address : felt,
+    _players_registry : felt,
+    _workshop_id : felt,
+    _exercise_id : felt,
+    arr_len : felt,
+    arr : felt*,
 ):
     ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id)
+    set_random_values(arr_len, arr)
     return ()
 end
 
