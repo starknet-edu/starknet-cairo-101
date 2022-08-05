@@ -134,3 +134,4 @@ dmypy.json
 goerli.deployments.txt
 Makefile
 
+*.sarif

@@ -61,12 +61,6 @@ This project can be made better and will evolve as StarkNet matures. Your contri
 - Add an explanation in the comments of the exercise if you feel it needs more explanation
 - Add exercises showcasing your favorite Cairo feature
 
-Before contributing run this
-
-```bash
-ln -s ../../pre-commit.sh .git/hooks/pre-commit
-```
-
 ### Languages
 
 A mandarin version is available 中文版本请查看这里[here](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin).
