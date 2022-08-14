@@ -93,7 +93,7 @@ func get_sum_internal{range_check_ptr}(length : felt, array : felt*) -> (sum : f
     # The sum begins
     let sum = [array] + current_sum
 
-    with_attr error_message("value at index i should be at least twice the value at index i + 1"):
+    with_attr error_message("value at index i should be at least the sum of values of index strictly higher than i"):
         assert_le(current_sum * 2, sum)
     end
     # The return function targets the body of this function
