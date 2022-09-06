@@ -1,11 +1,11 @@
 %lang starknet
 
-####################
-# INTERFACE
-####################
+//###################
+// INTERFACE
+//###################
 
 @contract_interface
-namespace IAccountContract:
-    func get_signer() -> (signer : felt):
-    end
-end
+namespace IAccountContract {
+    func get_signer() -> (signer: felt) {
+    }
+}

@@ -1,13 +1,13 @@
 %lang starknet
 
-####################
-# INTERFACE
-####################
+//###################
+// INTERFACE
+//###################
 
 @contract_interface
-namespace Iex10:
-    func set_ex_10b_address(ex_10b_address_ : felt):
-    end
-    func has_validated_exercise(account : felt) -> (has_validated_exercise : felt):
-    end
-end
+namespace Iex10 {
+    func set_ex_10b_address(ex_10b_address_: felt) {
+    }
+    func has_validated_exercise(account: felt) -> (has_validated_exercise: felt) {
+    }
+}
