@@ -44,7 +44,7 @@ Una vez que hayas terminado con este tutorial, tu feedback será muy apreciado!
 
 Y si se te complica seguir adelante, déjanos saber! La idea de este workshop es que sea lo más accesible posible; queremos saber si no es el caso.
 
-¿Tienes alguna pregunta? Visita nuestro [Server de Discord]​(https://discord.gg/QypNMzkHbc), regístrate, y visita el canal #tutorials-support.
+¿Tienes alguna pregunta? Visita nuestro [Server de Discord](https://discord.gg/QypNMzkHbc), regístrate, y visita el canal #tutorials-support.
 
 ¿Estás interesado/a en seguir workshops online sobre aprender cómo desarrollar en StarkNet? [Subscríbete](http://eepurl.com/hFnpQ5)
 
