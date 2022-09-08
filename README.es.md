@@ -60,9 +60,9 @@ Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. �
 
 ### Idiomas
 
-Versión disponible en Mandarín 中文版本请查看这里[aquí](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin).
-Versión disponible en Inglés [aquí](https://github.com/starknet-edu/starknet-cairo-101/blob/main/README.md).
-​
+- Versión disponible en Inglés [aquí](https://github.com/starknet-edu/starknet-cairo-101/blob/main/README.md).
+- Versión disponible en Mandarín 中文版本请查看这里[aquí](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin).
+
 ## Comencemos
 
 ### Creando una smart contract wallet (billetera de contrato inteligente)
