@@ -63,8 +63,8 @@ This project can be made better and will evolve as StarkNet matures. Your contri
 
 ### Languages
 
-A mandarin version is available 中文版本请查看这里[here](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin).
-​A spanish version is available [here](https://github.com/starknet-edu/starknet-cairo-101/blob/main/README.es.md).
+- A mandarin version is available 中文版本请查看这里[here](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin).
+- A spanish version is available [here](https://github.com/starknet-edu/starknet-cairo-101/blob/main/README.es.md).
 
 ## Getting started
 
