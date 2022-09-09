@@ -1,7 +1,7 @@
 # ######## Ex 01
 # # Usando uma simples função de um contrato público
 # Nesse exercício você precisar:
-# - Usar a função claim_points() do contrato
+# - Utilizar a função claim_points() deste contrato
 # - E os seus pontos sera creditado pelo contrato
 
 # # O que você ira aprender
