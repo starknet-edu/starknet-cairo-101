@@ -80,7 +80,7 @@ Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. �
 
 Los puntos son distribuidos por la función `distribute_points()` mientras la función `validate_exercise` registra que haz completado el ejercicio (puedes obtener puntos solo una vez). Tu objetivo es:
 
-![Graph](assets/diagram.png)
+![Graph](../assets/diagram.png)
 ​
 
 ### Usando Voyager
