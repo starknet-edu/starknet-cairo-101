@@ -93,13 +93,13 @@ class CairoContractTest(TestCase):
             source=EX5,
             constructor_calldata=[*INIT_CALLDATA, 5],
         )
-        await ex5.set_random_values(values=RANDOM_VALS).invoke(
+        await ex5.set_random_values(values=RANDOM_VALS).execute(
             caller_address=TEACHER_ADDRESS
         )
         ex6 = await starknet.deploy(
             source=EX6, constructor_calldata=[*INIT_CALLDATA, 6]
         )
-        await ex6.set_random_values(values=RANDOM_VALS).invoke(
+        await ex6.set_random_values(values=RANDOM_VALS).execute(
             caller_address=TEACHER_ADDRESS
         )
         ex7 = await starknet.deploy(
@@ -120,7 +120,7 @@ class CairoContractTest(TestCase):
         ex12 = await starknet.deploy(
             source=EX12, constructor_calldata=[*INIT_CALLDATA, 12]
         )
-        await ex12.set_random_values(values=RANDOM_VALS).invoke(
+        await ex12.set_random_values(values=RANDOM_VALS).execute(
             caller_address=TEACHER_ADDRESS
         )
         ex13 = await starknet.deploy(
@@ -151,7 +151,7 @@ class CairoContractTest(TestCase):
                 ex13.contract_address,
                 ex14.contract_address,
             ]
-        ).invoke(caller_address=TEACHER_ADDRESS)
+        ).execute(caller_address=TEACHER_ADDRESS)
         await tutoken.set_teachers(
             [
                 ex1.contract_address,
@@ -170,80 +170,82 @@ class CairoContractTest(TestCase):
                 ex13.contract_address,
                 ex14.contract_address,
             ]
-        ).invoke(caller_address=TEACHER_ADDRESS)
+        ).execute(caller_address=TEACHER_ADDRESS)
 
         async def test_ex01():
-            await ex1.claim_points().invoke(caller_address=STUDENT)
+            await ex1.claim_points().execute(caller_address=STUDENT)
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(2 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex02():
             secret_val = await ex2.my_secret_value().call()
-            await ex2.claim_points(my_value=secret_val.result.my_secret_value).invoke(
+            await ex2.claim_points(my_value=secret_val.result.my_secret_value).execute(
                 caller_address=STUDENT
             )
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(4 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex03():
-            await ex3.increment_counter().invoke(caller_address=STUDENT)
-            await ex3.increment_counter().invoke(caller_address=STUDENT)
-            await ex3.increment_counter().invoke(caller_address=STUDENT)
-            await ex3.increment_counter().invoke(caller_address=STUDENT)
-            await ex3.decrement_counter().invoke(caller_address=STUDENT)
-            await ex3.claim_points().invoke(caller_address=STUDENT)
+            await ex3.increment_counter().execute(caller_address=STUDENT)
+            await ex3.increment_counter().execute(caller_address=STUDENT)
+            await ex3.increment_counter().execute(caller_address=STUDENT)
+            await ex3.increment_counter().execute(caller_address=STUDENT)
+            await ex3.decrement_counter().execute(caller_address=STUDENT)
+            await ex3.claim_points().execute(caller_address=STUDENT)
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(6 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex04():
-            await ex4.assign_user_slot().invoke(caller_address=STUDENT)
+            await ex4.assign_user_slot().execute(caller_address=STUDENT)
             slot = await ex4.user_slots(account=STUDENT).call()
             val = await ex4.values_mapped(slot=slot.result.user_slot).call()
-            await ex4.claim_points(expected_value=val.result.value - 32).invoke(
+            await ex4.claim_points(expected_value=val.result.value - 32).execute(
                 caller_address=STUDENT
             )
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(8 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex05():
-            await ex5.assign_user_slot().invoke(caller_address=STUDENT)
-            await ex5.copy_secret_value_to_readable_mapping().invoke(
+            await ex5.assign_user_slot().execute(caller_address=STUDENT)
+            await ex5.copy_secret_value_to_readable_mapping().execute(
                 caller_address=STUDENT
             )
             val = await ex5.user_values(account=STUDENT).call()
-            await ex5.claim_points(expected_value=val.result.user_value).invoke(
+            await ex5.claim_points(expected_value=val.result.user_value).execute(
                 caller_address=STUDENT
             )
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(10 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex06():
-            await ex6.assign_user_slot().invoke(caller_address=STUDENT)
-            await ex6.external_handler_for_internal_function(a_value=0).invoke(
+            await ex6.assign_user_slot().execute(caller_address=STUDENT)
+            await ex6.external_handler_for_internal_function(a_value=0).execute(
                 caller_address=STUDENT
             )
             val = await ex6.user_values(account=STUDENT).call()
-            await ex6.claim_points(expected_value=val.result.user_value).invoke(
+            await ex6.claim_points(expected_value=val.result.user_value).execute(
                 caller_address=STUDENT
             )
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(12 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex07():
-            await ex7.claim_points(value_a=50, value_b=0).invoke(caller_address=STUDENT)
+            await ex7.claim_points(value_a=50, value_b=0).execute(
+                caller_address=STUDENT
+            )
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(14 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex08():
-            await ex8.set_user_values(account=STUDENT, array=[10] * 11).invoke(
+            await ex8.set_user_values(account=STUDENT, array=[10] * 11).execute(
                 caller_address=STUDENT
             )
-            await ex8.claim_points().invoke(caller_address=STUDENT)
+            await ex8.claim_points().execute(caller_address=STUDENT)
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(16 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex09():
-            await ex9.claim_points(array=[10**i for i in range(5, 1, -1)]).invoke(
+            await ex9.claim_points(array=[10**i for i in range(5, 1, -1)]).execute(
                 caller_address=STUDENT
             )
             balance = await tutoken.balanceOf(account=STUDENT).call()
@@ -254,7 +256,7 @@ class CairoContractTest(TestCase):
             await ex10.claim_points(
                 secret_value_i_guess=secret_val.result.secret_value,
                 next_secret_value_i_chose=69,
-            ).invoke(caller_address=STUDENT)
+            ).execute(caller_address=STUDENT)
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(20 * DECIMALS, 0), balance.result.balance)
 
@@ -263,26 +265,26 @@ class CairoContractTest(TestCase):
             await ex11.claim_points(
                 secret_value_i_guess=secret_val.result.secret_value - 42069,
                 next_secret_value_i_chose=69,
-            ).invoke(caller_address=STUDENT)
+            ).execute(caller_address=STUDENT)
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(22 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex12():
-            res = await ex12.assign_user_slot().invoke(caller_address=STUDENT)
+            res = await ex12.assign_user_slot().execute(caller_address=STUDENT)
             await ex12.claim_points(
                 expected_value=res.call_info.events[0].data[1] - 32
-            ).invoke(caller_address=STUDENT)
+            ).execute(caller_address=STUDENT)
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(24 * DECIMALS, 0), balance.result.balance)
 
         async def test_ex13():
-            await ex13.assign_user_slot().invoke(caller_address=STUDENT)
+            await ex13.assign_user_slot().execute(caller_address=STUDENT)
             slot = await ex13.user_slots(account=STUDENT).call()
             await ex13.claim_points(
-                expected_value=ex13.deploy_execution_info.call_info.calldata[
+                expected_value=ex13.deploy_call_info.call_info.calldata[
                     -1 - slot.result.user_slot
                 ]
-            ).invoke(caller_address=STUDENT)
+            ).execute(caller_address=STUDENT)
             balance = await tutoken.balanceOf(account=STUDENT).call()
             self.assertEqual(Uint256(26 * DECIMALS, 0), balance.result.balance)
 
