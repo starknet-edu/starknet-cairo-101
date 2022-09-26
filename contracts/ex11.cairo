@@ -20,6 +20,7 @@ from contracts.utils.ex11_base import (
     ex_initializer,
     validate_answers,
     ex11_secret_value,
+    secret_value
 )
 
 //
