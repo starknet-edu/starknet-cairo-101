@@ -41,8 +41,8 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 //
 
 // This function is called claim_points
-// It takes one argument as a parameter (sender_address), which is a felt. Read more about felts here https://www.cairo-lang.org/docs/hello_cairo/intro.html#field-element
-// It also has implicit arguments (syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr). Read more about implicit arguments here https://www.cairo-lang.org/docs/how_cairo_works/builtins.html
+// It takes implicit arguments (syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr). Read more about implicit arguments here https://www.cairo-lang.org/docs/how_cairo_works/builtins.html
+// It defines the expression sender_address as a felt. Read more about felts here https://www.cairo-lang.org/docs/hello_cairo/intro.html#field-element
 @external
 func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() {
     // Reading caller address
