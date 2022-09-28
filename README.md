@@ -6,7 +6,9 @@
 **Comencemos usando Cairo con este simple tutorial.
 Completa los ejercicios, obtén tokens y aprende sobre los contratos inteligentes de StarkNet!**
 
-## Contribuciones
+## ¡Contribuciones!
+
+Las contribuciones son excelente como primeros Pull Requests y para introducirse en el ecosistema de StarkNet. Sigue [este tutorial](https://www.dataschool.io/how-to-contribute-on-github/) si necesitas apoyo para realizar el Pull Request.
 
 Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. ¡Tus contribuciones son bienvenidas! Aquí hay algunas cosas que puedes hacer para ayudar:
 
@@ -14,7 +16,6 @@ Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. �
 - Actualizar el código para nuevas versiones de StarkNet y Cairo.
 - Agregar explicaciones en los comentarios del ejercicio si sientes que necesita mejor explicación.
 - Agregar ejercicios mostrando tus características favoritas de Cairo.
-
 
 ## Introducción
 
