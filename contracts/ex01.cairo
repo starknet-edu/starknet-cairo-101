@@ -1,16 +1,16 @@
-// Ex 01
-//  Using a simple public contract function
-// In this exercise, you need to:
-// - Use this contract's claim_points() function
-// - Your points are credited by the contract
+// Ejercicio 01
+// Usando una función de contrato público simple
+// En este ejercicio, necesita:
+// - Usar la función claim_points() de este contrato
+// - Sus puntos son acreditados por el contrato
 
-// What you'll learn
-// - General smart contract syntax
-// - Calling a function
+// Lo que aprenderás
+// - Sintaxis general del contrato inteligente
+// - Llamar a una función
 
-// General directives and imports
-//
-//
+// -----
+// GENERAL DIRECTIVES AND IMPORTS
+// -----
 
 %lang starknet
 
@@ -25,8 +25,10 @@ from contracts.utils.ex00_base import (
     ex_initializer,
 )
 
-// Constructor
-// This function is called when the contract is deployed
+// -----
+// CONSTRUCTOR
+// -----
+// Esta función se llama cuando se implementa el contrato
 //
 @constructor
 func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
@@ -36,13 +38,15 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
     return ();
 }
 
-// External functions
-// These functions are callable by other contracts
+// -----
+// EXTERNAL FUNCTIONS
+// -----
+// Estas funciones pueden ser llamadas por otros contratos.
 //
 
-// This function is called claim_points
-// It takes one argument as a parameter (sender_address), which is a felt. Read more about felts here https://www.cairo-lang.org/docs/hello_cairo/intro.html#field-element
-// It also has implicit arguments (syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr). Read more about implicit arguments here https://www.cairo-lang.org/docs/how_cairo_works/builtins.html
+// Esta función se llama claim_points
+// Guarda en (sender_address) un felt. Lea más sobre felts aquí https://www.cairo-lang.org/docs/hello_cairo/intro.htmlfield-element
+// Tiene argumentos implícitos (syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr). Lea más sobre argumentos implícitos aquí https://www.cairo-lang.org/docs/how_cairo_works/builtins.html
 @external
 func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() {
     // Reading caller address

@@ -1,160 +1,149 @@
 # StarkNet Cairo 101
 
-**Get started with Cairo with this simple tutorial.
-Complete the puzzles/exercises, get tokens and learn about StarkNet smart contracts!**
+*Repo original [starknet-cairo-101](https://github.com/starknet-edu/starknet-cairo-101)*
+*Traducción del README.md original al español por [@barretodavid](https://github.com/barretodavid).*
 
-## Introduction​
+**Comencemos usando Cairo con este simple tutorial.
+Completa los ejercicios, obtén tokens y aprende sobre los contratos inteligentes de StarkNet!**
+
+## Contribuciones
+
+Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. ¡Tus contribuciones son bienvenidas! Aquí hay algunas cosas que puedes hacer para ayudar:
+
+- Traducción de los ejercicios en [starknet-edu/starknet-cairo-101/contracts](https://github.com/starknet-edu/starknet-cairo-101/tree/main/contracts).
+- Actualizar el código para nuevas versiones de StarkNet y Cairo.
+- Agregar explicaciones en los comentarios del ejercicio si sientes que necesita mejor explicación.
+- Agregar ejercicios mostrando tus características favoritas de Cairo.
+
+
+## Introducción
 
 ### Disclaimer
 
-​Don't expect any benefit from using this other than learning some cool stuff about StarkNet, the first general-purpose validity rollup on the Ethereum mainnnet.
+Usando esto, no esperes otro beneficio que aprender algunas cosas interesantes sobre StarkNet, el primer rollup de validez (validity rollup) de propósito general en la red principal de Ethereum (Mainnet).
 
-​StarkNet is still in Alpha. This means that development is ongoing, and the paint is not dry everywhere. Things will get better, and in the meanwhile, we make things work with a bit of duct tape here and there!​
+StarkNet aún esta en Alpha. Esto significa que sigue en desarrollo, la pintura está fresca. Las cosas mejorarán, y mientras tanto, estamos haciendo que las cosas funcionen con un poco de cinta y alambres por aquí y por allí.
 
-### How it works
+### Cómo funciona
 
-​
-**Complete the exercises and get tokens!**
-This workshop is a set of smart contracts deployed on StarkNet Alpha on testnet. Each smart contract is an exercise/puzzle - which outlines a feature of the Cairo Smart contract language.
 
-Completing the exercise will credit you with points in the form of an [ERC20 token](contracts/token/TDERC20.cairo).
+**Completa los ejercicios y obtén tokens!**
+Este workshop consiste en un conjunto de contratos inteligentes corriendo en la testnet de StarkNet Alpha. Cada contrato es un ejercicio - que remarca alguna característica/feature del lenguaje de programación Cairo.
 
-​
-This workshop focuses on *reading* Cairo code and StarkNet smart contracts to understand its syntax. You do not need to code or install anything on your machine to follow and complete it.​
+Al completar el ejercicio se te acreditarán puntos en forma de [ERC20 token](contracts/token/TDERC20.cairo).
 
-​
-It will take you some time in order to get started (doing the first two exercises) into the tutorial. Hang on! Once there, things will flow more easily. You're learning!​
+​Este workshop se enfoca en *leer* código Cairo y contratos inteligentes de StarkNet para entender su sintaxis. No es necesario programar o instalar nada en tu computadora para seguirlo y completarlo.
 
-### Where am I?
+Va a tomarte algo de tiempo comenzar (hacer los primeros dos ejercicios) con el tutorial. Paciencia! una vez que estés allí, las cosas van a fluir mejor. ¡Estás aprendiendo!
 
-This workshop is the first in a series aimed at teaching how to build on StarkNet. Checkout out the following:
+### ¿Dónde me encuentro?
 
-| Topic                                       | GitHub repo                                                                            |
-| ------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Learn how to read Cairo code (you are here) | [Cairo 101](https://github.com/starknet-edu/starknet-cairo-101)                        |
-| Deploy and customize an ERC721 NFT          | [StarkNet ERC721](https://github.com/starknet-edu/starknet-erc721)                     |
-| Deploy and customize an ERC20 token         | [StarkNet ERC20](https://github.com/starknet-edu/starknet-erc20)                       |
-| Build a cross layer application             | [StarkNet messaging bridge](https://github.com/starknet-edu/starknet-messaging-bridge) |
-| Debug your Cairo contracts easily           | [StarkNet debug](https://github.com/starknet-edu/starknet-debug)                       |
-| Design your own account contract            | [StarkNet account abstraction](https://github.com/starknet-edu/starknet-accounts)      |
+Este workshop es el primero en una serie cuyo objetivo es enseñar a construir en StarkNet. Puedes obtener más información en los siguientes links:
 
-### Providing feedback & getting help
+| Topic                                       | GitHub repo                                                                                |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Aprende a leer código Cairo (Estás aquí)    | [Cairo 101](https://github.com/starknet-edu/starknet-cairo-101)                            |
+| Despliega y edita un NFT ERC721             | [StarkNet ERC721](https://github.com/starknet-edu/starknet-erc721)                         |
+| Despliega y edita un token ERC20            | [StarkNet ERC20](https://github.com/starknet-edu/starknet-erc20)                           |
+| Construye una aplicacion multi-capa         | [Puente de mensajes de StarkNet](https://github.com/starknet-edu/starknet-messaging-bridge)|
+| Debugea tus contratos Cairo fácilmente      | [StarkNet debug](https://github.com/starknet-edu/starknet-debug)                           |
+| Diseña tu propio contrato de cuenta         | [Abstracción de cuenta de StarkNet](https://github.com/starknet-edu/starknet-accounts)     |
 
-Once you are done working on this tutorial, your feedback would be greatly appreciated!
+### Feedback y ayuda
 
-**Please fill out [this form](https://forms.reform.app/starkware/untitled-form-4/kaes2e) to let us know what we can do to make it better.**
+Una vez que hayas terminado con este tutorial, tu feedback será muy apreciado!
 
-​
-And if you struggle to move forward, do let us know! This workshop is meant to be as accessible as possible; we want to know if it's not the case.
+**Por favor llena [este formulario](https://forms.reform.app/starkware/untitled-form-4/kaes2e) para dejarnos saber qué podemos mejorar.**
 
-​
-Do you have a question? Join our [Discord server](https://starknet.io/discord), register, and join channel #tutorials-support.
+Y si se te complica seguir adelante, déjanos saber! La idea de este workshop es que sea lo más accesible posible; queremos saber si no es el caso.
 
-Are you interested in following online workshops about learning how to dev on StarkNet? [Subscribe here](http://eepurl.com/hFnpQ5)
+¿Tienes alguna pregunta? Visita nuestro [Server de Discord](https://discord.gg/starknet), regístrate, y visita el canal #tutorials-support.
 
-### Contributing
+¿Estás interesado/a en seguir workshops online sobre aprender cómo desarrollar en StarkNet? [Subscríbete](http://eepurl.com/hFnpQ5)
 
-This project can be made better and will evolve as StarkNet matures. Your contributions are welcome! Here are things that you can do to help:
 
-- Create a branch with a translation to your language
-- Correct bugs if you find some
-- Add an explanation in the comments of the exercise if you feel it needs more explanation
-- Add exercises showcasing your favorite Cairo feature
+### Idiomas
 
-### Languages
+- Versión disponible en Inglés [aquí](https://github.com/starknet-edu/starknet-cairo-101/blob/main/README.md).
+- Versión disponible en Mandarín 中文版本请查看这里[aquí](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin).
 
-- A mandarin version is available 中文版本请查看这里[here](https://github.com/starknet-edu/starknet-cairo-101/tree/mandarin).
-- A spanish version is available [here](./README.es.md).
-- A portuguese version is available [here](./README.pt.md).
-- A Korean version is available [here](./README.kr.md).
+## Comencemos
 
-## Getting started
+### Creando una smart contract wallet (billetera de contrato inteligente)
+**Para completar este tutorial necesitas coleccionar puntos** Estos puntos van a ser adquiridos por el contrato inteligente que vas a desplegar.
 
-### Creating a smart contract wallet
+- La forma mas fácil de iniciar una es usando Argent X ([descarga la extensión de chrome](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/)  o  [checkea su repo](https://github.com/argentlabs/argent-x)) o Braavos ([descargar extensión de chrome](https://chrome.google.com/webstore/detail/braavos-wallet/jnlgamecbpmbajjfhmmmlhejkemejdma)). Estas billeteras son similares a lo que Metamask es para Ethereum y permite a los usuarios iniciar transacciones e interactuar con aplicaciones en StarkNet.
+- Sigue las instrucciones  para instalar la extensión y desplegar una contrato de cuenta inteligente (puede tomar más o menos 5 minutos para ser desplegado). Por favor nota que en StarkNet solo hay un tipo de cuentas - cuentas de contrato inteligente (esto se llama Abstracción de cuenta), en contraste a Ethereum donde hay billeteras y contratos inteligentes. En otras palabras, cada billetera en StarkNet es un contrato inteligente y no existe distinción entre ellos y otros contratos. Por lo tanto, para crear una nueva billetera, necesitas desplegar una transacción que publique tu billetera de contrato inteligente a la red.
+- Asegúrate de que estés en la red testnet de Goerli.
+- Los puntos de este tutorial estan contenidos en el contrato `[0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c](https://goerli.voyager.online/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c)`. Clickea en "Add Token" (Agregar Token) en tu billetera instalada y la dirección del contrato para que tus puntos de balance aparezcan! Un nuevo token llamado SC101 (starknet-cairo-101) aparecerá en tu billetera.
+- Conectar [Voyager](https://voyager.online/) a tu contrato de cuenta inteligente. Voyager está en el explorador de bloques para StarkNet (Equivalente a Etherscan para Ethereum) y te permite navegar el estado de la blockchain, ver todas las transacciones y sus estados. Conectar Voyager a tu billetera, te va a permitir enviar tus transacciones a través de la billetera.
+- Para ejecutar transacciones en la red de prueba Goerli de StarkNet **vas a necesitar ETH de prueba para pagar el gas**. Para obtener un poco, ve a [faucet](https://faucet.goerli.starknet.io/) y sigue las instrucciones. Podría tomar varios minutos, pero deberías recibir algunos ETH Goerli L2 en tu billetera que puedes usar para ejecutar transacciones en la red de prueba. 
 
-**To complete the tutorial you need to collect points.** These points will be owned by a smart contract wallet you need to deploy.
+### Resolviendo ejercicios y obteniendo puntos
+​**Cada ejercicio es un contrato inteligente separado.** Contiene código que, si se ejecuta correctamente, va a distribuir puntos en tu cuenta.
 
-- The easiest way to set one up is to use Argent X ([download the chrome extension](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/)  or  [check their repo](https://github.com/argentlabs/argent-x)) or Braavos ([download the chrome extension](https://chrome.google.com/webstore/detail/braavos-wallet/jnlgamecbpmbajjfhmmmlhejkemejdma)). These wallet solutions are similar to what Metamask is for Ethereum and allow users to initiate transactions and interact with applications on StarkNet.
-- Follow the instructions to install the extension and deploy a smart contract account (it could take about 5 minutes to be deployed). Please note that in StarkNet there is only one type of accounts - smart contract accounts (this is called Account Abstraction), in contrast to Ethereum where there are wallets and smart contracts. In other words, every wallet on StarkNet is a smart contract and there is no distinction between them and other smart contracts. Therefore, to create a new wallet, you need to deploy a transaction that publishes your smart contract wallet to the network.
-- Make sure you are on the Goerli testnet network.
-- The tutorial's points are held in contract  `0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c` ([Starkscan link](https://testnet.starkscan.co/contract/0x05c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c), [Voyager link](https://goerli.voyager.online/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c)). 
-- Click on "Add Token" in your installed wallet and the contract address to get your points balance to show up there! A new token called SC101 (starknet-cairo-101) will appear in your wallet.
-- Connect the block explorer ([Starkscan](https://testnet.starkscan.co/) or [Voyager](https://goerli.voyager.online/)) to your account smart contract. These are block explorers for StarkNet (the equivalent of Etherscan for Ethereum) and allow you to browse the state of the blockchain, view all transactions and their status. By connecting a block explorer to your wallet, you will be able to broadcast your transactions through your wallet.
-- To execute transactions on the Goerli StarkNet testnet **you'll need testnet ETH to pay for gas**. To get some, go to the [faucet](https://faucet.goerli.starknet.io/) and follow the instructions. It could take several minutes, but you should receive some L2 Goerli ETH in your wallet that you can use to execute transactions on the testnet.
-
-### Solving exercises & Getting points​
-
-​
-**Each exercise is a separate smart contract.** It contains code that, when executed correctly, will distribute points to your address.
-​
-Points are distributed by the function `distribute_points()` while the function `validate_exercise` records that you completed the exercise (you can get points only once). Your goal is to:
+Los puntos son distribuidos por la función `distribute_points()` mientras la función `validate_exercise` registra que haz completado el ejercicio (puedes obtener puntos solo una vez). Tu objetivo es:
 
 ![Graph](assets/diagram.png)
 ​
+
+### Usando Voyager
+
+Para este tutorial, vamos a interactuar con nuestros contratos a través de [Voyager](https://goerli.voyager.online/), el explorador de StarkNet. Por favor, asegúrate de conectar tu cuenta contrato de cuenta! Esto va a permitirte enviar tus transacciones a través de la billetera.
+
+Cuando busques hacer algún contrato/transacción, siempre asegúrate de que estés en la versión Goerli de Voyager!
+
+- Accede a tus transacciones con una URL de formato: [https://goerli.voyager.online/tx/tu-hash-de-transaccion](https://goerli.voyager.online/tx/tu-hash-de-transaccion).
+- Accede al contrato con una URL de formato: [https://goerli.voyager.online/contract/tu-direccion-de-contrato](https://goerli.voyager.online/contract/tu-direccion-de-contrato)
+- Accede a funciones de lectura/escritura del contrato en la tab "read/write contract" de Voyager.
 ​
 
-### Using a block explorer
+## Direcciones de los ejercicios y contratos
 
-For this tutorial, we'll interact with our contracts through [Starkscan](https://testnet.starkscan.co/) or [Voyager](https://goerli.voyager.online/), StarkNet's block explorers. Please make sure to connect the block explorer to your account contract! This will allow you to broadcast your transactions through your wallet.
+| Tópico                                            | Código del contrato                                        | Contrato en Voyager                                                                                             |
+| ------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Contador de puntos ERC20                          | [Contador de puntos ERC20](contracts/token/TDERC20.cairo) | [Link](https://goerli.voyager.online/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c) |
+| Sintaxis general                                  | [Ex01](contracts/ex01.cairo)                              | [Link](https://goerli.voyager.online/contract/0x29e2801df18d7333da856467c79aa3eb305724db57f386e3456f85d66cbd58b) |
+| Variables de almacenamiento, getters, asserts     | [Ex02](contracts/ex02.cairo)                              | [Link](https://goerli.voyager.online/contract/0x18ef3fa8b5938a0059fa35ee6a04e314281a3e64724fe094c80e3720931f83f) |
+| Leyendo y escribiendo variables de almacenamiento | [Ex03](contracts/ex03.cairo)                              | [Link](https://goerli.voyager.online/contract/0x79275e734d50d7122ef37bb939220a44d0b1ad5d8e92be9cdb043d85ec85e24) |
+| Mappings                                          | [Ex04](contracts/ex04.cairo)                              | [Link](https://goerli.voyager.online/contract/0x2cca27cae57e70721d0869327cee5cb58098af4c74c7d046ce69485cd061df1) |
+| Visibilidad de variables                          | [Ex05](contracts/ex05.cairo)                              | [Link](https://goerli.voyager.online/contract/0x399a3fdd57cad7ed2193bdbb00d84553cd449abbdfb62ccd4119eae96f827ad) |
+| Visibilidad de funciones                          | [Ex06](contracts/ex06.cairo)                              | [Link](https://goerli.voyager.online/contract/0x718ece7af4fb1d9c82f78b7a356910d8c2a8d47d4ac357db27e2c34c2424582) |
+| Comparando valores                                | [Ex07](contracts/ex07.cairo)                              | [Link](https://goerli.voyager.online/contract/0x3a1ad1cde69c9e7b87d70d2ea910522640063ccfb4875c3e33665f6f41d354a) |
+| Recursiones nivel 1                               | [Ex08](contracts/ex08.cairo)                              | [Link](https://goerli.voyager.online/contract/0x15fa754c386aed6f0472674559b75358cde49db8b2aba8da31697c62001146c) |
+| Recursiones nivel 2                               | [Ex09](contracts/ex09.cairo)                              | [Link](https://goerli.voyager.online/contract/0x2b9fcc1cfcb1ddf4663c8e7ac48fc87f84c91a8c2b99414c646900bf7ef5549) |
+| Composability                                     | [Ex10](contracts/ex10.cairo)                              | [Link](https://goerli.voyager.online/contract/0x8415762f4b0b0f44e42ac1d103ac93c3ea94450a15bb65b99bbcc816a9388)   |
+| Importando funciones                              | [Ex11](contracts/ex11.cairo)                              | [Link](https://goerli.voyager.online/contract/0xab5577b9be8948d89dbdba63370a3de92e72a23c4cacaea38b3a74eec3a872)  |
+| Eventos                                           | [Ex12](contracts/ex12.cairo)                              | [Link](https://goerli.voyager.online/contract/0x24d15e02ddaa19d7ecd77204d35ed9bfff00a0cabc62eb3da5ba7680e44baf9) |
+| Privacidad en StarkNet                            | [Ex13](contracts/ex13.cairo)                              | [Link](https://goerli.voyager.online/contract/0x2bae9190076c4252289b8a8671277cef57318192cff20c736808b0c71095895) |
+| Multicall (Llamadas múltiples)                    | [Ex14](contracts/ex14.cairo)                              | [Link](https://goerli.voyager.online/contract/0xed7ddffe1370fbbc1974ab8122d1d9bd7e3da8d829ead9177ea4249b4caef1)  |
 
-When looking for a contract/transaction, always ensure you are on the Goerli version of the block explorer!
+### Contando tus puntos
 
-- Access your transactions with a URL of the format:
-  - [https://testnet.starkscan.co/tx/your-tx-hash](https://testnet.starkscan.co/tx/your-tx-hash).
-  - [https://goerli.voyager.online/tx/your-tx-hash](https://goerli.voyager.online/tx/your-tx-hash).
-- Access a contract with a URL of the format:
-  - [https://testnet.starkscan.co/contract/your-contract-address](https://testnet.starkscan.co/contract/your-contract-address)
-  - [https://goerli.voyager.online/contract/your-contract-address](https://goerli.voyager.online/contract/your-contract-address)
-- Access read/write functions of the contract with the "read/write contract" tab in the block explorer.
-
+​Tus puntos serian acreditados en tu billetera instalada; aunque esto puede llevar algo de tiempo. Si quieres monitorear tus puntos en tiempo real, también puedes ver tu balance en voyager!
 ​
-​
+- Ve al [contador ERC20](https://goerli.voyager.online/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c#readContract) en Voyager, en la tab "read contract".
+- Ingresa tu dirección en la función "balanceOf".
 
-## Addresses of the exercises and contracts
-
-| Topic                                 | Contract code                                         | Contract on Starkscan                                                                                              | Contract on Voyager                                                                                              |
-| ------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Points counter ERC20                  | [Points counter ERC20](contracts/token/TDERC20.cairo) | [Link](https://testnet.starkscan.co/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c) | [Link](https://goerli.voyager.online/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c) |
-| General syntax                        | [Ex01](contracts/ex01.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x29e2801df18d7333da856467c79aa3eb305724db57f386e3456f85d66cbd58b) | [Link](https://goerli.voyager.online/contract/0x29e2801df18d7333da856467c79aa3eb305724db57f386e3456f85d66cbd58b) |
-| Storage variables, getters, asserts   | [Ex02](contracts/ex02.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x18ef3fa8b5938a0059fa35ee6a04e314281a3e64724fe094c80e3720931f83f) | [Link](https://goerli.voyager.online/contract/0x18ef3fa8b5938a0059fa35ee6a04e314281a3e64724fe094c80e3720931f83f) |
-| Reading and writing storage variables | [Ex03](contracts/ex03.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x79275e734d50d7122ef37bb939220a44d0b1ad5d8e92be9cdb043d85ec85e24) | [Link](https://goerli.voyager.online/contract/0x79275e734d50d7122ef37bb939220a44d0b1ad5d8e92be9cdb043d85ec85e24) |
-| Mappings                              | [Ex04](contracts/ex04.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x2cca27cae57e70721d0869327cee5cb58098af4c74c7d046ce69485cd061df1) | [Link](https://goerli.voyager.online/contract/0x2cca27cae57e70721d0869327cee5cb58098af4c74c7d046ce69485cd061df1) |
-| Variable visibility                   | [Ex05](contracts/ex05.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x399a3fdd57cad7ed2193bdbb00d84553cd449abbdfb62ccd4119eae96f827ad) | [Link](https://goerli.voyager.online/contract/0x399a3fdd57cad7ed2193bdbb00d84553cd449abbdfb62ccd4119eae96f827ad) |
-| Functions visibility                  | [Ex06](contracts/ex06.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x718ece7af4fb1d9c82f78b7a356910d8c2a8d47d4ac357db27e2c34c2424582) | [Link](https://goerli.voyager.online/contract/0x718ece7af4fb1d9c82f78b7a356910d8c2a8d47d4ac357db27e2c34c2424582) |
-| Comparing values                      | [Ex07](contracts/ex07.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x3a1ad1cde69c9e7b87d70d2ea910522640063ccfb4875c3e33665f6f41d354a) | [Link](https://goerli.voyager.online/contract/0x3a1ad1cde69c9e7b87d70d2ea910522640063ccfb4875c3e33665f6f41d354a) |
-| Recursions level 1                    | [Ex08](contracts/ex08.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x15fa754c386aed6f0472674559b75358cde49db8b2aba8da31697c62001146c) | [Link](https://goerli.voyager.online/contract/0x15fa754c386aed6f0472674559b75358cde49db8b2aba8da31697c62001146c) |
-| Recursions level 2                    | [Ex09](contracts/ex09.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x2b9fcc1cfcb1ddf4663c8e7ac48fc87f84c91a8c2b99414c646900bf7ef5549) | [Link](https://goerli.voyager.online/contract/0x2b9fcc1cfcb1ddf4663c8e7ac48fc87f84c91a8c2b99414c646900bf7ef5549) |
-| Composability                         | [Ex10](contracts/ex10.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x8415762f4b0b0f44e42ac1d103ac93c3ea94450a15bb65b99bbcc816a9388)   | [Link](https://goerli.voyager.online/contract/0x8415762f4b0b0f44e42ac1d103ac93c3ea94450a15bb65b99bbcc816a9388)   |
-| Importing functions                   | [Ex11](contracts/ex11.cairo)                          | [Link](https://testnet.starkscan.co/contract/0xab5577b9be8948d89dbdba63370a3de92e72a23c4cacaea38b3a74eec3a872)  | [Link](https://goerli.voyager.online/contract/0xab5577b9be8948d89dbdba63370a3de92e72a23c4cacaea38b3a74eec3a872)  |
-| Events                                | [Ex12](contracts/ex12.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x24d15e02ddaa19d7ecd77204d35ed9bfff00a0cabc62eb3da5ba7680e44baf9) | [Link](https://goerli.voyager.online/contract/0x24d15e02ddaa19d7ecd77204d35ed9bfff00a0cabc62eb3da5ba7680e44baf9) |
-| Privacy on StarkNet                   | [Ex13](contracts/ex13.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x2bae9190076c4252289b8a8671277cef57318192cff20c736808b0c71095895) | [Link](https://goerli.voyager.online/contract/0x2bae9190076c4252289b8a8671277cef57318192cff20c736808b0c71095895) |
-| Multicall                             | [Ex14](contracts/ex14.cairo)                          | [Link](https://testnet.starkscan.co/contract/0xed7ddffe1370fbbc1974ab8122d1d9bd7e3da8d829ead9177ea4249b4caef1)  | [Link](https://goerli.voyager.online/contract/0xed7ddffe1370fbbc1974ab8122d1d9bd7e3da8d829ead9177ea4249b4caef1)  |
-
-### Counting your points
-
-​
-Your points will get credited in your installed wallet; though this may take some time. If you want to monitor your points count in real time, you can also see your balance in a block explorer!
+Tambien puede checkear tu progreso general [aquí](https://starknet-tutorials.vercel.app).
 ​
 
-- Go to the  ERC20 counter on [Voyager](https://goerli.voyager.online/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c#readContract) or [Starkscan](https://testnet.starkscan.co/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c#read-contract), in the "read contract" tab.
-- Enter your address in the "balanceOf" function.
+### Estado de la transacción
 
-You can also check your overall progress [here](https://starknet-tutorials.vercel.app).
+​Si envías un transacción y es mostrada como "undetected" en Voyager, esto puede significar dos cosas:
+
+- Tu transacción está pendiente y va a ser incluida en un bloque pronto. Luego será visible en Voyager.
+- Tu transacción fué inválida y NO será incluida en un bloque (no existe tal cosa como transacción fallida en StarkNet).
+
+Puedes (y deberías) checkear el estado de tu transacción con la siguiente URL ​[https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=), donde puedes concatenar tu hash de transacción.
 ​
+​## Reutilizando este proyecto
 
-### Transaction status
-
-​
-You can also check the status of your transaction with the following URL  [https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=) or [https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=), where you can append your transaction hash.
-​
-​
-
-## Reusing this project
-
-- Clone the repo on your machine.
-- Set up the environment following [these instructions](https://starknet.io/docs/quickstart.html#quickstart).
-- Test that you can compile the project.
+- Clona el repositorio en tu máquina.
+- Haz el setup del entorno siguiendo [estas instrucciones](https://starknet.io/docs/quickstart.html#quickstart).
+- Instala [Nile](https://github.com/OpenZeppelin/nile).
+- Verifica que el proyecto compile.
 
 ```bash
-starknet-compile contracts/ex01.cairo
+nile compile
 ```
