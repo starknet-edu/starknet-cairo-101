@@ -8,7 +8,7 @@ Completa los ejercicios, obtén tokens y aprende sobre los contratos inteligente
 
 ## ¡Contribuciones!
 
-Las contribuciones son excelente como primeros Pull Requests y para introducirse en el ecosistema de StarkNet. Sigue [este tutorial](https://www.dataschool.io/how-to-contribute-on-github/) si necesitas apoyo para realizar el Pull Request. Una vez que hayas hecho `push` y te encuentras creando el PR en GitHub, recuerda realizarlo (comparar) con respecto a la branch `spanish`.
+Las contribuciones son excelente como primeros Pull Requests y para introducirse en el ecosistema de StarkNet. Sigue [este tutorial](https://www.dataschool.io/how-to-contribute-on-github/) si necesitas apoyo para realizar el Pull Request. Una vez que hayas hecho `push` y te encuentras creando el PR en GitHub, recuerda realizarlo (comparar) con respecto a la branch `spanish` y no con respecto a la `main`.
 
 Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. ¡Tus contribuciones son bienvenidas! Aquí hay algunas cosas que puedes hacer para ayudar:
 
