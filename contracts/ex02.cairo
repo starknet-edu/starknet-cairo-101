@@ -1,19 +1,19 @@
-// ######## Ex 02
-// # Understanding asserts
-// In this exercise, you need to:
-// - Use this contract's claim_points() function
-// - Your points are credited by the contract
+// ######## Ej 02
+// # Entendiendo los "Asserts"
+// En este ejercicio necesitas:
+// - Usar la función claim_points() de este contrato
+// - Tus puntos son acreditados por el contrato
 
-// # What you'll learn
-// - Using asserts
-// - How to declare storage variables
-// - How to read storage variables
-// - How to create getter functions
-// Asserts are a basic building block allowing you to verify that two values are the same.
-// They are similar to require() in Solidity
-// More information about basic storage https://www.cairo-by-example.com/basics/storage
+// # Lo que aprenderás
+// - Usar los "asserts"
+// - Cómo declarar variables de almacentamiento.
+// - Cómo leer variables de almacenamiento.
+// - Cómo crear funciones "getter"
+// Los "Asserts" son componentes básicos que te permiten verificar que dos valores sean iguales.
+// Son similares a los require() en Solidity.
+// Más informacion acerca del almacenamiento básico en https://www.cairo-by-example.com/basics/storage.
 
-// ######## General directives and imports
+// ######## Directivas generales e importaciones
 //
 //
 
@@ -30,19 +30,19 @@ from contracts.utils.ex00_base import (
 )
 
 //
-// Declaring storage vars
-// Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
+// Declarando las variables de almacenamiento
+// Las variables de almacenamiento son por defecto no visibles a través del ABI. Son similares a las variables del tipo "private" en Solidity
 //
-// This variable is a felt and is called my_secret_value_storage
-// From within a smart contract, it can be read with my_secret_value_storage.read() or written to with my_secret_value_storage.write()
+// Esta variable es un "Felt" y se llama my_secret_value_storage
+// Desde un mismo contrato inteligente, puede leerse con my_secret_value_storage.read() o escribirse con my_secret_value_storage.write()
 
 @storage_var
 func my_secret_value_storage() -> (my_secret_value_storage: felt) {
 }
 
 //
-// Declaring getters
-// Public variables should be declared explicitly with a getter
+// Declarando "getters"
+// Las variables del tipo "Public" deben declararse explicitamente con un "getter"
 //
 
 @view
@@ -54,7 +54,7 @@ func my_secret_value{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check
 }
 
 // ######## Constructor
-// This function is called when the contract is deployed
+// Esta función es llamada cuando se despliega el contrato.
 //
 @constructor
 func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
@@ -69,24 +69,24 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
     return ();
 }
 
-// ######## External functions
-// These functions are callable by other contracts
+// ######## Funciones del tipo "External"
+// Estas funciones pueden ser llamadas desde otros contratos
 //
 
 @external
 func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(my_value: felt) {
-    // Reading caller address
+    // Leyendo la dirección de quien la llama
     let (sender_address) = get_caller_address();
-    // Reading stored value from storage
+    // Leyendo el valor almacenado de la memoria
     let (my_secret_value) = my_secret_value_storage.read();
-    // Checking that the value sent is correct
-    // Using assert this way is similar to using "require" in Solidity
-    with_attr error_message("Wrong secret value") {
+    // Comprobando que el valor enviado es correcto
+    // Usar "assert" de esta forma es parecido a usar "require" en Solidity
+    with_attr error_message("Valor secreto incorrecto") {
         assert my_value = my_secret_value;
     }
-    // Checking if the user has validated the exercise before
+    // Comprobando si el usuario ha validado el ejercicio previamente
     validate_exercise(sender_address);
-    // Sending points to the address specified as parameter
+    // Enviando puntos a la dirección especificada como parámetro
     distribute_points(sender_address, 2);
     return ();
 }
