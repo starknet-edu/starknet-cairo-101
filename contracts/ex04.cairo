@@ -1,10 +1,10 @@
-// ######## Ex 04
-// Reading a mapping
-// In this exercise, you need to:
-// - Use a function to read a variable
-// - Use a function to read a value in a mapping, where the slot you read is the value from the first call
-// - Use a function to show you know the correct value of the value in the mapping
-// - Your points are credited by the contract
+// ######## Ejercicio 04
+// Leyendo un mapping.
+// En este ejercicio, necesitás:
+// -  Usar una función para leer una variable.
+// -  Usar una función para leer un valor de un mapping, donde la posición que leas es el valor de la primera llamada.
+// -  Usar una función para mostrar que conoces la posición correcta del valor en el mapping.
+// -  Sus puntos son acreditados por el contrato.
 
 %lang starknet
 
@@ -20,8 +20,8 @@ from contracts.utils.ex00_base import (
 )
 
 //
-// Declaring storage vars
-// Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
+//  Declarando variables de estado.
+//  Las variables de estado no son visibles por defecto en la ABI. Estas son similares a las variables privadas en Solidity.
 //
 
 @storage_var
@@ -41,8 +41,8 @@ func next_slot() -> (next_slot: felt) {
 }
 
 //
-// Declaring getters
-// Public variables should be declared explicitly with a getter
+// Declarando getters.
+// Las variables públicas deben de ser declaradas explícitamente con un getter.
 //
 
 @view
@@ -73,36 +73,36 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 //
-// External functions
+// Funciones externas.
 //
 
 @external
 func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     expected_value: felt
 ) {
-    // Reading caller address
+    // Leyendo la dirección del emisor.
     let (sender_address) = get_caller_address();
     with_attr error_message("User slot not assigned. Call assign_user_slot") {
-        // Checking that the user got a slot assigned
+        // Comprobando que el usuario tenga una posición asignada.
         let (user_slot) = user_slots_storage.read(sender_address);
         assert_not_zero(user_slot);
     }
-    // Checking that the value provided by the user is the one we expect
-    // Yes, I'm sneaky
+    // Comprobando que el valor dado por el usuario es el esperado.
+    // Sí, soy astuto.
     let (value) = values_mapped_storage.read(user_slot);
     with_attr error_message("Input value is not the expected secret value") {
         assert value = expected_value + 32;
     }
-    // Checking if the user has validated the exercise before
+    // Comprobando si el usuario ha validado el ejercicio anteriormente.
     validate_exercise(sender_address);
-    // Sending points to the address specified as parameter
+    // Enviando los puntos a la dirección especificada como parametro.
     distribute_points(sender_address, 2);
     return ();
 }
 
 @external
 func assign_user_slot{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() {
-    // Reading caller address
+    // Leyendo la dirección del emisor.
     let (sender_address) = get_caller_address();
     let (next_slot_temp) = next_slot.read();
     let (next_value) = values_mapped_storage.read(next_slot_temp + 1);
@@ -117,24 +117,24 @@ func assign_user_slot{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_chec
 }
 
 //
-// External functions - Administration
-// Only admins can call these. You don't need to understand them to finish the exercise.
+// Funciones externas - Administración
+// Solo los administradores pueden llamar estas funciones. Usted no necesita entenderlas para finalizar el ejercicio.
 //
 
 @external
 func set_random_values{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     values_len: felt, values: felt*
 ) {
-    // Check if the random values were already initialized
+    // Comprobando si los valores aleatorios ya fueron inicializados.
     let (was_initialized_read) = was_initialized.read();
     with_attr error_message("random values already initialized") {
         assert was_initialized_read = 0;
     }
 
-    // Storing passed values in the store
+    // Guardando los valores dados en la variable de estado.
     set_a_random_value(values_len, values);
 
-    // Mark that value store was initialized
+    // Marcar que el valor guardado fue inicializado.
     was_initialized.write(1);
     return ();
 }
