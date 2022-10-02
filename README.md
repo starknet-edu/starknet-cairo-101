@@ -16,7 +16,7 @@ Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. �
 - Agregar explicaciones en los comentarios del ejercicio si sientes que necesita mejor explicación.
 - Agregar ejercicios mostrando tus características favoritas de Cairo.
 
-Thank you @DigiCris, @mustafinho for your contributions.
+Thank you [@DigiCris](https://github.com/starknet-edu/starknet-cairo-101/issues?q=is%3Apr+is%3Aopen+author%3ADigiCris), [@mustafinho](https://github.com/starknet-edu/starknet-cairo-101/issues?q=is%3Apr+is%3Aopen+author%3Amustafinho) for your contributions.
 
 ## Introducción
 
