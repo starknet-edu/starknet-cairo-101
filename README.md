@@ -16,7 +16,7 @@ Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. �
 - Agregar explicaciones en los comentarios del ejercicio si sientes que necesita mejor explicación.
 - Agregar ejercicios mostrando tus características favoritas de Cairo.
 
-Gracias [@DigiCris](https://github.com/DigiCris), [@mustafinho](https://github.com/Amustafinho) por sus contribuciones.
+Gracias [@DigiCris](https://github.com/DigiCris), [@mustafinho](https://github.com/mustafinho) por sus contribuciones.
 
 ## Introducción
 
