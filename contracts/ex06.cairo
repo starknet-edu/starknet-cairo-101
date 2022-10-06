@@ -1,10 +1,10 @@
-// ######## Ex 06
-// External vs internal functions
-// In this exercise, you need to:
-// - Use a function to get assigned a private variable
-// - Use an internal function to duplicate this variable in a public variable
-// - Use a function to show you know the correct value of the private variable
-// - Your points are credited by the contract
+// ######## Ej 06
+// Funciones del tipo "External" contra las funciones del tipo "internal"
+// En este ejercicio necesitas:
+// - Usar una funcion para que te asigne una variable privada
+// - Usar una función interna para copiar esta variable en una variable pública
+// - Usar una función para mostrar que conoces el valor correcto de la variable privada
+// - Tus puntos serán acreditados por el contrato
 
 %lang starknet
 
@@ -21,8 +21,8 @@ from contracts.utils.ex00_base import (
 )
 
 //
-// Declaring storage vars
-// Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
+// Declarando Variables de almacenamiento
+// Las variables de almacenamiento son por defecto no visibles a través del ABI. Son similares a las variables del tipo "private" en Solidity
 //
 
 @storage_var
@@ -46,8 +46,8 @@ func next_slot() -> (next_slot: felt) {
 }
 
 //
-// Declaring getters
-// Public variables should be declared explicitly with a getter
+// Declarando los "getters"
+// Las variables publicas deberían ser declaradas explicitamente con un "getter"
 //
 
 @view
@@ -78,39 +78,39 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 //
-// External functions
+// Funciones del tipo "External"
 //
 
 @external
 func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     expected_value: felt
 ) {
-    // Reading caller address
+    // Leyendo la dirección de quien la llama
     let (sender_address) = get_caller_address();
-    // Checking that the user got a slot assigned
+    // Comprobando de que el usuario tiene un espacio asignado
     let (user_slot) = user_slots_storage.read(sender_address);
-    with_attr error_message("User slot not assigned. Call assign_user_slot") {
+    with_attr error_message("Espacio de usuario no asignado. Llamar a assign_user_slot") {
         assert_not_zero(user_slot);
     }
 
-    // Checking that the value provided by the user is the one we expect
-    // Still sneaky.
-    // Or not. Is this psyops?
+    // Comprobando que el valor proporcionado por el usuario es el que esperamos
+    // Todavía sigiloso.
+    // o no. Es esto una operación psicológica?
     let (value) = values_mapped_secret_storage.read(user_slot);
-    with_attr error_message("random values already initialized") {
+    with_attr error_message("los valores aleatorios ya fueron inicializados") {
         assert value = expected_value;
     }
 
-    // Checking if the user has validated the exercise before
+    // Comprobando si el usuario ha validado el ejercicio previamente
     validate_exercise(sender_address);
-    // Sending points to the address specified as parameter
+    // Mandando los puntos a la dirección especificada como parametro
     distribute_points(sender_address, 2);
     return ();
 }
 
 @external
 func assign_user_slot{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() {
-    // Reading caller address
+    // Leyendo la dirección de quien lo llama
     let (sender_address) = get_caller_address();
     let (next_slot_temp) = next_slot.read();
     let (next_value) = values_mapped_secret_storage.read(next_slot_temp + 1);
@@ -128,59 +128,59 @@ func assign_user_slot{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_chec
 func external_handler_for_internal_function{
     syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }(a_value: felt) {
-    // Reading caller address
+    // Leyendo la dirección de quien la llama
     let (sender_address) = get_caller_address();
-    with_attr error_message("Value provided is not 0") {
-        // Just for fun
+    with_attr error_message("El valor proporcionado no es 0") {
+        // Solo por diversión
         assert a_value = 0;
     }
-    // Calling internal function
+    // Llamando una función del tipo "internal"
     copy_secret_value_to_readable_mapping(sender_address);
     return ();
 }
 
 //
-// Internal functions
-// These functions can only be called by functions inside the same contract
-// Maybe some external functions allow you to call these?
+// Funciones del tipo "internal"
+// Estas funciones solo pueden ser llamadas por funciones dentro del mismo contrato.
+// Quizá ¿Algunas funciones del tipo "external" te permitan llamar a estas?
 //
 
 func copy_secret_value_to_readable_mapping{
     syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }(sender_address: felt) {
-    with_attr error_message("User slot not assigned. Call assign_user_slot") {
-        // Checking that the user got a slot assigned
+    with_attr error_message("Espacio de usuario no asignado. Llamar a assign_user_slot") {
+        // Comprobando que el usuario tenga un espacio asignado
         let (user_slot) = user_slots_storage.read(sender_address);
         assert_not_zero(user_slot);
     }
 
-    // Reading user secret value
+    // Leyendo el valor secreto del usuario
     let (secret_value) = values_mapped_secret_storage.read(user_slot);
 
-    // Copying the value from non accessible values_mapped_secret_storage to
+    // Copiando el valor de "values_mapped_secret_storage" el cual no está accesible hacia
     user_values_public_storage.write(sender_address, secret_value);
     return ();
 }
 
 //
-// External functions - Administration
-// Only admins can call these. You don't need to understand them to finish the exercise.
+// Funciones del timpo "External" - Administración
+// Solo los administradores pueden llamar a estas. No necesitas entenderlas para terminar el ejercicio.
 //
 
 @external
 func set_random_values{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     values_len: felt, values: felt*
 ) {
-    with_attr error_message("random values already initialized") {
-        // Check if the random values were already initialized
+    with_attr error_message("Valores aleatorios ya inicializados") {
+        // Comprobando si los valores aleatorios ya fueron inicializados
         let (was_initialized_read) = was_initialized.read();
         assert was_initialized_read = 0;
     }
 
-    // Storing passed values in the store
+    // Almacenando los valores proporcionados en el "storage"
     set_a_random_value(values_len, values);
 
-    // Mark that value store was initialized
+    // Marca que el valor almacenado fue inicializado
     was_initialized.write(1);
     return ();
 }
@@ -189,7 +189,7 @@ func set_a_random_value{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_ch
     values_len: felt, values: felt*
 ) {
     if (values_len == 0) {
-        // Start with sum=0.
+        // Empieza con suma=0.
         return ();
     }
 
