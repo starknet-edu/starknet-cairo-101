@@ -1,11 +1,11 @@
-// ######## Ex 07
-// # Understanding functions to compare values
-// In this exercise, you need to:
-// - Use this contract's claim_points() function
-// - Your points are credited by the contract
+// ######## Ejercicio 07
+// # Entendiendo funciones para comparar valores
+// En este ejercicio, necesitas:
+// - Usar la función claim_points() de este contrato.
+// - Sus puntos serán acreditados por el contrato
 
-// ######## References
-// Documentation is still being written. You can find answers in this file
+// ######## Referencias.
+// La documentación aún está siendo escrita. Puedes encontrar respuestas en este archivo:
 // https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/math.cairo
 
 %lang starknet
@@ -41,8 +41,8 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 //
-// External functions
-// Calling this function will simply credit 2 points to the address specified in parameter
+// Funciones externas
+// Invocar esta función simplemente acreditará dos (2) puntos a la dirección especificada como parámetro
 //
 
 @external
@@ -51,7 +51,7 @@ func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_pt
 ) {
     // Reading caller address
     let (sender_address) = get_caller_address();
-    // Checking that the passed values are correct
+    // Comprobando que los valores dados son correctos
     with_attr error_message("value_a shouldn't be 0") {
         assert_not_zero(value_a);
     }
@@ -75,9 +75,9 @@ func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_pt
     with_attr error_message("value_b should be < 1") {
         assert_lt(value_b, 1);
     }
-    // Checking if the user has validated the exercise before
+    // Comprobando si el usuario ha validado el ejercicio anteriormente.
     validate_exercise(sender_address);
-    // Sending points to the address specified as parameter
+    // Enviando los puntos a la dirección especificada como parámetro.
     distribute_points(sender_address, 2);
     return ();
 }
