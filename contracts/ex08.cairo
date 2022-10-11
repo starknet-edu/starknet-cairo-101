@@ -1,8 +1,8 @@
-// ######## Ex 08
-// # Recursions - basics
-// In this exercise, you need to:
-// - Use this contract's claim_points() function
-// - Your points are credited by the contract
+// ######## Ejercicio 08
+// # Recursión - Basicos
+// En este ejercicio, necesitas:
+// - Usar la función claim_points() de este contrato.
+// - Sus puntos son acreditados por el contrato
 
 %lang starknet
 
@@ -18,8 +18,8 @@ from contracts.utils.ex00_base import (
 )
 
 //
-// Declaring storage vars
-// Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
+// Declarando variables de estado.
+// Las variables de estado no son visibles por defecto en la ABI. Estas son similares a las variables privadas en Solidity.
 //
 
 @storage_var
@@ -27,8 +27,8 @@ func user_values_storage(account: felt, slot: felt) -> (user_values_storage: fel
 }
 
 //
-// Declaring getters
-// Public variables should be declared explicitly with a getter
+// Declarando getters.
+// Las variables públicas deben de ser declaradas explícitamente con un getter.
 //
 
 @view
@@ -51,33 +51,33 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 //
-// External functions
-// Calling this function will simply credit 2 points to the address specified in parameter
+// Funciones externas.
+// Invocar esta función simplemente acreditará dos (2) puntos a la dirección especificada como parámetro.
 //
 
 @external
 func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() {
-    // Reading caller address
+    // Leyendo la dirección del emisor.
     let (sender_address) = get_caller_address();
 
-    // Checking the value of user_values_storage for the user, at slot 10
+    // Comprobando el valor de user_values_storage del usuario, en la posición 10
     let (user_value_at_slot_ten) = user_values_storage.read(sender_address, 10);
 
     with_attr error_message("User value should be 10 (you can set it with set_user_values)") {
-        // This value should be equal to 10
+        // Este valor debe ser igual a 10
         assert user_value_at_slot_ten = 10;
     }
 
-    // Checking if the user has validated the exercise before
+    // Comprobando si el usuario ha validado el ejercicio anteriormente.
     validate_exercise(sender_address);
-    // Sending points to the address specified as parameter
+    // Enviando los puntos a la dirección especificada como parámetro.
     distribute_points(sender_address, 2);
     return ();
 }
 
-// This function takes an array as a parameter
-// In order to pass it, the user needs to pass both the array and its length
-// This complexity is abstracted away by voyager, where you simply need to pass an array
+// Esta función recibe un array como parámetro.
+// Para lograr ejecutarla efectivamente, el usuario necesita pasar tanto el array como su longitud.
+// Esta complejidad es abstraída por voyager, en donde simplemente necesitarás pasar un array.
 @external
 func set_user_values{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     account: felt, array_len: felt, array: felt*
@@ -87,25 +87,25 @@ func set_user_values{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check
 }
 
 //
-// Internal functions
+// Funciones internas
 //
 //
 
 func set_user_values_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     account: felt, length: felt, array: felt*
 ) {
-    // This function is used recursively to set all the user values
-    // Recursively, we first go through the length of the array
-    // Once at the end of the array (length = 0), we start summing
+    // Esta función es usada de forma recursiva para setear todos los valores del usuario.
+    // Recursivamente, primero  pasamos por la longitud del array.
+    // Una vez que llegamos al final del array (length = 0), empezamos a sumar.
     if (length == 0) {
         // Start with sum=0.
         return ();
     }
 
-    // If length is NOT zero, then the function calls itself again, moving forward one slot
+    // Si el largo NO es cero, entonces la función se llama así misma de nuevo, avanzando un espacio.
     set_user_values_internal(account=account, length=length - 1, array=array + 1);
 
-    // This part of the function is first reached when length=0.
+    // Se llega a esta parte de la función por primera vez cuando length=0
     user_values_storage.write(account, length - 1, [array]);
     return ();
 }
