@@ -49,7 +49,7 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     value_a: felt, value_b: felt
 ) {
-    // Reading caller address
+    // Leyendo dirección del emisor. 
     let (sender_address) = get_caller_address();
     // Comprobando que los valores dados son correctos
     with_attr error_message("value_a shouldn't be 0") {
