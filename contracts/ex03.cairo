@@ -1,14 +1,14 @@
 // ######## Ejercicio 03
 // Usando funciones del contrato para manipular variables del contrato
-// En este ejercicio, necesitaras:
+// En este ejercicio, necesitarás:
 // - Usar las funciones de este contrato para manipular un contador interno único para tu dirección
 // - Una vez que este contador llegue a cierto valor, llama una función especifica
 // - Tus puntos son acreditados por el contrato
 
 // # Lo que aprenderás
-// - Como declarar asignaciones
-// - Como leer y escribir en las asignaciones
-// - Como usar una función para manipular variables de almacenamiento
+// - Cómo declarar asignaciones
+// - Cómo leer y escribir en las asignaciones
+// - Cómo usar una función para manipular variables de almacenamiento
 
 // ######## Directivas generales e importaciones
 //
@@ -37,7 +37,7 @@ func user_counters_storage(account: felt) -> (user_counters_storage: felt) {
 }
 
 //
-// Declarando "geters"
+// Declarando "getters"
 // Las variables "public" deberían ser declaradas explicitamente con un "getter"
 //
 

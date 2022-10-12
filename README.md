@@ -2,6 +2,8 @@
 
 *Repo original [starknet-cairo-101](https://github.com/starknet-edu/starknet-cairo-101)*
 
+Gracias [@DigiCris](https://github.com/DigiCris), [@mustafinho](https://github.com/mustafinho), [@MVelascoWS](https://github.com/MVelascoWS) por sus contribuciones.
+
 **Comencemos usando Cairo con este simple tutorial.
 Completa los ejercicios, obtén tokens y aprende sobre los contratos inteligentes de StarkNet!**
 
@@ -15,8 +17,6 @@ Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. �
 - Actualizar el código para nuevas versiones de StarkNet y Cairo.
 - Agregar explicaciones en los comentarios del ejercicio si sientes que necesita mejor explicación.
 - Agregar ejercicios mostrando tus características favoritas de Cairo.
-
-Gracias [@DigiCris](https://github.com/DigiCris), [@mustafinho](https://github.com/mustafinho) por sus contribuciones.
 
 ## Introducción
 
