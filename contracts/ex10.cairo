@@ -1,10 +1,10 @@
-// ######## Ex 10
-// # Composability
-// In this exercise, you need to:
-// - Use this contract to retrieve the address of contract ex10b.cairo, which holds the key to this exercise
-// - Find the secret key in ex10b.cairo
-// - Call claim_points() in this exercise with the secret value
-// - Your points are credited by the contract
+// ######## Ejercicio 10 
+// # Componibilidad
+// En este ejercicio, necesitas:
+// - Usar este contrato para recuperar la dirección del contrato ex10b.cairo, el cual tiene la llave para este ejercicio. 
+// - Encuentra la llave secreta en ex10b.cairo.
+// - Invoca la función claim_points() en este ejercicio con el valor secreto. 
+// - Sus puntos son acreditados por el contrato. 
 
 %lang starknet
 
@@ -22,8 +22,8 @@ from contracts.utils.ex00_base import (
 from contracts.utils.Iex10b import Iex10b
 
 //
-// Declaring storage vars
-// Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
+// Declarando variables de estado.
+// Las variables de estado no son visibles por defecto en la ABI. Estas son similares a las variables privadas en Solidity.
 //
 
 @storage_var
@@ -31,7 +31,7 @@ func ex10b_address_storage() -> (ex10b_address_storage: felt) {
 }
 
 //
-// View functions
+// Funciones de lectura. 
 //
 @view
 func ex10b_address{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
@@ -53,25 +53,26 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 //
-// External functions
-// Calling this function will simply credit 2 points to the address specified in parameter
+// Funciones externas 
+// Invocar esta función simplemente acreditará dos (2) puntos a la dirección especificada como parámetro.
+
 //
 
 @external
 func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     secret_value_i_guess: felt, next_secret_value_i_chose: felt
 ) {
-    // Reading caller address
+    // Leyendo la dirección del emisor
     let (sender_address) = get_caller_address();
 
-    // Retrieve secret value by READING
+    // Recuperando el valor secreto por medio de leerlo
     let (ex10b_address) = ex10b_address_storage.read();
     let (secret_value) = Iex10b.secret_value(contract_address=ex10b_address);
     with_attr error_message("Input value is not the expected secret value") {
         assert secret_value = secret_value_i_guess;
     }
 
-    // choosing next secret_value for contract 10b. We don't want 0, it's not funny
+    // Eligiendo el siguiente secret_value para el contrato 10b. No queremos que sea 0, así no es divertido.
     with_attr error_message("Next secret value shouldn't be 0") {
         assert_not_zero(next_secret_value_i_chose);
     }
@@ -82,15 +83,15 @@ func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_pt
         );
     }
 
-    // Checking if the user has validated the exercise before
+    // Comprobando si el usuario ha validado el ejercicio anteriormente.
     validate_exercise(sender_address);
-    // Sending points to the address specified as parameter
+    // Enviando los puntos a la dirección especificada como parámetro. 
     distribute_points(sender_address, 2);
     return ();
 }
 
 //#
-// # Temporary functions, will remove once account contracts are live and usable with Nile
+// # Funciones temporales. Una vez que las cuentas contrato estén en la red y sean usables con Nile, estas funciones serán removidas.
 //#
 //#
 @storage_var
