@@ -1,8 +1,8 @@
-// ######## Ex 09
-// # Recursions - advanced
-// In this exercise, you need to:
-// - Use this contract's claim_points() function
-// - Your points are credited by the contract
+// ######## Ejercicio 09
+// # Recursión - Avanzado
+// En este ejercicio, necesitas:
+// - Usar la función claim_points() de este contrato.
+// - Sus puntos son acreditados por el contrato. 
 
 %lang starknet
 
@@ -18,7 +18,7 @@ from contracts.utils.ex00_base import (
 )
 
 //
-// View functions
+// Funciones de lectura.
 //
 @view
 func get_sum{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
@@ -40,63 +40,63 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 //
-// External functions
-// Calling this function will simply credit 2 points to the address specified in parameter
+// Funciones externas
+// Invocar esta función simplemente acreditará dos (2) puntos a la dirección dada como parámetro. 
 //
 
 @external
 func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     array_len: felt, array: felt*
 ) {
-    // Checking that the array is at least of length 4
+    // Comprobando que el array tiene al menos una longitud de 4
     with_attr error_message("Expected an array of at least 4 elements but got {array_len}") {
         assert_le(4, array_len);
     }
-    // Calculating the sum of the array sent by the user
+    // Calculando la suma del array dado por el usuario. 
     let (array_sum) = get_sum_internal(array_len, array);
 
     with_attr error_message("Expected the sum of the array to be at least 50") {
-        // The sum should be higher than 50
+        // La suma debe de ser mayor que 50.
         assert_le(50, array_sum);
     }
-    // Reading caller address
+    // Leyendo la dirección del emisor.
     let (sender_address) = get_caller_address();
-    // Checking if the user has validated the exercise before
+    // Comprobando si el usuario ha validado el ejercicio anteriormente. 
     validate_exercise(sender_address);
-    // Sending points to the address specified as parameter
+    // Enviando los puntos a la dirección especificada como parámetro.
     distribute_points(sender_address, 2);
     return ();
 }
 
 //
-// Internal functions
+// Funciones internas.
 //
 //
 
 func get_sum_internal{range_check_ptr}(length: felt, array: felt*) -> (sum: felt) {
-    // This function is used recursively to calculate the sum of all the values in an array
-    // Recursively, we first go through the length of the array
-    // Once at the end of the array (length = 0), we start summing
+    // Esta función es usada de forma recursiva para calcular la suma de todos los valores en un array
+    // Recursivamente, primero pasamos por todos las posiciones del array.
+    // Una vez que llegamos al final del array (length = 0), empezamos a sumar
     if (length == 0) {
         // Start with sum=0.
         return (sum=0);
     }
 
-    // If length is NOT zero, then the function calls itself again, by moving forward one slot
+    // Si el largo NO es cero, entonces la función se llama así misma de nuevo, avanzando un espacio.
     let (current_sum) = get_sum_internal(length=length - 1, array=array + 1);
 
-    // This part of the function is first reached when length=0.
-    // Checking that the first value in the array ([array]) is not 0
+    //  Se llega a esta parte de la función por primera vez cuando length=0.
+    // Comprobando que el primer valor en el array ([array]) no es 0.
     with_attr error_message("First value of the array should not be 0") {
         assert_not_zero([array]);
     }
-    // The sum begins
+    // La suma empieza. 
     let sum = [array] + current_sum;
 
     with_attr error_message(
             "value at index i should be at least the sum of values of index strictly higher than i") {
         assert_le(current_sum * 2, sum);
     }
-    // The return function targets the body of this function
+    // La función de retorno apunta al cuerpo de esta función.
     return (sum,);
 }
