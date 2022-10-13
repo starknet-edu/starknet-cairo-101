@@ -91,7 +91,7 @@ func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_pt
 }
 
 //#
-// # Funciones temporales. Una vez que las cuentas contrato estén en la red y sean usables con Nile, estas funciones serán removidas.
+// # Funciones temporales. Una vez que las cuentas contrato estén en la red y sean usables con Nile estas funciones serán removidas.
 //#
 //#
 @storage_var
