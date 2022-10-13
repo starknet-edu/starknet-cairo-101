@@ -1,8 +1,8 @@
-// ######## Ex 10b
-// # Composability
-// This exercise was deployed as a complement to ex10, but you don't know where!
-// Use ex10 to find its address, then voyager to read from ex10b
-// Then use ex10 to claim points
+// ######## Ejercicio 10b
+// # Componibilidad
+// Este ejercicio fue desplegado como complemento para el ejercicio 10, pero no sabes donde!
+// Usa el ejercicio 10 para conseguir la dirección de este contrato, despues voyager para leer desde ex10b.
+// Despues, usa el ejercicio 10 para reclamar los puntos. 
 
 %lang starknet
 
@@ -12,8 +12,8 @@ from starkware.starknet.common.syscalls import get_contract_address, get_caller_
 from contracts.utils.Iex10 import Iex10
 
 //
-// Declaring storage vars
-// Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
+// Declarando variables de estado.
+// Las variables de estado no son visibles por defecto en la ABI. Estas son similares a las variables privadas en Solidity.
 //
 
 @storage_var
@@ -25,7 +25,7 @@ func secret_value_storage() -> (secret_value_storage: felt) {
 }
 
 //
-// View functions
+// Funciones de lectura. 
 //
 @view
 func ex10_address{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
@@ -59,23 +59,23 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 //
-// External functions
-// Calling this function will simply credit 2 points to the address specified in parameter
+// Funciones externas 
+// Invocar esta función simplemente acreditará dos (2) puntos a la dirección especificada como parámetro.
 //
 
 @external
 func change_secret_value{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     new_secret_value: felt
 ) {
-    // Only ex10 can call this function
+    // Solo el ejercicio 10 puede invocar esta función.
     only_ex10();
-    // Changing secret value
+    // Cambiando el valor secretto. 
     secret_value_storage.write(new_secret_value);
     return ();
 }
 
 //
-// Internal functions
+// Funciones internas 
 //
 //
 func only_ex10{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() {
