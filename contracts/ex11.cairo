@@ -1,9 +1,9 @@
-// ######## Ex 11
-// # Importing functions
-// In this exercise, you need to:
-// - Read this contract and understand how it imports functions from another contract
-// - Find the relevant contract it imports from
-// - Read the code and understand what is expected of you
+// ######## Ej 11
+// # Importando funciones
+// En este ejercicio necesitas:
+// - Leer este contrato y entender como importa funciones de otro contrato
+// - Encontrar el contrato relevante del que se importa
+// - Leer el código y entender que se espera de ti
 
 %lang starknet
 
@@ -11,7 +11,7 @@ from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.math import assert_not_zero, assert_le
 from starkware.starknet.common.syscalls import get_caller_address
 
-// This contract imports functions from another file than other exercises, be careful
+// Este contrato importa funciones desde otro archivo desde otro ejercicio, Tenga cuidado
 from contracts.utils.ex11_base import (
     tderc20_address,
     has_validated_exercise,
@@ -35,8 +35,8 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 //
-// External functions
-// Calling this function will simply credit 2 points to the address specified in parameter
+// Funciones externas
+// Llamar a esta función va a acreditar 2 puntos a la dirección especificada por paramentro
 //
 
 @external
@@ -44,13 +44,13 @@ func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_pt
     secret_value_i_guess: felt, next_secret_value_i_chose: felt
 ) {
     alloc_locals;
-    // Reading caller address and setting it into a local to avoid revoked references
+    // Leyendo la dirección de quien la llama y configurando en una variable local para evitar referencias revocadas
     let (local sender_address) = get_caller_address();
-    // Check if your answer is correct
+    // Comprueba si su respuesta es correcta
     validate_answers(sender_address, secret_value_i_guess, next_secret_value_i_chose);
-    // Checking if the user has validated the exercise before
+    // Comprueba si el usuario ha validado el ejercicio antes.
     validate_exercise(sender_address);
-    // Sending points to the address specified as parameter
+    // Envía los puntos a la dirección especificada por parametros
     distribute_points(sender_address, 2);
     return ();
 }
