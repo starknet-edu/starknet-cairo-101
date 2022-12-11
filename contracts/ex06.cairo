@@ -97,7 +97,7 @@ func claim_points{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_pt
     // Still sneaky.
     // Or not. Is this psyops?
     let (value) = values_mapped_secret_storage.read(user_slot);
-    with_attr error_message("random values already initialized") {
+    with_attr error_message("Input value is not the expected secret value") {
         assert value = expected_value;
     }
 
