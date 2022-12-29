@@ -1,0 +1,49 @@
+[project]
+protostar-version = "0.9.0"
+lib-path = "lib"
+
+[contracts]
+TDERC20 = ["contracts/token/TDERC20.cairo"]
+players_registry = ["contracts/utils/players_registry.cairo"]
+ex01 = ["contracts/ex01.cairo"]
+ex02 = ["contracts/ex02.cairo"]
+ex03 = ["contracts/ex03.cairo"]
+ex04 = ["contracts/ex04.cairo"]
+ex05 = ["contracts/ex05.cairo"]
+ex06 = ["contracts/ex06.cairo"]
+ex07 = ["contracts/ex07.cairo"]
+ex08 = ["contracts/ex08.cairo"]
+ex09 = ["contracts/ex09.cairo"]
+ex10 = ["contracts/ex10.cairo"]
+ex10b = ["contracts/ex10b.cairo"]
+ex11 = ["contracts/ex11.cairo"]
+ex12 = ["contracts/ex12.cairo"]
+ex13 = ["contracts/ex13.cairo"]
+ex14 = ["contracts/ex14.cairo"]
+
+[format]
+target = ["src", "tests"]
+ignore-broken = true
+
+[profile.devnet.project]
+gateway-url = "http://127.0.0.1:5050/"
+chain-id = 1536727068981429685321
+
+[profile.testnet.project]
+network="testnet"
+
+[profile.testnet2.project]
+gateway-url = "https://alpha4-2.starknet.io"
+chain-id = 393402129659245999442226
+
+["profile.devnet.protostar.deploy"]
+gateway-url="http://127.0.0.1:5050/"
+
+["profile.testnet.protostar.deploy"]
+network="testnet"
+
+["profile.testnet2.protostar.deploy"]
+gateway-url = "https://alpha4-2.starknet.io"
+
+["profile.mainnet.protostar.deploy"]
+network="mainnet"

@@ -135,3 +135,6 @@ goerli.deployments.txt
 Makefile
 
 *.sarif
+
+
+.pkey*
