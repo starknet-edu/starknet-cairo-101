@@ -130,11 +130,28 @@ When looking for a contract/transaction, always ensure you are on the Goerli ver
 | Multicall                             | [Ex14](contracts/ex14.cairo)                          | [Link](https://testnet.starkscan.co/contract/0xed7ddffe1370fbbc1974ab8122d1d9bd7e3da8d829ead9177ea4249b4caef1)  | [Link](https://goerli.voyager.online/contract/0xed7ddffe1370fbbc1974ab8122d1d9bd7e3da8d829ead9177ea4249b4caef1)  |
 
 
-#### Addresses of the exercises and contracts on [alpha-goerli Testnet2]()
+#### Addresses of the exercises and contracts on alpha-goerli Testnet2
+
+| Topic                                 | Contract code                                         | Contract on Starkscan |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------
+| Points counter ERC20                  | [Points counter ERC20](contracts/token/TDERC20.cairo) | [Link](https://testnet-2.starkscan.co/contract/0x061d99a93b35b7f45acaca894c6d8fe553b0aa34aa305dc838dad5f91dec1879) |
+| General syntax                        | [Ex01](contracts/ex01.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x06fd03b95423d8d67d92ce81ecf9b7cb0bcb76bfa492b1d3e3f3465d2190483b) |
+| Storage variables, getters, asserts   | [Ex02](contracts/ex02.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x0003059dc2ee4b546d310f49cd62bb10a770e43b2f6d4416e60baff384f989ae) |
+| Reading and writing storage variables | [Ex03](contracts/ex03.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x004f36f5cd162cf197366c091584459ea235b8364295f2ad0512a05d2df03609) |
+| Mappings                              | [Ex04](contracts/ex04.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x01b7e295ca31237a001dbd482cced45f2877f7f3c738659d7294e90d9c0ccdb0)|
+| Variable visibility                   | [Ex05](contracts/ex05.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x0037bd16fb7bdd2b2ef861e4f525aa38edb6fdb95dd3a4d38f9c6d0102ed1e23) |
+| Functions visibility                  | [Ex06](contracts/ex06.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x03e7c676989d4fdbc67c6744d2856e569d71c26d025b0571e7e9a20e80da0c7f) |
+| Comparing values                      | [Ex07](contracts/ex07.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x05d32fb733b2d0f3d355a5272ddd45c9f37c7660ce048d0152229f8b56420dee) |
+| Recursions level 1                    | [Ex08](contracts/ex08.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x07615ba4e89163847ee2f39632bc4a0e2c8138bc2a5793c6325fdb177d6a1747) |
+| Recursions level 2                    | [Ex09](contracts/ex09.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x0293ba8653a314028dde856c78d78f496f07d53a057e3234620ac7f3cb9ae972) |
+| Composability                         | [Ex10](contracts/ex10.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x050b366559697dfd63a21fe6b8ef80e729f0eaadd95add970cb455720ab380d2)   |
+| Importing functions                   | [Ex11](contracts/ex11.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x0588e8f7b82ceb98bab9c6a31132644565b794e12378da1545c1828fbf6f818f)  |
+| Events                                | [Ex12](contracts/ex12.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x064de1f63ec7bcf17400a59f5b026ceb296a238b2a14c9ed49bcc57187897554) |
+| Privacy on StarkNet                   | [Ex13](contracts/ex13.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x0096b4410c1844bb805b457209101e7658ef09a7f4866e0de8667ec187fdaa93) |
+| Multicall                             | [Ex14](contracts/ex14.cairo)                          | [Link](https://testnet-2.starkscan.co/contract/0x07005d2bb246165fe82044354d45b4fb5aedbecb3e72660d193c1d5ffcadc4c0)  |
 
 
 ### Counting your points
-
 ​
 Your points will get credited in your installed wallet; though this may take some time. If you want to monitor your points count in real time, you can also see your balance in a block explorer!
 ​
@@ -153,11 +170,13 @@ You can also check the status of your transaction with the following URL  [https
 ​
 
 ## Reusing this project
-
 - Clone the repo on your machine.
 - Set up the environment following [these instructions](https://starknet.io/docs/quickstart.html#quickstart).
+- Set up the starknet-devnet and protostar following [these gists](https://gist.github.com/cryptoleek-eth/0171e92f01d68454b5619f4ca10d42bf)
 - Test that you can compile the project.
 
 ```bash
-starknet-compile contracts/ex01.cairo
+protostar build
 ```
+
+- for more detailed deploy scripts please refer to `deploy folder`
