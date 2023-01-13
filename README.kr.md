@@ -42,9 +42,9 @@ StarkNet은 여전히 알파 버전입니다. 개발이 진행 중이고, 곳곳
 
 [이 양식](https://forms.reform.app/starkware/untitled-form-4/kaes2e)을 작성하여 더 나은 서비스를 제공하기 위해 저희가 무엇을 할 수 있는지 알려주세요.
 
-그리고 어려운 부분이 있다면, 꼭 저희에게 알려주세요! 이 워크샵은 가능한 한 쉽게 접근할 수 있도록 되어 있습니다. 
+그리고 어려운 부분이 있다면, 꼭 저희에게 알려주세요! 이 워크샵은 가능한 한 쉽게 접근할 수 있도록 되어 있습니다.
 
-질문이 있으신가요? [Disord 서버](https://starknet.io/discord)에 가입하고 채널 #tutorials-support에 등록 및 가입하세요. 
+질문이 있으신가요? [Disord 서버](https://starknet.io/discord)에 가입하고 채널 #tutorials-support에 등록 및 가입하세요.
 
 StarkNet을 개발하는 방법에 대한 온라인 워크샵을 구독하는 것에 관심이 있나요? [여기서 구독](https://starkware.us12.list-manage.com/subscribe?u=b7a3c9f392572e89e8529da3c&id=6ed3eedc96)
 
@@ -72,7 +72,7 @@ StarkNet을 개발하는 방법에 대한 온라인 워크샵을 구독하는 �
 - 가장 쉬운 설정 방법은 Argent X([크롬 확장 다운로드](https://chrome.google.com/webstore/detail/argent-x/dlcobpjiigpikoobohmabehhmhfoodbb) 또는 [repo 확인](https://github.com/argentlabs/argent-x)) 또는 Braavos([크롬 확장 다운로드](https://chrome.google.com/webstore/detail/braavos-wallet/jnlgamecbpmbajjfhmmmlhejkemejdma))를 사용하는 것입니다. 이러한 지갑 솔루션은 메타마스크가 이더리움을 위한 것과 유사하며 사용자가 거래를 시작하고 StarkNet의 애플리케이션과 상호 작용할 수 있도록 합니다.
 - 지침에 따라 확장을 설치하고 스마트 컨트랙트 계정을 배포합니다(배포하는 데 약 5분 정도 걸릴 수 있음). StarkNet에는 지갑과 스마트 컨트랙트가 있는 이더리움과 달리 스마트 컨트랙트 계정(이것을 계정 추상화라고 합니다)이라는 한 가지 유형의 계정만 있습니다. 다시 말해, StarkNet의 모든 지갑은 스마트 컨트랙트이며 다른 스마트 컨트랙트과 구별이 없습니다. 따라서 새 지갑을 만들려면 스마트 컨트랙트 지갑을 네트워크에 게시하는 트랜잭션을 배포해야 합니다.
 - 사용자가 Goerli testnet 네트워크에 있는지 확인합니다.
-- 튜토리얼의 포인트는 컨트랙트에 있습니다.[0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c]`(https://goerli.voyager.online/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c)`. 
+- 튜토리얼의 포인트는 컨트랙트에 있습니다.[0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c]`(https://goerli.voyager.online/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c)`.
 설치된 지갑과 컨트랙트 주소에서 "토큰 추가"를 클릭하면 포인트 잔액이 표시됩니다! SC101(스타크넷-카이로-101)이라는 새로운 토큰이 지갑에 나타날 것입니다.
 - [Voyager](https://voyager.online/)를 계정 스마트 컨트랙트에 연결합니다. Voyager는 StarkNet(Ethereum의 Etherscan과 동일)의 블록 탐색기로, 블록체인의 상태를 탐색하고, 모든 트랜잭션과 상태를 볼 수 있습니다. Voyager를 지갑에 연결하면 지갑을 통해 거래를 브로드캐스트할 수 있습니다.
 - Goerli StarkNet 테스트넷에서 트랜잭션을 실행하려면 가스 비용을 지불할 테스트넷 ETH가 필요합니다. 몇 개를 사기 위해, [수도꼭지](https://faucet.goerli.starknet.io/)로 가서 지시를 따르세요. 몇 분 정도 걸릴 수 있지만, 테스트넷에서 트랜잭션을 실행하는 데 사용할 수 있는 L2 Goerli ETH를 지갑에 넣을 수 있습니다.
@@ -90,13 +90,13 @@ StarkNet을 개발하는 방법에 대한 온라인 워크샵을 구독하는 �
 컨트랙트/트랜잭션를 찾을 때 항상 Goerli 버전의 Voyager에 있는지 확인하십시오!
 
 - 아래 형식의 URL로 트랜잭션에 액세스 하세요:
-    
+
     [https://goerli.voyager.online/tx/your-tx-hash](https://goerli.voyager.online/tx/your-tx-hash).
-    
+
 - 아래 형식의 URL로 컨트랙트에 액세스 하세요:
-    
-    [https://goerli.voyager.online/contract/your-contract-address](https://goerli.voyager.online/contract/your-contract-address). 
-    
+
+    [https://goerli.voyager.online/contract/your-contract-address](https://goerli.voyager.online/contract/your-contract-address).
+
 - Voyager의 "읽기/쓰기 컨트랙트" 탭을 통해 컨트랙트의 읽기/쓰기 기능에 액세스 하세요.
 
 ## 과제 및 컨트랙트의 주소
@@ -143,5 +143,5 @@ StarkNet을 개발하는 방법에 대한 온라인 워크샵을 구독하는 �
 - 프로젝트를 편집할 수 있는지 테스트합니다.
 
 ```jsx
-nile compile
+protostar build
 ```

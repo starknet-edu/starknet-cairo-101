@@ -158,5 +158,5 @@ Você pode (e deve) verificar o status de sua transação com a seguinte URL [ht
 - Teste se você pode compilar o projeto.
 
 ```bash
-nile compile
+protostar build
 ```

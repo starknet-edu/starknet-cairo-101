@@ -73,7 +73,7 @@ Este proyecto puede mejorarse y va a evolucionar a medida que StarkNet madure. �
 - Asegúrate de que estés en la red testnet de Goerli.
 - Los puntos de este tutorial estan contenidos en el contrato `[0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c](https://goerli.voyager.online/contract/0x5c6b1379f1d4c8a4f5db781a706b63a885f3f9570f7863629e99e2342ac344c)`. Clickea en "Add Token" (Agregar Token) en tu billetera instalada y la dirección del contrato para que tus puntos de balance aparezcan! Un nuevo token llamado SC101 (starknet-cairo-101) aparecerá en tu billetera.
 - Conectar [Voyager](https://voyager.online/) a tu contrato de cuenta inteligente. Voyager está en el explorador de bloques para StarkNet (Equivalente a Etherscan para Ethereum) y te permite navegar el estado de la blockchain, ver todas las transacciones y sus estados. Conectar Voyager a tu billetera, te va a permitir enviar tus transacciones a través de la billetera.
-- Para ejecutar transacciones en la red de prueba Goerli de StarkNet **vas a necesitar ETH de prueba para pagar el gas**. Para obtener un poco, ve a [faucet](https://faucet.goerli.starknet.io/) y sigue las instrucciones. Podría tomar varios minutos, pero deberías recibir algunos ETH Goerli L2 en tu billetera que puedes usar para ejecutar transacciones en la red de prueba. 
+- Para ejecutar transacciones en la red de prueba Goerli de StarkNet **vas a necesitar ETH de prueba para pagar el gas**. Para obtener un poco, ve a [faucet](https://faucet.goerli.starknet.io/) y sigue las instrucciones. Podría tomar varios minutos, pero deberías recibir algunos ETH Goerli L2 en tu billetera que puedes usar para ejecutar transacciones en la red de prueba.
 
 ### Resolviendo ejercicios y obteniendo puntos
 ​**Cada ejercicio es un contrato inteligente separado.** Contiene código que, si se ejecuta correctamente, va a distribuir puntos en tu cuenta.
@@ -141,5 +141,5 @@ Puedes (y deberías) checkear el estado de tu transacción con la siguiente URL 
 - Verifica que el proyecto compile.
 
 ```bash
-nile compile
+protostar build
 ```

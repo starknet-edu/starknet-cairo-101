@@ -155,5 +155,5 @@
 - 测试您是否可以编译该项目。
 
 ```bash
-starknet-compile contracts/ex01.cairo
+protostar build
 ```

@@ -164,19 +164,19 @@ You can also check your overall progress [here](https://starknet-tutorials.verce
 
 ### Transaction status
 
-​
+
 You can also check the status of your transaction with the following URL  [https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=) or [https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=), where you can append your transaction hash.
-​
-​
 
 ## Reusing this project
 - Clone the repo on your machine.
 - Set up the environment following [these instructions](https://starknet.io/docs/quickstart.html#quickstart).
-- Set up the starknet-devnet and protostar following [these gists](https://gist.github.com/cryptoleek-eth/0171e92f01d68454b5619f4ca10d42bf)
+- Set up your local starknet-devnet [official doc](https://shard-labs.github.io/starknet-devnet/)
+- Set up protostar build tool [official doc](https://docs.swmansion.com/protostar/)
+- Or use the best practise to setup the local dev env [github](https://github.com/starknet-edu/setup-starknet-dev-env/)
 - Test that you can compile the project.
 
 ```bash
 protostar build
 ```
 
-- for more detailed deploy scripts please refer to `deploy folder`
+- For more detailed deploy scripts please refer to `deploy folder`
