@@ -7,7 +7,7 @@ salt = 1234
 tderc20_addr = "0x"
 player_registry_addr = "0x"
 pkey_name = ".pkey_local"
-network = "{network}"
+network = "devnet"
 exercise_contracts = {}
 
 def run_command(cmd):
