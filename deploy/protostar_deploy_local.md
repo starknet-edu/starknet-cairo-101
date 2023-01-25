@@ -2,7 +2,7 @@
 
 ## Set up local environment
 ```
-nile node
+starknet-devnet --seed 1234
 ```
 ## Build contracts
 ```
@@ -15,56 +15,56 @@ touch .pkey_local
 
 ## Deploy TDERC20
 ```
-protostar -p devnet declare ./build/TDERC20.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/TDERC20.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x01a0dd8f59b59746a7636b15a95eb09dc8160a0c186140e97cfae3d5bcd87b3c --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 10057515165931654559836545801321088512241713 357609582641 0 0 840684583409848155090139159631415205493949005563877468026570772574410479336 840684583409848155090139159631415205493949005563877468026570772574410479336
+protostar -p devnet deploy 0x0382f30be048bcd301280512812cceceeb345b25e859c484987d6dcf33245999 --salt 1234 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 10057515165931654559836545801321088512241713 357609582641 0 0 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919
 
-protostar -p devnet call --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "name"
+protostar -p devnet call --contract-address 0x05cf3221d489855bb8c0cf59a72026210eaacfa8b2e3ec1ab720c86d001d2252 --function "name"
 ```
 
 ## Deploy Players Registry
 ```
-protostar -p devnet declare ./build/players_registry.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/players_registry.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x00decb0616dede1597bf429da5ea4ec72eab500fa825bcc876dd6f4612c66c2d --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 840684583409848155090139159631415205493949005563877468026570772574410479336
+protostar -p devnet deploy 0x00decb0616dede1597bf429da5ea4ec72eab500fa825bcc876dd6f4612c66c2d --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919
 ```
 
 ## Deploy EX01
 ```
-protostar -p devnet declare ./build/ex01.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex01.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x010e2af892917b1d130c7b885393250a458c712c83fe811e31eb6a9059f6fed6 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 1
+protostar -p devnet deploy 0x010e2af892917b1d130c7b885393250a458c712c83fe811e31eb6a9059f6fed6 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 1
 ```
 
 ## Set Admin for EX01
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x03bba00008dae870eadba249f812e27ecefe9fb1968231fbade21acfce94fa79 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x03bba00008dae870eadba249f812e27ecefe9fb1968231fbade21acfce94fa79 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x03bba00008dae870eadba249f812e27ecefe9fb1968231fbade21acfce94fa79 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x03bba00008dae870eadba249f812e27ecefe9fb1968231fbade21acfce94fa79 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Claim points for EX01
 ```
-protostar -p devnet invoke --contract-address 0x03bba00008dae870eadba249f812e27ecefe9fb1968231fbade21acfce94fa79 --function "claim_points" --account-address 0x40598585725ed95c5c316423a05565f95ef2b8de586356ee082c33e1a0ecf44 --max-fee auto --private-key-path ./.pkey_p1
+protostar -p devnet invoke --contract-address 0x043734c1a0533d50d25ce9bf27cc62c3774b9df6ceb7e741aca49768b371cd97 --function "claim_points" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## validate points should have 2 points
 ```
-protostar -p devnet call --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "balanceOf" --inputs 0x40598585725ed95c5c316423a05565f95ef2b8de586356ee082c33e1a0ecf44
+protostar -p devnet call --contract-address 0x05cf3221d489855bb8c0cf59a72026210eaacfa8b2e3ec1ab720c86d001d2252 --function "balanceOf" --inputs 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919
 ```
 
 ## Deploy EX02
 ```
-protostar -p devnet declare ./build/ex02.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex02.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x00140ef6253b78f5ee81526b3e29c2eed6f3b9c57cea90df61a007f87267bdad --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 2 31020
+protostar -p devnet deploy 0x00140ef6253b78f5ee81526b3e29c2eed6f3b9c57cea90df61a007f87267bdad --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 2 31020
 ```
 
 ## Set Admin for EX02
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x001e4d3b7c566ed09a38f6cc6fb759c6e8ac31a8ed7ea581960a67607cf442f6 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x001e4d3b7c566ed09a38f6cc6fb759c6e8ac31a8ed7ea581960a67607cf442f6 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x001e4d3b7c566ed09a38f6cc6fb759c6e8ac31a8ed7ea581960a67607cf442f6 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x001e4d3b7c566ed09a38f6cc6fb759c6e8ac31a8ed7ea581960a67607cf442f6 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Claim points for EX02
@@ -79,16 +79,16 @@ protostar -p devnet call --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8
 
 ## Deploy Ex03
 ```
-protostar -p devnet declare ./build/ex03.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex03.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x07dfb404526f4a1c2cbfa86b6078e99b0feaa33b945d3690bb6d7b127fe4ca00 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 3
+protostar -p devnet deploy 0x07dfb404526f4a1c2cbfa86b6078e99b0feaa33b945d3690bb6d7b127fe4ca00 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 3
 ```
 
 ## Set Admin for EX03
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x049a2606c07fe72eb359a03ad55706ee2606186bf30c0df0e30bc44ceca63f24 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x049a2606c07fe72eb359a03ad55706ee2606186bf30c0df0e30bc44ceca63f24 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x049a2606c07fe72eb359a03ad55706ee2606186bf30c0df0e30bc44ceca63f24 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x049a2606c07fe72eb359a03ad55706ee2606186bf30c0df0e30bc44ceca63f24 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Claim points for EX03
@@ -107,15 +107,15 @@ protostar -p devnet call --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8
 
 ## Deploy Ex04
 ```
-protostar -p devnet declare ./build/ex04.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
-protostar -p devnet deploy 0x01fe242458977d5f1cf830200969c7d3687568c1ec27fcb139fb874d4bfffc82 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 4
+protostar -p devnet declare ./build/ex04.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet deploy 0x01fe242458977d5f1cf830200969c7d3687568c1ec27fcb139fb874d4bfffc82 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 4
 ```
 
 ## Set Admin for EX04
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x0408364676184e2de781f5fa46764a5a1e578b370b58887a88ebf937752819d7 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x0408364676184e2de781f5fa46764a5a1e578b370b58887a88ebf937752819d7 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x0408364676184e2de781f5fa46764a5a1e578b370b58887a88ebf937752819d7 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x0408364676184e2de781f5fa46764a5a1e578b370b58887a88ebf937752819d7 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Set Random Values for EX04
@@ -142,16 +142,16 @@ protostar -p devnet call --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8
 
 ## Deploy EX05
 ```
-protostar -p devnet declare ./build/ex05.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex05.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x01984a15f4284bd4147a17d8228e6d6955e7cb42dfe0814fd96e630a7edf2b05 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 5
+protostar -p devnet deploy 0x01984a15f4284bd4147a17d8228e6d6955e7cb42dfe0814fd96e630a7edf2b05 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 5
 ```
 
 ## Set Admin for EX05
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x060361ca11aca492aad086210c4e56fadf917da12b4e963cb0a2625fcae9b3d7 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x060361ca11aca492aad086210c4e56fadf917da12b4e963cb0a2625fcae9b3d7 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x060361ca11aca492aad086210c4e56fadf917da12b4e963cb0a2625fcae9b3d7 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x060361ca11aca492aad086210c4e56fadf917da12b4e963cb0a2625fcae9b3d7 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Set Random Values for EX05
@@ -161,16 +161,16 @@ starknet invoke --address 0x060361ca11aca492aad086210c4e56fadf917da12b4e963cb0a2
 
 ## Deploy EX06
 ```
-protostar -p devnet declare ./build/ex06.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex06.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x0069ce45376e406eeeef0937dd49b5157cb379a5b1227b85e702ae9989d946a8 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 6
+protostar -p devnet deploy 0x0069ce45376e406eeeef0937dd49b5157cb379a5b1227b85e702ae9989d946a8 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 6
 ```
 
 ## Set Admin for EX06
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x005586c4a89f927fb12eef617e770ec3434026eb62a78075333cd8c78f15843d 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x005586c4a89f927fb12eef617e770ec3434026eb62a78075333cd8c78f15843d 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x005586c4a89f927fb12eef617e770ec3434026eb62a78075333cd8c78f15843d 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x005586c4a89f927fb12eef617e770ec3434026eb62a78075333cd8c78f15843d 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Set Random Values for EX06
@@ -180,93 +180,93 @@ starknet invoke --address 0x005586c4a89f927fb12eef617e770ec3434026eb62a78075333c
 
 ## Deploy EX07
 ```
-protostar -p devnet declare ./build/ex07.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex07.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x03c0ac60a44f3311a8c1c0765399b44c0caab8868d824338a025418858066a1a --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 7
+protostar -p devnet deploy 0x03c0ac60a44f3311a8c1c0765399b44c0caab8868d824338a025418858066a1a --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 7
 ```
 
 ## Set Admin for EX07
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x02fbd11ba8d79005ecfab7840730cb0525ef2abb5408d1bb805def656cdbd8ba 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x02fbd11ba8d79005ecfab7840730cb0525ef2abb5408d1bb805def656cdbd8ba 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x02fbd11ba8d79005ecfab7840730cb0525ef2abb5408d1bb805def656cdbd8ba 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x02fbd11ba8d79005ecfab7840730cb0525ef2abb5408d1bb805def656cdbd8ba 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Deploy EX08
 ```
-protostar -p devnet declare ./build/ex08.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex08.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x01c8b6245ae4606b91fbc2e7d6d4c6abd72f730e4edfcf393915291e9e2d47e2 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 8
+protostar -p devnet deploy 0x01c8b6245ae4606b91fbc2e7d6d4c6abd72f730e4edfcf393915291e9e2d47e2 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 8
 ```
 
 ## Set Admin for EX08
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x07ba7fcf8b8406ce0a657965f42e10d4973ec9a93526ef6d2210b1fcbeddeef5 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x07ba7fcf8b8406ce0a657965f42e10d4973ec9a93526ef6d2210b1fcbeddeef5 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x07ba7fcf8b8406ce0a657965f42e10d4973ec9a93526ef6d2210b1fcbeddeef5 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x07ba7fcf8b8406ce0a657965f42e10d4973ec9a93526ef6d2210b1fcbeddeef5 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Deploy EX09
 ```
-protostar -p devnet declare ./build/ex09.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex09.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x05ccd05daadde40913c066e40cd3101500699f7e276c72f668f2de0b1d637c3b --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 9
+protostar -p devnet deploy 0x05ccd05daadde40913c066e40cd3101500699f7e276c72f668f2de0b1d637c3b --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 9
 ```
 
 ## Set Admin for EX09
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x00d031f29334f67a48e442ee6d875836b7605fca1383e4a9051c0dfbbfc7e9e2 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x00d031f29334f67a48e442ee6d875836b7605fca1383e4a9051c0dfbbfc7e9e2 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x00d031f29334f67a48e442ee6d875836b7605fca1383e4a9051c0dfbbfc7e9e2 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x00d031f29334f67a48e442ee6d875836b7605fca1383e4a9051c0dfbbfc7e9e2 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Deploy EX10
 ```
-protostar -p devnet declare ./build/ex10.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex10.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x05b2984c7787b3dc3be4be58b78b73343dcecfcded247c40c455bcd9a1b99c5a --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 10
+protostar -p devnet deploy 0x05b2984c7787b3dc3be4be58b78b73343dcecfcded247c40c455bcd9a1b99c5a --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 10
 ```
 
 ## Deploy EX10b
 ```
-protostar -p devnet declare ./build/ex10b.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex10b.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x037c0f354775165b86b1e5aa3a329f39800189a97579a63a056c6bb1a446ca78 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1728141856076841822517716656559132892769257647002698118798509769515037151786
+protostar -p devnet deploy 0x037c0f354775165b86b1e5aa3a329f39800189a97579a63a056c6bb1a446ca78 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1728141856076841822517716656559132892769257647002698118798509769515037151786
 ```
 
 ## Set Admin for EX10
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x03d217f804a925b2931772d68cdd540b0adf6fb0d3a0d322dc8743693e94d22a 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x03d217f804a925b2931772d68cdd540b0adf6fb0d3a0d322dc8743693e94d22a 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x03d217f804a925b2931772d68cdd540b0adf6fb0d3a0d322dc8743693e94d22a 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x03d217f804a925b2931772d68cdd540b0adf6fb0d3a0d322dc8743693e94d22a 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Deploy EX11
 ```
-protostar -p devnet declare ./build/ex11.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex11.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x0723f1d88ccb392fe7ba2e16221c10d68b7bd7b54bb6f449ffc7f20ba6453c12 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 11
+protostar -p devnet deploy 0x0723f1d88ccb392fe7ba2e16221c10d68b7bd7b54bb6f449ffc7f20ba6453c12 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 11
 ```
 
 ## Set Admin for EX11
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x067eef4ee32c3dc3aa61d23b0d1d4cd921675bfbaa68b1cf3b6e1cc3adc37e9e 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x067eef4ee32c3dc3aa61d23b0d1d4cd921675bfbaa68b1cf3b6e1cc3adc37e9e 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x067eef4ee32c3dc3aa61d23b0d1d4cd921675bfbaa68b1cf3b6e1cc3adc37e9e 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x067eef4ee32c3dc3aa61d23b0d1d4cd921675bfbaa68b1cf3b6e1cc3adc37e9e 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Deploy EX12
 ```
-protostar -p devnet declare ./build/ex12.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex12.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x075490bd8b63d12e9063586972c91caf26a0e8c47b57fcaf0d6de5fa447ae3a8 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 12
+protostar -p devnet deploy 0x075490bd8b63d12e9063586972c91caf26a0e8c47b57fcaf0d6de5fa447ae3a8 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 12
 ```
 
 ## Set Admin for EX12
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x00d014e9d7da3b9e4cc24c2640e2cc9f1ca95186b39362ab14528b6324f79b14 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x00d014e9d7da3b9e4cc24c2640e2cc9f1ca95186b39362ab14528b6324f79b14 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x00d014e9d7da3b9e4cc24c2640e2cc9f1ca95186b39362ab14528b6324f79b14 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x00d014e9d7da3b9e4cc24c2640e2cc9f1ca95186b39362ab14528b6324f79b14 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Set Random Values for EX12
@@ -276,28 +276,28 @@ starknet invoke --address 0x00d014e9d7da3b9e4cc24c2640e2cc9f1ca95186b39362ab1452
 
 ## Deploy EX13
 ```
-protostar -p devnet declare ./build/ex13.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex13.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x058db84e6e53cf49dd607d83d61f1b6671cbcb9b3a7470a1f3b004b7baab54b5 --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 13 100 5919 2682 7799 7765 9255 2249 8673 8649 9605 9669 9298 7384 8376 4535 5215 3552 4969 6803 8787 7403 7665 3286 1907 2228 5957 8153 6286 4738 7617 8216 9892 973 3389 941 663 3824 4120 9933 1237 570 3598 3360 2837 4401 2385 5226 8762 9335 6541 5965 4642 5677 8434 6027 8255 9684 487 8089 880 2532 3258 7896 416 6382 9127 6130 581 8543 5394 2321 2179 1657 464 6558 168 5035 5641 9209 1626 7485 7111 6225 9902 9584 8783 4900 4534 7004 3618 5641 7900 5585 7029 5298 2725 7107 6881 1626 9654 2022
+protostar -p devnet deploy 0x058db84e6e53cf49dd607d83d61f1b6671cbcb9b3a7470a1f3b004b7baab54b5 --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 13 100 5919 2682 7799 7765 9255 2249 8673 8649 9605 9669 9298 7384 8376 4535 5215 3552 4969 6803 8787 7403 7665 3286 1907 2228 5957 8153 6286 4738 7617 8216 9892 973 3389 941 663 3824 4120 9933 1237 570 3598 3360 2837 4401 2385 5226 8762 9335 6541 5965 4642 5677 8434 6027 8255 9684 487 8089 880 2532 3258 7896 416 6382 9127 6130 581 8543 5394 2321 2179 1657 464 6558 168 5035 5641 9209 1626 7485 7111 6225 9902 9584 8783 4900 4534 7004 3618 5641 7900 5585 7029 5298 2725 7107 6881 1626 9654 2022
 ```
 
 ## Set Admin for EX13
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x04a585f1507a6f6e3072b39952a5eb3955726bf5bd1f66b7d2be0410b434f40a 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x04a585f1507a6f6e3072b39952a5eb3955726bf5bd1f66b7d2be0410b434f40a 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x04a585f1507a6f6e3072b39952a5eb3955726bf5bd1f66b7d2be0410b434f40a 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x04a585f1507a6f6e3072b39952a5eb3955726bf5bd1f66b7d2be0410b434f40a 1 --max-fee auto --private-key-path ./.pkey_local
 ```
 
 ## Deploy EX14
 ```
-protostar -p devnet declare ./build/ex14.json --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto
+protostar -p devnet declare ./build/ex14.json --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto
 
-protostar -p devnet deploy 0x07363302a1c6373edd5f969adce9c982419b2dbb307330f491505f0136f16c7d --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 14
+protostar -p devnet deploy 0x07363302a1c6373edd5f969adce9c982419b2dbb307330f491505f0136f16c7d --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --private-key-path ./.pkey_local --max-fee auto -i 1182650070130573435193028845990660031073426562100538112561262125938226576593 961180306726768256007213141751957493112749470679826243697583243652066956019 1 14
 ```
 
 ## Set Admin for EX14
 ```
-protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x07434d31238916a8f2c7fc3a779eff989d30a89ebc0e3239203fb7fc29ea5dcc 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x0220023f0e6a09b79b986e385dc3173f1bcfdeb144af7aaa8af1db104e17d2f3 --function "set_exercise_or_admin" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x07434d31238916a8f2c7fc3a779eff989d30a89ebc0e3239203fb7fc29ea5dcc 1 --max-fee auto --private-key-path ./.pkey_local
 
-protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x1dbcf844695857018455d7d574f25415ec90745ba51baf0a9acca93e2ed96e8 --inputs 0x07434d31238916a8f2c7fc3a779eff989d30a89ebc0e3239203fb7fc29ea5dcc 1 --max-fee auto --private-key-path ./.pkey_local
+protostar -p devnet invoke --contract-address 0x029d5b312473d2eacfbc3685c3a498e0d8472f7a44a193145c799b8d9c8d3cd1 --function "set_teacher" --account-address 0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919 --inputs 0x07434d31238916a8f2c7fc3a779eff989d30a89ebc0e3239203fb7fc29ea5dcc 1 --max-fee auto --private-key-path ./.pkey_local
 ```
