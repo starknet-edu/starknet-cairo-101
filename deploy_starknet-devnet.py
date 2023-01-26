@@ -9,6 +9,7 @@ player_registry_addr = "0x"
 pkey_name = ".pkey_testnet2"
 network = "testnet2"
 exercise_contracts = {}
+max_fee = "auto"
 
 def run_command(cmd):
   out = subprocess.check_output(cmd.split(" "))
@@ -30,13 +31,13 @@ def test():
 def deploy_TDERC20():
   contract = "tderc20"
   print("DECLARE " + contract)
-  out = run_command(f"protostar -p {network} declare ./build/TDERC20.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} declare ./build/TDERC20.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} --wait-for-acceptance --json")
 
   print("DEPLOY " + contract)
   token_name = str_to_felt("starknet-cairo-101")
   token_symbol = str_to_felt("SC101")
   class_hash = json.loads(out)['class_hash']
-  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto -i {token_name} {token_symbol} 0 0 {account_addr} {account_addr} --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} -i {token_name} {token_symbol} 0 0 {account_addr} {account_addr} --wait-for-acceptance --json")
 
   print("CALL " + contract)
   global tderc20_addr
@@ -51,11 +52,11 @@ def deploy_TDERC20():
 def deploy_players_registry():
   contract = "players_registry"
   print("DECLARE " + contract)
-  out = run_command(f"protostar -p {network} declare ./build/players_registry.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} declare ./build/players_registry.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} --wait-for-acceptance --json")
 
   print("DEPLOY " + contract)
   class_hash = json.loads(out)['class_hash']
-  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto -i {account_addr} --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} -i {account_addr} --wait-for-acceptance --json")
 
   global player_registry_addr
   player_registry_addr = json.loads(out)['contract_address']
@@ -67,11 +68,11 @@ def deploy_players_registry():
 #
 def deploy_ex_common(contract, workshop_id, exercise_id):
   print("DECLARE " + contract)
-  out = run_command(f"protostar -p {network} declare ./build/{contract}.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} declare ./build/{contract}.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} --wait-for-acceptance --json")
 
   print("DEPLOY " + contract)
   class_hash = json.loads(out)['class_hash']
-  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto -i {tderc20_addr} {player_registry_addr} {workshop_id} {exercise_id} --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} -i {tderc20_addr} {player_registry_addr} {workshop_id} {exercise_id} --wait-for-acceptance --json")
 
   exercise_contracts[contract] = json.loads(out)['contract_address']
   print(contract + " contract:" +  exercise_contracts[contract])
@@ -81,10 +82,10 @@ def deploy_ex_common(contract, workshop_id, exercise_id):
 def deploy_ex02(workshop_id, exercise_id, my_secret_value):
   contract = "ex02"
   print("DECLARE " + contract)
-  out = run_command(f"protostar -p {network} declare ./build/{contract}.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} declare ./build/{contract}.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} --wait-for-acceptance --json")
   print("DEPLOY " + contract)
   class_hash = json.loads(out)['class_hash']
-  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto -i {tderc20_addr} {player_registry_addr} {workshop_id} {exercise_id} {my_secret_value} --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} -i {tderc20_addr} {player_registry_addr} {workshop_id} {exercise_id} {my_secret_value} --wait-for-acceptance --json")
   exercise_contracts[contract] = json.loads(out)['contract_address']
   print(contract + " contract:" +  exercise_contracts[contract])
   return
@@ -94,10 +95,10 @@ def deploy_ex10b():
   contract = "ex10b"
   ex10_contract = exercise_contracts["ex10"]
   print("DECLARE ex10b")
-  out = run_command(f"protostar -p {network} declare ./build/{contract}.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} declare ./build/{contract}.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} --wait-for-acceptance --json")
   print("DEPLOY ex10b")
   class_hash = json.loads(out)['class_hash']
-  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto -i {ex10_contract} --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} -i {ex10_contract} --wait-for-acceptance --json")
   exercise_contracts[contract] = json.loads(out)['contract_address']
   print(contract + " contract:" +  exercise_contracts[contract])
   return
@@ -106,11 +107,11 @@ def deploy_ex10b():
 def deploy_ex13(workshop_id, exercise_id, list_length, random_number_list):
   contract = "ex13"
   print("DECLARE " + contract)
-  out = run_command(f"protostar -p {network} declare ./build/{contract}.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} declare ./build/{contract}.json --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} --wait-for-acceptance --json")
   print("DEPLOY " + contract)
   class_hash = json.loads(out)['class_hash']
   list_string = ' '.join(str(e) for e in random_number_list)
-  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee auto -i {tderc20_addr} {player_registry_addr} {workshop_id} {exercise_id} {list_length} {list_string} --wait-for-acceptance --json")
+  out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} -i {tderc20_addr} {player_registry_addr} {workshop_id} {exercise_id} {list_length} {list_string} --wait-for-acceptance --json")
   exercise_contracts[contract] = json.loads(out)['contract_address']
   print(contract + " contract:" +  exercise_contracts[contract])
   return
@@ -119,8 +120,8 @@ def deploy_ex13(workshop_id, exercise_id, list_length, random_number_list):
 def set_admin_ex(ex_no):
   print("set admin and teacher for " + ex_no)
   ex_contract_addr = exercise_contracts[ex_no]
-  run_command(f"protostar -p {network} invoke --contract-address {player_registry_addr} --function set_exercise_or_admin --account-address {account_addr} --inputs {ex_contract_addr} 1 --max-fee auto --private-key-path ./{pkey_name} --wait-for-acceptance --json")
-  run_command(f"protostar -p {network} invoke --contract-address {tderc20_addr} --function set_teacher --account-address {account_addr} --inputs {ex_contract_addr} 1 --max-fee auto --private-key-path ./{pkey_name} --wait-for-acceptance --json")
+  run_command(f"protostar -p {network} invoke --contract-address {player_registry_addr} --function set_exercise_or_admin --account-address {account_addr} --inputs {ex_contract_addr} 1 --max-fee {max_fee} --private-key-path ./{pkey_name} --wait-for-acceptance --json")
+  run_command(f"protostar -p {network} invoke --contract-address {tderc20_addr} --function set_teacher --account-address {account_addr} --inputs {ex_contract_addr} 1 --max-fee {max_fee} --private-key-path ./{pkey_name} --wait-for-acceptance --json")
   return
 
 # Set Random Number
@@ -128,7 +129,7 @@ def set_random_number(ex_no, list_length, random_number_list):
   print("set random number for " + ex_no)
   ex_contract_addr = exercise_contracts[ex_no]
   list_string = ' '.join(str(e) for e in random_number_list)
-  run_command(f"protostar -p {network} invoke --contract-address {ex_contract_addr} --function set_random_values --account-address {account_addr} --inputs {list_length} {list_string} --max-fee auto --private-key-path ./{pkey_name} --wait-for-acceptance --json")
+  run_command(f"protostar -p {network} invoke --contract-address {ex_contract_addr} --function set_random_values --account-address {account_addr} --inputs {list_length} {list_string} --max-fee {max_fee} --private-key-path ./{pkey_name} --wait-for-acceptance --json")
   return
 
 def deploy_all():
