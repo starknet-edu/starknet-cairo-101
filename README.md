@@ -162,20 +162,23 @@ You can also check your overall progress [here](https://starknet-tutorials.verce
 ​
 
 ### Transaction status
-
-
 You can also check the status of your transaction with the following URL  [https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=) or [https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=](https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=), where you can append your transaction hash.
 
-## Reusing this project
+## Deploy everything on your local machine
 - Clone the repo on your machine.
 - Set up the environment following [these instructions](https://starknet.io/docs/quickstart.html#quickstart).
 - Set up your local starknet-devnet [official doc](https://shard-labs.github.io/starknet-devnet/)
 - Set up protostar build tool [official doc](https://docs.swmansion.com/protostar/)
 - Or use the best practise to setup the local dev env [github](https://github.com/starknet-edu/setup-starknet-dev-env/)
-- Test that you can compile the project.
-
+- Start your own local starknet-devnet
 ```bash
-protostar build
+starknet-devnet --seed 1234
 ```
-
-- For more detailed deploy scripts please refer to `deploy folder`
+- Setup essential settings in `deploy_starknet.py`
+  - Configure your `account_addr`, this is the account you will initiate txn from
+  - Configure your `pkey_name`, create a file called pkey and put private key secret inside
+  - Choose your `network`, by default its using local starknet-devnet
+- Run `deploy_starknet.py`
+```bash
+python3 deploy_starknet.py
+```
