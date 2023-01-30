@@ -12,7 +12,6 @@ Complete the puzzles/exercises, get tokens and learn about StarkNet smart contra
 ​StarkNet is still in Alpha. This means that development is ongoing, and the paint is not dry everywhere. Things will get better, and in the meanwhile, we make things work with a bit of duct tape here and there!​
 
 ### How it works
-
 ​
 **Complete the exercises and get tokens!**
 This workshop is a set of smart contracts deployed on StarkNet Alpha on testnet. Each smart contract is an exercise/puzzle - which outlines a feature of the Cairo Smart contract language.
