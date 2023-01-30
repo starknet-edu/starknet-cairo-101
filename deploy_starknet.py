@@ -2,12 +2,12 @@ import subprocess, json
 from utils import str_to_felt, felt_to_str
 
 # essential settings
-account_addr = "0x07bcabe962aa18db948bb8619fbdc36ef7681cc4d1e280c78e9c8709402a03db"
-salt = 4567
+account_addr = "0x33507ff2edf12c12c73d0b6d1d90de9fac12a355de1097ab305249612451919"
+salt = 1
 tderc20_addr = "0x"
 player_registry_addr = "0x"
-pkey_name = ".pkey_testnet2"
-network = "testnet2"
+pkey_name = ".pkey"
+network = "devnet"
 exercise_contracts = {}
 max_fee = "auto"
 
@@ -17,13 +17,13 @@ def run_command(cmd):
 
 # Build
 def build():
-  print("BUILDing...")
+  print("BUILD")
   run_command("protostar build")
   return
 
 # Test
 def test():
-  print("Testing...")
+  print("Test")
   run_command("protostar test")
   return
 
@@ -39,12 +39,8 @@ def deploy_TDERC20():
   class_hash = json.loads(out)['class_hash']
   out = run_command(f"protostar -p {network} deploy {class_hash} --salt {salt} --account-address {account_addr} --private-key-path ./{pkey_name} --max-fee {max_fee} -i {token_name} {token_symbol} 0 0 {account_addr} {account_addr} --wait-for-acceptance --json")
 
-  print("CALL " + contract)
   global tderc20_addr
   tderc20_addr = json.loads(out)['contract_address']
-  out = run_command(f"protostar -p {network} call --contract-address {tderc20_addr} --function name --json")
-  print("Deployed TDERC20 Name: " + felt_to_str(json.loads(out)['transformed_output']['name']))
-  print(contract + " Deployment DONE")
 
   return
 
@@ -60,7 +56,6 @@ def deploy_players_registry():
 
   global player_registry_addr
   player_registry_addr = json.loads(out)['contract_address']
-  print(contract + " Deployment DONE")
   return
 
 #
@@ -132,8 +127,18 @@ def set_random_number(ex_no, list_length, random_number_list):
   run_command(f"protostar -p {network} invoke --contract-address {ex_contract_addr} --function set_random_values --account-address {account_addr} --inputs {list_length} {list_string} --max-fee {max_fee} --private-key-path ./{pkey_name} --wait-for-acceptance --json")
   return
 
+def print_all_contracts():
+  print(f"Yo starknet fans, all contracts deployed successfully on {network}!")
+  print("=================================================================================")
+  print(f"tderc20_addr: {tderc20_addr}")
+  print(f"player_registry_addr: {player_registry_addr}")
+  for contract_name, contract_address in exercise_contracts.items():
+    print(f"{contract_name}: {contract_address}")
+  print("=================================================================================")
+  return
+
 def deploy_all():
-  # build()
+  build()
   # test()
   deploy_TDERC20()
   deploy_players_registry()
@@ -171,6 +176,6 @@ def deploy_all():
   deploy_ex13(1, 13, 100, [5919,2682,7799,7765,9255,2249,8673,8649,9605,9669,9298,7384,8376,4535,5215,3552,4969,6803,8787,7403,7665,3286,1907,2228,5957,8153,6286,4738,7617,8216,9892,973,3389,941,663,3824,4120,9933,1237,570,3598,3360,2837,4401,2385,5226,8762,9335,6541,5965,4642,5677,8434,6027,8255,9684,487,8089,880,2532,3258,7896,416,6382,9127,6130,581,8543,5394,2321,2179,1657,464,6558,168,5035,5641,9209,1626,7485,7111,6225,9902,9584,8783,4900,4534,7004,3618,5641,7900,5585,7029,5298,2725,7107,6881,1626,9654,2022])
   deploy_ex_common("ex14",1, 14)
   set_admin_ex("ex14")
-  print("exercise_contracts: ", exercise_contracts)
+  print_all_contracts()
 
 deploy_all()

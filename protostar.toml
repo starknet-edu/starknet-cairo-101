@@ -33,8 +33,7 @@ chain-id = 1536727068981429685321
 network="testnet"
 
 [profile.testnet2.project]
-gateway-url = "https://alpha4-2.starknet.io"
-chain-id = 393402129659245999442226
+network="testnet2"
 
 ["profile.devnet.protostar.deploy"]
 gateway-url="http://127.0.0.1:5050/"
@@ -43,7 +42,7 @@ gateway-url="http://127.0.0.1:5050/"
 network="testnet"
 
 ["profile.testnet2.protostar.deploy"]
-gateway-url = "https://alpha4-2.starknet.io"
+network="testnet2"
 
 ["profile.mainnet.protostar.deploy"]
 network="mainnet"
