@@ -7,7 +7,7 @@ Complete the puzzles/exercises, get tokens and learn about StarkNet smart contra
 
 ### Disclaimer
 
-​Don't expect any benefit from using this other than learning some cool stuff about StarkNet, the first general-purpose validity rollup on the Ethereum mainnnet.
+​Don't expect any benefit from using this other than learning some cool stuff about StarkNet, the first general-purpose validity rollup on the Ethereum mainnet.
 
 ​StarkNet is still in Alpha. This means that development is ongoing, and the paint is not dry everywhere. Things will get better, and in the meanwhile, we make things work with a bit of duct tape here and there!​
 
@@ -23,7 +23,7 @@ Completing the exercise will credit you with points in the form of an [ERC20 tok
 This workshop focuses on *reading* Cairo code and StarkNet smart contracts to understand its syntax. You do not need to code or install anything on your machine to follow and complete it.​
 
 ​
-It will take you some time in order to get started (doing the first two exercises) into the tutorial. Hang on! Once there, things will flow more easily. You're learning!​
+It will take you some time in order to get started (doing the first two exercises) in the tutorial. Hang on! Once there, things will flow more easily. You're learning!​
 
 ### Where am I?
 
