@@ -1,24 +1,18 @@
-%lang starknet
-from starkware.cairo.common.uint256 import (
-    Uint256,
-    uint256_add,
-    uint256_sub,
-    uint256_le,
-    uint256_lt,
-    uint256_check,
-)
-@contract_interface
-namespace ITDERC20 {
-    func distribute_points(to: felt, amount: Uint256) {
+//###################
+// INTERFACE
+//###################
+#[abi]
+trait ITDERC20 {
+    fn distribute_points(to: ContractAddress, amount: u256) {
     }
-    func remove_points(to: felt, amount: Uint256) {
+    fn remove_points(to: ContractAddress, amount: u256) {
     }
-    func set_teacher(account: felt, permission: felt) {
+    fn set_teacher(account: ContractAddress, permission: felt) {
     }
-    func is_teacher_or_exercise(account: felt) -> (permission: felt) {
+    fn is_teacher_or_exercise(account: ContractAddress) -> (permission: felt) {
     }
-    func set_teachers_temp(accounts_len: felt, accounts: felt*) {
+    fn set_teachers_temp(accounts_len: u8, accounts: Array::<ContractAddress>) {
     }
-    func set_teacher_temp(account: felt) {
-    }
+    fn set_teacher_temp(account: ContractAddress) {
+    } 
 }
