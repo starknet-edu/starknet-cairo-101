@@ -1,5 +1,5 @@
 #[contract]
-mod Ex01 { 
+mod Ex01 {
     // Ex 01
     //  Using a simple public contract function
     // In this exercise, you need to:
@@ -14,13 +14,16 @@ mod Ex01 {
     //
     //
 
-
+    // Core Library Imports
     use starknet::get_caller_address;
+    use starknet::contract_address_to_felt;
     use integer::u256_from_felt;
-    // TODO(Omar): import distribute_points, validate_exercise, and ex_initializer from ex00_base
-    // use ex00_base::distribute_points;
-    // use ex00_base::validate_exercise;
-    // use ex00_base::ex_initializer;
+
+    // Internal Imports
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
+
 
     // Constructor
     // This function is called when the contract is deployed
@@ -42,7 +45,7 @@ mod Ex01 {
     #[external]
     fn claim_points() {
         // Reading caller address
-        let sender_address = get_caller_address();
+        let sender_address = contract_address_to_felt(get_caller_address());
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter

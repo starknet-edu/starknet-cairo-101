@@ -1,12 +1,15 @@
 // ######## Ex 00
 // # A contract from which other contracts can import functions
 
-// TODO(Omar): import interfaces ITDERC20 and Iplayers_registry 
-
 #[contract]
 mod Ex00Base {
-    // use starknet::ContractAddress;
+    // Core Library Imports
     use starknet::contract_address_try_from_felt;
+
+    // Internal Imports
+    use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcher;
+    use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
+
 
     struct Storage {
         tderc20_address_storage: felt,
@@ -49,12 +52,9 @@ mod Ex00Base {
                 return 1;
             },
         };
-        super::Iplayers_registryDispatcher::has_validated_exercise(
-            address,
-            account,
-            _workshop_id,
-            _exercise_id
-        )   
+        Iplayers_registryDispatcher::has_validated_exercise(
+            address, account, _workshop_id, _exercise_id
+        )
     }
 
     //
@@ -78,9 +78,7 @@ mod Ex00Base {
     // Similar to internal functions in Solidity
     //
 
-    fn distribute_points(
-        to: felt, amount: u256
-    ) {
+    fn distribute_points(to: felt, amount: u256) {
         // Retrieving contract address from storage
         let _contract_address = tderc20_address_storage::read();
         // Calling the ERC20 contract to distribute points
@@ -91,12 +89,10 @@ mod Ex00Base {
                 return ();
             },
         };
-        super::ITDERC20Dispatcher::distribute_points(address, to, amount);
+        ITDERC20Dispatcher::distribute_points(address, to, amount);
     }
 
-    fn validate_exercise(
-        account: felt
-    ) {
+    fn validate_exercise(account: felt) {
         // reading player registry
         let _players_registry = players_registry_storage::read();
         let _workshop_id = workshop_id_storage::read();
@@ -109,18 +105,13 @@ mod Ex00Base {
                 return ();
             },
         };
-        let has_current_user_validated_exercise = super::Iplayers_registryDispatcher::has_validated_exercise(
-            address,
-            account,
-            _workshop_id,
-            _exercise_id,
+        let has_current_user_validated_exercise =
+            Iplayers_registryDispatcher::has_validated_exercise(
+            address, account, _workshop_id, _exercise_id, 
         );
-        assert(has_current_user_validated_exercise == 0, 'Ex00Base: User validated the exercise previously');
-        super::Iplayers_registryDispatcher::validate_exercise(
-            address,
-            account,
-            _workshop_id,
-            _exercise_id,
+        assert(has_current_user_validated_exercise == 0, 'Exercise previously validated');
+        Iplayers_registryDispatcher::validate_exercise(
+            address, account, _workshop_id, _exercise_id, 
         );
     }
 }

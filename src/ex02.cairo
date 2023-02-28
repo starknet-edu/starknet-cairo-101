@@ -19,11 +19,15 @@
 
 #[contract]
 mod Ex02 {
+    // Core library Imports
     use starknet::get_caller_address;
-    // TODO(Omar): import distribute_points, validate_exercise, and ex_initializer from ex00_base
-    // use ex00_base::distribute_points;
-    // use ex00_base::validate_exercise;
-    // use ex00_base::ex_initializer;
+    use starknet::contract_address_to_felt;
+    use integer::u256_from_felt;
+
+    // Internal Imports
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
 
     //
     // Declaring storage vars
@@ -33,7 +37,7 @@ mod Ex02 {
     // From within a smart contract, it can be read with my_secret_value_storage.read() or written to with my_secret_value_storage.write()
 
     struct Storage {
-        my_secret_value_storage: felt,
+        my_secret_value_storage: felt, 
     }
 
     //
@@ -43,7 +47,7 @@ mod Ex02 {
 
     #[view]
     fn my_secret_value() -> felt {
-        my_secret_value_storage::read();
+        my_secret_value_storage::read()
     }
 
     // ######## Constructor
@@ -68,7 +72,7 @@ mod Ex02 {
     #[external]
     fn claim_points(my_value: felt) {
         // Reading caller address
-        let sender_address = get_caller_address();
+        let sender_address = contract_address_to_felt(get_caller_address());
         // Reading stored value from storage
         let my_secret_value = my_secret_value_storage::read();
         // Checking that the value sent is correct
