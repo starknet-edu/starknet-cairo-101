@@ -1,10 +1,10 @@
-// ######## Ex 02
-// # Understanding asserts
+// /////// Ex 02
+// // Understanding asserts
 // In this exercise, you need to:
 // - Use this contract's claim_points() function
-// - Your points are credited by the contract
+// - Your points are credited by the contract if you send the correct value
 
-// # What you'll learn
+// // What you'll learn
 // - Using asserts
 // - How to declare storage variables
 // - How to read storage variables
@@ -13,7 +13,7 @@
 // They are similar to require() in Solidity
 // More information about basic storage https://www.cairo-by-example.com/basics/storage
 
-// ######## General directives and imports
+// /////// General directives and imports
 //
 //
 
@@ -33,8 +33,8 @@ mod Ex02 {
     // Declaring storage vars
     // Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
     //
-    // This variable is a felt and is called my_secret_value_storage
-    // From within a smart contract, it can be read with my_secret_value_storage.read() or written to with my_secret_value_storage.write()
+    // This variable is a felt and is called my_secret_value_storage. It is stored in the contract's Storage struct
+    // From within a smart contract, it can be read with my_secret_value_storage::read() or written to with my_secret_value_storage::write()
 
     struct Storage {
         my_secret_value_storage: felt, 
@@ -42,7 +42,7 @@ mod Ex02 {
 
     //
     // Declaring getters
-    // Public variables should be declared explicitly with a getter
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
     //
 
     #[view]
@@ -51,7 +51,7 @@ mod Ex02 {
     }
 
     // ######## Constructor
-    // This function is called when the contract is deployed
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     //
     #[constructor]
     fn constructor(
@@ -66,7 +66,7 @@ mod Ex02 {
     }
 
     // ######## External functions
-    // These functions are callable by other contracts
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
     //
 
     #[external]

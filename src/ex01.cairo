@@ -1,14 +1,14 @@
 #[contract]
 mod Ex01 {
-    // Ex 01
-    //  Using a simple public contract function
+    // /////// Ex 01
+    // // Using a simple public contract function
     // In this exercise, you need to:
-    // - Use this contract's claim_points() function
-    // - Your points are credited by the contract
+    // - Use this contract's claim_points() function to claim your points
+    // - Your points are credited by the contract to your address if you send the correct value
 
     // What you'll learn
-    // - General smart contract syntax
-    // - Calling a function
+    // - General smart contract syntax and structure
+    // - Calling a function from a smart contract
 
     // General directives and imports
     //
@@ -40,7 +40,6 @@ mod Ex01 {
     //
 
     // This function is called claim_points
-    // It takes implicit arguments (syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr). Read more about implicit arguments here https://www.cairo-lang.org/docs/how_cairo_works/builtins.html
     // It defines the expression sender_address as a felt. Read more about felts here https://www.cairo-lang.org/docs/hello_cairo/intro.html#field-element
     #[external]
     fn claim_points() {
