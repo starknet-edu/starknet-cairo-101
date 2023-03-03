@@ -1,2 +1,2 @@
 [crate_roots]
-starknet_cairo_101 = "contracts"
+starknet_cairo_101 = "src"
