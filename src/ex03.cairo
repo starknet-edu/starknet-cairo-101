@@ -49,7 +49,6 @@ mod Ex03 {
 
     ////////////////////////////////
     // VIEW FUNCTIONS
-    // Declaring getters for our mappings. It takes one argument as a parameter, the account you wish to read the counter of
     ////////////////////////////////
     #[view]
     fn get_user_counters(account: felt) -> felt {

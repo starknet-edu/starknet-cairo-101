@@ -1,6 +1,6 @@
-//###################
+////////////////////////////////
 // INTERFACE
-//###################
+////////////////////////////////
 #[abi]
 trait Iplayers_registry {
     fn has_validated_exercise(account: felt, workshop: felt, exercise: felt) -> felt;

@@ -37,7 +37,7 @@ mod Ex02 {
     // From within a smart contract, it can be read with my_secret_value_storage::read() or written to with my_secret_value_storage::write()
 
     struct Storage {
-        my_secret_value_storage: felt, 
+        my_secret_value_storage: felt,
     }
 
     //
