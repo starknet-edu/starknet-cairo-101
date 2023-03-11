@@ -46,7 +46,9 @@ mod Ex12 {
     // Constructor
     ////////////////////////////////
     #[constructor]
-    fn constructor(_tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt) {
+    fn constructor(
+        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+    ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
@@ -65,7 +67,7 @@ mod Ex12 {
     #[external]
     fn claim_points(expected_value: felt) {
         // Reading caller address
-        let sender_address:ContractAddress = get_caller_address();
+        let sender_address: ContractAddress = get_caller_address();
         // Checking that the user got a slot assigned
         let user_slot = user_slots::read(sender_address.into());
         assert(user_slot != 0, 'ASSIGN_USER_SLOT_FIRST');
@@ -85,7 +87,7 @@ mod Ex12 {
     #[external]
     fn assign_user_slot() {
         // Reading caller address
-        let sender_address:ContractAddress = get_caller_address();
+        let sender_address: ContractAddress = get_caller_address();
         let next_slot_temp = next_slot::read();
         let next_value = values_mapped_secret::read(next_slot_temp + 1);
         if next_value == 0 {
@@ -110,7 +112,7 @@ mod Ex12 {
     fn set_random_values(values: Array::<felt>) {
         // Check if the random values were already initialized
         let was_initialized_read = was_initialized::read();
-        assert (was_initialized_read == true, 'NOT_INITIALISED');
+        assert(was_initialized_read == true, 'NOT_INITIALISED');
 
         let mut idx: felt = 0;
         set_a_random_value(idx, values);
@@ -126,5 +128,4 @@ mod Ex12 {
             set_a_random_value(idx, values);
         }
     }
-
 }

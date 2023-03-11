@@ -35,7 +35,9 @@ mod Ex11 {
     // Constructor
     ////////////////////////////////
     #[constructor]
-    fn constructor(_tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt) {
+    fn constructor(
+        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+    ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
@@ -46,7 +48,7 @@ mod Ex11 {
     #[external]
     fn claim_points(secret_value_i_guess: felt, next_secret_value_i_chose: felt) {
         // Reading caller address
-        let sender_address:ContractAddress = get_caller_address();
+        let sender_address: ContractAddress = get_caller_address();
         // Check if your answer is correct
         validate_answers(sender_address.into(), secret_value_i_guess, next_secret_value_i_chose);
         // Checking if the user has validated the exercise before
@@ -54,5 +56,4 @@ mod Ex11 {
         // Sending points to the address specified as parameter
         distribute_points(sender_address.into(), u256_from_felt(2));
     }
-
 }

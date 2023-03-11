@@ -107,11 +107,11 @@ mod Ex00Base {
         };
         let has_current_user_validated_exercise =
             Iplayers_registryDispatcher::has_validated_exercise(
-            address, account, _workshop_id, _exercise_id,
+            address, account, _workshop_id, _exercise_id, 
         );
         assert(has_current_user_validated_exercise == 0, 'Exercise previously validated');
         Iplayers_registryDispatcher::validate_exercise(
-            address, account, _workshop_id, _exercise_id,
+            address, account, _workshop_id, _exercise_id, 
         );
     }
 }

@@ -36,14 +36,16 @@ mod Ex03 {
     ////////////////////////////////
 
     struct Storage {
-        user_counters: LegacyMap::<felt, felt>,
+        user_counters: LegacyMap::<felt, felt>, 
     }
 
     ////////////////////////////////
     // Constructor
     ////////////////////////////////
     #[constructor]
-    fn constructor(_tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt) {
+    fn constructor(
+        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+    ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
@@ -66,7 +68,7 @@ mod Ex03 {
         assert(!sender_address.is_zero(), 'sender_address is empty!');
         // Checking that user's counter is equal to 7
         let current_counter_value = user_counters::read(sender_address.into());
-        assert (current_counter_value == 7, 'Counter is not equal to 7');
+        assert(current_counter_value == 7, 'Counter is not equal to 7');
 
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address.into());
@@ -99,6 +101,6 @@ mod Ex03 {
         // Reading counter from storage
         let current_counter_value = user_counters::read(sender_address.into());
         // Writing updated value to storage
-        user_counters::write(sender_address.into(), current_counter_value -1);
+        user_counters::write(sender_address.into(), current_counter_value - 1);
     }
 }

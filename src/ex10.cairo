@@ -43,7 +43,9 @@ mod Ex10 {
     // Constructor
     ////////////////////////////////
     #[constructor]
-    fn constructor(_tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt) {
+    fn constructor(
+        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+    ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
@@ -62,7 +64,7 @@ mod Ex10 {
     #[external]
     fn claim_points(secret_value_i_guess: felt, next_secret_value_i_chose: felt) {
         // Reading caller address
-        let sender_address:ContractAddress = get_caller_address();
+        let sender_address: ContractAddress = get_caller_address();
 
         // Retrieve secret value by READING
         let ex10b_addr = ex10b_address::read();
@@ -96,5 +98,4 @@ mod Ex10 {
         ex10b_address::write(ex10b_addr);
         setup_is_finished::write(true);
     }
-
 }
