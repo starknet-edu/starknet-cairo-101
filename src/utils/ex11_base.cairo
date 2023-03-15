@@ -117,15 +117,17 @@ mod Ex11Base {
         };
         let has_current_user_validated_exercise =
             Iplayers_registryDispatcher::has_validated_exercise(
-            address, account, _workshop_id, _exercise_id,
+            address, account, _workshop_id, _exercise_id, 
         );
         assert(has_current_user_validated_exercise == 0, 'Exercise previously validated');
         Iplayers_registryDispatcher::validate_exercise(
-            address, account, _workshop_id, _exercise_id,
+            address, account, _workshop_id, _exercise_id, 
         );
     }
 
-    fn validate_answers(sender_address: felt, secret_value_i_guess: felt, next_secret_value_i_chose: felt){
+    fn validate_answers(
+        sender_address: felt, secret_value_i_guess: felt, next_secret_value_i_chose: felt
+    ) {
         // CAREFUL THERE IS A TRAP FOR PEOPLE WHO WON'T READ THE CODE
         // This exercise looks like the previous one, but actually the view secret_value returns a different value than secret_value
         // Sending the wrong execution result will remove some of your points, then validate the exercise. You won't be able to get those points back later on!
@@ -160,5 +162,4 @@ mod Ex11Base {
             }
         }
     }
-
 }

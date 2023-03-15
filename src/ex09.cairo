@@ -31,7 +31,9 @@ mod Ex09 {
     // Constructor
     ////////////////////////////////
     #[constructor]
-    fn constructor(_tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt) {
+    fn constructor(
+        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+    ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
@@ -47,10 +49,10 @@ mod Ex09 {
         // Calculating the sum of the array sent by the user
         let mut sum: felt = 0;
         sum = get_sum_internal(sum, array);
-        assert(sum >= 50 , 'SUM_LT_50');
+        assert(sum >= 50, 'SUM_LT_50');
 
         // Reading caller address
-        let sender_address:ContractAddress = get_caller_address();
+        let sender_address: ContractAddress = get_caller_address();
 
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address.into());
@@ -70,5 +72,4 @@ mod Ex09 {
 
         sum
     }
-
 }

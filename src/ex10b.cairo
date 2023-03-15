@@ -90,7 +90,6 @@ mod Ex10 {
     fn only_ex10() {
         let caller = get_caller_address();
         let ex10_address = ex10_address::read();
-        assert (ex10_address == caller.into(), 'ADDRESS_NOT_MATCH');
+        assert(ex10_address == caller.into(), 'ADDRESS_NOT_MATCH');
     }
-
 }

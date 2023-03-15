@@ -39,7 +39,9 @@ mod Ex14 {
     // Constructor
     ////////////////////////////////
     #[constructor]
-    fn constructor(_tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt) {
+    fn constructor(
+        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+    ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
@@ -50,7 +52,7 @@ mod Ex14 {
     #[external]
     fn claim_points() {
         // Reading caller address
-        let sender_address:ContractAddress = get_caller_address();
+        let sender_address: ContractAddress = get_caller_address();
         //
         let erc20_address = tderc20_address();
 
@@ -61,5 +63,4 @@ mod Ex14 {
         // Sending points to the address specified as parameter
         distribute_points(sender_address.into(), u256_from_felt(2));
     }
-
 }
