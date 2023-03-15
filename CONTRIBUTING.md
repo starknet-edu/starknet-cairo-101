@@ -1,4 +1,22 @@
-# Guide to setup your Cairo environment.
+
+# Contributing to StarkNet Cairo 101
+
+Thank you, STARKer! Here are the steps:
+
+0. If it a minor change (nits, writing, better instructions or comments) you can just make a PR. If it is a major change, please open an issue first to discuss it.
+1. Clone the repo on your machine.
+2. Set up the environment following the instructions in the next section.
+3. Make your changes.
+4. Test that you can compile the project with:
+
+```bash
+scarb build
+```
+
+5. Make a PR and wait for it to be reviewed.
+
+
+## Guide to setup your Cairo environment.
 
 ### Step 1: Install Cairo 1.0
 

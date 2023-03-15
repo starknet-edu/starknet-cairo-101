@@ -88,19 +88,20 @@ Enjoy the workshop! If you have any questions, feel free to contact us on [Disco
 
 ---
 
-## Contributing or reusing this project
+## Contributing to making this workshop better
 
-- Clone the repo on your machine.
-- Set up the environment following [these instructions](./setup.md).
-- Test that you can compile the project.
+This project can be made better and will evolve. Your contributions are welcome and required! Go to the [CONTRIBUTING](CONTRIBUTING.md) file for more information on how to setup your environment and contribute to the project.
 
-```bash
-scarb build
-```
+Here are **some** things that you can do to help:
 
-Enjoy!
+- Create a branch with a translation to your language
+- Correct bugs if you find some
+- Add an explanation in the comments of the exercise if you feel it needs more explanation
+- Add exercises showcasing your favorite Cairo feature
+- Add a new tutorial to the series
 
-## Where am I?
+
+## Other Automated Workshops
 
 This workshop is the first in a series aimed at teaching how to build on Starknet. Checkout out other workshops in the series:
 
@@ -126,16 +127,6 @@ Do you have a question? Join our [Discord server](https://starknet.io/discord), 
 
 Are you interested in attending online workshops about dev on Starknet? [Subscribe here](http://eepurl.com/hFnpQ5)
 
-
-## Contributing
-
-This project can be made better and will evolve as Starknet matures. Your contributions are welcome! Here are things that you can do to help:
-
-- Create a branch with a translation to your language
-- Correct bugs if you find some
-- Add an explanation in the comments of the exercise if you feel it needs more explanation
-- Add exercises showcasing your favorite Cairo feature
-- Add a new tutorial to the series
 
 ## Languages
 
