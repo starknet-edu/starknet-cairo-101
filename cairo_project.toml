@@ -1,2 +1,2 @@
 [crate_roots]
-starknet_cairo_101 = "src"
+starknet_cairo_101 = "starknet_cairo_101"

@@ -1,3 +1,5 @@
+use starknet::contract_address::ContractAddressSerde;
+
 //###################
 // INTERFACE
 //###################

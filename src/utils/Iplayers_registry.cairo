@@ -1,14 +1,16 @@
+use starknet::contract_address::ContractAddressSerde;
+
 ////////////////////////////////
 // INTERFACE
 ////////////////////////////////
 #[abi]
 trait Iplayers_registry {
-    fn has_validated_exercise(account: felt, workshop: felt, exercise: felt) -> felt;
-    fn is_exercise_or_admin(account: felt) -> felt;
+    fn has_validated_exercise(account: ContractAddress, workshop: felt, exercise: felt) -> bool;
+    fn is_exercise_or_admin(account: ContractAddress) -> bool;
     fn next_player_rank() -> felt;
-    fn players_registry(rank: felt) -> felt;
-    fn player_ranks(account: felt) -> felt;
-    fn set_exercise_or_admin(account: felt, permission: felt);
-    fn set_exercises_or_admins(accounts_len: felt, accounts: Array::<felt>);
-    fn validate_exercise(account: felt, workshop: felt, exercise: felt);
+    fn players_registry(rank: felt) -> ContractAddress;
+    fn player_ranks(account: ContractAddress) -> felt;
+    fn set_exercise_or_admin(account: ContractAddress, permission: bool);
+    fn set_exercises_or_admins(accounts: Array::<felt>);
+    fn validate_exercise(account: ContractAddress, workshop: felt, exercise: felt);
 }

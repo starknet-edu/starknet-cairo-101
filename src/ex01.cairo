@@ -18,6 +18,16 @@ mod Ex01 {
     use starknet::get_caller_address;
     use starknet::contract_address_to_felt;
     use integer::u256_from_felt;
+    use zeroable::Zeroable;
+    use starknet::ContractAddressZeroable;
+    use starknet::ContractAddressIntoFelt;
+    use starknet::FeltTryIntoContractAddress;
+    use starknet::contract_address_try_from_felt;
+    use traits::Into;
+    use traits::TryInto;
+    use array::ArrayTrait;
+    use option::OptionTrait;
+
 
     // Internal Imports
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;

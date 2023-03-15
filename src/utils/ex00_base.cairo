@@ -4,27 +4,58 @@
 #[contract]
 mod Ex00Base {
     // Core Library Imports
+    use starknet::get_caller_address;
+    use starknet::contract_address_to_felt;
+    use integer::u256_from_felt;
+    use zeroable::Zeroable;
+    use starknet::ContractAddressZeroable;
+    use starknet::ContractAddressIntoFelt;
+    use starknet::FeltTryIntoContractAddress;
     use starknet::contract_address_try_from_felt;
+    use traits::Into;
+    use traits::TryInto;
+    use array::ArrayTrait;
+    use option::OptionTrait;
 
     // Internal Imports
+    use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registry;
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcher;
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
 
 
+    ////////////////////////////////
+    // STORAGE
+    ////////////////////////////////
     struct Storage {
-        tderc20_address_storage: felt,
-        players_registry_storage: felt,
+        tderc20_address_storage: ContractAddress,
+        players_registry_storage: ContractAddress,
         workshop_id_storage: felt,
         exercise_id_storage: felt,
     }
 
+    ////////////////////////////////
+    // Constructor
+    ////////////////////////////////
+    #[constructor]
+    fn ex_initializer(
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
+    ) {
+        tderc20_address_storage::write(_tderc20_address);
+        players_registry_storage::write(_players_registry);
+        workshop_id_storage::write(_workshop_id);
+        exercise_id_storage::write(_exercise_id);
+    }
+
+    ////////////////////////////////
+    // View Functions
+    ////////////////////////////////
     #[view]
-    fn tderc20_address() -> felt {
+    fn tderc20_address() -> ContractAddress {
         tderc20_address_storage::read()
     }
 
     #[view]
-    fn players_registry() -> felt {
+    fn players_registry() -> ContractAddress {
         players_registry_storage::read()
     }
 
@@ -39,79 +70,37 @@ mod Ex00Base {
     }
 
     #[view]
-    fn has_validated_exercise(account: felt) -> felt {
+    fn has_validated_exercise(account: ContractAddress) -> bool {
         // reading player registry
         let _players_registry = players_registry_storage::read();
         let _workshop_id = workshop_id_storage::read();
         let _exercise_id = exercise_id_storage::read();
-        // Checking if the user already validated this exercise
-        let address = match contract_address_try_from_felt(_players_registry) {
-            Option::Some(address) => address,
-            Option::None(()) => {
-                // TODO (Omar): add adequate error message
-                return 1;
-            },
-        };
-        Iplayers_registryDispatcher::has_validated_exercise(
-            address, account, _workshop_id, _exercise_id
-        )
+
+        Iplayers_registryDispatcher::has_validated_exercise(_players_registry, account, _workshop_id, _exercise_id)
     }
 
-    //
-    // Internal constructor
-    // This function is used to initialize the contract. It can be called from the constructor
-    //
-
-    #[constructor]
-    fn ex_initializer(
-        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
-    ) {
-        tderc20_address_storage::write(_tderc20_address);
-        players_registry_storage::write(_players_registry);
-        workshop_id_storage::write(_workshop_id);
-        exercise_id_storage::write(_exercise_id);
-    }
-
-    //
-    // Internal functions
-    // These functions can not be called directly by a transaction
-    // Similar to internal functions in Solidity
-    //
-
-    fn distribute_points(to: felt, amount: u256) {
+    ////////////////////////////////
+    // Internal Functions
+    ////////////////////////////////
+    fn distribute_points(to: ContractAddress, amount: u256) {
         // Retrieving contract address from storage
         let _contract_address = tderc20_address_storage::read();
-        // Calling the ERC20 contract to distribute points
-        let address = match contract_address_try_from_felt(_contract_address) {
-            Option::Some(address) => address,
-            Option::None(()) => {
-                // TODO (Omar): add adequate error message
-                return ();
-            },
-        };
-        ITDERC20Dispatcher::distribute_points(address, to, amount);
+        ITDERC20Dispatcher::distribute_points(_contract_address, to, amount);
     }
 
-    fn validate_exercise(account: felt) {
+    fn validate_exercise(account: ContractAddress) {
         // reading player registry
         let _players_registry = players_registry_storage::read();
         let _workshop_id = workshop_id_storage::read();
         let _exercise_id = exercise_id_storage::read();
-        // Checking if the user already validated this exercise
-        let address = match contract_address_try_from_felt(_players_registry) {
-            Option::Some(address) => address,
-            Option::None(()) => {
-                // TODO (Omar): add adequate error message
-                return ();
-            },
-        };
+
         let has_current_user_validated_exercise =
             Iplayers_registryDispatcher::has_validated_exercise(
-            address, account, _workshop_id, _exercise_id,
+            _players_registry, account, _workshop_id, _exercise_id,
         );
-        assert(has_current_user_validated_exercise == 0, 'Exercise previously validated');
+        assert(has_current_user_validated_exercise == false, 'Exercise previously validated');
         Iplayers_registryDispatcher::validate_exercise(
-            address, account, _workshop_id, _exercise_id,
+            _players_registry, account, _workshop_id, _exercise_id,
         );
     }
 }

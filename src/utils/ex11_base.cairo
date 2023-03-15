@@ -55,14 +55,8 @@ mod Ex11Base {
         let _players_registry = players_registry_storage::read();
         let _workshop_id = workshop_id_storage::read();
         let _exercise_id = exercise_id_storage::read();
+
         // Checking if the user already validated this exercise
-        let address = match contract_address_try_from_felt(_players_registry) {
-            Option::Some(address) => address,
-            Option::None(()) => {
-                // TODO (Omar): add adequate error message
-                return 1;
-            },
-        };
         Iplayers_registryDispatcher::has_validated_exercise(
             address, account, _workshop_id, _exercise_id
         )
