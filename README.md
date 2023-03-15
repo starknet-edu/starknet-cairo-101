@@ -6,13 +6,17 @@ This tutorial is for developers who want to learn how to read Cairo code and Sta
 
 ## Introduction​
 
-Starknet is a general-purpose Validity Rollup on the Ethereum mainnet. It is a layer 2 scaling solution allowing developers to build applications on top of Ethereum without compromising security, decentralization, and censorship resistance.
+Hey there!
 
-This workshop is a set of smart contracts deployed on Starknet Alpha on testnet. Each smart contract is an exercise/puzzle - outlining a Cairo Smart contract language feature. 
+Welcome to Starknet, a general-purpose Validity Rollup on the Ethereum mainnet. It's a layer 2 scaling solution that lets developers build applications on top of Ethereum without compromising security, decentralization, and censorship resistance.
 
-Completing the exercise will credit you with points in the form of an [ERC20 token](contracts/token/TDERC20.cairo). The token is worth nothing, but it’s a fun way to get you to complete the exercises.
-​
-This workshop focuses on **reading** Cairo code and Starknet smart contracts to understand syntax. You **do not need to code or install anything** on your machine to follow and complete it.​
+This workshop is designed to help you read Cairo code and Starknet smart contracts to understand syntax. Don't worry, you don't need to code or install anything on your machine to follow and complete it. **You can do it all from your browser**.
+
+The workshop is a set of smart contracts deployed on Starknet Alpha on testnet. Each smart contract is an exercise/puzzle that outlines a feature of the Cairo Smart contract language.
+
+Completing the exercises will earn you points in the form of an [ERC20 token](contracts/token/TDERC20.cairo). The token may not have any monetary value, but it's a fun way to get you to complete the exercises.
+
+Hope you have fun participating in this workshop!
 
 ## What you will learn
 
@@ -30,11 +34,11 @@ This workshop focuses on **reading** Cairo code and Starknet smart contracts to 
 
 ### 1. Creating a smart contract wallet and connecting it to a Block Explorer
 
-**To complete the tutorial, you need to collect points.** These points will be owned by a smart contract wallet that you must deploy.
+**To complete the tutorial, you need to collect points.** You will own these points through your Starknet wallet. However, thanks to Account Abstraction, Starknet wallets work differently than Ethereum wallets. Do not worry; we will walk you through creating a wallet and connecting it to a Block Explorer.
 
 - The easiest way to set one up is to use Argent X ([download the chrome extension](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/)  or  [check their repo](https://github.com/argentlabs/argent-x)) or Braavos ([download the chrome extension](https://chrome.google.com/webstore/detail/braavos-wallet/jnlgamecbpmbajjfhmmmlhejkemejdma)). 
 These wallet solutions are similar to what Metamask is for Ethereum and allow users to initiate transactions and interact with applications on Starknet.
-- Follow the instructions to install the extension and deploy a smart contract account (it could take about 5 minutes to be deployed). Please note that in Starknet, there is only one type of Account - smart contract accounts (this is called Account Abstraction), in contrast to Ethereum where there are wallets and smart contracts. In other words, every wallet on Starknet is a smart contract, and there is no distinction between them and other smart contracts. Therefore, to create a new wallet, you need to deploy a transaction that publishes your smart contract wallet to the network.
+- Follow the instructions in your wallet app to install the extension. It may take approximately 5 minutes for the account to be deployed. Note that in Starknet, there is only one type of account: smart contract accounts. This is called Account Abstraction, which is in contrast to Ethereum where there are wallets and smart contracts. In Starknet, every wallet is a smart contract, and there is no distinction between them and other smart contracts. To create a new wallet, you need to deploy a transaction that publishes your smart contract wallet to the network.
 - Make sure you are on the Goerli testnet network.
 - The tutorial’s points are held in contract  `WIP` ([Starkscan link](WIP), [Voyager link](WIP)). 
 - Click "Add Token" in your installed wallet and add the tutorial contract address so that your points balance appears there. A new token called SC101 (starknet-cairo-101) will appear in your wallet.
