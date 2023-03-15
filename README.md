@@ -40,9 +40,8 @@ Hope you have fun participating in this workshop!
 These wallet solutions are similar to what Metamask is for Ethereum and allow users to initiate transactions and interact with applications on Starknet.
 - Follow the instructions in your wallet app to install the extension. It may take approximately 5 minutes for the account to be deployed. Note that in Starknet, there is only one type of account: smart contract accounts. This is called Account Abstraction, which is in contrast to Ethereum where there are wallets and smart contracts. In Starknet, every wallet is a smart contract, and there is no distinction between them and other smart contracts. To create a new wallet, you need to deploy a transaction that publishes your smart contract wallet to the network.
 - Make sure you are on the Goerli testnet network.
-- The tutorial’s points are held in contract  `WIP` ([Starkscan link](WIP), [Voyager link](WIP)). 
-- Click "Add Token" in your installed wallet and add the tutorial contract address so that your points balance appears there. A new token called SC101 (starknet-cairo-101) will appear in your wallet.
-- To execute transactions on the Goerli Starknet testnet **you'll need testnet ETH to pay for gas**. Go to the [faucet](https://faucet.goerli.starknet.io/) and follow the instructions to get some. It could take several minutes, but you should receive some L2 Goerli ETH in your wallet that you can use to execute transactions on the testnet.
+- The tutorial’s points are held in contract  `WIP` ([Starkscan link](WIP), [Voyager link](WIP)). Click "Add Token" in your installed wallet and add the tutorial contract address so that your points balance appears there. A new token called `SC101` (starknet-cairo-101) will appear in your wallet.
+- To execute transactions on the Goerli Starknet testnet, you will need testnet ETH to pay for gas. To obtain testnet ETH, go to the [faucet](https://faucet.goerli.starknet.io/) and follow the instructions. It may take several minutes, but you should receive some L2 Goerli ETH in your wallet that you can use to execute transactions on the testnet.
 
 ### 2. Solving exercises and getting points​
 ​
@@ -92,7 +91,7 @@ Enjoy the workshop! If you have any questions, feel free to contact us on [Disco
 
 ---
 
-## Contributing to making this workshop better
+## Contributing to improve this workshop
 
 This project can be made better and will evolve. Your contributions are welcome and required! Go to the [CONTRIBUTING](CONTRIBUTING.md) file for more information on how to setup your environment and contribute to the project.
 
