@@ -18,8 +18,9 @@ mod Ex00Base {
     use option::OptionTrait;
 
     // Internal Imports
-    use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registry;
+    use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcherTrait;
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcher;
+    use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
 
 
@@ -72,11 +73,12 @@ mod Ex00Base {
     #[view]
     fn has_validated_exercise(account: ContractAddress) -> bool {
         // reading player registry
-        let _players_registry = players_registry_storage::read();
-        let _workshop_id = workshop_id_storage::read();
-        let _exercise_id = exercise_id_storage::read();
+        let players_registry = players_registry_storage::read();
+        let workshop_id = workshop_id_storage::read();
+        let exercise_id = exercise_id_storage::read();
 
-        Iplayers_registryDispatcher::has_validated_exercise(_players_registry, account, _workshop_id, _exercise_id)
+        Iplayers_registryDispatcher{contract_address: players_registry}
+            .has_validated_exercise(account, workshop_id, exercise_id)
     }
 
     ////////////////////////////////
@@ -84,23 +86,24 @@ mod Ex00Base {
     ////////////////////////////////
     fn distribute_points(to: ContractAddress, amount: u256) {
         // Retrieving contract address from storage
-        let _contract_address = tderc20_address_storage::read();
-        ITDERC20Dispatcher::distribute_points(_contract_address, to, amount);
+        let tderc20_address = tderc20_address_storage::read();
+
+        ITDERC20Dispatcher{contract_address: tderc20_address}
+            .distribute_points(to, amount);
     }
 
     fn validate_exercise(account: ContractAddress) {
         // reading player registry
-        let _players_registry = players_registry_storage::read();
-        let _workshop_id = workshop_id_storage::read();
-        let _exercise_id = exercise_id_storage::read();
+        let players_registry = players_registry_storage::read();
+        let workshop_id = workshop_id_storage::read();
+        let exercise_id = exercise_id_storage::read();
 
         let has_current_user_validated_exercise =
-            Iplayers_registryDispatcher::has_validated_exercise(
-            _players_registry, account, _workshop_id, _exercise_id,
-        );
+            Iplayers_registryDispatcher{contract_address: players_registry}
+            .has_validated_exercise(account, workshop_id, exercise_id);
+
         assert(has_current_user_validated_exercise == false, 'Exercise previously validated');
-        Iplayers_registryDispatcher::validate_exercise(
-            _players_registry, account, _workshop_id, _exercise_id,
-        );
+        Iplayers_registryDispatcher{contract_address: players_registry}
+            .validate_exercise(account, workshop_id, exercise_id);
     }
 }
