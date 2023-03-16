@@ -14,6 +14,7 @@ mod Ex12 {
     use starknet::ContractAddressIntoFelt;
     use starknet::FeltTryIntoContractAddress;
     use starknet::contract_address_try_from_felt;
+    use starknet::contract_address_to_felt;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;

@@ -9,10 +9,10 @@ use traits::TryInto;
 use option::OptionTrait;
 use hash::LegacyHash;
 
-impl FeltTriplet of LegacyHash::<(felt, felt, felt)> {
-    fn hash(state: felt, triplet: (felt, felt, felt)) -> felt {
+impl FeltTriplet of LegacyHash::<(ContractAddress, felt, felt)> {
+    fn hash(state: felt, triplet: (ContractAddress, felt, felt)) -> felt {
         let (first, second, third) = triplet;
-        let state = LegacyHash::hash(state, first);
+        let state = LegacyHash::hash(state, contract_address_to_felt(first));
         let state = LegacyHash::hash(state, second);
         LegacyHash::hash(state, third)
     }

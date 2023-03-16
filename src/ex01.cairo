@@ -40,7 +40,7 @@ mod Ex01 {
     //
     #[constructor]
     fn constructor(
-        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -54,7 +54,7 @@ mod Ex01 {
     #[external]
     fn claim_points() {
         // Reading caller address
-        let sender_address = contract_address_to_felt(get_caller_address());
+        let sender_address = get_caller_address();
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter

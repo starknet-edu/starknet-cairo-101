@@ -35,19 +35,6 @@ mod Ex00Base {
     }
 
     ////////////////////////////////
-    // Constructor
-    ////////////////////////////////
-    #[constructor]
-    fn ex_initializer(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
-    ) {
-        tderc20_address_storage::write(_tderc20_address);
-        players_registry_storage::write(_players_registry);
-        workshop_id_storage::write(_workshop_id);
-        exercise_id_storage::write(_exercise_id);
-    }
-
-    ////////////////////////////////
     // View Functions
     ////////////////////////////////
     #[view]
@@ -79,6 +66,18 @@ mod Ex00Base {
 
         Iplayers_registryDispatcher{contract_address: players_registry}
             .has_validated_exercise(account, workshop_id, exercise_id)
+    }
+
+    ////////////////////////////////
+    // Internal Constructor
+    ////////////////////////////////
+    fn ex_initializer(
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
+    ) {
+        tderc20_address_storage::write(_tderc20_address);
+        players_registry_storage::write(_players_registry);
+        workshop_id_storage::write(_workshop_id);
+        exercise_id_storage::write(_exercise_id);
     }
 
     ////////////////////////////////

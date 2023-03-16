@@ -36,7 +36,7 @@ mod Ex03 {
     ////////////////////////////////
 
     struct Storage {
-        user_counters: LegacyMap::<felt, felt>, 
+        user_counters: LegacyMap::<ContractAddress, felt>,
     }
 
     ////////////////////////////////
@@ -44,7 +44,7 @@ mod Ex03 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -53,7 +53,7 @@ mod Ex03 {
     // VIEW FUNCTIONS
     ////////////////////////////////
     #[view]
-    fn get_user_counters(account: felt) -> felt {
+    fn get_user_counters(account: ContractAddress) -> felt {
         let user_counter = user_counters::read(account);
         user_counter
     }
@@ -67,13 +67,13 @@ mod Ex03 {
         let sender_address: ContractAddress = get_caller_address();
         assert(!sender_address.is_zero(), 'sender_address is empty!');
         // Checking that user's counter is equal to 7
-        let current_counter_value = user_counters::read(sender_address.into());
+        let current_counter_value = user_counters::read(sender_address);
         assert(current_counter_value == 7, 'Counter is not equal to 7');
 
         // Checking if the user has validated the exercise before
-        validate_exercise(sender_address.into());
+        validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address.into(), u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt(2));
     }
 
     #[external]
@@ -81,7 +81,7 @@ mod Ex03 {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
         // Reinitializing the user counter
-        user_counters::write(sender_address.into(), 0);
+        user_counters::write(sender_address, 0);
     }
 
     #[external]
@@ -89,9 +89,9 @@ mod Ex03 {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
         // Reading counter from storage
-        let current_counter_value = user_counters::read(sender_address.into());
+        let current_counter_value = user_counters::read(sender_address);
         // Writing updated value to storage
-        user_counters::write(sender_address.into(), current_counter_value + 2);
+        user_counters::write(sender_address, current_counter_value + 2);
     }
 
     #[external]
@@ -99,8 +99,8 @@ mod Ex03 {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
         // Reading counter from storage
-        let current_counter_value = user_counters::read(sender_address.into());
+        let current_counter_value = user_counters::read(sender_address);
         // Writing updated value to storage
-        user_counters::write(sender_address.into(), current_counter_value - 1);
+        user_counters::write(sender_address, current_counter_value - 1);
     }
 }

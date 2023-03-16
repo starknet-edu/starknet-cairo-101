@@ -37,7 +37,7 @@ mod Ex02 {
     // From within a smart contract, it can be read with my_secret_value_storage::read() or written to with my_secret_value_storage::write()
 
     struct Storage {
-        my_secret_value_storage: felt, 
+        my_secret_value_storage: felt,
     }
 
     //
@@ -55,8 +55,8 @@ mod Ex02 {
     //
     #[constructor]
     fn constructor(
-        _tderc20_address: felt,
-        _players_registry: felt,
+        _tderc20_address: ContractAddress,
+        _players_registry: ContractAddress,
         _workshop_id: felt,
         _exercise_id: felt,
         my_secret_value: felt,
@@ -72,7 +72,7 @@ mod Ex02 {
     #[external]
     fn claim_points(my_value: felt) {
         // Reading caller address
-        let sender_address = contract_address_to_felt(get_caller_address());
+        let sender_address = get_caller_address();
         // Reading stored value from storage
         let my_secret_value = my_secret_value_storage::read();
         // Checking that the value sent is correct

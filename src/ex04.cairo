@@ -31,7 +31,7 @@ mod Ex04 {
     // STORAGE
     ////////////////////////////////
     struct Storage {
-        user_slots: LegacyMap::<felt, felt>,
+        user_slots: LegacyMap::<ContractAddress, felt>,
         values_mapped: LegacyMap::<felt, felt>,
         was_initialized: bool,
         next_slot: felt,
@@ -42,7 +42,7 @@ mod Ex04 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -51,7 +51,7 @@ mod Ex04 {
     // View Functions
     ////////////////////////////////
     #[view]
-    fn get_user_slots(account: felt) -> felt {
+    fn get_user_slots(account: ContractAddress) -> felt {
         return user_slots::read(account);
     }
 
@@ -68,7 +68,7 @@ mod Ex04 {
     fn claim_points(expected_value: felt) {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
-        let user_slot = user_slots::read(sender_address.into());
+        let user_slot = user_slots::read(sender_address);
         assert(user_slot != 0, 'ASSIGN_USER_SLOT_FIRST');
 
         // Checking that the value provided by the user is the one we expect
@@ -77,9 +77,9 @@ mod Ex04 {
         assert(value == expected_value + 32, 'NOT_EXPECTED_SECRET_VALUE');
 
         // Checking if the user has validated the exercise before
-        validate_exercise(sender_address.into());
+        validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address.into(), u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt(2));
     }
 
     #[external]
@@ -89,10 +89,10 @@ mod Ex04 {
         let next_slot_temp = next_slot::read();
         let next_value = values_mapped::read(next_slot_temp + 1);
         if next_value == 0 {
-            user_slots::write(sender_address.into(), 1);
+            user_slots::write(sender_address, 1);
             next_slot::write(0);
         } else {
-            user_slots::write(sender_address.into(), next_slot_temp + 1);
+            user_slots::write(sender_address, next_slot_temp + 1);
             next_slot::write(next_slot_temp + 1);
         }
     }
