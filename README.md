@@ -1,12 +1,12 @@
 # Starknet Cairo 101 Automated Workshop
 
-![Graph](assets/banner.png)
+![banner](assets/banner.png)
 
-This tutorial is for developers who want to learn how to read Cairo code and Starknet smart contracts. **Get started with Cairo and Starknet with this simple tutorial. Complete the puzzles/exercises, get tokens, and learn about Starknet smart contracts!**
+Hey there! 
+
+This tutorial is perfect for developers who are interested in learning how to read Cairo code and Starknet smart contracts. With this simple tutorial, you'll be able to get started in no time. Have fun!
 
 ## Introduction​
-
-Hey there!
 
 Welcome to Starknet, a general-purpose Validity Rollup on the Ethereum mainnet. It's a layer 2 scaling solution that lets developers build applications on top of Ethereum without compromising security, decentralization, and censorship resistance.
 
@@ -32,6 +32,8 @@ Hope you have fun participating in this workshop!
 
 ## Steps
 
+![Steps](assets/steps.png)
+
 ### 1. Creating a smart contract wallet and connecting it to a Block Explorer
 
 **To complete the tutorial, you need to collect points.** You will own these points through your Starknet wallet. However, thanks to Account Abstraction, Starknet wallets work differently than Ethereum wallets. Do not worry; we will walk you through creating a wallet and connecting it to a Block Explorer.
@@ -43,15 +45,21 @@ These wallet solutions are similar to what Metamask is for Ethereum and allow us
 - The tutorial’s points are held in contract  `WIP` ([Starkscan link](WIP), [Voyager link](WIP)). Click "Add Token" in your installed wallet and add the tutorial contract address so that your points balance appears there. A new token called `SC101` (starknet-cairo-101) will appear in your wallet.
 - To execute transactions on the Goerli Starknet testnet, you will need testnet ETH to pay for gas. To obtain testnet ETH, go to the [faucet](https://faucet.goerli.starknet.io/) and follow the instructions. It may take several minutes, but you should receive some L2 Goerli ETH in your wallet that you can use to execute transactions on the testnet.
 
-### 2. Solving exercises and getting points​
+### 2. Use a Block Explorer to interact with the contracts
+
+In this workshop we need to interact with a Block Explorer to solve the exercises.
+
+Connect the Block Explorer ([Starkscan](https://testnet.starkscan.co/) or [Voyager](https://goerli.voyager.online/)) to your smart account contract (your Argent or Braavos wallet). These are Block Explorers for Starknet (the equivalent of Etherscan for Ethereum) and allow you to browse the state of the blockchain and view all transactions and their status. By connecting a Block Explorer to your wallet, you will be able to broadcast your transactions through your wallet and interact with the contracts in the tutorial.
+
+When looking for a contract/transaction, always ensure you are on the Goerli version of the Block Explorer. To solve the exercises, access the contract’s `read`/`write` functions in the “read/write contract” tab in the Block Explorer.​
+
+### 3. Solving exercises and getting points​
 ​
 **Each exercise is a separate smart contract.** It contains code that, when executed correctly, will distribute points to your address.
 
 Follow the instructions in each exercise in the `src` folder to get the points. Points are distributed by the function `distribute_points()` while `validate_exercise` records that you completed the exercise (you can get points only once).
 
-![Graph](assets/diagram.png)
-
-Each exercise is deployed on the Goerli testnet, and you will need to interact with them through a block explorer (more on this in the next section). You can find the addresses of the contracts in the table below. In other words, if you want to interact with the exercise `Ex01`, you must open the contract address `WIP` in the block explorer.
+Each exercise is deployed on the Goerli testnet, and you will need to interact with them through a Block Explorer. You can find the addresses of the contracts in the table below. In other words, if you want to interact with the exercise `Ex01`, you must open the contract address `WIP` in the Block Explorer.
 
 | Topic                                 | Contract code                                         | Contract on Starkscan                                                                                              | Contract on Voyager                                                                                              |
 | ------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -72,17 +80,9 @@ Each exercise is deployed on the Goerli testnet, and you will need to interact w
 | Multicall                             | [Ex14](contracts/ex14.cairo)                          | [Link](https://testnet.starkscan.co/contract/0xed7ddffe1370fbbc1974ab8122d1d9bd7e3da8d829ead9177ea4249b4caef1)  | [Link](https://goerli.voyager.online/contract/0xed7ddffe1370fbbc1974ab8122d1d9bd7e3da8d829ead9177ea4249b4caef1)  |
 
 
-### 3. Using a block explorer to interact with the contracts
-
-Follow the exercise instructions and solve the challenges using the block explorer’s read/write tab.
-
-Connect the block explorer ([Starkscan](https://testnet.starkscan.co/) or [Voyager](https://goerli.voyager.online/)) to your smart account contract (your Argent or Braavos wallet). These are block explorers for Starknet (the equivalent of Etherscan for Ethereum) and allow you to browse the state of the blockchain and view all transactions and their status. By connecting a block explorer to your wallet, you will be able to broadcast your transactions through your wallet and interact with the contracts in the tutorial.
-
-When looking for a contract/transaction, always ensure you are on the Goerli version of the Block Explorer. To solve the exercises, access the contract’s `read`/`write` functions in the “read/write contract” tab in the block explorer.​
-
 ### 4. Counting your points and checking your progress
 
-Your points will get credited to your installed wallet, though this may take some time. If you want to monitor your points count in real-time, you can also check your balance in a block explorer!
+Your points will get credited to your installed wallet, though this may take some time. If you want to monitor your points count in real-time, you can also check your balance in a Block Explorer!
 ​
 - Go to the  ERC20 counter on [Voyager](WIP) or [Starkscan](WIP) in the "read contract" tab.
 - Enter your address in the `balanceOf` function.​
