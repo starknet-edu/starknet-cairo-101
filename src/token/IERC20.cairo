@@ -8,7 +8,7 @@ use starknet::contract_address::ContractAddressSerde;
 trait IERC20 {
     fn name() -> felt;
     fn symbol() -> felt;
-    fn decimals() -> felt;
+    fn decimals() -> u8;
     fn totalSupply() -> u256;
     fn balanceOf(account: ContractAddress) -> u256;
     fn allowance(owner: ContractAddress, spender: ContractAddress) -> u256;
