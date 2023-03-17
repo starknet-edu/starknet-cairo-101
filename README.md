@@ -14,7 +14,7 @@ This workshop is designed to help you read Cairo code and Starknet smart contrac
 
 The workshop is a set of smart contracts deployed on Starknet Alpha on testnet. Each smart contract is an exercise/puzzle that outlines a feature of the Cairo Smart contract language.
 
-Completing the exercises will earn you points in the form of an [ERC20 token](contracts/token/TDERC20.cairo). The token may not have any monetary value, but it's a fun way to get you to complete the exercises.
+Completing the exercises will earn you points in the form of an [ERC20 token](contracts/token/TDERC20.cairo). The token does not have any monetary value, but it's a fun way to get you to complete the exercises.
 
 Hope you have fun participating in this workshop!
 
@@ -36,7 +36,7 @@ Hope you have fun participating in this workshop!
 
 ### 1. Creating a smart contract wallet and connecting it to a Block Explorer
 
-**To complete the tutorial, you need to collect points.** You will own these points through your Starknet wallet. However, thanks to Account Abstraction, Starknet wallets work differently than Ethereum wallets. Do not worry; we will walk you through creating a wallet and connecting it to a Block Explorer.
+**To complete the tutorial, you need to collect points.** You will own these points through your Starknet wallet. However, thanks to Account Abstraction, StarkNet wallets work differently than Ethereum's EOA based wallets. Do not worry; we will walk you through creating a wallet and connecting it to a Block Explorer.
 
 - The easiest way to set one up is to use Argent X ([download the chrome extension](https://chrome.google.com/webstore/detail/argent-x-starknet-wallet/dlcobpjiigpikoobohmabehhmhfoodbb/)  or  [check their repo](https://github.com/argentlabs/argent-x)) or Braavos ([download the chrome extension](https://chrome.google.com/webstore/detail/braavos-wallet/jnlgamecbpmbajjfhmmmlhejkemejdma)). 
 These wallet solutions are similar to what Metamask is for Ethereum and allow users to initiate transactions and interact with applications on Starknet.
