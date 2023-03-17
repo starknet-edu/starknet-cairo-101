@@ -17,3 +17,11 @@ impl FeltTriplet of LegacyHash::<(ContractAddress, felt, felt)> {
         LegacyHash::hash(state, third)
     }
 }
+
+impl FeltDoublet of LegacyHash::<(ContractAddress, felt)> {
+    fn hash(state: felt, doublet: (ContractAddress, felt)) -> felt {
+        let (first, second) = doublet;
+        let state = LegacyHash::hash(state, contract_address_to_felt(first));
+        LegacyHash::hash(state, second)
+    }
+}

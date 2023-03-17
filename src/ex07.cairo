@@ -34,7 +34,7 @@ mod Ex07 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -42,7 +42,6 @@ mod Ex07 {
     ////////////////////////////////
     // EXTERNAL FUNCTIONS
     ////////////////////////////////
-
     #[external]
     fn claim_points(value_a: felt, value_b: felt) {
         // Reading caller address
@@ -56,8 +55,8 @@ mod Ex07 {
         assert(value_b < 1, 'LESS_THAN_VALUE');
 
         // Checking if the user has validated the exercise before
-        validate_exercise(sender_address.into());
+        validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address.into(), u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt(2));
     }
 }

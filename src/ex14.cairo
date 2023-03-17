@@ -35,12 +35,17 @@ mod Ex14 {
     use starknet_cairo_101::utils::ex11_base::Ex11Base::ex11_secret_value;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::secret_value;
 
+    use starknet_cairo_101::token::IERC20::IERC20Dispatcher;
+    use starknet_cairo_101::token::IERC20::IERC20DispatcherTrait;
+    use super::IAllInOneContractDispatcher;
+    use super::IAllInOneContractDispatcherTrait;
+
     ////////////////////////////////
     // Constructor
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -53,14 +58,29 @@ mod Ex14 {
     fn claim_points() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
-        //
+        // Retrieving ERC20 address
         let erc20_address = tderc20_address();
+        // Reading contract balance before calling
+        let balance_before = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
 
-        // Check if your answer is correct
-        validate_answers(sender_address.into(), secret_value_i_guess, next_secret_value_i_chose);
-        // Checking if the user has validated the exercise before
-        validate_exercise(sender_address.into());
+        // Calling caller's validate_various_exercises() function
+        IAllInOneContractDispatcher{contract_address: sender_address}.validate_various_exercises();
+
+        // Reading contract balance after calling
+        let balance_after = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
+
+        // Verifying that caller collected some points
+        assert(balance_before >= u256_from_felt(0) & balance_after > balance_before, 'NO_POINTS_COLLECTED');
+
+        // Read how many points were collected
+        let collected_points = balance_after - balance_before;
+        // Check that at least 20 points were collected
+        assert(collected_points >= u256_from_felt(20), 'NO_ENOUGH_POINTS_COLLECTED');
+
+         // Checking if the user has validated the exercise before
+        validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address.into(), u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt(2));
+
     }
 }

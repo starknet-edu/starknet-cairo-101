@@ -28,13 +28,14 @@ mod Ex10 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::Iex10::Iex10Dispatcher;
+    use starknet_cairo_101::utils::Iex10::Iex10DispatcherTrait;
 
 
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
     struct Storage {
-        ex10_address: felt,
+        ex10_address: ContractAddress,
         secret_value: felt,
     }
 
@@ -42,26 +43,18 @@ mod Ex10 {
     // Constructor
     ////////////////////////////////
     #[constructor]
-    fn constructor(ex10_addr: felt) {
+    fn constructor(ex10_addr: ContractAddress) {
         ex10_address::write(ex10_addr);
         let current_contract_address = get_contract_address();
 
-        let address = match contract_address_try_from_felt(ex10_addr) {
-            Option::Some(address) => address,
-            Option::None(()) => {
-                // TODO (Omar): add adequate error message
-                return ();
-            },
-        };
-
-        Iex10Dispatcher::set_ex_10b_address(address, current_contract_address.into());
+        Iex10Dispatcher{contract_address: ex10_addr}.set_ex_10b_address(current_contract_address);
     }
 
     ////////////////////////////////
     // View Functions
     ////////////////////////////////
     #[view]
-    fn get_ex10_address() -> felt {
+    fn get_ex10_address() -> ContractAddress {
         return ex10_address::read();
     }
 
@@ -90,6 +83,6 @@ mod Ex10 {
     fn only_ex10() {
         let caller = get_caller_address();
         let ex10_address = ex10_address::read();
-        assert(ex10_address == caller.into(), 'ADDRESS_NOT_MATCH');
+        assert(ex10_address.into() == caller.into(), 'ADDRESS_NOT_MATCH');
     }
 }

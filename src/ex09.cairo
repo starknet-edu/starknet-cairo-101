@@ -32,7 +32,7 @@ mod Ex09 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -55,9 +55,9 @@ mod Ex09 {
         let sender_address: ContractAddress = get_caller_address();
 
         // Checking if the user has validated the exercise before
-        validate_exercise(sender_address.into());
+        validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address.into(), u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt(2));
     }
 
 

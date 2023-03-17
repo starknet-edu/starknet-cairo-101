@@ -28,14 +28,15 @@ mod Ex10 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::Iex10b::Iex10bDispatcher;
 
+    use starknet_cairo_101::utils::Iex10b::Iex10bDispatcher;
+    use starknet_cairo_101::utils::Iex10b::Iex10bDispatcherTrait;
 
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
     struct Storage {
-        ex10b_address: felt,
+        ex10b_address: ContractAddress,
         setup_is_finished: bool,
     }
 
@@ -44,7 +45,7 @@ mod Ex10 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -53,7 +54,7 @@ mod Ex10 {
     // View Functions
     ////////////////////////////////
     #[view]
-    fn get_ex10b_address() -> felt {
+    fn get_ex10b_address() -> ContractAddress {
         return ex10b_address::read();
     }
 
@@ -69,30 +70,22 @@ mod Ex10 {
         // Retrieve secret value by READING
         let ex10b_addr = ex10b_address::read();
 
-        let address = match contract_address_try_from_felt(ex10b_addr) {
-            Option::Some(address) => address,
-            Option::None(()) => {
-                // TODO (Omar): add adequate error message
-                return ();
-            },
-        };
-
-        let secret_value = Iex10bDispatcher::secret_value(address);
+        let secret_value = Iex10bDispatcher{contract_address: ex10b_addr}.secret_value();
         assert(secret_value == secret_value_i_guess, 'NOT_EXPECTED_SECRET_VALUE');
 
         // choosing next secret_value for contract 10b. We don't want 0, it's not funny
         assert(next_secret_value_i_chose != 0, 'SECRET_VALUE_IS_ZERO');
 
-        Iex10bDispatcher::change_secret_value(address, next_secret_value_i_chose);
+        Iex10bDispatcher{contract_address: ex10b_addr}.change_secret_value(next_secret_value_i_chose);
 
         // Checking if the user has validated the exercise before
-        validate_exercise(sender_address.into());
+        validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address.into(), u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt(2));
     }
 
     #[external]
-    fn set_ex_10b_address(ex10b_addr: felt) {
+    fn set_ex_10b_address(ex10b_addr: ContractAddress) {
         let is_setup = setup_is_finished::read();
         assert(is_setup == false, 'SETUP_FINISHED');
         ex10b_address::write(ex10b_addr);

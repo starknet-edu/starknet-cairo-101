@@ -31,8 +31,8 @@ mod Ex06 {
     // STORAGE
     ////////////////////////////////
     struct Storage {
-        user_slots: LegacyMap::<felt, felt>,
-        user_values_public: LegacyMap::<felt, felt>,
+        user_slots: LegacyMap::<ContractAddress, felt>,
+        user_values_public: LegacyMap::<ContractAddress, felt>,
         values_mapped_secret: LegacyMap::<felt, felt>,
         was_initialized: bool,
         next_slot: felt,
@@ -43,7 +43,7 @@ mod Ex06 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: felt, _players_registry: felt, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -52,12 +52,12 @@ mod Ex06 {
     // View Functions
     ////////////////////////////////
     #[view]
-    fn get_user_slots(account: felt) -> felt {
+    fn get_user_slots(account: ContractAddress) -> felt {
         return user_slots::read(account);
     }
 
     #[view]
-    fn get_user_values(account: felt) -> felt {
+    fn get_user_values(account: ContractAddress) -> felt {
         return user_values_public::read(account);
     }
 
@@ -69,7 +69,7 @@ mod Ex06 {
     fn claim_points(expected_value: felt) {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
-        let user_slot = user_slots::read(sender_address.into());
+        let user_slot = user_slots::read(sender_address);
         assert(user_slot != 0, 'ASSIGN_USER_SLOT_FIRST');
 
         // Checking that the value provided by the user is the one we expect
@@ -79,9 +79,9 @@ mod Ex06 {
         assert(value == expected_value, 'NOT_EXPECTED_SECRET_VALUE');
 
         // Checking if the user has validated the exercise before
-        validate_exercise(sender_address.into());
+        validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address.into(), u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt(2));
     }
 
     #[external]
@@ -91,10 +91,10 @@ mod Ex06 {
         let next_slot_temp = next_slot::read();
         let next_value = values_mapped_secret::read(next_slot_temp + 1);
         if next_value == 0 {
-            user_slots::write(sender_address.into(), 1);
+            user_slots::write(sender_address, 1);
             next_slot::write(0);
         } else {
-            user_slots::write(sender_address.into(), next_slot_temp + 1);
+            user_slots::write(sender_address, next_slot_temp + 1);
             next_slot::write(next_slot_temp + 1);
         }
     }
@@ -105,11 +105,11 @@ mod Ex06 {
         let sender_address: ContractAddress = get_caller_address();
         assert(!sender_address.is_zero(), 'ZERO_ADDRESS');
         // Calling internal function
-        copy_secret_value_to_readable_mapping(sender_address.into());
+        copy_secret_value_to_readable_mapping(sender_address);
     }
 
 
-    fn copy_secret_value_to_readable_mapping(sender_address: felt) {
+    fn copy_secret_value_to_readable_mapping(sender_address: ContractAddress) {
         let user_slot = user_slots::read(sender_address);
         assert(user_slot != 0, 'ASSIGN_USER_SLOT_FIRST');
 
