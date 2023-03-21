@@ -4,15 +4,12 @@ mod TDERC20 {
     use starknet::get_caller_address;
     use zeroable::Zeroable;
     use starknet::contract_address_const;
+    use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
-    use starknet::ContractAddressIntoFelt;
-    use starknet::FeltTryIntoContractAddress;
-    use starknet::contract_address_try_from_felt;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
-    use integer::u256_from_felt;
 
     // Internal Imports
     use starknet_cairo_101::token::ERC20_base::ERC20Base::ERC20_name;
@@ -53,12 +50,12 @@ mod TDERC20 {
     }
 
     #[view]
-    fn name() -> felt {
+    fn name() -> felt252 {
         ERC20_name()
     }
 
     #[view]
-    fn symbol() -> felt {
+    fn symbol() -> felt252 {
         ERC20_symbol()
     }
 
@@ -92,7 +89,7 @@ mod TDERC20 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        name_: felt, symbol_: felt, decimals_: u8, initial_supply: u256, recipient: ContractAddress
+        name_: felt252, symbol_: felt252, decimals_: u8, initial_supply: u256, recipient: ContractAddress
     ) {
         ERC20_initializer(name_, symbol_, decimals_, initial_supply, recipient);
         Transfer(contract_address_const::<0>(), recipient, initial_supply);

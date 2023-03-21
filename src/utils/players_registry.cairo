@@ -5,13 +5,9 @@
 mod PlayersRegistry {
     // Core Library Imports
     use starknet::get_caller_address;
-    use starknet::contract_address_to_felt;
-    use integer::u256_from_felt;
     use zeroable::Zeroable;
+    use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
-    use starknet::ContractAddressIntoFelt;
-    use starknet::FeltTryIntoContractAddress;
-    use starknet::contract_address_try_from_felt;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
@@ -22,24 +18,24 @@ mod PlayersRegistry {
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcher;
     use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
-    use starknet_cairo_101::utils::corelib_extension::FeltTriplet;
+    use core::hash::TupleSize3LegacyHash;
 
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
     struct Storage {
-        has_validated_exercise_storage: LegacyMap::<(ContractAddress, felt, felt), bool>,
+        has_validated_exercise_storage: LegacyMap::<(ContractAddress, felt252, felt252), bool>,
         exercises_and_admins_accounts: LegacyMap::<ContractAddress, bool>,
-        next_player_rank: felt,
-        players_registry: LegacyMap::<felt, ContractAddress>,
-        players_ranks_storage: LegacyMap::<ContractAddress, felt>,
+        next_player_rank: felt252,
+        players_registry: LegacyMap::<felt252, ContractAddress>,
+        players_ranks_storage: LegacyMap::<ContractAddress, felt252>,
     }
 
     ////////////////////////////////
     // View Functions
     ////////////////////////////////
     #[view]
-    fn has_validated_exercise(account: ContractAddress, workshop: felt, exercise: felt) -> bool {
+    fn has_validated_exercise(account: ContractAddress, workshop: felt252, exercise: felt252) -> bool {
         has_validated_exercise_storage::read((account, workshop, exercise))
     }
 
@@ -49,17 +45,17 @@ mod PlayersRegistry {
     }
 
     #[view]
-    fn get_next_player_rank() -> felt {
+    fn get_next_player_rank() -> felt252 {
         next_player_rank::read()
     }
 
     #[view]
-    fn get_players_registry(rank: felt) -> ContractAddress {
+    fn get_players_registry(rank: felt252) -> ContractAddress {
         players_registry::read(rank)
     }
 
     #[view]
-    fn players_ranks(account: ContractAddress) -> felt {
+    fn players_ranks(account: ContractAddress) -> felt252 {
         players_ranks_storage::read(account)
     }
 
@@ -70,10 +66,10 @@ mod PlayersRegistry {
     fn Modificate_Exercise_Or_Admin(account: ContractAddress, permission: bool) {}
 
     #[event]
-    fn New_Player(account: ContractAddress, rank: felt) {}
+    fn New_Player(account: ContractAddress, rank: felt252) {}
 
     #[event]
-    fn New_Validation(account: ContractAddress, workshop: felt, exercise: felt) {}
+    fn New_Validation(account: ContractAddress, workshop: felt252, exercise: felt252) {}
 
     ////////////////////////////////
     // Constructor
@@ -96,7 +92,7 @@ mod PlayersRegistry {
     }
 
     #[external]
-    fn validate_exercise(account: ContractAddress, workshop: felt, exercise: felt) {
+    fn validate_exercise(account: ContractAddress, workshop: felt252, exercise: felt252) {
         only_exercise_or_admin();
         // Checking if the user already validated this exercise
         let is_validated = has_validated_exercise_storage::read(
@@ -110,11 +106,11 @@ mod PlayersRegistry {
         New_Validation(account, workshop, exercise);
 
         // Recording player if he is not yet recorded
-        let player_rank: felt = players_ranks_storage::read(account);
+        let player_rank: felt252 = players_ranks_storage::read(account);
 
         if player_rank == 0 {
             // Player is not yet record, let's record
-            let next_player_rank: felt = next_player_rank::read();
+            let next_player_rank: felt252 = next_player_rank::read();
             players_registry::write(next_player_rank, account);
             players_ranks_storage::write(account, next_player_rank);
 

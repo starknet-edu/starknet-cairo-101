@@ -5,13 +5,9 @@
 mod Ex00Base {
     // Core Library Imports
     use starknet::get_caller_address;
-    use starknet::contract_address_to_felt;
-    use integer::u256_from_felt;
     use zeroable::Zeroable;
+    use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
-    use starknet::ContractAddressIntoFelt;
-    use starknet::FeltTryIntoContractAddress;
-    use starknet::contract_address_try_from_felt;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
@@ -30,8 +26,8 @@ mod Ex00Base {
     struct Storage {
         tderc20_address_storage: ContractAddress,
         players_registry_storage: ContractAddress,
-        workshop_id_storage: felt,
-        exercise_id_storage: felt,
+        workshop_id_storage: felt252,
+        exercise_id_storage: felt252,
     }
 
     ////////////////////////////////
@@ -48,12 +44,12 @@ mod Ex00Base {
     }
 
     #[view]
-    fn workshop_id() -> felt {
+    fn workshop_id() -> felt252 {
         workshop_id_storage::read()
     }
 
     #[view]
-    fn exercise_id() -> felt {
+    fn exercise_id() -> felt252 {
         exercise_id_storage::read()
     }
 
@@ -72,7 +68,7 @@ mod Ex00Base {
     // Internal Constructor
     ////////////////////////////////
     fn ex_initializer(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt252, _exercise_id: felt252
     ) {
         tderc20_address_storage::write(_tderc20_address);
         players_registry_storage::write(_players_registry);

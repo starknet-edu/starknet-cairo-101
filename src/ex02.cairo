@@ -21,13 +21,15 @@
 mod Ex02 {
     // Core library Imports
     use starknet::get_caller_address;
-    use starknet::contract_address_to_felt;
-    use integer::u256_from_felt;
+    use starknet::ContractAddress;
+    use integer::u256_from_felt252;
 
     // Internal Imports
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
+
+    type felt = felt252;
 
     //
     // Declaring storage vars
@@ -81,6 +83,6 @@ mod Ex02 {
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address, u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt252(2));
     }
 }

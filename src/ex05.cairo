@@ -10,15 +10,14 @@
 mod Ex05 {
     use zeroable::Zeroable;
     use starknet::get_caller_address;
+    use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
-    use starknet::ContractAddressIntoFelt;
-    use starknet::FeltTryIntoContractAddress;
-    use starknet::contract_address_try_from_felt;
+
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
-    use integer::u256_from_felt;
+    use integer::u256_from_felt252;
 
     // Internal Imports
     use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
@@ -26,6 +25,8 @@ mod Ex05 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+
+    type felt = felt252;
 
     ////////////////////////////////
     // STORAGE
@@ -80,7 +81,7 @@ mod Ex05 {
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address, u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt252(2));
     }
 
     #[external]

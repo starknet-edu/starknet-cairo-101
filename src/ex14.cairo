@@ -13,17 +13,14 @@ trait IAllInOneContract {
 mod Ex14 {
     use zeroable::Zeroable;
     use starknet::get_caller_address;
+    use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
-    use starknet::ContractAddressIntoFelt;
-    use starknet::FeltTryIntoContractAddress;
-    use starknet::contract_address_try_from_felt;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
-    use integer::u256_from_felt;
+    use integer::u256_from_felt252;
     use hash::LegacyHash;
-    use integer::u32_to_felt;
 
     // Internal Imports
     use starknet_cairo_101::utils::ex11_base::Ex11Base::tderc20_address;
@@ -39,6 +36,8 @@ mod Ex14 {
     use starknet_cairo_101::token::IERC20::IERC20DispatcherTrait;
     use super::IAllInOneContractDispatcher;
     use super::IAllInOneContractDispatcherTrait;
+
+    type felt = felt252;
 
     ////////////////////////////////
     // Constructor
@@ -70,17 +69,17 @@ mod Ex14 {
         let balance_after = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
 
         // Verifying that caller collected some points
-        assert(balance_before >= u256_from_felt(0) & balance_after > balance_before, 'NO_POINTS_COLLECTED');
+        assert(balance_before >= u256_from_felt252(0) & balance_after > balance_before, 'NO_POINTS_COLLECTED');
 
         // Read how many points were collected
         let collected_points = balance_after - balance_before;
         // Check that at least 20 points were collected
-        assert(collected_points >= u256_from_felt(20), 'NO_ENOUGH_POINTS_COLLECTED');
+        assert(collected_points >= u256_from_felt252(20), 'NO_ENOUGH_POINTS_COLLECTED');
 
          // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address, u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt252(2));
 
     }
 }

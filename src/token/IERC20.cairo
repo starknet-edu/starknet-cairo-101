@@ -1,4 +1,4 @@
-use starknet::contract_address::ContractAddressSerde;
+use starknet::ContractAddress;
 
 //###################
 // INTERFACE
@@ -6,8 +6,8 @@ use starknet::contract_address::ContractAddressSerde;
 
 #[abi]
 trait IERC20 {
-    fn name() -> felt;
-    fn symbol() -> felt;
+    fn name() -> felt252;
+    fn symbol() -> felt252;
     fn decimals() -> u8;
     fn totalSupply() -> u256;
     fn balanceOf(account: ContractAddress) -> u256;

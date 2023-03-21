@@ -8,17 +8,15 @@
 mod Ex09 {
     use zeroable::Zeroable;
     use starknet::get_caller_address;
+    use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
-    use starknet::ContractAddressIntoFelt;
-    use starknet::FeltTryIntoContractAddress;
-    use starknet::contract_address_try_from_felt;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
-    use integer::u256_from_felt;
+    use integer::u256_from_felt252;
+    use integer::u32_from_felt252;
     use hash::LegacyHash;
-    use integer::u32_to_felt;
 
     // Internal Imports
     use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
@@ -26,6 +24,8 @@ mod Ex09 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+
+    type felt = felt252;
 
     ////////////////////////////////
     // Constructor
@@ -44,12 +44,12 @@ mod Ex09 {
     #[external]
     fn claim_points(array: Array::<felt>) {
         assert(!array.is_empty(), 'EMPTY_ARRAY');
-        assert(u32_to_felt(array.len()) >= 4, 'ARRAY_LEN_LT_4');
+        assert(array.len() >= u32_from_felt252(4), 'ARRAY_LEN_LT_4');
 
         // Calculating the sum of the array sent by the user
         let mut sum: felt = 0;
         sum = get_sum_internal(sum, array);
-        assert(sum >= 50, 'SUM_LT_50');
+        assert(u32_from_felt252(sum) >= u32_from_felt252(50), 'SUM_LT_50');
 
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
@@ -57,7 +57,7 @@ mod Ex09 {
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address, u256_from_felt(2));
+        distribute_points(sender_address, u256_from_felt252(2));
     }
 
 

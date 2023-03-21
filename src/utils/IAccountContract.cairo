@@ -3,5 +3,5 @@
 ////////////////////////////////
 #[abi]
 trait IAccountContract {
-    fn get_signer() -> felt;
+    fn get_signer() -> felt252;
 }

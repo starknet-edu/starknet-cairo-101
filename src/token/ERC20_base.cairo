@@ -4,15 +4,13 @@ mod ERC20Base {
     use starknet::get_caller_address;
     use zeroable::Zeroable;
     use starknet::contract_address_const;
+    use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
-    use starknet::ContractAddressIntoFelt;
-    use starknet::FeltTryIntoContractAddress;
-    use starknet::contract_address_try_from_felt;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
-    use integer::u256_from_felt;
+    use integer::u256_from_felt252;
 
     //
     // Declaring storage vars
@@ -22,19 +20,19 @@ mod ERC20Base {
     // From within a smart contract, it can be read with my_secret_value_storage::read() or written to with my_secret_value_storage::write()
 
     struct Storage {
-        name: felt,
-        symbol: felt,
+        name: felt252,
+        symbol: felt252,
         decimals: u8,
         total_supply: u256,
         balances: LegacyMap::<ContractAddress, u256>,
         allowances: LegacyMap::<(ContractAddress, ContractAddress), u256>,
     }
 
-    fn ERC20_name() -> felt {
+    fn ERC20_name() -> felt252 {
         name::read()
     }
 
-    fn ERC20_symbol() -> felt {
+    fn ERC20_symbol() -> felt252 {
         symbol::read()
     }
 
@@ -58,7 +56,7 @@ mod ERC20Base {
     // Internal Constructor
     ////////////////////////////////
     fn ERC20_initializer(
-        name_: felt, symbol_: felt, decimals_: u8, initial_supply: u256, recipient: ContractAddress
+        name_: felt252, symbol_: felt252, decimals_: u8, initial_supply: u256, recipient: ContractAddress
     ) {
         name::write(name_);
         symbol::write(symbol_);
@@ -98,7 +96,7 @@ mod ERC20Base {
 
     fn ERC20_mint(recipient: ContractAddress, amount: u256) {
         assert(!recipient.is_zero(), 'ERC20: mint to the 0 address');
-        assert(amount > u256_from_felt(0), 'ZERO_AMOUNT');
+        assert(amount > u256_from_felt252(0), 'ZERO_AMOUNT');
 
         let balance: u256 = balances::read(recipient);
         // overflow is not possible because sum is guaranteed to be less than total supply
@@ -114,7 +112,7 @@ mod ERC20Base {
 
     fn ERC20_burn(account: ContractAddress, amount: u256) {
         assert(!account.is_zero(), 'ERC20: burn to the 0 address');
-        assert(amount > u256_from_felt(0), 'ZERO_AMOUNT');
+        assert(amount > u256_from_felt252(0), 'ZERO_AMOUNT');
 
         let balance: u256 = balances::read(account);
         assert(balance >= amount, 'ERC20: burn amount exceeds');

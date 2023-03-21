@@ -9,17 +9,13 @@ mod Ex10 {
     use zeroable::Zeroable;
     use starknet::get_caller_address;
     use starknet::get_contract_address;
+    use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
-    use starknet::ContractAddressIntoFelt;
-    use starknet::FeltTryIntoContractAddress;
-    use starknet::contract_address_try_from_felt;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
-    use integer::u256_from_felt;
     use hash::LegacyHash;
-    use integer::u32_to_felt;
 
     // Internal Imports
     use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
@@ -30,6 +26,7 @@ mod Ex10 {
     use starknet_cairo_101::utils::Iex10::Iex10Dispatcher;
     use starknet_cairo_101::utils::Iex10::Iex10DispatcherTrait;
 
+    type felt = felt252;
 
     ////////////////////////////////
     // STORAGE
@@ -83,6 +80,6 @@ mod Ex10 {
     fn only_ex10() {
         let caller = get_caller_address();
         let ex10_address = ex10_address::read();
-        assert(ex10_address.into() == caller.into(), 'ADDRESS_NOT_MATCH');
+        assert(ex10_address == caller, 'ADDRESS_NOT_MATCH');
     }
 }

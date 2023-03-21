@@ -5,13 +5,11 @@
 mod Ex11Base {
     // Core Library Imports
     use starknet::get_caller_address;
-    use integer::u256_from_felt;
+    use integer::u256_from_felt252;
     use zeroable::Zeroable;
+    use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
-    use starknet::ContractAddressIntoFelt;
-    use starknet::FeltTryIntoContractAddress;
-    use starknet::contract_address_to_felt;
-    use starknet::contract_address_try_from_felt;
+    use starknet::contract_address_to_felt252;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
@@ -23,7 +21,7 @@ mod Ex11Base {
     use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
 
-    const Decimals: felt = 1000000000000000000;
+    const Decimals: felt252 = 1000000000000000000;
 
     ////////////////////////////////
     // STORAGE
@@ -31,9 +29,9 @@ mod Ex11Base {
     struct Storage {
         tderc20_address_storage: ContractAddress,
         players_registry_storage: ContractAddress,
-        workshop_id_storage: felt,
-        exercise_id_storage: felt,
-        ex11_secret_value: felt,
+        workshop_id_storage: felt252,
+        exercise_id_storage: felt252,
+        ex11_secret_value: felt252,
     }
 
     ////////////////////////////////
@@ -50,17 +48,17 @@ mod Ex11Base {
     }
 
     #[view]
-    fn workshop_id() -> felt {
+    fn workshop_id() -> felt252 {
         workshop_id_storage::read()
     }
 
     #[view]
-    fn exercise_id() -> felt {
+    fn exercise_id() -> felt252 {
         exercise_id_storage::read()
     }
 
     #[view]
-    fn secret_value() -> felt {
+    fn secret_value() -> felt252 {
         let secret_value = ex11_secret_value::read();
         // There is a trick here
         return secret_value + 42069;
@@ -83,12 +81,12 @@ mod Ex11Base {
     // This function is used to initialize the contract. It can be called from the constructor
     //
 
-    fn ex_initializer(_tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt) {
+    fn ex_initializer(_tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt252, _exercise_id: felt252) {
         tderc20_address_storage::write(_tderc20_address);
         players_registry_storage::write(_players_registry);
         workshop_id_storage::write(_workshop_id);
         exercise_id_storage::write(_exercise_id);
-        ex11_secret_value::write(contract_address_to_felt(_tderc20_address));
+        ex11_secret_value::write(contract_address_to_felt252(_tderc20_address));
     }
 
     //
@@ -100,7 +98,7 @@ mod Ex11Base {
     fn distribute_points(to: ContractAddress, amount: u256) {
         // Converting felt to uint256. We assume it's a small number
         // We also add the required number of decimals
-        let points_to_credit: u256 = amount * u256_from_felt(Decimals);
+        let points_to_credit: u256 = amount * u256_from_felt252(Decimals);
         // Retrieving contract address from storage
         let tderc20_address = tderc20_address_storage::read();
         // Calling the ERC20 contract to distribute points
@@ -123,7 +121,7 @@ mod Ex11Base {
             .validate_exercise(account, _workshop_id, _exercise_id);
     }
 
-    fn validate_answers(sender_address: ContractAddress, secret_value_i_guess: felt, next_secret_value_i_chose: felt) {
+    fn validate_answers(sender_address: ContractAddress, secret_value_i_guess: felt252, next_secret_value_i_chose: felt252) {
         // CAREFUL THERE IS A TRAP FOR PEOPLE WHO WON'T READ THE CODE
         // This exercise looks like the previous one, but actually the view secret_value returns a different value than secret_value
         // Sending the wrong execution result will remove some of your points, then validate the exercise. You won't be able to get those points back later on!
@@ -133,7 +131,7 @@ mod Ex11Base {
         if diff == 42069 {
             // Converting felt to uint256. We assume it's a small number
             // We also add the required number of decimals
-            let points_to_remove: u256 = u256_from_felt(2 * Decimals);
+            let points_to_remove: u256 = u256_from_felt252(2 * Decimals);
             // # Retrieving contract address from storage
             let tderc20_address = tderc20_address_storage::read();
             // # Calling the ERC20 contract to remove points
