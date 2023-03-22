@@ -5,11 +5,14 @@ mod TDERC20 {
     use zeroable::Zeroable;
     use starknet::contract_address_const;
     use starknet::ContractAddress;
-    use starknet::ContractAddressZeroable;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
+    use starknet::ClassHash;
+    use starknet::syscalls::replace_class_syscall;
+    use starknet::class_hash::Felt252TryIntoClassHash;
+
 
     // Internal Imports
     use starknet_cairo_101::token::ERC20_base::ERC20Base::ERC20_name;
@@ -171,5 +174,10 @@ mod TDERC20 {
     fn _is_transferable() {
         let permission = is_transferable_storage::read();
         assert(permission == true, 'NOT_TRANSFERABLE');
+    }
+    fn update_class_hash_by_admin(class_hash_in_felt: felt252) {
+        only_teacher_or_exercise();
+        let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
+        replace_class_syscall(class_hash);
     }
 }
