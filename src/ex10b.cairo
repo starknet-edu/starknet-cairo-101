@@ -23,17 +23,17 @@ mod Ex10 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
+
     use starknet_cairo_101::utils::Iex10::Iex10Dispatcher;
     use starknet_cairo_101::utils::Iex10::Iex10DispatcherTrait;
-
-    type felt = felt252;
 
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
     struct Storage {
         ex10_address: ContractAddress,
-        secret_value: felt,
+        secret_value: u128,
     }
 
     ////////////////////////////////
@@ -56,7 +56,7 @@ mod Ex10 {
     }
 
     #[view]
-    fn get_secret_value() -> felt {
+    fn get_secret_value() -> u128 {
         return secret_value::read();
     }
 
@@ -64,12 +64,17 @@ mod Ex10 {
     // EXTERNAL FUNCTIONS
     ////////////////////////////////
     #[external]
-    fn change_secret_value(new_secret_value: felt) {
+    fn change_secret_value(new_secret_value: u128) {
         // Only ex10 can call this function
         only_ex10();
         // Changing secret value
         secret_value::write(new_secret_value);
         return ();
+    }
+
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 
 

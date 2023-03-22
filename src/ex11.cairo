@@ -27,15 +27,14 @@ mod Ex11 {
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_answers;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::ex11_secret_value;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::secret_value;
-
-    type felt = felt252;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     ////////////////////////////////
     // Constructor
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -45,7 +44,7 @@ mod Ex11 {
     ////////////////////////////////
 
     #[external]
-    fn claim_points(secret_value_i_guess: felt, next_secret_value_i_chose: felt) {
+    fn claim_points(secret_value_i_guess: u128, next_secret_value_i_chose: u128) {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
         // Check if your answer is correct
@@ -54,5 +53,10 @@ mod Ex11 {
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
         distribute_points(sender_address, u256_from_felt252(2));
+    }
+
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 }

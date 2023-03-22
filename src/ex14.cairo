@@ -31,20 +31,19 @@ mod Ex14 {
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_answers;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::ex11_secret_value;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::secret_value;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     use starknet_cairo_101::token::IERC20::IERC20Dispatcher;
     use starknet_cairo_101::token::IERC20::IERC20DispatcherTrait;
     use super::IAllInOneContractDispatcher;
     use super::IAllInOneContractDispatcherTrait;
 
-    type felt = felt252;
-
     ////////////////////////////////
     // Constructor
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -81,5 +80,10 @@ mod Ex14 {
         // Sending points to the address specified as parameter
         distribute_points(sender_address, u256_from_felt252(2));
 
+    }
+
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 }

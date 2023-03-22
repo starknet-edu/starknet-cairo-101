@@ -8,6 +8,10 @@ mod Ex00Base {
     use zeroable::Zeroable;
     use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
+    use starknet::syscalls::replace_class_syscall;
+    use starknet::ClassHash;
+    use starknet::class_hash::Felt252TryIntoClassHash;
+    use integer::u256_from_felt252;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
@@ -19,6 +23,8 @@ mod Ex00Base {
     use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
 
+    const Decimals: felt252 = 1000000000000000000;
+
 
     ////////////////////////////////
     // STORAGE
@@ -26,8 +32,8 @@ mod Ex00Base {
     struct Storage {
         tderc20_address_storage: ContractAddress,
         players_registry_storage: ContractAddress,
-        workshop_id_storage: felt252,
-        exercise_id_storage: felt252,
+        workshop_id_storage: u128,
+        exercise_id_storage: u128,
     }
 
     ////////////////////////////////
@@ -44,12 +50,12 @@ mod Ex00Base {
     }
 
     #[view]
-    fn workshop_id() -> felt252 {
+    fn workshop_id() -> u128 {
         workshop_id_storage::read()
     }
 
     #[view]
-    fn exercise_id() -> felt252 {
+    fn exercise_id() -> u128 {
         exercise_id_storage::read()
     }
 
@@ -68,7 +74,7 @@ mod Ex00Base {
     // Internal Constructor
     ////////////////////////////////
     fn ex_initializer(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt252, _exercise_id: felt252
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
         tderc20_address_storage::write(_tderc20_address);
         players_registry_storage::write(_players_registry);
@@ -82,9 +88,10 @@ mod Ex00Base {
     fn distribute_points(to: ContractAddress, amount: u256) {
         // Retrieving contract address from storage
         let tderc20_address = tderc20_address_storage::read();
+        let points_to_credit: u256 = amount * u256_from_felt252(Decimals);
 
         ITDERC20Dispatcher{contract_address: tderc20_address}
-            .distribute_points(to, amount);
+            .distribute_points(to, points_to_credit);
     }
 
     fn validate_exercise(account: ContractAddress) {
@@ -100,5 +107,17 @@ mod Ex00Base {
         assert(has_current_user_validated_exercise == false, 'Exercise previously validated');
         Iplayers_registryDispatcher{contract_address: players_registry}
             .validate_exercise(account, workshop_id, exercise_id);
+    }
+
+    fn update_class_hash_by_admin(class_hash_in_felt: felt252) {
+        let players_registry = players_registry_storage::read();
+        let sender_address = get_caller_address();
+
+        let is_admin = Iplayers_registryDispatcher{contract_address: players_registry}
+            .is_exercise_or_admin(sender_address);
+
+        assert (is_admin == true, 'CALLER_NO_ADMIN_RIGHTS');
+        let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
+        replace_class_syscall(class_hash);
     }
 }

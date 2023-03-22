@@ -6,6 +6,7 @@ mod Ex11Base {
     // Core Library Imports
     use starknet::get_caller_address;
     use integer::u256_from_felt252;
+    use integer::u128_from_felt252;
     use zeroable::Zeroable;
     use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
@@ -29,9 +30,9 @@ mod Ex11Base {
     struct Storage {
         tderc20_address_storage: ContractAddress,
         players_registry_storage: ContractAddress,
-        workshop_id_storage: felt252,
-        exercise_id_storage: felt252,
-        ex11_secret_value: felt252,
+        workshop_id_storage: u128,
+        exercise_id_storage: u128,
+        ex11_secret_value: u128,
     }
 
     ////////////////////////////////
@@ -48,20 +49,20 @@ mod Ex11Base {
     }
 
     #[view]
-    fn workshop_id() -> felt252 {
+    fn workshop_id() -> u128 {
         workshop_id_storage::read()
     }
 
     #[view]
-    fn exercise_id() -> felt252 {
+    fn exercise_id() -> u128 {
         exercise_id_storage::read()
     }
 
     #[view]
-    fn secret_value() -> felt252 {
+    fn secret_value() -> u128 {
         let secret_value = ex11_secret_value::read();
         // There is a trick here
-        return secret_value + 42069;
+        return secret_value + 42069_u128;
     }
 
     #[view]
@@ -81,12 +82,12 @@ mod Ex11Base {
     // This function is used to initialize the contract. It can be called from the constructor
     //
 
-    fn ex_initializer(_tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt252, _exercise_id: felt252) {
+    fn ex_initializer(_tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128) {
         tderc20_address_storage::write(_tderc20_address);
         players_registry_storage::write(_players_registry);
         workshop_id_storage::write(_workshop_id);
         exercise_id_storage::write(_exercise_id);
-        ex11_secret_value::write(contract_address_to_felt252(_tderc20_address));
+        ex11_secret_value::write(u128_from_felt252(contract_address_to_felt252(_tderc20_address)));
     }
 
     //
@@ -121,14 +122,14 @@ mod Ex11Base {
             .validate_exercise(account, _workshop_id, _exercise_id);
     }
 
-    fn validate_answers(sender_address: ContractAddress, secret_value_i_guess: felt252, next_secret_value_i_chose: felt252) {
+    fn validate_answers(sender_address: ContractAddress, secret_value_i_guess: u128, next_secret_value_i_chose: u128) {
         // CAREFUL THERE IS A TRAP FOR PEOPLE WHO WON'T READ THE CODE
         // This exercise looks like the previous one, but actually the view secret_value returns a different value than secret_value
         // Sending the wrong execution result will remove some of your points, then validate the exercise. You won't be able to get those points back later on!
         let secret_value = ex11_secret_value::read();
         let diff = secret_value_i_guess - secret_value;
         // Laying our trap here
-        if diff == 42069 {
+        if diff == 42069_u128 {
             // Converting felt to uint256. We assume it's a small number
             // We also add the required number of decimals
             let points_to_remove: u256 = u256_from_felt252(2 * Decimals);
@@ -139,8 +140,8 @@ mod Ex11Base {
                 .remove_points(sender_address, points_to_remove);
         } else {
             // If secret value is correct, set new secret value
-            if diff == 0 {
-                assert(next_secret_value_i_chose != 0, 'NEXT_SECRET_ZERO');
+            if diff == 0_u128 {
+                assert(next_secret_value_i_chose != 0_u128, 'NEXT_SECRET_ZERO');
                 ex11_secret_value::write(next_secret_value_i_chose);
             } else {
                 let mut data = ArrayTrait::new();

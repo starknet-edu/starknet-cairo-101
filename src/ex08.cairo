@@ -23,16 +23,15 @@ mod Ex08 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     use core::hash::TupleSize2LegacyHash;
-
-    type felt = felt252;
 
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
     struct Storage {
-        user_values: LegacyMap::<(ContractAddress, felt), felt>
+        user_values: LegacyMap::<(ContractAddress, u128), u128>
     }
 
     ////////////////////////////////
@@ -40,7 +39,7 @@ mod Ex08 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -49,7 +48,7 @@ mod Ex08 {
     // View Functions
     ////////////////////////////////
     #[view]
-    fn get_user_values(account: ContractAddress, slot: felt) -> felt {
+    fn get_user_values(account: ContractAddress, slot: u128) -> u128 {
         return user_values::read((account, slot));
     }
 
@@ -61,8 +60,8 @@ mod Ex08 {
     fn claim_points() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
-        let user_value_at_slot_ten = user_values::read((sender_address, 10));
-        assert(user_value_at_slot_ten == 10, 'USER_VALUE_NOT_10');
+        let user_value_at_slot_ten = user_values::read((sender_address, 10_u128));
+        assert(user_value_at_slot_ten == 10_u128, 'USER_VALUE_NOT_10');
 
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
@@ -74,19 +73,24 @@ mod Ex08 {
     // In order to pass it, the user needs to pass both the array and its length
     // This complexity is abstracted away by voyager, where you simply need to pass an array
     #[external]
-    fn set_user_values(account: ContractAddress, values: Array::<felt>) {
-        let mut idx: felt = 0;
+    fn set_user_values(account: ContractAddress, values: Array::<u128>) {
+        let mut idx = 0_u128;
         set_user_values_internal(account, idx, values);
     }
 
     //
     // Internal functions
     //
-    fn set_user_values_internal(account: ContractAddress, mut idx: felt, mut values: Array::<felt>) {
+    fn set_user_values_internal(account: ContractAddress, mut idx: u128, mut values: Array::<u128>) {
         if !values.is_empty() {
             user_values::write((account, idx), values.pop_front().unwrap());
-            idx = idx + 1;
+            idx = idx + 1_u128;
             set_user_values_internal(account, idx, values);
         }
+    }
+
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 }

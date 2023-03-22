@@ -28,8 +28,7 @@ mod Ex02 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
-
-    type felt = felt252;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     //
     // Declaring storage vars
@@ -39,7 +38,7 @@ mod Ex02 {
     // From within a smart contract, it can be read with my_secret_value_storage::read() or written to with my_secret_value_storage::write()
 
     struct Storage {
-        my_secret_value_storage: felt,
+        my_secret_value_storage: u128,
     }
 
     //
@@ -48,20 +47,20 @@ mod Ex02 {
     //
 
     #[view]
-    fn my_secret_value() -> felt {
+    fn my_secret_value() -> u128 {
         my_secret_value_storage::read()
     }
 
     // ######## Constructor
     // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
-    //
+
     #[constructor]
     fn constructor(
         _tderc20_address: ContractAddress,
         _players_registry: ContractAddress,
-        _workshop_id: felt,
-        _exercise_id: felt,
-        my_secret_value: felt,
+        _workshop_id: u128,
+        _exercise_id: u128,
+        my_secret_value: u128,
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
         my_secret_value_storage::write(my_secret_value);
@@ -69,10 +68,10 @@ mod Ex02 {
 
     // ######## External functions
     // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
-    //
+
 
     #[external]
-    fn claim_points(my_value: felt) {
+    fn claim_points(my_value: u128) {
         // Reading caller address
         let sender_address = get_caller_address();
         // Reading stored value from storage
@@ -84,5 +83,10 @@ mod Ex02 {
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
         distribute_points(sender_address, u256_from_felt252(2));
+    }
+
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 }

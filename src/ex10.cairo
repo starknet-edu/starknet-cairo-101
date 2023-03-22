@@ -25,11 +25,10 @@ mod Ex10 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     use starknet_cairo_101::utils::Iex10b::Iex10bDispatcher;
     use starknet_cairo_101::utils::Iex10b::Iex10bDispatcherTrait;
-
-    type felt = felt252;
 
     ////////////////////////////////
     // STORAGE
@@ -44,7 +43,7 @@ mod Ex10 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -62,7 +61,7 @@ mod Ex10 {
     ////////////////////////////////
 
     #[external]
-    fn claim_points(secret_value_i_guess: felt, next_secret_value_i_chose: felt) {
+    fn claim_points(secret_value_i_guess: u128, next_secret_value_i_chose: u128) {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
 
@@ -73,7 +72,7 @@ mod Ex10 {
         assert(secret_value == secret_value_i_guess, 'NOT_EXPECTED_SECRET_VALUE');
 
         // choosing next secret_value for contract 10b. We don't want 0, it's not funny
-        assert(next_secret_value_i_chose != 0, 'SECRET_VALUE_IS_ZERO');
+        assert(next_secret_value_i_chose != 0_u128, 'SECRET_VALUE_IS_ZERO');
 
         Iex10bDispatcher{contract_address: ex10b_addr}.change_secret_value(next_secret_value_i_chose);
 
@@ -89,5 +88,10 @@ mod Ex10 {
         assert(is_setup == false, 'SETUP_FINISHED');
         ex10b_address::write(ex10b_addr);
         setup_is_finished::write(true);
+    }
+
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 }

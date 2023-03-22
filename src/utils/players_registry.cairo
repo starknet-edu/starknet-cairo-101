@@ -24,18 +24,18 @@ mod PlayersRegistry {
     // STORAGE
     ////////////////////////////////
     struct Storage {
-        has_validated_exercise_storage: LegacyMap::<(ContractAddress, felt252, felt252), bool>,
+        has_validated_exercise_storage: LegacyMap::<(ContractAddress, u128, u128), bool>,
         exercises_and_admins_accounts: LegacyMap::<ContractAddress, bool>,
-        next_player_rank: felt252,
-        players_registry: LegacyMap::<felt252, ContractAddress>,
-        players_ranks_storage: LegacyMap::<ContractAddress, felt252>,
+        next_player_rank: u128,
+        players_registry: LegacyMap::<u128, ContractAddress>,
+        players_ranks_storage: LegacyMap::<ContractAddress, u128>,
     }
 
     ////////////////////////////////
     // View Functions
     ////////////////////////////////
     #[view]
-    fn has_validated_exercise(account: ContractAddress, workshop: felt252, exercise: felt252) -> bool {
+    fn has_validated_exercise(account: ContractAddress, workshop: u128, exercise: u128) -> bool {
         has_validated_exercise_storage::read((account, workshop, exercise))
     }
 
@@ -45,17 +45,17 @@ mod PlayersRegistry {
     }
 
     #[view]
-    fn get_next_player_rank() -> felt252 {
+    fn get_next_player_rank() -> u128 {
         next_player_rank::read()
     }
 
     #[view]
-    fn get_players_registry(rank: felt252) -> ContractAddress {
+    fn get_players_registry(rank: u128) -> ContractAddress {
         players_registry::read(rank)
     }
 
     #[view]
-    fn players_ranks(account: ContractAddress) -> felt252 {
+    fn players_ranks(account: ContractAddress) -> u128 {
         players_ranks_storage::read(account)
     }
 
@@ -66,10 +66,10 @@ mod PlayersRegistry {
     fn Modificate_Exercise_Or_Admin(account: ContractAddress, permission: bool) {}
 
     #[event]
-    fn New_Player(account: ContractAddress, rank: felt252) {}
+    fn New_Player(account: ContractAddress, rank: u128) {}
 
     #[event]
-    fn New_Validation(account: ContractAddress, workshop: felt252, exercise: felt252) {}
+    fn New_Validation(account: ContractAddress, workshop: u128, exercise: u128) {}
 
     ////////////////////////////////
     // Constructor
@@ -78,7 +78,7 @@ mod PlayersRegistry {
     fn constructor(first_admin: ContractAddress) {
         exercises_and_admins_accounts::write(first_admin, true);
         Modificate_Exercise_Or_Admin(first_admin, true);
-        next_player_rank::write(1);
+        next_player_rank::write(1_u128);
     }
 
     ////////////////////////////////
@@ -92,7 +92,7 @@ mod PlayersRegistry {
     }
 
     #[external]
-    fn validate_exercise(account: ContractAddress, workshop: felt252, exercise: felt252) {
+    fn validate_exercise(account: ContractAddress, workshop: u128, exercise: u128) {
         only_exercise_or_admin();
         // Checking if the user already validated this exercise
         let is_validated = has_validated_exercise_storage::read(
@@ -106,15 +106,15 @@ mod PlayersRegistry {
         New_Validation(account, workshop, exercise);
 
         // Recording player if he is not yet recorded
-        let player_rank: felt252 = players_ranks_storage::read(account);
+        let player_rank = players_ranks_storage::read(account);
 
-        if player_rank == 0 {
+        if player_rank == 0_u128 {
             // Player is not yet record, let's record
-            let next_player_rank: felt252 = next_player_rank::read();
+            let next_player_rank = next_player_rank::read();
             players_registry::write(next_player_rank, account);
             players_ranks_storage::write(account, next_player_rank);
 
-            let next_player_rank_plus_one = next_player_rank + 1;
+            let next_player_rank_plus_one = next_player_rank + 1_u128;
             next_player_rank::write(next_player_rank_plus_one);
 
             New_Player(account, next_player_rank);

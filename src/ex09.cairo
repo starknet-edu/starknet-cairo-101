@@ -24,15 +24,14 @@ mod Ex09 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-
-    type felt = felt252;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     ////////////////////////////////
     // Constructor
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -42,14 +41,14 @@ mod Ex09 {
     ////////////////////////////////
 
     #[external]
-    fn claim_points(array: Array::<felt>) {
+    fn claim_points(array: Array::<u128>) {
         assert(!array.is_empty(), 'EMPTY_ARRAY');
         assert(array.len() >= u32_from_felt252(4), 'ARRAY_LEN_LT_4');
 
         // Calculating the sum of the array sent by the user
-        let mut sum: felt = 0;
+        let mut sum: u128 = 0_u128;
         sum = get_sum_internal(sum, array);
-        assert(u32_from_felt252(sum) >= u32_from_felt252(50), 'SUM_LT_50');
+        assert(sum >= 50_u128, 'SUM_LT_50');
 
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
@@ -64,12 +63,17 @@ mod Ex09 {
     ////////////////////////////////
     // INTERNAL FUNCTIONS
     ////////////////////////////////
-    fn get_sum_internal(mut sum: felt, mut values: Array::<felt>) -> felt {
+    fn get_sum_internal(mut sum: u128, mut values: Array::<u128>) -> u128 {
         if !values.is_empty() {
             sum = sum + values.pop_front().unwrap();
             get_sum_internal(sum, values);
         }
 
         sum
+    }
+
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 }

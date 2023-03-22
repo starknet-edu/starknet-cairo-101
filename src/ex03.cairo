@@ -28,15 +28,14 @@ mod Ex03 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-
-    type felt = felt252;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
 
     struct Storage {
-        user_counters: LegacyMap::<ContractAddress, felt>,
+        user_counters: LegacyMap::<ContractAddress, u128>,
     }
 
     ////////////////////////////////
@@ -44,7 +43,7 @@ mod Ex03 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: felt, _exercise_id: felt
+        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -53,7 +52,7 @@ mod Ex03 {
     // VIEW FUNCTIONS
     ////////////////////////////////
     #[view]
-    fn get_user_counters(account: ContractAddress) -> felt {
+    fn get_user_counters(account: ContractAddress) -> u128 {
         let user_counter = user_counters::read(account);
         user_counter
     }
@@ -68,7 +67,7 @@ mod Ex03 {
         assert(!sender_address.is_zero(), 'sender_address is empty!');
         // Checking that user's counter is equal to 7
         let current_counter_value = user_counters::read(sender_address);
-        assert(current_counter_value == 7, 'Counter is not equal to 7');
+        assert(current_counter_value == 7_u128, 'Counter is not equal to 7');
 
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
@@ -76,31 +75,36 @@ mod Ex03 {
         distribute_points(sender_address, u256_from_felt252(2));
     }
 
-    #[external]
+    // #[external]
     fn reset_counter() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
         // Reinitializing the user counter
-        user_counters::write(sender_address, 0);
+        user_counters::write(sender_address, 0_u128);
     }
 
-    #[external]
+    // #[external]
     fn increment_counter() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
         // Reading counter from storage
         let current_counter_value = user_counters::read(sender_address);
         // Writing updated value to storage
-        user_counters::write(sender_address, current_counter_value + 2);
+        user_counters::write(sender_address, current_counter_value + 2_u128);
     }
 
-    #[external]
+    // #[external]
     fn decrement_counter() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
         // Reading counter from storage
         let current_counter_value = user_counters::read(sender_address);
         // Writing updated value to storage
-        user_counters::write(sender_address, current_counter_value - 1);
+        user_counters::write(sender_address, current_counter_value - 1_u128);
+    }
+
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 }
