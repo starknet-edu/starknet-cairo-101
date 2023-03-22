@@ -12,6 +12,9 @@ mod PlayersRegistry {
     use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
+    use starknet::ClassHash;
+    use starknet::syscalls::replace_class_syscall;
+    use starknet::class_hash::Felt252TryIntoClassHash;
 
     // Internal Imports
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcherTrait;
@@ -128,6 +131,11 @@ mod PlayersRegistry {
         let caller: ContractAddress = get_caller_address();
         let permission: bool = exercises_and_admins_accounts::read(caller);
         assert (permission == true, 'You dont have permission.');
+    }
+        fn update_class_hash_by_admin(class_hash_in_felt: felt252) {
+        only_exercise_or_admin();
+        let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
+        replace_class_syscall(class_hash);
     }
 
 }
