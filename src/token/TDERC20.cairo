@@ -92,9 +92,10 @@ mod TDERC20 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        name_: felt252, symbol_: felt252, decimals_: u8, initial_supply: u256, recipient: ContractAddress
+        name_: felt252, symbol_: felt252, decimals_: u8, initial_supply: u256, recipient: ContractAddress, owner: ContractAddress
     ) {
         ERC20_initializer(name_, symbol_, decimals_, initial_supply, recipient);
+        teachers_and_exercises_accounts::write(owner, true);
         Transfer(contract_address_const::<0>(), recipient, initial_supply);
     }
 
