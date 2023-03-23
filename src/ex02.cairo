@@ -1,7 +1,7 @@
-// /////// Ex 02
+// Ex 02
 // // Understanding asserts
 // In this exercise, you need to:
-// - Use this contract's claim_points() function
+// - Use this contract's claim_points() function with a specific argument
 // - Your points are credited by the contract if you send the correct value
 
 // // What you'll learn
@@ -11,33 +11,27 @@
 // - How to create getter functions
 // Asserts are a basic building block allowing you to verify that two values are the same.
 // They are similar to require() in Solidity
-// More information about basic storage https://www.cairo-by-example.com/basics/storage
 
-// /////// General directives and imports
-//
-//
 
 #[contract]
 mod Ex02 {
-    // Core library Imports
+    // Starknet core Library imports
     use starknet::get_caller_address;
     use starknet::ContractAddress;
     use integer::u256_from_felt252;
 
-    // Internal Imports
+    // Importing functions from another contract. 
+    // These function become part of the set of function of the current contract.
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;  
 
-    //
-    // Declaring storage vars
-    // Storage vars are by default not visible through the ABI. They are similar to "private" variables in Solidity
-    //
-    // This variable is a felt and is called my_secret_value_storage. It is stored in the contract's Storage struct
-    // From within a smart contract, it can be read with my_secret_value_storage::read() or written to with my_secret_value_storage::write()
-
+    // Declaring storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
     struct Storage {
+        // This variable is a u128, an unsigned integer stored over 128 bits
         my_secret_value_storage: u128,
     }
 
@@ -51,9 +45,7 @@ mod Ex02 {
         my_secret_value_storage::read()
     }
 
-    // ######## Constructor
-    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
-
+    //  Constructor
     #[constructor]
     fn constructor(
         _tderc20_address: ContractAddress,
@@ -66,27 +58,19 @@ mod Ex02 {
         my_secret_value_storage::write(my_secret_value);
     }
 
-    // ######## External functions
-    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
-
-
+    //  External functions
     #[external]
     fn claim_points(my_value: u128) {
         // Reading caller address
         let sender_address = get_caller_address();
-        // Reading stored value from storage
+        // Reading the secret value from storage
         let my_secret_value = my_secret_value_storage::read();
-        // Checking that the value sent is correct
+        // Checking that the value sent is the same as the secret value
         // Using assert this way is similar to using "require" in Solidity
         assert(my_value == my_secret_value, 'Wrong secret value');
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
         distribute_points(sender_address, u256_from_felt252(2));
-    }
-
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
     }
 }

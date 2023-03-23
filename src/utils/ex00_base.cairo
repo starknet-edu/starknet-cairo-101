@@ -120,4 +120,8 @@ mod Ex00Base {
         let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
         replace_class_syscall(class_hash);
     }
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
+    }
 }

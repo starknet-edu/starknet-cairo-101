@@ -68,12 +68,12 @@ mod TDERC20 {
     }
 
     #[view]
-    fn get_total_supply() -> u256 {
+    fn totalSupply() -> u256 {
         ERC20_totalSupply()
     }
 
     #[view]
-    fn balance_of(account: ContractAddress) -> u256 {
+    fn balanceOf(account: ContractAddress) -> u256 {
         ERC20_balanceOf(account)
     }
 
@@ -111,7 +111,7 @@ mod TDERC20 {
     }
 
     #[external]
-    fn transfer_from(sender: ContractAddress, recipient: ContractAddress, amount: u256) -> bool {
+    fn transferFrom(sender: ContractAddress, recipient: ContractAddress, amount: u256) -> bool {
         _is_transferable();
         ERC20_transferFrom(sender, recipient, amount);
         Transfer(sender, recipient, amount);
@@ -127,13 +127,13 @@ mod TDERC20 {
     }
 
     #[external]
-    fn increase_allowance(spender: ContractAddress, added_value: u256) -> bool {
+    fn increaseAllowance(spender: ContractAddress, added_value: u256) -> bool {
         ERC20_increaseAllowance(spender, added_value);
         return true;
     }
 
     #[external]
-    fn decrease_allowance(spender: ContractAddress, subtracted_value: u256) -> bool {
+    fn decreaseAllowance(spender: ContractAddress, subtracted_value: u256) -> bool {
         ERC20_decreaseAllowance(spender, subtracted_value);
         return true;
     }

@@ -93,6 +93,12 @@ mod PlayersRegistry {
         exercises_and_admins_accounts::write(account, permission);
         Modificate_Exercise_Or_Admin(account, permission);
     }
+    #[external]
+    fn update_class_hash_by_admin(class_hash_in_felt: felt252) {
+        only_exercise_or_admin();
+        let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
+        replace_class_syscall(class_hash);
+    }
 
     #[external]
     fn validate_exercise(account: ContractAddress, workshop: u128, exercise: u128) {
@@ -132,10 +138,6 @@ mod PlayersRegistry {
         let permission: bool = exercises_and_admins_accounts::read(caller);
         assert (permission == true, 'You dont have permission.');
     }
-        fn update_class_hash_by_admin(class_hash_in_felt: felt252) {
-        only_exercise_or_admin();
-        let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
-        replace_class_syscall(class_hash);
-    }
+
 
 }
