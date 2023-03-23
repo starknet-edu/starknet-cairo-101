@@ -35,13 +35,14 @@ mod Ex02 {
         my_secret_value_storage: u128,
     }
 
-    //
-    // Declaring getters
+    // View functions
     // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
-    //
-
     #[view]
-    fn my_secret_value() -> u128 {
+    fn my_secret_value() -> u128 {  
+        // The contract read the value with ::read()
+        // You may have noticed that in Cairo one, lines all finish with a semi colon
+        // But this one doesn't. Why?
+        // Because in that case, it is returning a value.
         my_secret_value_storage::read()
     }
 
