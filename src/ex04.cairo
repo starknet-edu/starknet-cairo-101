@@ -1,10 +1,11 @@
-// ######## Ex 04
-// Reading a mapping
+// Ex 04
+// // Reading a mapping
 // In this exercise, you need to:
 // - Use a function to read a variable
 // - Use a function to read a value in a mapping, where the slot you read is the value from the first call
 // - Use a function to show you know the correct value of the value in the mapping
 // - Your points are credited by the contract
+
 
 #[contract]
 mod Ex04 {
@@ -26,9 +27,7 @@ mod Ex04 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
-    ////////////////////////////////
-    // STORAGE
-    ////////////////////////////////
+    // Declaring storage
     struct Storage {
         user_slots: LegacyMap::<ContractAddress, u128>,
         values_mapped: LegacyMap::<u128, u128>,
@@ -36,9 +35,7 @@ mod Ex04 {
         next_slot: u128,
     }
 
-    ////////////////////////////////
     // Constructor
-    ////////////////////////////////
     #[constructor]
     fn constructor(
         _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
@@ -46,9 +43,7 @@ mod Ex04 {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
-    ////////////////////////////////
     // View Functions
-    ////////////////////////////////
     #[view]
     fn get_user_slots(account: ContractAddress) -> u128 {
         return user_slots::read(account);
@@ -59,10 +54,7 @@ mod Ex04 {
         return values_mapped::read(slot);
     }
 
-    ////////////////////////////////
-    // EXTERNAL FUNCTIONS
-    ////////////////////////////////
-
+    // External functions
     #[external]
     fn claim_points(expected_value: u128) {
         // Reading caller address
@@ -96,10 +88,8 @@ mod Ex04 {
         }
     }
 
-    //
     // External functions - Administration
-    // Only admins can call these. You don't need to understand them to finish the exercise.
-    //
+    // Only admins can call the below functions. You don't need to understand them to finish the exercise.
     #[external]
     fn set_random_values(values: Array::<u128>) {
         // Check if the random values were already initialized
