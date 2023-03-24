@@ -11,8 +11,6 @@ mod Ex05 {
     // Starknet core Library imports
     use starknet::get_caller_address;
     use starknet::ContractAddress;
-    use starknet::ContractAddressZeroable;
-    use zeroable::Zeroable;
     use array::ArrayTrait;
     use option::OptionTrait;
     use integer::u256_from_felt252;

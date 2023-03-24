@@ -1,34 +1,29 @@
 // ######## Ex 06
 // External vs internal functions
-// In this exercise, you need to:
-// - Use a function to get assigned a private variable
-// - Use an internal function to duplicate this variable in a public variable
-// - Use a function to show you know the correct value of the private variable
-// - Your points are credited by the contract
+// In this exercise, you need to the exact same thing as the previous exercice
+// But this time, the external function you will call will in turn call an internal function
 
 #[contract]
 mod Ex06 {
-    use zeroable::Zeroable;
+    ////////////////////////////////    
+    // Starknet core library imports
+    ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
-    use starknet::ContractAddressZeroable;
-
-    use traits::Into;
-    use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
     use integer::u256_from_felt252;
 
-    // Internal Imports
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
+    ////////////////////////////////
+    // Internal imports
+    ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
 
     ////////////////////////////////
-    // STORAGE
+    // Storage
     ////////////////////////////////
     struct Storage {
         user_slots: LegacyMap::<ContractAddress, u128>,
@@ -62,13 +57,14 @@ mod Ex06 {
     }
 
     ////////////////////////////////
-    // EXTERNAL FUNCTIONS
+    // External functions
     ////////////////////////////////
 
     #[external]
     fn claim_points(expected_value: u128) {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
+        // Reading user slot
         let user_slot = user_slots::read(sender_address);
         assert(user_slot != 0_u128, 'ASSIGN_USER_SLOT_FIRST');
 
@@ -88,28 +84,30 @@ mod Ex06 {
     fn assign_user_slot() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
+        // Assigning a slot to a user
         let next_slot_temp = next_slot::read();
-        let next_value = values_mapped_secret::read(next_slot_temp + 1_u128);
+        // Checking if next random value is 0
+        // next_value is a "mutable" variable. Its value can change during the course of the function call
+        let mut next_value = values_mapped_secret::read(next_slot::read() + 1_u128);
         if next_value == 0_u128 {
-            user_slots::write(sender_address, 1_u128);
             next_slot::write(0_u128);
-        } else {
-            user_slots::write(sender_address, next_slot_temp + 1_u128);
-            next_slot::write(next_slot_temp + 1_u128);
-        }
+            next_value = values_mapped_secret::read(next_slot::read() + 1_u128);
+        } 
+        user_slots::write(sender_address, next_slot::read() + 1_u128);
+        next_slot::write(next_slot::read() + 1_u128);
     }
 
     #[external]
     fn external_handler_for_internal_function(a_value: u128) {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
-        assert(!sender_address.is_zero(), 'ZERO_ADDRESS');
         // Calling internal function
         copy_secret_value_to_readable_mapping(sender_address);
     }
 
 
     fn copy_secret_value_to_readable_mapping(sender_address: ContractAddress) {
+        // Reading user slot
         let user_slot = user_slots::read(sender_address);
         assert(user_slot != 0_u128, 'ASSIGN_USER_SLOT_FIRST');
 
@@ -120,10 +118,10 @@ mod Ex06 {
         user_values_public::write(sender_address, secret_value);
     }
 
-    //
+    ////////////////////////////////
     // External functions - Administration
     // Only admins can call these. You don't need to understand them to finish the exercise.
-    //
+    ////////////////////////////////
     #[external]
     fn set_random_values(values: Array::<u128>) {
         // Check if the random values were already initialized
@@ -143,10 +141,5 @@ mod Ex06 {
             idx = idx + 1_u128;
             set_a_random_value(idx, values);
         }
-    }
-
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
     }
 }
