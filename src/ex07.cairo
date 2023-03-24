@@ -1,37 +1,33 @@
-// ######## Ex 07
-// # Understanding functions to compare values
-// In this exercise, you need to:
+////////////////////////////////    
+// Exercise 7
+// Understanding functions to compare values
+////////////////////////////////
 // - Use this contract's claim_points() function
 // - Your points are credited by the contract
-
-// ######## References
-// Documentation is still being written. You can find answers in this file
-// https://github.com/starkware-libs/cairo-lang/blob/master/src/starkware/cairo/common/math.cairo
+////////////////////////////////
 
 #[contract]
 mod Ex07 {
-    use zeroable::Zeroable;
+    ////////////////////////////////    
+    // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
+    ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
-    use starknet::ContractAddressZeroable;
-
-    use traits::Into;
-    use traits::TryInto;
-    use array::ArrayTrait;
-    use option::OptionTrait;
     use integer::u256_from_felt252;
-    use integer::u8_from_felt252;
 
-    // Internal Imports
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
+    ////////////////////////////////
+    // Internal imports
+    // These function become part of the set of function of the current contract.
+    ////////////////////////////////    
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
 
     ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
     fn constructor(
@@ -41,15 +37,14 @@ mod Ex07 {
     }
 
     ////////////////////////////////
-    // EXTERNAL FUNCTIONS
+    // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
     #[external]
     fn claim_points(value_a: u128, value_b: u128) {
         // Reading caller address
-        let sender_address: ContractAddress = get_caller_address();
-
-        let test = 75_u128;
-
+        let sender_address: ContractAddress = get_caller_address(); 
+        // Checking that value_a and value_b fit the desired properties
         assert(value_a != 0_u128, 'ZERO_VALUE');
         assert(value_b >= 0_u128, 'LESS_THAN_ZERO_VALUE');
         assert(value_a != value_b, 'EQUAL_VALUE');
@@ -61,10 +56,5 @@ mod Ex07 {
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
         distribute_points(sender_address, u256_from_felt252(2));
-    }
-
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
     }
 }

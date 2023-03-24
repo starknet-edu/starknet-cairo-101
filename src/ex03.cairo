@@ -18,8 +18,6 @@ mod Ex03 {
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
-    use zeroable::Zeroable;
-    use starknet::ContractAddressZeroable;
     use integer::u256_from_felt252;
 
     ////////////////////////////////
@@ -99,7 +97,6 @@ mod Ex03 {
     fn claim_points() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
-        assert(!sender_address.is_zero(), 'sender_address is empty!');
         // Checking that user's counter is equal to 3
         let current_counter_value = user_counters::read(sender_address);
         assert(current_counter_value == 3_u128, 'Counter is not equal to 3');
