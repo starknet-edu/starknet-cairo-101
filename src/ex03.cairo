@@ -12,9 +12,10 @@
 
 #[contract]
 mod Ex03 {
-    use zeroable::Zeroable;
+    // Starknet core Library imports
     use starknet::get_caller_address;
     use starknet::ContractAddress;
+    use zeroable::Zeroable;
     use starknet::ContractAddressZeroable;
     use integer::u256_from_felt252;
 

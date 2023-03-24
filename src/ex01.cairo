@@ -12,9 +12,10 @@
 mod Ex01 {
     
     // Starknet core Library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
     use starknet::get_caller_address;
-    use integer::u256_from_felt252;
     use starknet::ContractAddress;
+    use integer::u256_from_felt252;
 
     // Importing functions from another contract. 
     // These function become part of the set of function of the current contract.

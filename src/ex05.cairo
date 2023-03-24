@@ -1,4 +1,4 @@
-// ######## Ex 05
+// Ex 05
 // Public/private variables
 // In this exercise, you need to:
 // - Use a function to get assigned a private variable
@@ -8,10 +8,11 @@
 
 #[contract]
 mod Ex05 {
-    use zeroable::Zeroable;
+    // Starknet core Library imports
     use starknet::get_caller_address;
     use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
+    use zeroable::Zeroable;
 
     use traits::Into;
     use traits::TryInto;

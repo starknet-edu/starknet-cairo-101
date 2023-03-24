@@ -9,23 +9,18 @@
 
 #[contract]
 mod Ex04 {
-    use zeroable::Zeroable;
+    // Starknet core Library imports
     use starknet::get_caller_address;
     use starknet::ContractAddress;
-    use starknet::ContractAddressZeroable;
-    use traits::Into;
-    use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
     use integer::u256_from_felt252;
 
     // Internal Imports
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash; 
 
     // Declaring storage
     struct Storage {
@@ -59,10 +54,11 @@ mod Ex04 {
     fn claim_points(expected_value: u128) {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
+        // Reading the slot assigned to the caller
         let user_slot = user_slots::read(sender_address);
         assert(user_slot != 0_u128, 'ASSIGN_USER_SLOT_FIRST');
 
-        // Checking that the value provided by the user is the one we expect
+        // Checking that the value provided by the caller is the one we expect
         // Yes, I'm sneaky
         let value = values_mapped::read(user_slot);
         assert(value == expected_value + 32_u128, 'NOT_EXPECTED_SECRET_VALUE');
@@ -77,15 +73,18 @@ mod Ex04 {
     fn assign_user_slot() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
+        // Assigning a slot to a user
         let next_slot_temp = next_slot::read();
-        let next_value = values_mapped::read(next_slot_temp + 1_u128);
+        // Checking if next random value is 0
+        // next_value is a "mutable" variable. Its value can change during the course of the function call
+        let mut next_value = values_mapped::read(next_slot::read() + 1_u128);
         if next_value == 0_u128 {
-            user_slots::write(sender_address, 1_u128);
             next_slot::write(0_u128);
-        } else {
-            user_slots::write(sender_address, next_slot_temp + 1_u128);
-            next_slot::write(next_slot_temp + 1_u128);
-        }
+            next_value = values_mapped::read(next_slot::read() + 1_u128);
+        } 
+        user_slots::write(sender_address, next_slot::read() + 1_u128);
+        next_slot::write(next_slot::read() + 1_u128);
+        
     }
 
     // External functions - Administration
@@ -109,10 +108,5 @@ mod Ex04 {
             idx = idx + 1_u128;
             set_a_random_value(idx, values);
         }
-    }
-
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
     }
 }
