@@ -13,24 +13,17 @@ mod Ex05 {
     use starknet::ContractAddress;
     use starknet::ContractAddressZeroable;
     use zeroable::Zeroable;
-
-    use traits::Into;
-    use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
     use integer::u256_from_felt252;
 
     // Internal Imports
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
 
-    ////////////////////////////////
-    // STORAGE
-    ////////////////////////////////
+    // Declaring storage
     struct Storage {
         user_slots: LegacyMap::<ContractAddress, u128>,
         user_values_public: LegacyMap::<ContractAddress, u128>,
@@ -39,9 +32,7 @@ mod Ex05 {
         next_slot: u128,
     }
 
-    ////////////////////////////////
     // Constructor
-    ////////////////////////////////
     #[constructor]
     fn constructor(
         _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
@@ -49,9 +40,7 @@ mod Ex05 {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
-    ////////////////////////////////
     // View Functions
-    ////////////////////////////////
     #[view]
     fn get_user_slots(account: ContractAddress) -> u128 {
         user_slots::read(account)
@@ -62,14 +51,12 @@ mod Ex05 {
         user_values_public::read(account)
     }
 
-    ////////////////////////////////
-    // EXTERNAL FUNCTIONS
-    ////////////////////////////////
-
+    // External functions
     #[external]
     fn claim_points(expected_value: u128) {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
+        // Reading user slot and verifying it's not zero
         let user_slot = user_slots::read(sender_address);
         assert(user_slot != 0_u128, 'ASSIGN_USER_SLOT_FIRST');
 
@@ -88,29 +75,31 @@ mod Ex05 {
     fn assign_user_slot() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
+        // Assigning a slot to a user
         let next_slot_temp = next_slot::read();
-        let next_value = values_mapped_secret::read(next_slot_temp + 1_u128);
+        // Checking if next random value is 0
+        // next_value is a "mutable" variable. Its value can change during the course of the function call
+        let mut next_value = values_mapped_secret::read(next_slot::read() + 1_u128);
         if next_value == 0_u128 {
-            user_slots::write(sender_address, 1_u128);
             next_slot::write(0_u128);
-        } else {
-            user_slots::write(sender_address, next_slot_temp + 1_u128);
-            next_slot::write(next_slot_temp + 1_u128);
-        }
+            next_value = values_mapped_secret::read(next_slot::read() + 1_u128);
+        } 
+        user_slots::write(sender_address, next_slot::read() + 1_u128);
+        next_slot::write(next_slot::read() + 1_u128);
     }
 
     #[external]
     fn copy_secret_value_to_readable_mapping() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
-
+        // Reading user's assigned slot and verifying it's not zero
         let user_slot = user_slots::read(sender_address);
         assert(user_slot != 0_u128, 'ASSIGN_USER_SLOT_FIRST');
 
         // Reading user secret value
         let secret_value = values_mapped_secret::read(user_slot);
 
-        // Copying the value from non accessible values_mapped_secret_storage to
+        // Copying the value from non accessible values_mapped_secret_storage to publicly accessible user_values_public
         user_values_public::write(sender_address, secret_value - 23_u128);
     }
 
@@ -137,10 +126,5 @@ mod Ex05 {
             idx = idx + 1_u128;
             set_a_random_value(idx, values);
         }
-    }
-
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
     }
 }

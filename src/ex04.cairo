@@ -84,7 +84,6 @@ mod Ex04 {
         } 
         user_slots::write(sender_address, next_slot::read() + 1_u128);
         next_slot::write(next_slot::read() + 1_u128);
-        
     }
 
     // External functions - Administration
