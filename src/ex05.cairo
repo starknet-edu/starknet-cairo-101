@@ -1,27 +1,40 @@
-// Ex 05
+////////////////////////////////    
+// Exercise 5
 // Public/private variables
+////////////////////////////////
 // In this exercise, you need to:
 // - Use a function to get assigned a private variable
 // - Use a function to duplicate this variable in a public variable
 // - Use a function to show you know the correct value of the private variable
 // - Your points are credited by the contract
+////////////////////////////////
 
 #[contract]
 mod Ex05 {
-    // Starknet core Library imports
+    ////////////////////////////////    
+    // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
+    ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
     use array::ArrayTrait;
     use option::OptionTrait;
     use integer::u256_from_felt252;
 
-    // Internal Imports
+    ////////////////////////////////
+    // Internal imports
+    // These function become part of the set of function of the current contract.
+    ////////////////////////////////    
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
 
-    // Declaring storage
+    ////////////////////////////////
+    // Storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
+    ////////////////////////////////
     struct Storage {
         user_slots: LegacyMap::<ContractAddress, u128>,
         user_values_public: LegacyMap::<ContractAddress, u128>,
@@ -30,7 +43,10 @@ mod Ex05 {
         next_slot: u128,
     }
 
+    ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
+    ////////////////////////////////
     #[constructor]
     fn constructor(
         _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
@@ -38,7 +54,10 @@ mod Ex05 {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
+    ////////////////////////////////
     // View Functions
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
+    ////////////////////////////////
     #[view]
     fn get_user_slots(account: ContractAddress) -> u128 {
         user_slots::read(account)
@@ -49,7 +68,10 @@ mod Ex05 {
         user_values_public::read(account)
     }
 
+    ////////////////////////////////
     // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
+    ////////////////////////////////
     #[external]
     fn claim_points(expected_value: u128) {
         // Reading caller address
@@ -101,10 +123,10 @@ mod Ex05 {
         user_values_public::write(sender_address, secret_value - 23_u128);
     }
 
-    //
+    ////////////////////////////////
     // External functions - Administration
     // Only admins can call these. You don't need to understand them to finish the exercise.
-    //
+    ////////////////////////////////
     #[external]
     fn set_random_values(values: Array::<u128>) {
         // Check if the random values were already initialized

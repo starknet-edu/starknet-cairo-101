@@ -9,20 +9,30 @@
 
 #[contract]
 mod Ex04 {
-    // Starknet core Library imports
+    ////////////////////////////////    
+    // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
+    ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
     use array::ArrayTrait;
     use option::OptionTrait;
     use integer::u256_from_felt252;
 
-    // Internal Imports
+    ////////////////////////////////
+    // Internal imports
+    // These function become part of the set of function of the current contract.
+    ////////////////////////////////    
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash; 
 
-    // Declaring storage
+    ////////////////////////////////
+    // Storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
+    ////////////////////////////////
     struct Storage {
         user_slots: LegacyMap::<ContractAddress, u128>,
         values_mapped: LegacyMap::<u128, u128>,
@@ -30,7 +40,10 @@ mod Ex04 {
         next_slot: u128,
     }
 
+    ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
+    ////////////////////////////////
     #[constructor]
     fn constructor(
         _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
@@ -38,7 +51,10 @@ mod Ex04 {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
+    ////////////////////////////////
     // View Functions
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
+    ////////////////////////////////
     #[view]
     fn get_user_slots(account: ContractAddress) -> u128 {
         return user_slots::read(account);
@@ -49,7 +65,10 @@ mod Ex04 {
         return values_mapped::read(slot);
     }
 
+    ////////////////////////////////
     // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
+    ////////////////////////////////
     #[external]
     fn claim_points(expected_value: u128) {
         // Reading caller address
@@ -86,8 +105,10 @@ mod Ex04 {
         next_slot::write(next_slot::read() + 1_u128);
     }
 
+    ////////////////////////////////
     // External functions - Administration
-    // Only admins can call the below functions. You don't need to understand them to finish the exercise.
+    // Only admins can call these. You don't need to understand them to finish the exercise.
+    ////////////////////////////////
     #[external]
     fn set_random_values(values: Array::<u128>) {
         // Check if the random values were already initialized

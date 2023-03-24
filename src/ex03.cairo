@@ -12,26 +12,39 @@
 
 #[contract]
 mod Ex03 {
-    // Starknet core Library imports
+    ////////////////////////////////    
+    // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
+    ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
     use zeroable::Zeroable;
     use starknet::ContractAddressZeroable;
     use integer::u256_from_felt252;
 
-    // Internal Imports
+    ////////////////////////////////
+    // Internal imports
+    // These function become part of the set of function of the current contract.
+    ////////////////////////////////    
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;  
 
-    // Declaring storage
+    ////////////////////////////////
+    // Storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
+    ////////////////////////////////
     struct Storage {
         // This variable is a LegacyMap. It is equivalent to a mapping in Solidity
         user_counters: LegacyMap::<ContractAddress, u128>,
     }
 
+    ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
+    ////////////////////////////////
     #[constructor]
     fn constructor(
         _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
@@ -39,14 +52,20 @@ mod Ex03 {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
-    // View functions
+    ////////////////////////////////
+    // View Functions
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
+    ////////////////////////////////
     #[view]
     fn get_user_counters(account: ContractAddress) -> u128 {
         let user_counter = user_counters::read(account);
         user_counter
     }
 
-    //  External functions
+    ////////////////////////////////
+    // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
+    ////////////////////////////////
     #[external]
     fn increment_counter() {
         // Reading caller address

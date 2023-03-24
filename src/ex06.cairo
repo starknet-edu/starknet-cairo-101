@@ -1,12 +1,16 @@
-// ######## Ex 06
+////////////////////////////////    
+// Exercise 6
 // External vs internal functions
+////////////////////////////////
 // In this exercise, you need to the exact same thing as the previous exercice
 // But this time, the external function you will call will in turn call an internal function
+////////////////////////////////
 
 #[contract]
 mod Ex06 {
     ////////////////////////////////    
     // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
@@ -16,7 +20,8 @@ mod Ex06 {
 
     ////////////////////////////////
     // Internal imports
-    ////////////////////////////////
+    // These function become part of the set of function of the current contract.
+    ////////////////////////////////    
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
@@ -24,6 +29,8 @@ mod Ex06 {
 
     ////////////////////////////////
     // Storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
     ////////////////////////////////
     struct Storage {
         user_slots: LegacyMap::<ContractAddress, u128>,
@@ -35,6 +42,7 @@ mod Ex06 {
 
     ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
     fn constructor(
@@ -45,6 +53,7 @@ mod Ex06 {
 
     ////////////////////////////////
     // View Functions
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
     ////////////////////////////////
     #[view]
     fn get_user_slots(account: ContractAddress) -> u128 {
@@ -58,6 +67,7 @@ mod Ex06 {
 
     ////////////////////////////////
     // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
 
     #[external]
