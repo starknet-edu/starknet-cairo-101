@@ -29,7 +29,6 @@ mod Ex08 {
     // Internal imports
     // These function become part of the set of function of the current contract
     ////////////////////////////////  
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
