@@ -1,11 +1,18 @@
-// ######## Ex 09
-// # Recursions - advanced
-// In this exercise, you need to:
+////////////////////////////////    
+// Exercise 9
+// Recursions - advanced
+////////////////////////////////
+// TODO (omar): Add a description of the exercise
 // - Use this contract's claim_points() function
 // - Your points are credited by the contract
+////////////////////////////////
 
 #[contract]
 mod Ex09 {
+    ////////////////////////////////    
+    // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
+    ////////////////////////////////
     use zeroable::Zeroable;
     use starknet::get_caller_address;
     use starknet::ContractAddress;
@@ -18,7 +25,10 @@ mod Ex09 {
     use integer::u32_from_felt252;
     use hash::LegacyHash;
 
-    // Internal Imports
+    ////////////////////////////////
+    // Internal imports
+    // These function become part of the set of function of the current contract
+    ////////////////////////////////  
     use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
@@ -28,6 +38,7 @@ mod Ex09 {
 
     ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
     fn constructor(
@@ -37,9 +48,9 @@ mod Ex09 {
     }
 
     ////////////////////////////////
-    // EXTERNAL FUNCTIONS
+    // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
-
     #[external]
     fn claim_points(array: Array::<u128>) {
         assert(!array.is_empty(), 'EMPTY_ARRAY');
@@ -59,9 +70,9 @@ mod Ex09 {
         distribute_points(sender_address, u256_from_felt252(2));
     }
 
-
     ////////////////////////////////
-    // INTERNAL FUNCTIONS
+    // Internal functions
+    // These functions are not callable by other contracts (similar to "private" in Solidity)
     ////////////////////////////////
     fn get_sum_internal(mut sum: u128, mut values: Array::<u128>) -> u128 {
         if !values.is_empty() {
@@ -72,6 +83,10 @@ mod Ex09 {
         sum
     }
 
+    ////////////////////////////////
+    // External functions - Administration
+    // Only admins can call these. You don't need to understand them to finish the exercise.
+    ////////////////////////////////
     #[external]
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);

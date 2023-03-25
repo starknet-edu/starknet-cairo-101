@@ -1,11 +1,18 @@
-// ######## Ex 10b
-// # Composability
+////////////////////////////////    
+// Exercise 10b
+// Composability
+////////////////////////////////
 // This exercise was deployed as a complement to ex10, but you don't know where!
 // Use ex10 to find its address, then voyager to read from ex10b
 // Then use ex10 to claim points
+////////////////////////////////
 
 #[contract]
 mod Ex10 {
+    ////////////////////////////////    
+    // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
+    ////////////////////////////////
     use zeroable::Zeroable;
     use starknet::get_caller_address;
     use starknet::get_contract_address;
@@ -17,7 +24,10 @@ mod Ex10 {
     use option::OptionTrait;
     use hash::LegacyHash;
 
-    // Internal Imports
+    ////////////////////////////////
+    // Internal imports
+    // These function become part of the set of function of the current contract
+    ////////////////////////////////  
     use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
@@ -29,7 +39,9 @@ mod Ex10 {
     use starknet_cairo_101::utils::Iex10::Iex10DispatcherTrait;
 
     ////////////////////////////////
-    // STORAGE
+    // Storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
     ////////////////////////////////
     struct Storage {
         ex10_address: ContractAddress,
@@ -38,6 +50,7 @@ mod Ex10 {
 
     ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
     fn constructor(ex10_addr: ContractAddress) {
@@ -49,6 +62,7 @@ mod Ex10 {
 
     ////////////////////////////////
     // View Functions
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
     ////////////////////////////////
     #[view]
     fn get_ex10_address() -> ContractAddress {
@@ -61,7 +75,8 @@ mod Ex10 {
     }
 
     ////////////////////////////////
-    // EXTERNAL FUNCTIONS
+    // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
     #[external]
     fn change_secret_value(new_secret_value: u128) {
@@ -72,16 +87,20 @@ mod Ex10 {
         return ();
     }
 
+    ////////////////////////////////
+    // External functions - Administration
+    // Only admins can call these. You don't need to understand them to finish the exercise.
+    ////////////////////////////////
     #[external]
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);
     }
 
 
-    //
-    // Internal functions
-    //
-    //
+    ////////////////////////////////
+    // Internal functions - Administration
+    // Only admins can call these. You don't need to understand them to finish the exercise.
+    ////////////////////////////////
     fn only_ex10() {
         let caller = get_caller_address();
         let ex10_address = ex10_address::read();

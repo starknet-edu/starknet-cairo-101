@@ -1,9 +1,18 @@
-// ######## Ex 14
-// All in one exercise
-// It's your time to shine.
-// Deploy a contract that validates various exercises in a single transaction to get 2 points
-// Do you want to agregate your points in a single account? Use this https://github.com/starknet-edu/points-migrator
+////////////////////////////////    
+// Exercise 14
+// All in one exercise -It's your time to shine.
+////////////////////////////////
+// TODO (omar) - improve description
+// - Deploy a contract that validates various exercises in a single transaction to get 2 points
+// - Do you want to agregate your points in a single account? Use this https://github.com/starknet-edu/points-migrator
+////////////////////////////////
 
+
+
+////////////////////////////////
+// ABI imports
+// These are the interfaces of the contracts that you will interact with.
+////////////////////////////////
 #[abi]
 trait IAllInOneContract {
     fn validate_various_exercises();
@@ -11,6 +20,10 @@ trait IAllInOneContract {
 
 #[contract]
 mod Ex14 {
+    ////////////////////////////////    
+    // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
+    ////////////////////////////////
     use zeroable::Zeroable;
     use starknet::get_caller_address;
     use starknet::ContractAddress;
@@ -22,7 +35,10 @@ mod Ex14 {
     use integer::u256_from_felt252;
     use hash::LegacyHash;
 
-    // Internal Imports
+    ////////////////////////////////
+    // Internal imports
+    // These function become part of the set of function of the current contract.
+    ////////////////////////////////  
     use starknet_cairo_101::utils::ex11_base::Ex11Base::tderc20_address;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::distribute_points;
@@ -40,6 +56,7 @@ mod Ex14 {
 
     ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
     fn constructor(
@@ -49,9 +66,9 @@ mod Ex14 {
     }
 
     ////////////////////////////////
-    // EXTERNAL FUNCTIONS
+    // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
-
     #[external]
     fn claim_points() {
         // Reading caller address
@@ -82,6 +99,10 @@ mod Ex14 {
 
     }
 
+    ////////////////////////////////
+    // External functions - Administration
+    // Only admins can call these. You don't need to understand them to finish the exercise.
+    ////////////////////////////////
     #[external]
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);

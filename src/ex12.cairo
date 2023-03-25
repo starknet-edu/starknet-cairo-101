@@ -7,6 +7,10 @@
 
 #[contract]
 mod Ex12 {
+    ////////////////////////////////    
+    // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
+    ////////////////////////////////
     use zeroable::Zeroable;
     use starknet::get_caller_address;
     use starknet::ContractAddress;
@@ -17,7 +21,10 @@ mod Ex12 {
     use option::OptionTrait;
     use integer::u256_from_felt252;
 
-    // Internal Imports
+    ////////////////////////////////
+    // Internal imports
+    // These function become part of the set of function of the current contract.
+    ////////////////////////////////  
     use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
@@ -26,7 +33,9 @@ mod Ex12 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     ////////////////////////////////
-    // STORAGE
+    // Storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
     ////////////////////////////////
     struct Storage {
         user_slots: LegacyMap::<ContractAddress, u128>,
@@ -43,6 +52,7 @@ mod Ex12 {
 
     ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
     fn constructor(
@@ -53,6 +63,7 @@ mod Ex12 {
 
     ////////////////////////////////
     // View Functions
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
     ////////////////////////////////
     #[view]
     fn get_user_slots(account: ContractAddress) -> u128 {
@@ -60,9 +71,9 @@ mod Ex12 {
     }
 
     ////////////////////////////////
-    // EXTERNAL FUNCTIONS
+    // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
-
     #[external]
     fn claim_points(expected_value: u128) {
         // Reading caller address
@@ -128,6 +139,10 @@ mod Ex12 {
         }
     }
 
+    ////////////////////////////////
+    // External functions - Administration
+    // Only admins can call these. You don't need to understand them to finish the exercise.
+    ////////////////////////////////
     #[external]
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);

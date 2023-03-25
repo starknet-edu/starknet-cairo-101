@@ -1,11 +1,19 @@
-// ######## Ex 08
-// # Recursions - basics
-// In this exercise, you need to:
+////////////////////////////////    
+// Exercise 8
+// Recursions - basics
+////////////////////////////////
+// TODO (omar): Add a description of the exercise
 // - Use this contract's claim_points() function
 // - Your points are credited by the contract
+////////////////////////////////
+
 
 #[contract]
 mod Ex08 {
+    ////////////////////////////////    
+    // Starknet core library imports
+    // These are syscalls and functionnalities that allow you to write starknet contracts
+    ////////////////////////////////
     use zeroable::Zeroable;
     use starknet::get_caller_address;
     use starknet::ContractAddress;
@@ -17,7 +25,10 @@ mod Ex08 {
     use integer::u256_from_felt252;
     use hash::LegacyHash;
 
-    // Internal Imports
+    ////////////////////////////////
+    // Internal imports
+    // These function become part of the set of function of the current contract
+    ////////////////////////////////  
     use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
@@ -28,7 +39,9 @@ mod Ex08 {
     use core::hash::TupleSize2LegacyHash;
 
     ////////////////////////////////
-    // STORAGE
+    // Storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
     ////////////////////////////////
     struct Storage {
         user_values: LegacyMap::<(ContractAddress, u128), u128>
@@ -36,6 +49,7 @@ mod Ex08 {
 
     ////////////////////////////////
     // Constructor
+    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
     fn constructor(
@@ -46,6 +60,7 @@ mod Ex08 {
 
     ////////////////////////////////
     // View Functions
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
     ////////////////////////////////
     #[view]
     fn get_user_values(account: ContractAddress, slot: u128) -> u128 {
@@ -53,9 +68,9 @@ mod Ex08 {
     }
 
     ////////////////////////////////
-    // EXTERNAL FUNCTIONS
+    // External functions
+    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
-
     #[external]
     fn claim_points() {
         // Reading caller address
@@ -69,6 +84,23 @@ mod Ex08 {
         distribute_points(sender_address, u256_from_felt252(2));
     }
 
+    ////////////////////////////////
+    // Internal functions
+    // These functions are not callable by other contracts (similar to "private" in Solidity)
+    ////////////////////////////////
+    fn set_user_values_internal(account: ContractAddress, mut idx: u128, mut values: Array::<u128>) {
+        if !values.is_empty() {
+            user_values::write((account, idx), values.pop_front().unwrap());
+            idx = idx + 1_u128;
+            set_user_values_internal(account, idx, values);
+        }
+    }
+
+    ////////////////////////////////
+    // External functions - Administration
+    // Only admins can call these. You don't need to understand them to finish the exercise.
+    ////////////////////////////////
+
     // This function takes an array as a parameter
     // In order to pass it, the user needs to pass both the array and its length
     // This complexity is abstracted away by voyager, where you simply need to pass an array
@@ -76,17 +108,6 @@ mod Ex08 {
     fn set_user_values(account: ContractAddress, values: Array::<u128>) {
         let mut idx = 0_u128;
         set_user_values_internal(account, idx, values);
-    }
-
-    //
-    // Internal functions
-    //
-    fn set_user_values_internal(account: ContractAddress, mut idx: u128, mut values: Array::<u128>) {
-        if !values.is_empty() {
-            user_values::write((account, idx), values.pop_front().unwrap());
-            idx = idx + 1_u128;
-            set_user_values_internal(account, idx, values);
-        }
     }
 
     #[external]
