@@ -16,21 +16,15 @@ mod Ex11 {
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
-    use array::ArrayTrait;
-    use option::OptionTrait;
-    use hash::LegacyHash;
 
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract
     ////////////////////////////////  
-    use starknet_cairo_101::utils::ex11_base::Ex11Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::distribute_points;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_exercise;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::ex_initializer;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_answers;
-    use starknet_cairo_101::utils::ex11_base::Ex11Base::ex11_secret_value;
-    use starknet_cairo_101::utils::ex11_base::Ex11Base::secret_value;
 
     ////////////////////////////////
     // Constructor
