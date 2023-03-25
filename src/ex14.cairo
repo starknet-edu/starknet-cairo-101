@@ -90,6 +90,6 @@ mod Ex14 {
          // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address, u256_from_felt252(2));
+        distribute_points(sender_address, 2_u128);
     }
 }

@@ -23,7 +23,7 @@ mod Ex00Base {
     use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
 
-    const Decimals: felt252 = 1000000000000000000;
+    const Decimals: u128 = 1000000000000000000_u128;
 
 
     ////////////////////////////////
@@ -85,10 +85,10 @@ mod Ex00Base {
     ////////////////////////////////
     // Internal Functions
     ////////////////////////////////
-    fn distribute_points(to: ContractAddress, amount: u256) {
+    fn distribute_points(to: ContractAddress, amount: u128) {
         // Retrieving contract address from storage
         let tderc20_address = tderc20_address_storage::read();
-        let points_to_credit: u256 = amount * u256_from_felt252(Decimals);
+        let points_to_credit: u128 = amount * Decimals;
 
         ITDERC20Dispatcher{contract_address: tderc20_address}
             .distribute_points(to, points_to_credit);

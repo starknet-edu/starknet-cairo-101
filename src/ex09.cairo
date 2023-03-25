@@ -17,15 +17,11 @@ mod Ex09 {
     use starknet::ContractAddress;
     use array::ArrayTrait;
     use option::OptionTrait;
-    use integer::u256_from_felt252;
-    use integer::u32_from_felt252;
-    use hash::LegacyHash;
 
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract
     ////////////////////////////////  
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
@@ -48,7 +44,7 @@ mod Ex09 {
     #[external]
     fn claim_points(array: Array::<u128>) {
         assert(!array.is_empty(), 'EMPTY_ARRAY');
-        assert(array.len() >= u32_from_felt252(4), 'ARRAY_LEN_LT_4');
+        assert(array.len() >= 4_u32, 'ARRAY_LEN_LT_4');
 
         // Calculating the sum of the array sent by the user
         let mut sum: u128 = 0_u128;
@@ -61,7 +57,7 @@ mod Ex09 {
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address, u256_from_felt252(2));
+        distribute_points(sender_address, 2_u128);
     }
 
     ////////////////////////////////

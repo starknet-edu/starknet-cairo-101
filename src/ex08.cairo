@@ -18,20 +18,15 @@ mod Ex08 {
     use starknet::ContractAddress;
     use array::ArrayTrait;
     use option::OptionTrait;
-    use integer::u256_from_felt252;
-    use hash::LegacyHash;
 
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract
     ////////////////////////////////  
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
-
-    use core::hash::TupleSize2LegacyHash;
 
     ////////////////////////////////
     // Storage
@@ -76,7 +71,7 @@ mod Ex08 {
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
-        distribute_points(sender_address, u256_from_felt252(2));
+        distribute_points(sender_address, 2_u128);
     }
 
     ////////////////////////////////

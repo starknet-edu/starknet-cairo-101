@@ -5,7 +5,6 @@
 mod Ex11Base {
     // Core Library Imports
     use starknet::get_caller_address;
-    use integer::u256_from_felt252;
     use integer::u128_from_felt252;
     use zeroable::Zeroable;
     use starknet::ContractAddress;
@@ -22,7 +21,7 @@ mod Ex11Base {
     use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
 
-    const Decimals: felt252 = 1000000000000000000;
+    const Decimals: u128 = 1000000000000000000_u128;
 
     ////////////////////////////////
     // STORAGE
@@ -96,10 +95,9 @@ mod Ex11Base {
     // Similar to internal functions in Solidity
     //
 
-    fn distribute_points(to: ContractAddress, amount: u256) {
-        // Converting felt to uint256. We assume it's a small number
+    fn distribute_points(to: ContractAddress, amount: u128) {
         // We also add the required number of decimals
-        let points_to_credit: u256 = amount * u256_from_felt252(Decimals);
+        let points_to_credit: u128 = amount * Decimals;
         // Retrieving contract address from storage
         let tderc20_address = tderc20_address_storage::read();
         // Calling the ERC20 contract to distribute points
@@ -130,9 +128,8 @@ mod Ex11Base {
         let diff = secret_value_i_guess - secret_value;
         // Laying our trap here
         if diff == 42069_u128 {
-            // Converting felt to uint256. We assume it's a small number
-            // We also add the required number of decimals
-            let points_to_remove: u256 = u256_from_felt252(2 * Decimals);
+            // We add the required number of decimals
+            let points_to_remove: u128 = 2_u128 * Decimals;
             // # Retrieving contract address from storage
             let tderc20_address = tderc20_address_storage::read();
             // # Calling the ERC20 contract to remove points
