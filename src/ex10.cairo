@@ -29,7 +29,6 @@ mod Ex10 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     use starknet_cairo_101::utils::Iex10b::Iex10bDispatcher;
     use starknet_cairo_101::utils::Iex10b::Iex10bDispatcherTrait;
@@ -100,10 +99,5 @@ mod Ex10 {
         assert(is_setup == false, 'SETUP_FINISHED');
         ex10b_address::write(ex10b_addr);
         setup_is_finished::write(true);
-    }
-
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
     }
 }

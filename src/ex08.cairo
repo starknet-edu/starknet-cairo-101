@@ -29,7 +29,7 @@ mod Ex08 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
 
     use core::hash::TupleSize2LegacyHash;
 
@@ -103,10 +103,5 @@ mod Ex08 {
     fn set_user_values(account: ContractAddress, values: Array::<u128>) {
         let mut idx = 0_u128;
         set_user_values_internal(account, idx, values);
-    }
-
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
     }
 }

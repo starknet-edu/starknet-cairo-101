@@ -32,7 +32,6 @@ mod Ex11 {
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_answers;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::ex11_secret_value;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::secret_value;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     ////////////////////////////////
     // Constructor
@@ -59,14 +58,5 @@ mod Ex11 {
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
         distribute_points(sender_address, u256_from_felt252(2));
-    }
-
-    ////////////////////////////////
-    // External functions - Administration
-    // Only admins can call these. You don't need to understand them to finish the exercise.
-    ////////////////////////////////
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
     }
 }
