@@ -26,8 +26,6 @@ mod Ex14 {
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
-    use traits::Into;
-    use traits::TryInto;
     use array::ArrayTrait;
     use option::OptionTrait;
     use integer::u256_from_felt252;
