@@ -11,10 +11,8 @@ mod Ex12 {
     // Starknet core library imports
     // These are syscalls and functionnalities that allow you to write starknet contracts
     ////////////////////////////////
-    use zeroable::Zeroable;
     use starknet::get_caller_address;
     use starknet::ContractAddress;
-    use starknet::ContractAddressZeroable;
     use traits::Into;
     use traits::TryInto;
     use array::ArrayTrait;
