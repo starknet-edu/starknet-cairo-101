@@ -16,15 +16,11 @@ mod Ex10 {
     use starknet::get_caller_address;
     use starknet::get_contract_address;
     use starknet::ContractAddress;
-    use array::ArrayTrait;
-    use option::OptionTrait;
-    use hash::LegacyHash;
 
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract
     ////////////////////////////////  
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
