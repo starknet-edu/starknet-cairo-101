@@ -3,11 +3,10 @@
 // All in one exercise -It's your time to shine.
 ////////////////////////////////
 // TODO (omar) - improve description
+// - This exercise is a bit different from the others. It is a bit more open-ended and you will have to use your creativity to solve it.
 // - Deploy a contract that validates various exercises in a single transaction to get 2 points
 // - Do you want to agregate your points in a single account? Use this https://github.com/starknet-edu/points-migrator
 ////////////////////////////////
-
-
 
 ////////////////////////////////
 // ABI imports
@@ -26,23 +25,15 @@ mod Ex14 {
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
-    use array::ArrayTrait;
-    use option::OptionTrait;
-    use integer::u256_from_felt252;
-    use hash::LegacyHash;
 
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract.
     ////////////////////////////////  
     use starknet_cairo_101::utils::ex11_base::Ex11Base::tderc20_address;
-    use starknet_cairo_101::utils::ex11_base::Ex11Base::has_validated_exercise;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::distribute_points;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_exercise;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::ex_initializer;
-    use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_answers;
-    use starknet_cairo_101::utils::ex11_base::Ex11Base::ex11_secret_value;
-    use starknet_cairo_101::utils::ex11_base::Ex11Base::secret_value;
 
     use starknet_cairo_101::token::IERC20::IERC20Dispatcher;
     use starknet_cairo_101::token::IERC20::IERC20DispatcherTrait;
@@ -80,12 +71,12 @@ mod Ex14 {
         let balance_after = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
 
         // Verifying that caller collected some points
-        assert(balance_before >= u256_from_felt252(0) & balance_after > balance_before, 'NO_POINTS_COLLECTED');
+        assert(balance_before >= u256 { low: 0_u128, high: 0_u128 } & balance_after > balance_before, 'NO_POINTS_COLLECTED');
 
         // Read how many points were collected
         let collected_points = balance_after - balance_before;
         // Check that at least 20 points were collected
-        assert(collected_points >= u256_from_felt252(20), 'NO_ENOUGH_POINTS_COLLECTED');
+        assert(collected_points >= u256 { low: 0_u128, high: 20_u128 }, 'NO_ENOUGH_POINTS_COLLECTED');
 
          // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
