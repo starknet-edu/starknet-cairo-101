@@ -7,7 +7,7 @@
 // you might need this endpoint https://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=
 
 #[contract]
-mod Ex12 {
+mod Ex13 {
     ////////////////////////////////
     // Starknet core library imports
     // These are syscalls and functionnalities that allow you to write starknet contracts

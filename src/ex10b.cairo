@@ -8,7 +8,7 @@
 ////////////////////////////////
 
 #[contract]
-mod Ex10 {
+mod Ex10b {
     ////////////////////////////////
     // Starknet core library imports
     // These are syscalls and functionnalities that allow you to write starknet contracts
