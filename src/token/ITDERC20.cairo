@@ -1,6 +1,6 @@
 use starknet::ContractAddress;
 //###################
-// INTERFACE
+// ITDERC20 INTERFACE
 //###################
 #[abi]
 trait ITDERC20 {

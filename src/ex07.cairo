@@ -1,4 +1,4 @@
-////////////////////////////////    
+////////////////////////////////
 // Exercise 7
 // Understanding functions to compare values
 ////////////////////////////////
@@ -8,7 +8,7 @@
 
 #[contract]
 mod Ex07 {
-    ////////////////////////////////    
+    ////////////////////////////////
     // Starknet core library imports
     // These are syscalls and functionnalities that allow you to write starknet contracts
     ////////////////////////////////
@@ -18,7 +18,7 @@ mod Ex07 {
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract.
-    ////////////////////////////////    
+    ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
@@ -37,12 +37,12 @@ mod Ex07 {
 
     ////////////////////////////////
     // External functions
-    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
+    // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
     #[external]
     fn claim_points(value_a: u128, value_b: u128) {
         // Reading caller address
-        let sender_address: ContractAddress = get_caller_address(); 
+        let sender_address: ContractAddress = get_caller_address();
         // Checking that value_a and value_b fit the desired properties
         assert(value_a != 0_u128, 'ZERO_VALUE');
         assert(value_b >= 0_u128, 'LESS_THAN_ZERO_VALUE');

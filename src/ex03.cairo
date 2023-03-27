@@ -1,5 +1,7 @@
-// Ex 03
-// // Using contract functions to manipulate contract variables
+////////////////////////////////
+// Exercise 3
+// Using contract functions to manipulate contract variables
+////////////////////////////////
 // In this exercise, you need to:
 // - Use this contract's functions in order to manipulate an internal counter unique to your address
 // - Once this counter reaches a certain value, call a specific function
@@ -9,10 +11,11 @@
 // - How to declare mappings
 // - How to read and write to mappings
 // - How to use a function to manipulate storage variables
+////////////////////////////////
 
 #[contract]
 mod Ex03 {
-    ////////////////////////////////    
+    ////////////////////////////////
     // Starknet core library imports
     // These are syscalls and functionnalities that allow you to write starknet contracts
     ////////////////////////////////
@@ -22,11 +25,11 @@ mod Ex03 {
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract.
-    ////////////////////////////////    
+    ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;  
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
 
     ////////////////////////////////
     // Storage
@@ -61,7 +64,7 @@ mod Ex03 {
 
     ////////////////////////////////
     // External functions
-    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
+    // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
     #[external]
     fn increment_counter() {
@@ -82,7 +85,7 @@ mod Ex03 {
         // Writing updated value to storage
         user_counters::write(sender_address, current_counter_value - 1_u128);
     }
-    
+
     #[external]
     fn reset_counter() {
         // Reading caller address
@@ -91,7 +94,7 @@ mod Ex03 {
         user_counters::write(sender_address, 0_u128);
     }
 
-    
+
     #[external]
     fn claim_points() {
         // Reading caller address

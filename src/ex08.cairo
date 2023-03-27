@@ -1,4 +1,4 @@
-////////////////////////////////    
+////////////////////////////////
 // Exercise 8
 // Recursions - basics
 ////////////////////////////////
@@ -10,7 +10,7 @@
 
 #[contract]
 mod Ex08 {
-    ////////////////////////////////    
+    ////////////////////////////////
     // Starknet core library imports
     // These are syscalls and functionnalities that allow you to write starknet contracts
     ////////////////////////////////
@@ -22,7 +22,7 @@ mod Ex08 {
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract
-    ////////////////////////////////  
+    ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
@@ -59,7 +59,7 @@ mod Ex08 {
 
     ////////////////////////////////
     // External functions
-    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
+    // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
     #[external]
     fn claim_points() {
@@ -76,7 +76,7 @@ mod Ex08 {
 
     ////////////////////////////////
     // Internal functions
-    // These functions are not callable by other contracts (similar to "private" in Solidity)
+    // These functions are not accessible to external calls only callable inside the contracts or be used in other contracts using "use statement" (similar to "private" in Solidity)
     ////////////////////////////////
     fn set_user_values_internal(account: ContractAddress, mut idx: u128, mut values: Array::<u128>) {
         if !values.is_empty() {
@@ -92,8 +92,6 @@ mod Ex08 {
     ////////////////////////////////
 
     // This function takes an array as a parameter
-    // In order to pass it, the user needs to pass both the array and its length
-    // This complexity is abstracted away by voyager, where you simply need to pass an array
     #[external]
     fn set_user_values(account: ContractAddress, values: Array::<u128>) {
         let mut idx = 0_u128;

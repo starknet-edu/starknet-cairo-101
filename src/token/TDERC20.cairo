@@ -1,3 +1,9 @@
+////////////////////////////////
+// TDERC20
+// Main ERC20 contract to utilise ERC20_base contracts
+// The contract is used to distribute points etc.
+////////////////////////////////
+
 #[contract]
 mod TDERC20 {
     // Core library Imports

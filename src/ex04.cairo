@@ -1,15 +1,18 @@
-// Ex 04
-// // Reading a mapping
+////////////////////////////////
+// Exercise 4
+// Reading a mapping
+////////////////////////////////
 // In this exercise, you need to:
 // - Use a function to read a variable
 // - Use a function to read a value in a mapping, where the slot you read is the value from the first call
 // - Use a function to show you know the correct value of the value in the mapping
 // - Your points are credited by the contract
+////////////////////////////////
 
 
 #[contract]
 mod Ex04 {
-    ////////////////////////////////    
+    ////////////////////////////////
     // Starknet core library imports
     // These are syscalls and functionnalities that allow you to write starknet contracts
     ////////////////////////////////
@@ -21,11 +24,11 @@ mod Ex04 {
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract.
-    ////////////////////////////////    
+    ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash; 
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
 
     ////////////////////////////////
     // Storage
@@ -66,7 +69,7 @@ mod Ex04 {
 
     ////////////////////////////////
     // External functions
-    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
+    // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
     #[external]
     fn claim_points(expected_value: u128) {
@@ -99,7 +102,7 @@ mod Ex04 {
         if next_value == 0_u128 {
             next_slot::write(0_u128);
             next_value = values_mapped::read(next_slot::read() + 1_u128);
-        } 
+        }
         user_slots::write(sender_address, next_slot::read() + 1_u128);
         next_slot::write(next_slot::read() + 1_u128);
     }

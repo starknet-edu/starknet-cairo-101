@@ -1,3 +1,9 @@
+////////////////////////////////
+// ERC20Base
+// A Base ERC20 contract to implement ERC20 standarded methods
+// such as `transfer`, `transfer_from`, `mint`, 'burn', 'approve' etc.
+////////////////////////////////
+
 #[contract]
 mod ERC20Base {
     // Core library Imports
@@ -96,7 +102,7 @@ mod ERC20Base {
 
     fn ERC20_mint(recipient: ContractAddress, amount: u256) {
         assert(!recipient.is_zero(), 'ERC20: mint to the 0 address');
-        assert(amount > u256_from_felt252(0), 'ZERO_AMOUNT');
+        assert(amount >= u256_from_felt252(0), 'ZERO_AMOUNT');
 
         let balance: u256 = balances::read(recipient);
         // overflow is not possible because sum is guaranteed to be less than total supply

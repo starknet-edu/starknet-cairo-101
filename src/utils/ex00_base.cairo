@@ -1,5 +1,9 @@
-// ######## Ex 00
-// # A contract from which other contracts can import functions
+////////////////////////////////
+// Ex11Base
+// A Base contract from which other contracts can import major functions
+// such as `validate_exercise`, `distribute_points`
+////////////////////////////////
+
 
 #[contract]
 mod Ex00Base {

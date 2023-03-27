@@ -1,7 +1,7 @@
 use starknet::ContractAddress;
 
 ////////////////////////////////
-// INTERFACE
+// Iplayers_registry INTERFACE
 ////////////////////////////////
 #[abi]
 trait Iplayers_registry {

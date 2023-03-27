@@ -1,6 +1,6 @@
 use starknet::ContractAddress;
 ////////////////////////////////
-// INTERFACE
+// Iex10 INTERFACE
 ////////////////////////////////
 #[abi]
 trait Iex10 {

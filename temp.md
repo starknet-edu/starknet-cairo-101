@@ -28,12 +28,12 @@ Transaction hash: 0x4f23397a152d19e0365fffeaf004bc61b545c8f11216dca7d38e0260899b
 
 ================================================================================================================================================
 
-starknet declare --contract starknet_cairo_101_PlayersRegistry.json --max_fee 174987888270947 --account version_11
+starknet declare --contract target/release/starknet_cairo_101_PlayersRegistry.json --account version_11
 Declare transaction was sent.
-Contract class hash: 0x33049995b12eca958ef2b07ea8ee2365e809738336339cb2eccb0175898270d
-Transaction hash: 0x2f1f6632c85cc5ccd704b51f9494d32f90df5a41e6bd3e1f3edabd552f4c7e3
+Contract class hash: 0x033049995b12eca958ef2b07ea8ee2365e809738336339cb2eccb0175898270d
+Transaction hash: 0x01f985b0bc5ff83328aa4a103352dd6a47ec7583e3421f2cf1346370e56d5535
 
-starknet deploy --class_hash 0x33049995b12eca958ef2b07ea8ee2365e809738336339cb2eccb0175898270d --inputs 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79 --account version_11
+starknet deploy --class_hash 0x033049995b12eca958ef2b07ea8ee2365e809738336339cb2eccb0175898270d --inputs 0x04b22f492ade0853a8586e003978976ed19e4bcbc8df133b0f98ea768c80dd10 --account version_11
 
 FEE_TRANSFER_FAILURE
 Actual fee exceeded max fee.

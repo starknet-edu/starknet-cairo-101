@@ -1,7 +1,7 @@
 use starknet::ContractAddress;
 
 //###################
-// INTERFACE
+// IERC20 INTERFACE
 //###################
 
 #[abi]

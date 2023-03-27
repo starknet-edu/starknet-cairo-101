@@ -1,5 +1,8 @@
-// ######## Ex 11
-// # A contract from which other contracts can import functions
+////////////////////////////////
+// Ex11Base
+// A contract from which other contracts can import functions
+// such as `validate_exercise`, `distribute_points`
+////////////////////////////////
 
 #[contract]
 mod Ex11Base {

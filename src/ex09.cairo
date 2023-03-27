@@ -1,4 +1,4 @@
-////////////////////////////////    
+////////////////////////////////
 // Exercise 9
 // Recursions - advanced
 ////////////////////////////////
@@ -9,7 +9,7 @@
 
 #[contract]
 mod Ex09 {
-    ////////////////////////////////    
+    ////////////////////////////////
     // Starknet core library imports
     // These are syscalls and functionnalities that allow you to write starknet contracts
     ////////////////////////////////
@@ -21,7 +21,7 @@ mod Ex09 {
     ////////////////////////////////
     // Internal imports
     // These function become part of the set of function of the current contract
-    ////////////////////////////////  
+    ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
@@ -39,7 +39,7 @@ mod Ex09 {
 
     ////////////////////////////////
     // External functions
-    // These functions are callable by other contracts and are indicated with #[external] (similar to "public" in Solidity)
+    // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
     #[external]
     fn claim_points(array: Array::<u128>) {
@@ -62,7 +62,7 @@ mod Ex09 {
 
     ////////////////////////////////
     // Internal functions
-    // These functions are not callable by other contracts (similar to "private" in Solidity)
+    // These functions are not accessible to external calls only callable inside the contracts or be used in other contracts using "use statement" (similar to "private" in Solidity)
     ////////////////////////////////
     fn get_sum_internal(mut sum: u128, mut values: Array::<u128>) -> u128 {
         if !values.is_empty() {

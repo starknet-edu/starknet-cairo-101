@@ -1,5 +1,8 @@
-// ######## Ex 00
-// # A contract from which other contracts can import functions
+////////////////////////////////
+// PlayersRegistry
+// A contract to record all addresses who participated, and which exercises and workshops they completed
+////////////////////////////////
+
 
 #[contract]
 mod PlayersRegistry {
