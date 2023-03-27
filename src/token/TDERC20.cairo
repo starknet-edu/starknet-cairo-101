@@ -141,13 +141,13 @@ mod TDERC20 {
     #[external]
     fn distribute_points(to: ContractAddress, amount: u128) {
         only_teacher_or_exercise();
-        ERC20_mint(to, as_u256(0_u128, amount));
+        ERC20_mint(to, u256 { low: 0_u128, high: amount });
     }
 
     #[external]
     fn remove_points(to: ContractAddress, amount: u128) {
         only_teacher_or_exercise();
-        ERC20_burn(to, as_u256(0_u128, amount));
+        ERC20_burn(to, u256 { low: 0_u128, high: amount });
     }
 
     #[external]
@@ -180,8 +180,5 @@ mod TDERC20 {
         only_teacher_or_exercise();
         let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
         replace_class_syscall(class_hash);
-    }
-    fn as_u256(high: u128, low: u128) -> u256 {
-    u256 { low, high }
     }
 }
