@@ -53,11 +53,9 @@ mod Ex13 {
         _tderc20_address: ContractAddress,
         _players_registry: ContractAddress,
         _workshop_id: u128,
-        _exercise_id: u128,
-        values: Array::<u128>
+        _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
-        set_random_values(values);
     }
 
     ////////////////////////////////
