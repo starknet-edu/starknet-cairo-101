@@ -136,7 +136,7 @@ mod Ex06 {
     fn set_random_values(values: Array::<u128>) {
         // Check if the random values were already initialized
         let was_initialized_read = was_initialized::read();
-        assert(was_initialized_read == true, 'NOT_INITIALISED');
+        assert(was_initialized_read != true, 'NOT_INITIALISED');
 
         let mut idx = 0_u128;
         set_a_random_value(idx, values);
