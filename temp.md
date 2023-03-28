@@ -1,35 +1,87 @@
+# Deploying the tutorial
+## Deployed addresses and class hashes
+starknet call --function balanceOf --address 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 --input 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79
+
+| Contract | Class hash | Deployed contract | Permissions |
+| ------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Players registry | 0x7a6e514bb54d60ac1cfe8c53a872fbc23ebf25137d093c23c3bf01a6ae5b1c6 | 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba | Ok | 
+| TDERC20 | 0x14f38e5454fbdec31b41ac5d36641cdfdc6d8ac6a33226c3416a968972e55b0 | 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 | Ok | 
+| Ex01 | 0xe200aa0be9e2ff98cb8f3922f82b9508c24017207cc637f2f1193e79ca803e | 0x07d3f3dce413a97c500b7af5f5010b230d85feafcda0590bd4dd388f65853161 | Ok | 
+| Ex02 | 0x4070836bc88356c93b78ff9abf295986543c48cae1aecb5d222d1a8b6092c0a | 0x04293bfdeb6716f44b7a510265c5bbfae68c2f9bc164aa88c02cf05e284325a2 | Ok | 
+| Ex03 | 0x2deedb948926e551309bed476ca866b56dc7849760b02ef9ce31356a0ea4e4f | 0x01d96c6de16807d5ecc441c335bb8603391dc13e36c253bd4f219d38997ba4c2 | Ok | 
+| Ex04 | 0x371a4c938207f35345caed7b4ee411a5d1e891addf0ef6b1ca4c08ff06ad2b7 | 0x0486558e921a07bae6c688995c1f6097cfd0a870b22812d270fc571af1a10626 | Ok, need rand value store | 
+| Ex05 | 0x514aa2c7131db6e742689d2c89a2c1e2073227a0caac00dd39c4ab44fed28c | 0x0652b8c31e6c35ef8573fa78ff65deb6aa252c55e122d8392f630c5f72d48757 | Ok, need rand value store | 
+| Ex06 | 0x444297f4b671700e6d4b970ed75ddda1b9c38b2ac89099a7affbbf8ef764f61 | 0x0690c84f71416eee8b98ae6fb2187d09ff5918985643520141292a4c9de4d271 | Ok, need rand value store | 
+| Ex07 | 0x076c22e5d4c10804d28506e4c14f470fc48d168af5fcbb31472ab48bc31d610f | 0x0418fb3f6c8ca579875a354b97a397400ddea5eb7dcccf3401b0c2574eab9a3b | Ok | 
+| Ex08 | 0x6ba4fbc0462425ff3f3d66da3d125d803f68ef29a3e32942866db726003b29c | 0x0006dac4a1e842b0415855241d555b2c207c939d12e64226fa87c8032fdb7519 | Ok | 
+| Ex09 | 0x10581227a879aa9a02d90319c6e9ca33448c7f73fa9d99b03087e273d55a2ec | 0x056aa19afb0e5c621ae369edc08a20f36a5dfaaf6e7ebc63338303e06ab8aff1 | Ok | 
+| Ex10 | 0x334e1e4d148a789fb44367eff869a6330693037983ba6fd2291b2be1249e15a | 0x0307dbe1012a45617af8a708266eb3c300ab3bf9efe3d6e5a2a5693999daa962 | Ok | 
+| Ex10b | 0x32a35c4bf9c8148689002ca501c973a135a30457c6507e28261bed0c3a1f35 | 0x05f16f4b1c41dedd693f161cbeb10f16f8adc189982c5d33991d232afb2c49ad | Ok | 
+| Ex11 | 0x06eb622294fbf3e7e3d10abdd51565a5fd75a3a41a95f7f34e4f560687b9b6d6 |  |  | 
+| Ex12 | 0x49c061584d80522c8b09967250366f0196b6d3b45d8bba66ea67be5f167ee61 | 0x042b34fe6f5e03d25c0adfdf7149ce21942f725f94dbfe4454e9ea793ff99cb8 |  | 
+| Ex13 | 0x6ce1d974d285a624411d17c0fa0184a9d018feb23a24d386d5b4f93b7cbe047 |  |  | 
+| Ex14 | 0x03c1872bae0e57d9a9bd087ac87eebcf8153d1b0ef66d12a9fb42075fd9c2c4e |  |  | 
+
+## Useful commands
+Setting venv and env variables
+```bash
+source ~/cairo_venv_v11/bin/activate
 export STARKNET_NETWORK=alpha-goerli
 export STARKNET_WALLET=starkware.starknet.wallets.open_zeppelin.OpenZeppelinAccount
+```
+Declaring ex 1
+```bash 
+starknet declare --contract target/release/starknet_cairo_101_Ex14.json --account version_11 
+```
+Deploying players registry and ERC20 and checking admin is registered
+```bash
+# Players registry
+starknet deploy --class_hash 0x07a6e514bb54d60ac1cfe8c53a872fbc23ebf25137d093c23c3bf01a6ae5b1c6 --inputs 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79 --account version_11 --max_fee 100000000000000000
+#ERC20
+starknet deploy --class_hash 0x14f38e5454fbdec31b41ac5d36641cdfdc6d8ac6a33226c3416a968972e55b0 --inputs 67657382794945494849 67657382794945494849 18 0 0 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79 --account version_11 --max_fee 100000000000000000
+starknet call --function is_exercise_or_admin --address 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba --input 0x01d96c6de16807d5ecc441c335bb8603391dc13e36c253bd4f219d38997ba4c2
+starknet call --function is_teacher_or_exercise --address 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 --input 0x01d96c6de16807d5ecc441c335bb8603391dc13e36c253bd4f219d38997ba4c2
+```
+Declaring exercices
+```bash
+# Ex01
+starknet deploy --class_hash 0xe200aa0be9e2ff98cb8f3922f82b9508c24017207cc637f2f1193e79ca803e --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 1 --account version_11 --max_fee 100000000000000000
+# Ex02
+starknet deploy --class_hash 0x4070836bc88356c93b78ff9abf295986543c48cae1aecb5d222d1a8b6092c0a --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 2 107101107 --account version_11 --max_fee 100000000000000000
+# Ex03
+starknet deploy --class_hash 0x2deedb948926e551309bed476ca866b56dc7849760b02ef9ce31356a0ea4e4f --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 3 --account version_11 --max_fee 100000000000000000
+# Ex04
+starknet deploy --class_hash 0x371a4c938207f35345caed7b4ee411a5d1e891addf0ef6b1ca4c08ff06ad2b7 --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 4 --account version_11 --max_fee 100000000000000000
+# Ex 05
+starknet deploy --class_hash 0x514aa2c7131db6e742689d2c89a2c1e2073227a0caac00dd39c4ab44fed28c --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 5 --account version_11 --max_fee 100000000000000000
+# Ex06
+starknet deploy --class_hash 0x444297f4b671700e6d4b970ed75ddda1b9c38b2ac89099a7affbbf8ef764f61 --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 6 --account version_11 --max_fee 100000000000000000
+# Ex07
+starknet deploy --class_hash 0x076c22e5d4c10804d28506e4c14f470fc48d168af5fcbb31472ab48bc31d610f --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 7 --account version_11 --max_fee 100000000000000000
+# Ex08
+starknet deploy --class_hash 0x6ba4fbc0462425ff3f3d66da3d125d803f68ef29a3e32942866db726003b29c --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 8 --account version_11 --max_fee 100000000000000000
+# Ex09
+starknet deploy --class_hash 0x10581227a879aa9a02d90319c6e9ca33448c7f73fa9d99b03087e273d55a2ec --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 9 --account version_11 --max_fee 100000000000000000
+# Ex10
+starknet deploy --class_hash 0x334e1e4d148a789fb44367eff869a6330693037983ba6fd2291b2be1249e15a --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 10 --account version_11 --max_fee 100000000000000000
+# Ex10b
+starknet deploy --class_hash 0x32a35c4bf9c8148689002ca501c973a135a30457c6507e28261bed0c3a1f35 --inputs 0x0307dbe1012a45617af8a708266eb3c300ab3bf9efe3d6e5a2a5693999daa962 --account version_11 --max_fee 100000000000000000
+# Ex11
+starknet deploy --class_hash 0x06eb622294fbf3e7e3d10abdd51565a5fd75a3a41a95f7f34e4f560687b9b6d6 --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 11 --account version_11 --max_fee 100000000000000000
+# Ex 12
+starknet deploy --class_hash 0x49c061584d80522c8b09967250366f0196b6d3b45d8bba66ea67be5f167ee61 --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 12 --account version_11 --max_fee 100000000000000000
+# Ex 14
+starknet deploy --class_hash 0x3c1872bae0e57d9a9bd087ac87eebcf8153d1b0ef66d12a9fb42075fd9c2c4e --inputs 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba 1 14 --account version_11 --max_fee 100000000000000000
+```
+Adding exercices as admin in ERC20 and players registry. Added things through a block explorer. To check the status:
+```bash
+# ERC20
+starknet call --function is_exercise_or_admin --address 0x0726c21564e9666d0957c6e2a6b63056c9fa280cf05f01b690b3acc7c974a5ba --input 0x042b34fe6f5e03d25c0adfdf7149ce21942f725f94dbfe4454e9ea793ff99cb8
+starknet call --function is_teacher_or_exercise --address 0x021a7050c83b4282d9194bb70d302673c00845a3ccfe8d9608e6a55f4a429b11 --input 0x042b34fe6f5e03d25c0adfdf7149ce21942f725f94dbfe4454e9ea793ff99cb8
 
-
-starknet declare --contract target/release/starknet_cairo_101_Ex00Base.json --account version_11
-Sending the transaction with max_fee: 0.000000 ETH (105123114666 WEI).
-Declare transaction was sent.
-Contract class hash: 0x79f1ec1f451548eb27337f42841185b42acd6b9afbb28ae9d89a9527847c54
-Transaction hash: 0x1abea07639dd51d7285aa6c9e0762a5d807d1945a961a4c625df07349fd12fe
-
-starknet tx_status --hash 0x1abea07639dd51d7285aa6c9e0762a5d807d1945a961a4c625df07349fd12fe
-
-starknet deploy --class_hash 0x79f1ec1f451548eb27337f42841185b42acd6b9afbb28ae9d89a9527847c54 --account version_11
-Sending the transaction with max_fee: 0.000000 ETH (206743524373 WEI).
-Invoke transaction for contract deployment was sent.
-Contract address: 0x0456824a3c047407fe15f98012e06ccc37efef00ed0c4340c12c287fe9adfea2
-Transaction hash: 0x3a5dff38feeadd252293a15c1ba6aa939f7b12b89ea70e9c83dfbeb49230ab2
-
-================================================================================================================================================
-
-starknet declare --contract target/release/starknet_cairo_101_ERC20Base.json --account version_11
-Sending the transaction with max_fee: 0.000031 ETH (30670745847265 WEI).
-Declare transaction was sent.
-Contract class hash: 0x68c7dea0af3d8a5d86675e8691af52605d6236ec0483209fdf27bdaaabaa364
-Transaction hash: 0x00d850b64b4c5b2c75e29320c995a787afceb31040536e18507b58cc1168f099
-
-starknet deploy --class_hash 0x68c7dea0af3d8a5d86675e8691af52605d6236ec0483209fdf27bdaaabaa364 --account version_11
-Sending the transaction with max_fee: 0.000073 ETH (73194953676383 WEI).
-Invoke transaction for contract deployment was sent.
-Contract address: 0x074c9d00ec80a938225e2dc39aa1566c99e9f532bf4b3323a4fc01ca8cd4c0d6
-Transaction hash: 0x4f23397a152d19e0365fffeaf004bc61b545c8f11216dca7d38e0260899b355
-
+```
+Setting random values
+starknet invoke --function set_random_values --address 0x0486558e921a07bae6c688995c1f6097cfd0a870b22812d270fc571af1a10626 --input 100 509 7151 5476 3518 3472 1072 2672 1522 2451 4950 9493 6340 6911 3571 7159 111 5431 3695 1758 4928 5139 6549 2252 1068 1624 480 6659 7521 9588 8679 1091 4111 5113 5727 4376 5287 5718 7204 8537 7240 3457 455 685 3467 9279 7243 1571 5229 3683 9881 622 4622 7388 4811 2961 7321 2199 3362 7477 9380 4547 8696 5393 3719 1001 699 646 824 3133 1946 89 2980 8677 6857 2800 8920 1224 2189 6094 2932 5363 4795 192 2695 853 6569 6941 7967 5070 2585 4675 3048 444 2487 5451 6121 945 9343 5757 9193 --account version_11
 ================================================================================================================================================
 
 starknet declare --contract target/release/starknet_cairo_101_PlayersRegistry.json --account version_11
@@ -37,7 +89,7 @@ Declare transaction was sent.
 Contract class hash: 0x07a6e514bb54d60ac1cfe8c53a872fbc23ebf25137d093c23c3bf01a6ae5b1c6
 Transaction hash: 0x06e3c0e562502c1d3a0a17b5875f6d083214555a4bb13d3fb00b37d20da1afb0
 
-starknet deploy --class_hash 0x07a6e514bb54d60ac1cfe8c53a872fbc23ebf25137d093c23c3bf01a6ae5b1c6 --inputs 0x04b22f492ade0853a8586e003978976ed19e4bcbc8df133b0f98ea768c80dd10 --account version_11 --max_fee 99999999999999
+starknet deploy --class_hash 0x07a6e514bb54d60ac1cfe8c53a872fbc23ebf25137d093c23c3bf01a6ae5b1c6 --inputs 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79 --account version_11 --max_fee 100000000000000000
 Sending the transaction with max_fee: 0.000000 ETH (318891749831 WEI).
 Invoke transaction for contract deployment was sent.
 Contract address: 0x06b2c700fba286cd43a29dc99d6f106442968ee1e3aa219c0cde6c521c9874ba
@@ -276,7 +328,7 @@ tx_failure_reason": {
 
 
 ================================================================================================================================================
-starknet declare --contract target/release/starknet_cairo_101_Ex14.json --account version_11 --max_fee 99999999999999
+starknet declare --contract target/release/starknet_cairo_101_Ex14.json --account version_11 --max_fee 100000000000000000
 Declare transaction was sent.
 Contract class hash: 0x03c1872bae0e57d9a9bd087ac87eebcf8153d1b0ef66d12a9fb42075fd9c2c4e
 Transaction hash: 0x025342247b18e95bb344316e72c81e1e380e78446fdccd3cedd7cf8d1b49b2c0
@@ -285,10 +337,3 @@ starknet deploy --class_hash 0x03c1872bae0e57d9a9bd087ac87eebcf8153d1b0ef66d12a9
 Invoke transaction for contract deployment was sent.
 Contract address: 0x0228a48ec35c161a70e417f54145d9a9dc0ad274dd83750041ef5d22a677bc75
 Transaction hash: 0x57007de85ea8cc61e4fc41ce9d92a9042cabe1c4d8366dbf7829cde2f63caea
-
-"tx_failure_reason": {
-        "code": "TRANSACTION_FAILED",
-        "error_message": "Error at pc=0:32:\nGot an exception while executing a hint.\nCairo traceback (most recent call last):\nUnknown location (pc=0:557)\nUnknown location (pc=0:519)\nUnknown location (pc=0:625)\n\nError in the called contract (0x498a667ab7cff4bd5cefd8d1676759ddd265be5aef3b94ecf7a9dfe616b933d):\nError at pc=0:45:\nGot an exception while executing a hint.\nCairo traceback (most recent call last):\nUnknown location (pc=0:597)\nUnknown location (pc=0:568)\n\nError in the called contract (0x228a48ec35c161a70e417f54145d9a9dc0ad274dd83750041ef5d22a677bc75):\nExecution was reverted; failure reason: [0x753132385f66726f6d204f46]."
-    },
-
-Text: u128_from OF
