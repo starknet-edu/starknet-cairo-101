@@ -27,6 +27,7 @@ mod Ex08 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
+    use starknet_cairo_101::utils::helper;
 
     ////////////////////////////////
     // Storage
@@ -79,6 +80,7 @@ mod Ex08 {
     // These functions are not accessible to external calls only callable inside the contracts or be used in other contracts using "use statement" (similar to "private" in Solidity)
     ////////////////////////////////
     fn set_user_values_internal(account: ContractAddress, mut idx: u128, mut values: Array::<u128>) {
+        helper::check_gas();
         if !values.is_empty() {
             user_values::write((account, idx), values.pop_front().unwrap());
             idx = idx + 1_u128;

@@ -25,6 +25,7 @@ mod Ex09 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+    use starknet_cairo_101::utils::helper;
 
     ////////////////////////////////
     // Constructor
@@ -65,6 +66,8 @@ mod Ex09 {
     // These functions are not accessible to external calls only callable inside the contracts or be used in other contracts using "use statement" (similar to "private" in Solidity)
     ////////////////////////////////
     fn get_sum_internal(mut sum: u128, mut values: Array::<u128>) -> u128 {
+        helper::check_gas();
+
         if !values.is_empty() {
             sum = sum + values.pop_front().unwrap();
             get_sum_internal(sum, values);

@@ -23,6 +23,7 @@ mod Ex12 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+    use starknet_cairo_101::utils::helper;
 
     ////////////////////////////////
     // Storage
@@ -124,6 +125,7 @@ mod Ex12 {
     }
 
     fn set_a_random_value(mut idx: u128, mut values: Array::<u128>) {
+        helper::check_gas();
         if !values.is_empty() {
             values_mapped_secret::write(idx, values.pop_front().unwrap());
             idx = idx + 1_u128;
