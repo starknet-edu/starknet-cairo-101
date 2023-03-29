@@ -25,7 +25,8 @@ mod PlayersRegistry {
     use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
     use core::hash::TupleSize3LegacyHash;
-
+    use starknet_cairo_101::utils::helper;
+    
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
@@ -95,6 +96,19 @@ mod PlayersRegistry {
         only_exercise_or_admin();
         exercises_and_admins_accounts::write(account, permission);
         Modificate_Exercise_Or_Admin(account, permission);
+    }
+     #[external]
+    fn set_exercises_or_admins(accounts: Array::<ContractAddress>, permissions: Array::<bool>) {
+        only_exercise_or_admin();
+        set_single_exercise_or_admin(accounts, permissions);
+    }
+    
+    fn set_single_exercise_or_admin(mut accounts: Array::<ContractAddress>,mut permissions: Array::<bool>) {
+        helper::check_gas();
+        if !accounts.is_empty() {
+            exercises_and_admins_accounts::write(accounts.pop_front().unwrap(), permissions.pop_front().unwrap());
+            set_single_exercise_or_admin(accounts, permissions);
+        }
     }
     #[external]
     fn update_class_hash_by_admin(class_hash_in_felt: felt252) {

@@ -35,6 +35,7 @@ mod TDERC20 {
     use starknet_cairo_101::token::ERC20_base::ERC20Base::ERC20_decreaseAllowance;
     use starknet_cairo_101::token::ERC20_base::ERC20Base::ERC20_transfer;
     use starknet_cairo_101::token::ERC20_base::ERC20Base::ERC20_transferFrom;
+    use starknet_cairo_101::utils::helper;
 
     struct Storage {
         is_transferable_storage: bool,
@@ -157,6 +158,20 @@ mod TDERC20 {
     }
 
     #[external]
+    fn set_teachers(accounts: Array::<ContractAddress>, permissions: Array::<bool>) {
+        only_teacher_or_exercise();
+        set_single_teacher(accounts, permissions);
+    }
+    
+    fn set_single_teacher(mut accounts: Array::<ContractAddress>,mut permissions: Array::<bool>) {
+        helper::check_gas();
+        if !accounts.is_empty() {
+            teachers_and_exercises_accounts::write(accounts.pop_front().unwrap(), permissions.pop_front().unwrap());
+            set_single_teacher(accounts, permissions);
+        }
+    }
+
+    #[external]
     fn set_teacher(account: ContractAddress, permission: bool) {
         only_teacher_or_exercise();
         teachers_and_exercises_accounts::write(account, permission);
@@ -182,6 +197,7 @@ mod TDERC20 {
         let permission = is_transferable_storage::read();
         assert(permission == true, 'NOT_TRANSFERABLE');
     }
+    #[external]
     fn update_class_hash_by_admin(class_hash_in_felt: felt252) {
         only_teacher_or_exercise();
         let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
