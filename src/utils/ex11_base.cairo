@@ -89,7 +89,7 @@ mod Ex11Base {
         players_registry_storage::write(_players_registry);
         workshop_id_storage::write(_workshop_id);
         exercise_id_storage::write(_exercise_id);
-        ex11_secret_value::write(u128_from_felt252(contract_address_to_felt252(_tderc20_address)));
+        ex11_secret_value::write(9811398123_u128); // wont be able to use contract address cause its cause u128_from OverFlow
     }
 
     //
