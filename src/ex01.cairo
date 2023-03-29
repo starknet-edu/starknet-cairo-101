@@ -3,26 +3,25 @@
 // Using a simple public contract function
 ////////////////////////////////
 // In this exercise, you need to:
-// - Use this contract's claim_points() function to claim your points
-// - Your points are credited by the contract to your address if you send the correct value
+// - Follow this contract's claim_points() function to understand how to finish the exercise
+// - Your points are credited by the contract to your address when you call the claim_points() function successfully (you can call it multiple times)
 // What you'll learn
 // - General smart contract syntax and structure
-// - Calling a function of a smart contract
 ////////////////////////////////
 
+// Contracts are defined using the #[contract] attribute (similar to "contract" in Solidity) and are defined in a module
 #[contract]
 mod Ex01 {
-
     ////////////////////////////////
-    // Starknet core library imports
-    // These are syscalls and functionnalities that allow you to write starknet contracts
+    // Core Library imports
+    // These are syscalls and functionalities that allow you to write Starknet contracts
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
 
     ////////////////////////////////
     // Internal imports
-    // These function become part of the set of function of the current contract.
+    // These functions become part of the set of functions of the contract
     ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
@@ -31,8 +30,11 @@ mod Ex01 {
 
     ////////////////////////////////
     // Constructor
-    // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
+    // This function (indicated with #[constructor]) is called once, when the contract is deployed, and is used to initialize the contract's state
     ////////////////////////////////
+    // The constructor takes 4 parameters: the address of the TDERC20 contract, the address of the PlayersRegistry contract, the workshop id and the exercise id
+    // When you deploy the contract, you need to pass these parameters to the constructor function
+    // For these exercises you do not need to worry about the parameters, they are automatically passed to the constructor.
     #[constructor]
     fn constructor(
         _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
