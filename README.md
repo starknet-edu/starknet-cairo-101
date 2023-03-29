@@ -40,7 +40,7 @@ We hope you have fun participating in this workshop!
 These wallet solutions are for Starknet  what Metamask is for Ethereum. They allow users to initiate transactions and interact with applications on Starknet.
 - Follow the instructions in your wallet app to install the extension. It may take approximately 5 minutes for the account to be deployed. Note that in Starknet, there is only one type of account: smart contract accounts. To create a new wallet, you need to send a transaction that publishes your smart contract wallet to the network.
 - Make sure you are on the Goerli testnet network.
-- The tutorial’s points are held in contract  `WIP` ([Starkscan link](WIP), [Voyager link](WIP)). Click "Add Token" in your installed wallet and add the tutorial contract address so that your points balance appears there. A new token called `SC101` (starknet-cairo-101) will appear in your wallet.
+- The tutorial’s points are held in contract  `0x044f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de` ([Starkscan link](https://testnet.starkscan.co/contract/0x044f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de), [Voyager link](https://goerli.voyager.online/contract/0x044f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de)). Click "Add Token" in your installed wallet and add the tutorial contract address so that your points balance appears there. A new token called `SC101` (starknet-cairo-101) will appear in your wallet.
 - To execute transactions on the Goerli Starknet testnet, you will need testnet ETH to pay for gas. You have two options:
     - Go to the [faucet](https://faucet.goerli.starknet.io/) and follow the instructions. It may take a few minutes
     - Go to [Starkgate](https://goerli.starkgate.starknet.io/) and bridge Goerli Eth from Ethereum to Starknet
@@ -67,8 +67,6 @@ Each exercise is deployed on the Goerli testnet, and you will need to interact w
 
 | Topic                                 | Contract code                                         | Contract on Starkscan                                                                                              | Contract on Voyager                                                                                              |
 | ------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Players Registry                      | [Players Registry](src/utils/players_registry.cairo) | [Link](https://testnet.starkscan.co/contract/0x04732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636) | [Link](https://goerli.voyager.online/contract/0x04732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636) |
-| Points counter ERC20                  | [Points counter ERC20](src/token/TDERC20.cairo) | [Link](https://testnet.starkscan.co/contract/0x044f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de) | [Link](https://goerli.voyager.online/contract/0x044f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de) |
 | General syntax                        | [Ex01](src/ex01.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x031d1866cb827c4e27bbca9ffee59fa2158b679413ffb58c3f90af56e1140e85) | [Link](https://goerli.voyager.online/contract/0x031d1866cb827c4e27bbca9ffee59fa2158b679413ffb58c3f90af56e1140e85) |
 | Storage variables, getters, asserts   | [Ex02](src/ex02.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x0600f8fe0752e598b4e6b27839f00ad65215d129f385e12931323c487b6f9b36) | [Link](https://goerli.voyager.online/contract/0x0600f8fe0752e598b4e6b27839f00ad65215d129f385e12931323c487b6f9b36) |
 | Reading and writing storage variables | [Ex03](src/ex03.cairo)                          | [Link](https://testnet.starkscan.co/contract/0x033d5fc40c0e262612528a9a652ada70be854d98241fb7548745262b5273c9d1) | [Link](https://goerli.voyager.online/contract/0x033d5fc40c0e262612528a9a652ada70be854d98241fb7548745262b5273c9d1) |
@@ -88,11 +86,10 @@ Each exercise is deployed on the Goerli testnet, and you will need to interact w
 ### 4. Counting your points and checking your progress
 
 Your points will be credited to your wallet, though this may take some time. If you want to monitor your points count in real-time, you can also check your balance in a block explorer!
-​
-- Go to the  ERC20 counter on [Voyager](WIP) or [Starkscan](WIP) in the "read contract" tab.
+- Go to the  ERC20 counter on [Voyager](https://goerli.voyager.online/contract/0x044f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de) or [Starkscan](https://testnet.starkscan.co/contract/0x044f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de) in the "read contract" tab.
 - Enter your address in the `balanceOf` function.​
 
-Enjoy the workshop! If you have any questions, feel free to contact us on [Discord](https://discord.gg/8Z3q3Z5). We are happy to help!
+Enjoy the workshop! If you have any questions, feel free to contact us on [Discord](https://starknet.io/discord). We are happy to help!
 
 ---
 

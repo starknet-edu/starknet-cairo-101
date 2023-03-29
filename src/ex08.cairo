@@ -2,7 +2,6 @@
 // Exercise 8
 // Recursions - basics
 ////////////////////////////////
-// - 
 // - Use this contract's claim_points() function
 // - Your points are credited by the contract
 ////////////////////////////////
