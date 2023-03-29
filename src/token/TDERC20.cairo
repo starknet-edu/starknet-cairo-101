@@ -147,7 +147,7 @@ mod TDERC20 {
     #[external]
     fn distribute_points(to: ContractAddress, amount: u128) {
         only_teacher_or_exercise();
-        ERC20_mint(to, u256 { low: 0_u128, high: amount });
+        ERC20_mint(to, u256 { low: amount, high: 0_u128 });
     }
 
     #[external]
