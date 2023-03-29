@@ -25,6 +25,7 @@ mod Ex09 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
     use starknet_cairo_101::utils::helper;
 
     ////////////////////////////////
@@ -59,6 +60,15 @@ mod Ex09 {
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
         distribute_points(sender_address, 2_u128);
+    }
+    
+    ////////////////////////////////
+    // External functions - Administration
+    // Only admins can call these. You don't need to understand them to finish the exercise.
+    ////////////////////////////////
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 
     ////////////////////////////////

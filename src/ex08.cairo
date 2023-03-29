@@ -26,7 +26,7 @@ mod Ex08 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
     use starknet_cairo_101::utils::helper;
 
     ////////////////////////////////
@@ -92,6 +92,10 @@ mod Ex08 {
     // External functions - Administration
     // Only admins can call these. You don't need to understand them to finish the exercise.
     ////////////////////////////////
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
+    }
 
     // This function takes an array as a parameter
     #[external]

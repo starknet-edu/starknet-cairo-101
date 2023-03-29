@@ -24,7 +24,7 @@ mod Ex10b {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
     use starknet_cairo_101::utils::Iex10::Iex10Dispatcher;
     use starknet_cairo_101::utils::Iex10::Iex10DispatcherTrait;
 

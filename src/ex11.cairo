@@ -25,7 +25,7 @@ mod Ex11 {
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_exercise;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::ex_initializer;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_answers;
-
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
     ////////////////////////////////
     // Constructor
     // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
@@ -51,5 +51,13 @@ mod Ex11 {
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
         distribute_points(sender_address, 2_u128);
+    }
+    ////////////////////////////////
+    // External functions - Administration
+    // Only admins can call these. You don't need to understand them to finish the exercise.
+    ////////////////////////////////
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
     }
 }
