@@ -2,7 +2,7 @@
 // Exercise 8
 // Recursions - basics
 ////////////////////////////////
-// TODO (omar): Add a description of the exercise
+// - 
 // - Use this contract's claim_points() function
 // - Your points are credited by the contract
 ////////////////////////////////
@@ -11,8 +11,8 @@
 #[contract]
 mod Ex08 {
     ////////////////////////////////
-    // Starknet core library imports
-    // These are syscalls and functionnalities that allow you to write starknet contracts
+    // Core Library imports
+    // These are syscalls and functionalities that allow you to write Starknet contracts
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;

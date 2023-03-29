@@ -11,8 +11,8 @@
 #[contract]
 mod Ex11 {
     ////////////////////////////////
-    // Starknet core library imports
-    // These are syscalls and functionnalities that allow you to write starknet contracts
+    // Core Library imports
+    // These are syscalls and functionalities that allow you to write Starknet contracts
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
