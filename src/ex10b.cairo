@@ -10,8 +10,8 @@
 #[contract]
 mod Ex10b {
     ////////////////////////////////
-    // Starknet core library imports
-    // These are syscalls and functionnalities that allow you to write starknet contracts
+    // Core Library imports
+    // These are syscalls and functionalities that allow you to write Starknet contracts
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::get_contract_address;
@@ -24,7 +24,7 @@ mod Ex10b {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
     use starknet_cairo_101::utils::Iex10::Iex10Dispatcher;
     use starknet_cairo_101::utils::Iex10::Iex10DispatcherTrait;
 

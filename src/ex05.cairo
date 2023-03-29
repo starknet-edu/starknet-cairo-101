@@ -3,17 +3,20 @@
 // Public/private variables
 ////////////////////////////////
 // In this exercise, you need to:
+// - Follow this contract's claim_points() function to understand how to finish the exercise
 // - Use a function to get assigned a private variable
 // - Use a function to duplicate this variable in a public variable
 // - Use a function to show you know the correct value of the private variable
 // - Your points are credited by the contract
+// What you will learn:
+// - How to interact with private and public variables
 ////////////////////////////////
 
 #[contract]
 mod Ex05 {
     ////////////////////////////////
-    // Starknet core library imports
-    // These are syscalls and functionnalities that allow you to write starknet contracts
+    // Core Library imports
+    // These are syscalls and functionalities that allow you to write Starknet contracts
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
@@ -22,12 +25,12 @@ mod Ex05 {
 
     ////////////////////////////////
     // Internal imports
-    // These function become part of the set of function of the current contract.
+    // These functions become part of the set of functions of the contract
     ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
     use starknet_cairo_101::utils::helper;
 
     ////////////////////////////////
@@ -127,6 +130,11 @@ mod Ex05 {
     // External functions - Administration
     // Only admins can call these. You don't need to understand them to finish the exercise.
     ////////////////////////////////
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
+    }
+    
     #[external]
     fn set_random_values(values: Array::<u128>) {
         // Check if the random values were already initialized

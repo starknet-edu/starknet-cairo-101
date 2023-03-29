@@ -3,18 +3,20 @@
 // Reading a mapping
 ////////////////////////////////
 // In this exercise, you need to:
-// - Use a function to read a variable
-// - Use a function to read a value in a mapping, where the slot you read is the value from the first call
+// - Follow this contract's claim_points() function to understand how to finish the exercise
 // - Use a function to show you know the correct value of the value in the mapping
-// - Your points are credited by the contract
+// - Use this contract's claim_points() function with a specific argument
+// - Your points are credited by the contract if you send the correct value
+// What you will learn:
+// - How to use a function to read a value in a mapping where the slot you read is the value from the first call
 ////////////////////////////////
 
 
 #[contract]
 mod Ex04 {
     ////////////////////////////////
-    // Starknet core library imports
-    // These are syscalls and functionnalities that allow you to write starknet contracts
+    // Core Library imports
+    // These are syscalls and functionalities that allow you to write Starknet contracts
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
@@ -23,12 +25,12 @@ mod Ex04 {
 
     ////////////////////////////////
     // Internal imports
-    // These function become part of the set of function of the current contract.
+    // These functions become part of the set of functions of the contract
     ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
     use starknet_cairo_101::utils::helper;
 
     ////////////////////////////////
@@ -76,8 +78,10 @@ mod Ex04 {
     fn claim_points(expected_value: u128) {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
-        // Reading the slot assigned to the caller
+        // Reading the slot assigned to the caller address in the mapping user_slots.
+        // The value was assigned when assign_user_slot() was called by the user (see below) and is stored in the mapping user_slots
         let user_slot = user_slots::read(sender_address);
+        // Checking that the user has a slot assigned to they (i.e. that he called assign_user_slot() before)
         assert(user_slot != 0_u128, 'ASSIGN_USER_SLOT_FIRST');
 
         // Checking that the value provided by the caller is the one we expect
@@ -91,15 +95,16 @@ mod Ex04 {
         distribute_points(sender_address, 2_u128);
     }
 
+    // This function is used to assign a slot to a user and to update the next slot
     #[external]
     fn assign_user_slot() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
         // Assigning a slot to a user
         let next_slot_temp = next_slot::read();
-        // Checking if next random value is 0
-        // next_value is a "mutable" variable. Its value can change during the course of the function call
+        // Next_value is a "mutable" variable. Its value can change during the course of the function call
         let mut next_value = values_mapped::read(next_slot::read() + 1_u128);
+        // Checking if next random value is 0
         if next_value == 0_u128 {
             next_slot::write(0_u128);
             next_value = values_mapped::read(next_slot::read() + 1_u128);
@@ -113,6 +118,10 @@ mod Ex04 {
     // Only admins can call these. You don't need to understand them to finish the exercise.
     ////////////////////////////////
     #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
+    }
+    #[external]
     fn set_random_values(values: Array::<u128>) {
         // Check if the random values were already initialized
         let was_initialized_read = was_initialized::read();
@@ -124,7 +133,7 @@ mod Ex04 {
         // Mark that value store was initialized
         was_initialized::write(true);
     }
-
+    
     fn set_a_random_value(mut idx: u128, mut values: Array::<u128>) {
         helper::check_gas();
         if !values.is_empty() {

@@ -9,20 +9,20 @@
 #[contract]
 mod Ex07 {
     ////////////////////////////////
-    // Starknet core library imports
-    // These are syscalls and functionnalities that allow you to write starknet contracts
+    // Core Library imports
+    // These are syscalls and functionalities that allow you to write Starknet contracts
     ////////////////////////////////
     use starknet::get_caller_address;
     use starknet::ContractAddress;
 
     ////////////////////////////////
     // Internal imports
-    // These function become part of the set of function of the current contract.
+    // These functions become part of the set of functions of the contract
     ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
-    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash;
+    use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
     ////////////////////////////////
     // Constructor
@@ -36,9 +36,13 @@ mod Ex07 {
     }
 
     ////////////////////////////////
-    // External functions
-    // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
+    // External functions - Administration
+    // Only admins can call these. You don't need to understand them to finish the exercise.
     ////////////////////////////////
+    #[external]
+    fn update_class_hash(class_hash: felt252) {
+        update_class_hash_by_admin(class_hash);
+    }
     #[external]
     fn claim_points(value_a: u128, value_b: u128) {
         // Reading caller address
