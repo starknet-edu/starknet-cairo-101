@@ -111,6 +111,7 @@ mod Ex06 {
 
     #[external]
     fn external_handler_for_internal_function(a_value: u128) {
+        assert(a_value != 0_u128, 'A_VALUE_NOT_ZERO');
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
         // Calling internal function
@@ -138,7 +139,7 @@ mod Ex06 {
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);
     }
-    
+
     #[external]
     fn set_random_values(values: Array::<u128>) {
         // Check if the random values were already initialized

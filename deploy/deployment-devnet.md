@@ -136,36 +136,6 @@ starknet invoke --function claim_points --address 0x008a057550284f3e8e06d571bb18
 ```
 
 
-
-
-
-name, contract_class_hash, contract_addr
-TDERC20, 0x14f38e5454fbdec31b41ac5d36641cdfdc6d8ac6a33226c3416a968972e55b0, 0x0577633dd856cea9a21adff6d698cff5e488ab7e56d48f41dfe1551502620117
-PlayersRegistry, 0x7a6e514bb54d60ac1cfe8c53a872fbc23ebf25137d093c23c3bf01a6ae5b1c6, 0x0239cea68a458a1f74dd59b377d39a82d5319e0dce9e8e2c7936666851d58e12
-ex01, 0xe200aa0be9e2ff98cb8f3922f82b9508c24017207cc637f2f1193e79ca803e, 0x0719194252ce4c40d1f49ef25b39c4c7bb607bb3edab4504c47f83fa9a374d6f
-ex02, 0x4070836bc88356c93b78ff9abf295986543c48cae1aecb5d222d1a8b6092c0a, 0x0018d465f4732fc6e665e3e953e53bc1bfa1a424fbb7fead4370f8b6b944ba8a
-ex03, 0x2deedb948926e551309bed476ca866b56dc7849760b02ef9ce31356a0ea4e4f, 0x008a057550284f3e8e06d571bb1863bf41245dcdcca109bb496229e2cb9e09ed
-ex11, 0x6eb622294fbf3e7e3d10abdd51565a5fd75a3a41a95f7f34e4f560687b9b6d6,
-
-
-
-
-
-
-starknet call --function is_teacher_or_exercise --address 0x03f5a8e43a4660b2c3dc467645a2457a78ded80d63980079c5c1131e1acad3da --input $ACCT_ADMIN --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
-
-starknet call --function balanceOf --address 0x0577633dd856cea9a21adff6d698cff5e488ab7e56d48f41dfe1551502620117 --inputs 0x2c3e03cacac109396754f70ba9445b987bebb7b843474fc1f00b4bbde32e901 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
-
-
-starknet invoke --function set_transferable --address 0x03f5a8e43a4660b2c3dc467645a2457a78ded80d63980079c5c1131e1acad3da --inputs 1 --account test --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
-
-starknet invoke --function distribute_points --address 0x03f5a8e43a4660b2c3dc467645a2457a78ded80d63980079c5c1131e1acad3da --inputs 0x01517435681b37f79838374367af59e2302c5500853f9ffcd9bc25ffcc7bc9fa 999000000000000000000 0 --account test --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
-
-
-
-
-
-
 ``` bash
 docker run -p 127.0.0.1:5050:5050 --name devnet1 --mount type=bind,source=/Users/seabookchen/.starknet-devnet/dumpdir,target=/dumpdir devnet-1 --seed 1234 --timeout 10000  --dump-on exit --dump-path /dumpdir/dump.pkl
 ```

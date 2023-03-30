@@ -76,7 +76,7 @@ mod Ex14 {
         // Read how many points were collected
         let collected_points = balance_after - balance_before;
         // Check that at least 20 points were collected
-        assert(collected_points >= u256 { low: 0_u128, high: 20_u128 }, 'NO_ENOUGH_POINTS_COLLECTED');
+        assert(collected_points >= u256 { low: 20_u128, high: 0_u128 }, 'NO_ENOUGH_POINTS_COLLECTED');
 
          // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
