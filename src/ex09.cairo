@@ -50,7 +50,7 @@ mod Ex09 {
 
         // Calculating the sum of the array sent by the user
         let mut sum: u128 = 0_u128;
-        sum = get_sum_internal(sum, array);
+        get_sum_internal(sum, array);
         assert(sum >= 50_u128, 'SUM_LT_50');
 
         // Reading caller address

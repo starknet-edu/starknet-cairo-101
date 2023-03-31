@@ -72,7 +72,7 @@ mod Ex10 {
         // Retrieve secret value by READING
         let ex10b_addr = ex10b_address::read();
 
-        let secret_value = Iex10bDispatcher{contract_address: ex10b_addr}.secret_value();
+        let secret_value = Iex10bDispatcher{contract_address: ex10b_addr}.get_secret_value();
         assert(secret_value == secret_value_i_guess, 'NOT_EXPECTED_SECRET_VALUE');
 
         // choosing next secret_value for contract 10b. We don't want 0, it's not funny
@@ -94,7 +94,7 @@ mod Ex10 {
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);
     }
-    
+
     #[external]
     fn set_ex_10b_address(ex10b_addr: ContractAddress) {
         let is_setup = setup_is_finished::read();

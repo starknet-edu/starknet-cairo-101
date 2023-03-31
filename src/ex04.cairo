@@ -133,7 +133,7 @@ mod Ex04 {
         // Mark that value store was initialized
         was_initialized::write(true);
     }
-    
+
     fn set_a_random_value(mut idx: u128, mut values: Array::<u128>) {
         helper::check_gas();
         if !values.is_empty() {
