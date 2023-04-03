@@ -50,8 +50,8 @@ mod Ex09 {
 
         // Calculating the sum of the array sent by the user
         let mut sum: u128 = 0_u128;
-        get_sum_internal(sum, array);
-        assert(sum >= 50_u128, 'SUM_LT_50');
+        let total = get_sum_internal(sum, array);
+        assert(total >= 50_u128, 'SUM_LT_50');
 
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
@@ -75,12 +75,14 @@ mod Ex09 {
     // Internal functions
     // These functions are not accessible to external calls only callable inside the contracts or be used in other contracts using "use statement" (similar to "private" in Solidity)
     ////////////////////////////////
-    fn get_sum_internal(mut sum: u128, mut values: Array::<u128>) {
+    fn get_sum_internal(mut sum: u128, mut values: Array::<u128>) -> u128 {
         helper::check_gas();
 
         if !values.is_empty() {
             sum = sum + values.pop_front().unwrap();
-            get_sum_internal(sum, values);
+            return get_sum_internal(sum, values);
         }
+
+        sum
     }
 }

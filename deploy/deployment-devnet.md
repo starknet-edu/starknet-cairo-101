@@ -23,9 +23,6 @@ starknet tx_status --gateway_url http://localhost:5050 --feeder_gateway_url http
 
 ### Declare contracts on dev-net
 ``` bash
-starknet declare --contract target/release/starknet_cairo_101_EX00Base.json --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
-starknet declare --contract target/release/starknet_cairo_101_EX11Base.json --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
-starknet declare --contract target/release/starknet_cairo_101_ERC20Base.json --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 starknet declare --contract target/release/starknet_cairo_101_TDERC20.json --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 starknet declare --contract target/release/starknet_cairo_101_PlayersRegistry.json --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 starknet declare --contract target/release/starknet_cairo_101_ex01.json --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
@@ -251,12 +248,7 @@ starknet invoke --function set_random_values --address 0x02d0e25abe31cebb145aa9c
 starknet invoke --function set_random_values --address 0x066162f43d2c27e93377b84bef716fd8a0e52e00bc9c6758c17e107a669f8896 --input 100 8308 5970 1409 7875 8633 6802 4987 2249 8843 3546 2519 5738 214 5185 6229 4843 8604 5121 4495 40 8045 3028 1327 8160 9376 6845 5219 6010 2220 253 5913 8682 1031 6173 690 1235 8918 5215 2276 1228 4315 9814 4099 9322 9672 5389 5795 9779 4535 5385 3787 6393 5306 7019 5447 7366 9283 7893 5210 2696 323 1824 2665 6720 7457 2627 1784 2730 2100 7622 8957 3193 8833 6583 428 5015 9026 6353 8905 5935 3224 7475 5910 5129 8137 9669 5646 4841 2318 7741 2280 9086 5248 7178 4496 1003 934 2803 9022 8656 --account admin --max_fee 100000000000000000 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 ```
 
-``` bash
-docker run -p 127.0.0.1:5050:5050 --name devnet1 --mount type=bind,source=/Users/seabookchen/.starknet-devnet/dumpdir,target=/dumpdir devnet-1 --seed 1234 --timeout 10000  --dump-on exit --dump-path /dumpdir/dump.pkl
-```
-
-
 ### Run starknet-devnet locally
 ```
-docker run -p 127.0.0.1:5050:5050 --name starknet-devnet --mount type=bind,source=/Users/seabookchen/.starknet-devnet/dumpdir,target=/dumpdir shardlabs/starknet-devnet:latest-arm --seed 1234 --timeout 10000  --dump-on exit --dump-path /dumpdir/dump.pkl
+docker run -p 127.0.0.1:5050:5050 --name starknet-devnet --mount type=bind,source=/Users/seabookchen/.starknet-devnet/dumpdir,target=/dumpdir shardlabs/starknet-devnet:latest-arm --seed 1234 --timeout 10000  --dump-on exit --dump-path /dumpdir/dump.pkl --load-path /dumpdir/dump.pkl
 ```

@@ -1,6 +1,6 @@
 # Smart Contract Devent Record
 
-| Contract Name  |  Class Hash  | Contract Address | Passed? |
+| Contract Name  |  Class Hash  | Contract Address | Test Passed? |
 |:----------|:----------|:----------|:----------|
 | TDERC20    | 0x2de7e654139db6c8c05d7c456b953e8feba7055a25d6dc0ab5d538314d96a6 | 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196    | ✅    |
 | PLAYER_REGISTRY    | 0x25f0f9beb3c3bf0c01678aa830ff96fad5f2bd05b23a8f4c0a2bce92ec5f25d  | 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809    | ✅    | 
