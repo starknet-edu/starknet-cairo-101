@@ -11,7 +11,7 @@
 ////////////////////////////////
 
 #[contract]
-mod ExEnums {
+mod Ex16 {
     // Core Library imports
     use starknet::get_caller_address;
     use starknet::ContractAddress;
