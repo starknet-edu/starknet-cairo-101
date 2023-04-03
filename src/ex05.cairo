@@ -134,7 +134,7 @@ mod Ex05 {
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);
     }
-    
+
     #[external]
     fn set_random_values(values: Array::<u128>) {
         // Check if the random values were already initialized

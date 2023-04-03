@@ -26,7 +26,7 @@ mod PlayersRegistry {
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
     use core::hash::TupleSize3LegacyHash;
     use starknet_cairo_101::utils::helper;
-    
+
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
@@ -102,7 +102,7 @@ mod PlayersRegistry {
         only_exercise_or_admin();
         set_single_exercise_or_admin(accounts, permissions);
     }
-    
+
     fn set_single_exercise_or_admin(mut accounts: Array::<ContractAddress>,mut permissions: Array::<bool>) {
         helper::check_gas();
         if !accounts.is_empty() {

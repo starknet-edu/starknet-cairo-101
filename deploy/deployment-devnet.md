@@ -254,3 +254,9 @@ starknet invoke --function set_random_values --address 0x066162f43d2c27e93377b84
 ``` bash
 docker run -p 127.0.0.1:5050:5050 --name devnet1 --mount type=bind,source=/Users/seabookchen/.starknet-devnet/dumpdir,target=/dumpdir devnet-1 --seed 1234 --timeout 10000  --dump-on exit --dump-path /dumpdir/dump.pkl
 ```
+
+
+### Run starknet-devnet locally
+```
+docker run -p 127.0.0.1:5050:5050 --name starknet-devnet --mount type=bind,source=/Users/seabookchen/.starknet-devnet/dumpdir,target=/dumpdir shardlabs/starknet-devnet:latest-arm --seed 1234 --timeout 10000  --dump-on exit --dump-path /dumpdir/dump.pkl
+```

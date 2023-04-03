@@ -40,7 +40,7 @@ mod Ex03 {
     // Storage is not visible by default through the ABI
     ////////////////////////////////
     struct Storage {
-        // This variable is a LegacyMap. It is equivalent to a mapping in Solidity. 
+        // This variable is a LegacyMap. It is equivalent to a mapping in Solidity.
         // It is used to store a counter (of type u128) for each user address (of type ContractAddress) in the contract's storage
         // The user_counters variable is private and can only be accessed through the getter function declared below
         // To read the u128 value from a LegacyMap, use the read function (e.g. user_counters::read(sender_address))
@@ -65,7 +65,7 @@ mod Ex03 {
     ////////////////////////////////
     #[view]
     fn get_user_counters(account: ContractAddress) -> u128 {
-        // We are not calling the read function without any parameter (e.g. user_counters::read()) but with a parameter (e.g. user_counters::read(sender_address)) 
+        // We are not calling the read function without any parameter (e.g. user_counters::read()) but with a parameter (e.g. user_counters::read(sender_address))
         // because we want to read the value of the mapping for a specific key (the sender address)
         let user_counter = user_counters::read(account);
         // We return the value of the counter. We can return a value without using the return keyword, similar to Rust

@@ -8,8 +8,8 @@
 // - Your points are credited by the contract if you send the correct value
 // What you'll learn
 // - Using asserts
-// - How to declare storage variables 
-// - How to read storage variables 
+// - How to declare storage variables
+// - How to read storage variables
 // - How to create getter functions (indicated with #[view]) to read variables
 // - How to use asserts; they are similar to require() in Solidity
 ////////////////////////////////
@@ -82,12 +82,12 @@ mod Ex02 {
     ////////////////////////////////
     #[external]
     fn claim_points(my_value: u128) {
-        // Reading caller address using the Starknet core library function get_caller_address() (similar to msg.sender in Solidity) 
+        // Reading caller address using the Starknet core library function get_caller_address() (similar to msg.sender in Solidity)
         // and storing it in a variable called sender_address.
         let sender_address = get_caller_address();
         // Reading the secret value from storage using the read function from the storage variable my_secret_value_storage
         let my_secret_value = my_secret_value_storage::read();
-        // Checking that the value sent is the same as the secret value stored in storage using the assert function 
+        // Checking that the value sent is the same as the secret value stored in storage using the assert function
         // Using assert this way is similar to using "require" in Solidity
         assert(my_value == my_secret_value, 'Wrong secret value');
         // Checking if the user has validated the exercise before sending points using the validate_exercise function from the Ex00Base contract
