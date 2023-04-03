@@ -31,7 +31,7 @@ impl StorageAccessUser of StorageAccess<User> {
         Result::Ok(
             StorageAccess::<felt252>::read(
                 address_domain, base
-            )?.player_address.try_into().expect('StorageAccessUser - non User')
+            )?.try_into().expect('StorageAccessUser - non User')
         )
     }
     #[inline(always)]
@@ -42,7 +42,7 @@ impl StorageAccessUser of StorageAccess<User> {
 
 
 #[contract]
-mod Ex05 {
+mod Ex15 {
     ////////////////////////////////
     // Core Library imports
     // These are syscalls and functionalities that allow you to write Starknet contracts
@@ -67,9 +67,9 @@ mod Ex05 {
     struct Storage {
         current_slot: u128,
         // Map between slot and user
-        players: LegacyMap<u128, User>,
+        players: LegacyMap<u128, super::super::User>,
         // The info you chose for the previous user
-        chosen_previous_user_info: LegacyMap<ContractAddress, User>,
+        chosen_previous_user_info: LegacyMap<ContractAddress, super::super::User>,
     }
 
     // struct User {
@@ -104,7 +104,7 @@ mod Ex05 {
     // Return the address, lucky value, short string and was happy value of the user in the previous slot
     #[view]
     fn get_previous_user_info_by_slot (previous_user_slot: u128) -> (ContractAddress, u8, felt252, bool) {
-        let previous_user : User = players::read(previous_user_slot);
+        let previous_user : super::User = players::read(previous_user_slot);
         (previous_user.player_address, previous_user.player_lucky_value, previous_user.player_short_string, previous_user.player_was_happy)
     }
 
@@ -116,7 +116,7 @@ mod Ex05 {
     #[external]
     fn create_struct_with_the_previous_user_info(contract_address: ContractAddress, lucky_value: u8, short_string: felt252, you_happy: bool) {
         // Creating a new user struct
-        let new_user = User {
+        let new_user = super::User {
             player_address: contract_address, // Previous user address
             player_lucky_value: lucky_value, // Previous user lucky value
             player_short_string: short_string, // Previous user short string
@@ -137,7 +137,7 @@ mod Ex05 {
         let sender_address: ContractAddress = get_caller_address();
 
         // Creating a new user struct
-        let new_user = User {
+        let new_user = super::User {
             player_address: sender_address, // User address of type ContractAddress
             player_lucky_value: lucky_value_from_1_to_10, // Answer should be a number between 1 and 10
             player_short_string: short_string, // Answer should be a string of 10 characters or less
