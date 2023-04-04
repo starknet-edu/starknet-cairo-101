@@ -1,0 +1,7 @@
+[package]
+name = "starknet_cairo_101"
+version = "0.1.0"
+description = "Workshop to learn the basics of Cairo."
+homepage = "https://github.com/starknet-edu/starknet-cairo-101"
+
+[[target.starknet-contract]]
