@@ -1,5 +1,8 @@
-export STARKNET_NETWORK=alpha-goerli <br>
-export STARKNET_WALLET=starkware.starknet.wallets.open_zeppelin.OpenZeppelinAccount <br>
+### Export ENV
+``` bash
+export STARKNET_NETWORK=alpha-goerli
+export STARKNET_WALLET=starkware.starknet.wallets.open_zeppelin.OpenZeppelinAccount
+```
 
 ### Setup accounts
 ```bash
@@ -11,10 +14,12 @@ starknet deploy_account --account test --gateway_url http://localhost:5050 --fee
 ```
 
 ### Export Account
-export ACCT_ADMIN=0x707d687d44fbe083b43a1c17d0f66615bcfbe73b645c933065bf43f68d47979 <br>
-export ACCT_TEST=0x06f249480e59dbf016c0696ae1904218931f764857b9f4871c3284ec3ffe78ad <br>
-export TDERC20=0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 <br>
-export PLAYER_REGISTRY=0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 <br>
+```bash
+export ACCT_ADMIN=0x707d687d44fbe083b43a1c17d0f66615bcfbe73b645c933065bf43f68d47979
+export ACCT_TEST=0x06f249480e59dbf016c0696ae1904218931f764857b9f4871c3284ec3ffe78ad
+export TDERC20=0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196
+export PLAYER_REGISTRY=0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809
+```
 
 ### Check txn status
 ``` bash
@@ -93,7 +98,7 @@ starknet deploy --salt 0x1234 --class_hash  0x3174b379c0dae73d2ea25bd6d3546e67b8
 starknet deploy --salt 0x1234 --class_hash  0x5d4af31df1011e23e90bccf721f8dd7040c468d3f9df8eb4a175c0002c339ca --inputs $TDERC20 $PLAYER_REGISTRY 1 13 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 
 ## Ex14
-starknet deploy --salt 0x1234 --class_hash  0x5a838a3831f20c4cd1e34e861a69cce0fd6f3c4b7c049ddfe82be805dcbccae --inputs $TDERC20 $PLAYER_REGISTRY 1 14 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
+starknet deploy --salt 0x1234 --class_hash  0x5aa8563e722c9f77db09981f94dd24a2d63611692fee9d421b50cb5460f45a0 --inputs $TDERC20 $PLAYER_REGISTRY 1 14 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 ```
 
 ### Setup permissions and datas
