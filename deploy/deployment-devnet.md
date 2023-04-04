@@ -75,7 +75,7 @@ starknet deploy --salt 0x1234 --class_hash  0x25dbaec22271885e5329a359537668c28c
 starknet deploy --salt 0x1234 --class_hash  0x18c34d459b1a86f1e7579692e989a8cde55448f39f506d00ad69731c857e481 --inputs $TDERC20 $PLAYER_REGISTRY 1 8 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 
 ## Ex09
-starknet deploy --salt 0x1234 --class_hash  0x2631306b45d5a9396bfb23e6869457cc7efbf6e71fb3fa9be23a84d161b94e --inputs $TDERC20 $PLAYER_REGISTRY 1 9 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
+starknet deploy --salt 0x1234 --class_hash  0x61b96695fcf0f72c4c59e9f5e7ced3296cbf2049240fa0ee8f65232e7435233 --inputs $TDERC20 $PLAYER_REGISTRY 1 9 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 
 ## Ex10
 starknet deploy --salt 0x1234 --class_hash  0x8edcf59bd290228cb979894b9a8700f2afd1069404c464a5166640d13f5562 --inputs $TDERC20 $PLAYER_REGISTRY 1 10 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
@@ -139,9 +139,9 @@ starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623e
 starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x0582ae40e0ae7de3a35986ab5fd415a637ffc43cc6fe3470a9eab7e0fe2b7c79 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex09
-starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x03122a65fd4fc155107ef5de7f4ce0d5d394b06635dbf4080f6fca9d479ff3ee 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x044f88574c82e073c594af4179e9b2b66586da81d8a70d93d87d145f19613c90 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x03122a65fd4fc155107ef5de7f4ce0d5d394b06635dbf4080f6fca9d479ff3ee 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x044f88574c82e073c594af4179e9b2b66586da81d8a70d93d87d145f19613c90 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex10
 starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x03ade0da876b44f353e3ecc962aa5a1c01e4ac26014c60f41285035364070621 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
@@ -214,7 +214,7 @@ starknet invoke --function set_user_values --address 0x0582ae40e0ae7de3a35986ab5
 starknet invoke --function claim_points --address 0x0582ae40e0ae7de3a35986ab5fd415a637ffc43cc6fe3470a9eab7e0fe2b7c79 --account test  --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex09
-starknet invoke --function claim_points --address 0x07f6bf9bb7b3f4ff3bbdcfe6634596c057c8f22919a0977df6fbcec4994d1d8b --account test --inputs 4 10 20 30 40  --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function claim_points --address 0x044f88574c82e073c594af4179e9b2b66586da81d8a70d93d87d145f19613c90 --account test --inputs 4 10 20 30 40  --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex10
 starknet call --function get_ex10b_address --address 0x03ade0da876b44f353e3ecc962aa5a1c01e4ac26014c60f41285035364070621 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
