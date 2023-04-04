@@ -96,18 +96,14 @@ mod Ex06 {
     fn assign_user_slot() {
         // Reading caller address
         let sender_address: ContractAddress = get_caller_address();
-        // Assigning a slot to a user
-        let next_slot_temp = next_slot::read();
-        // Get the next_value from values_mapped_secret
-        let next_value = values_mapped_secret::read(next_slot_temp);
+        // Its value can change during the course of the function call
+        let next_value = values_mapped_secret::read(next_slot::read() + 1_u128);
         // Checking if next random value is 0
         if next_value == 0_u128 {
-          next_slot::write(0_u128);
-          user_slots::write(sender_address, 0_u128);
-        } else {
-          user_slots::write(sender_address, next_slot_temp);
-          next_slot::write(next_slot_temp + 1_u128);
+            next_slot::write(0_u128);
         }
+        user_slots::write(sender_address, next_slot::read() + 1_u128);
+        next_slot::write(next_slot::read() + 1_u128);
     }
 
     #[external]

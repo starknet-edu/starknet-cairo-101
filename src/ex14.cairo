@@ -30,6 +30,7 @@ mod Ex14 {
     // Internal imports
     // These functions become part of the set of functions of the contract
     ////////////////////////////////
+    use starknet_cairo_101::utils::helper::get_token_in_decimals;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::tderc20_address;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
@@ -61,6 +62,7 @@ mod Ex14 {
         let sender_address: ContractAddress = get_caller_address();
         // Retrieving ERC20 address
         let erc20_address = tderc20_address();
+
         // Reading contract balance before calling
         let balance_before = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
 
@@ -75,8 +77,12 @@ mod Ex14 {
 
         // Read how many points were collected
         let collected_points = balance_after - balance_before;
+
         // Check that at least 20 points were collected
-        assert(collected_points >= u256 { low: 20_u128, high: 0_u128 }, 'NO_ENOUGH_POINTS_COLLECTED');
+        let decimals = IERC20Dispatcher{contract_address: erc20_address}.decimals();
+        let token_decimals = get_token_in_decimals(decimals);
+        let token_amount = 20_u128 * token_decimals;
+        assert(collected_points >= u256 { low: token_amount, high: 0_u128 }, 'NO_ENOUGH_POINTS_COLLECTED');
 
          // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
