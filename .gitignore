@@ -138,3 +138,5 @@ Makefile
 
 
 .pkey*
+# Scarb build files
+/target/

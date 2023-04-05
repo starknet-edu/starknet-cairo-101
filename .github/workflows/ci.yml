@@ -11,7 +11,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Compile all the contracts
-        run:
-          ./ci.sh
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - run: |
+          pip install cairo-lang asynctest pytest && \
+          for cairo_file in $(find contracts/ -type f -name "*.cairo"); do
+            starknet-compile $cairo_file 
+          done && \
+          pytest -W ignore::DeprecationWarning
