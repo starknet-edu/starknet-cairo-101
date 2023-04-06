@@ -14,7 +14,7 @@ This workshop is designed to help you read Cairo 1 code and Starknet smart contr
 
 The exercices are a set of smart contracts deployed on Starknet Alpha on testnet. Each smart contract is an exercise/puzzle that outlines a feature of the Cairo Smart contract language.
 
-Completing the exercises will earn you points in the form of an [ERC20 token](contracts/token/TDERC20.cairo). The token does not have any monetary value, but it's a fun way to track your learning progresses.
+Completing the exercises will earn you points in the form of an [ERC20 token](src/token/TDERC20.cairo). The token does not have any monetary value, but it's a fun way to track your learning progresses.
 
 We hope you have fun participating in this workshop!
 
