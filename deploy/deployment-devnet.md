@@ -65,13 +65,13 @@ starknet deploy --salt 0x1234 --class_hash 0x5acbc7548d1fc3f189427ce2c7480e4f7e4
 starknet deploy --salt 0x1234 --class_hash  0x5df061a4185d402e0b211ea6a7c772f837a028444c03e376b4dc066be5a40ec --inputs $TDERC20 $PLAYER_REGISTRY 1 3 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 
 ## Ex04
-starknet deploy --salt 0x1234 --class_hash  0x23e5c477e3892b705e1c16831ebecc2d2e534c6563e1e528fd2f3b8b7d06ed5 --inputs $TDERC20 $PLAYER_REGISTRY 1 4 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
+starknet deploy --salt 0x1234 --class_hash  0x58b738875c8805fb19f993d01e844c7482fe2bbad28ab572f2e5bd2849383c7 --inputs $TDERC20 $PLAYER_REGISTRY 1 4 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 
 ## Ex05
-starknet deploy --salt 0x1234 --class_hash  0x5e805c2c57f5b7040401bef5af5439bb70add3403374d47eb1b9ead1b2f553c --inputs $TDERC20 $PLAYER_REGISTRY 1 5 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
+starknet deploy --salt 0x1234 --class_hash  0x8dce186e78c149c968f89a5e93ccd3b3ed07c2e06fccd737231f0b006ab735 --inputs $TDERC20 $PLAYER_REGISTRY 1 5 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 
 ## Ex06
-starknet deploy --salt 0x1234 --class_hash  0x2061e691f227615415b8c1c7e6a199de7499199a274c5b555ef5a2cf3fecc87 --inputs $TDERC20 $PLAYER_REGISTRY 1 6 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
+starknet deploy --salt 0x1234 --class_hash  0x4b9979b805cea3ddcc032d443e6ff8d9c924353a6af1fb6ad759370f9b8a550 --inputs $TDERC20 $PLAYER_REGISTRY 1 6 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
 
 ## Ex07
 starknet deploy --salt 0x1234 --class_hash  0x25dbaec22271885e5329a359537668c28c7474a3c4c92cf8b9f5efdfdb9f4b --inputs $TDERC20 $PLAYER_REGISTRY 1 7 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050 --max_fee 100000000000000000000
@@ -119,19 +119,19 @@ starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623e
 starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x015b87d0975321ede377f4e2cfcef8941ece3c3d77e7f4c435ad5dff258f5c47 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex04
-starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x069437567c9133b284b6be1777fba9df0bbf25ce1a3e27defeca4d3d424bb5f1 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x07a6bab4b1d66d1a58f9648de86e1a485a33fda5f4170a74cda7679d4f9c733c 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x069437567c9133b284b6be1777fba9df0bbf25ce1a3e27defeca4d3d424bb5f1 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x07a6bab4b1d66d1a58f9648de86e1a485a33fda5f4170a74cda7679d4f9c733c 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex05
-starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x061a67d9d69b0093dcb0f7a98f23b6ae98c8f9469a486add50843d8027bbad27 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x0300eba992a5f5b246e31e2cc62f1829c9d082e897f431025a6c38ec884a20cd 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x061a67d9d69b0093dcb0f7a98f23b6ae98c8f9469a486add50843d8027bbad27 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x0300eba992a5f5b246e31e2cc62f1829c9d082e897f431025a6c38ec884a20cd 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex06
-starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x07d3c31903ff034e32371217126d841d4af43752b859782510f4e0593b1af408 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x042598856dbb33e76a4828ec18f4acf88f5cfc2e5b4df1ce486f201b802e8ce2 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x07d3c31903ff034e32371217126d841d4af43752b859782510f4e0593b1af408 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123271827c49196 --function set_teacher --inputs 0x042598856dbb33e76a4828ec18f4acf88f5cfc2e5b4df1ce486f201b802e8ce2 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex07
 starknet invoke --address 0x0643c0eb6cd5b848de6b653e621b4e550e11921908d324df623ee4dcc9cd5809 --function set_exercise_or_admin --inputs 0x0518281f2678aa97c854687d26777d58eb291d797d2882ec00299c1ea087daed 1 --account admin --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
@@ -188,27 +188,27 @@ starknet invoke --function decrement_counter --address 0x015b87d0975321ede377f4e
 starknet invoke --function claim_points --address 0x015b87d0975321ede377f4e2cfcef8941ece3c3d77e7f4c435ad5dff258f5c47 --account test --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex04
-starknet invoke --function assign_user_slot --address 0x069437567c9133b284b6be1777fba9df0bbf25ce1a3e27defeca4d3d424bb5f1 --account test  --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function assign_user_slot --address 0x07a6bab4b1d66d1a58f9648de86e1a485a33fda5f4170a74cda7679d4f9c733c --account test  --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --function claim_points --address 0x069437567c9133b284b6be1777fba9df0bbf25ce1a3e27defeca4d3d424bb5f1 --account test  --inputs 7119 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function claim_points --address 0x07a6bab4b1d66d1a58f9648de86e1a485a33fda5f4170a74cda7679d4f9c733c --account test  --inputs 7119 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex05
-starknet invoke --function assign_user_slot --address 0x061a67d9d69b0093dcb0f7a98f23b6ae98c8f9469a486add50843d8027bbad27 --account test  --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function assign_user_slot --address 0x0300eba992a5f5b246e31e2cc62f1829c9d082e897f431025a6c38ec884a20cd --account test  --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --function copy_secret_value_to_readable_mapping --address 0x061a67d9d69b0093dcb0f7a98f23b6ae98c8f9469a486add50843d8027bbad27 --account test --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function copy_secret_value_to_readable_mapping --address 0x0300eba992a5f5b246e31e2cc62f1829c9d082e897f431025a6c38ec884a20cd --account test --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet call --function get_user_values --address 0x061a67d9d69b0093dcb0f7a98f23b6ae98c8f9469a486add50843d8027bbad27 --input $ACCT_TEST --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet call --function get_user_values --address 0x0300eba992a5f5b246e31e2cc62f1829c9d082e897f431025a6c38ec884a20cd --input $ACCT_TEST --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --function claim_points --address 0x061a67d9d69b0093dcb0f7a98f23b6ae98c8f9469a486add50843d8027bbad27 --account test  --inputs 8861 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function claim_points --address 0x0300eba992a5f5b246e31e2cc62f1829c9d082e897f431025a6c38ec884a20cd --account test  --inputs 8861 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex06
-starknet invoke --function assign_user_slot --address 0x07d3c31903ff034e32371217126d841d4af43752b859782510f4e0593b1af408 --account test  --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function assign_user_slot --address 0x042598856dbb33e76a4828ec18f4acf88f5cfc2e5b4df1ce486f201b802e8ce2 --account test  --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --function external_handler_for_internal_function --address 0x07d3c31903ff034e32371217126d841d4af43752b859782510f4e0593b1af408 --account test --inputs 1 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function external_handler_for_internal_function --address 0x042598856dbb33e76a4828ec18f4acf88f5cfc2e5b4df1ce486f201b802e8ce2 --account test --inputs 1 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet call --function get_user_values --address 0x07d3c31903ff034e32371217126d841d4af43752b859782510f4e0593b1af408 --input $ACCT_TEST --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet call --function get_user_values --address 0x042598856dbb33e76a4828ec18f4acf88f5cfc2e5b4df1ce486f201b802e8ce2 --input $ACCT_TEST --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --function claim_points --address 0x07d3c31903ff034e32371217126d841d4af43752b859782510f4e0593b1af408 --account test  --inputs 5970 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function claim_points --address 0x042598856dbb33e76a4828ec18f4acf88f5cfc2e5b4df1ce486f201b802e8ce2 --account test  --inputs 5970 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 ## Ex07
 starknet invoke --function claim_points --address 0x0518281f2678aa97c854687d26777d58eb291d797d2882ec00299c1ea087daed --account test  --inputs 50 0 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
@@ -242,11 +242,11 @@ starknet invoke --function claim_points --address 0x066162f43d2c27e93377b84bef71
 
 ### Set random values
 ```bash
-starknet invoke --function set_random_values --address 0x069437567c9133b284b6be1777fba9df0bbf25ce1a3e27defeca4d3d424bb5f1 --input 100 509 7151 5476 3518 3472 1072 2672 1522 2451 4950 9493 6340 6911 3571 7159 111 5431 3695 1758 4928 5139 6549 2252 1068 1624 480 6659 7521 9588 8679 1091 4111 5113 5727 4376 5287 5718 7204 8537 7240 3457 455 685 3467 9279 7243 1571 5229 3683 9881 622 4622 7388 4811 2961 7321 2199 3362 7477 9380 4547 8696 5393 3719 1001 699 646 824 3133 1946 89 2980 8677 6857 2800 8920 1224 2189 6094 2932 5363 4795 192 2695 853 6569 6941 7967 5070 2585 4675 3048 444 2487 5451 6121 945 9343 5757 9193 --account admin --max_fee 100000000000000000 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function set_random_values --address 0x07a6bab4b1d66d1a58f9648de86e1a485a33fda5f4170a74cda7679d4f9c733c --input 100 509 7151 5476 3518 3472 1072 2672 1522 2451 4950 9493 6340 6911 3571 7159 111 5431 3695 1758 4928 5139 6549 2252 1068 1624 480 6659 7521 9588 8679 1091 4111 5113 5727 4376 5287 5718 7204 8537 7240 3457 455 685 3467 9279 7243 1571 5229 3683 9881 622 4622 7388 4811 2961 7321 2199 3362 7477 9380 4547 8696 5393 3719 1001 699 646 824 3133 1946 89 2980 8677 6857 2800 8920 1224 2189 6094 2932 5363 4795 192 2695 853 6569 6941 7967 5070 2585 4675 3048 444 2487 5451 6121 945 9343 5757 9193 --account admin --max_fee 100000000000000000 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --function set_random_values --address 0x061a67d9d69b0093dcb0f7a98f23b6ae98c8f9469a486add50843d8027bbad27 --input 100 9760 8893 9155 1504 3558 5806 3145 8537 9798 1834 7969 8581 2448 9523 2435 9242 5081 8715 4195 6467 1218 8174 2955 9996 4129 8850 512 3215 7527 2373 9350 2872 9705 4779 2068 7184 5795 4942 8624 1927 4821 5234 9554 1503 1963 2490 925 8189 4138 9562 8507 5719 2976 131 7059 6648 4584 6839 9692 8072 2047 4929 9464 4557 8502 173 4404 1511 1958 2814 7708 3867 7408 114 1805 5990 4761 1797 8443 8075 4903 597 5980 7592 9607 3224 7164 8408 6744 6689 6120 3494 6485 519 3526 9327 2334 9125 4709 9798 --account admin --max_fee 100000000000000000 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function set_random_values --address 0x0300eba992a5f5b246e31e2cc62f1829c9d082e897f431025a6c38ec884a20cd --input 100 9760 8893 9155 1504 3558 5806 3145 8537 9798 1834 7969 8581 2448 9523 2435 9242 5081 8715 4195 6467 1218 8174 2955 9996 4129 8850 512 3215 7527 2373 9350 2872 9705 4779 2068 7184 5795 4942 8624 1927 4821 5234 9554 1503 1963 2490 925 8189 4138 9562 8507 5719 2976 131 7059 6648 4584 6839 9692 8072 2047 4929 9464 4557 8502 173 4404 1511 1958 2814 7708 3867 7408 114 1805 5990 4761 1797 8443 8075 4903 597 5980 7592 9607 3224 7164 8408 6744 6689 6120 3494 6485 519 3526 9327 2334 9125 4709 9798 --account admin --max_fee 100000000000000000 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
-starknet invoke --function set_random_values --address 0x07d3c31903ff034e32371217126d841d4af43752b859782510f4e0593b1af408 --input 100 8308 5970 1409 7875 8633 6802 4987 2249 8843 3546 2519 5738 214 5185 6229 4843 8604 5121 4495 40 8045 3028 1327 8160 9376 6845 5219 6010 2220 253 5913 8682 1031 6173 690 1235 8918 5215 2276 1228 4315 9814 4099 9322 9672 5389 5795 9779 4535 5385 3787 6393 5306 7019 5447 7366 9283 7893 5210 2696 323 1824 2665 6720 7457 2627 1784 2730 2100 7622 8957 3193 8833 6583 428 5015 9026 6353 8905 5935 3224 7475 5910 5129 8137 9669 5646 4841 2318 7741 2280 9086 5248 7178 4496 1003 934 2803 9022 8656 --account admin --max_fee 100000000000000000 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
+starknet invoke --function set_random_values --address 0x042598856dbb33e76a4828ec18f4acf88f5cfc2e5b4df1ce486f201b802e8ce2 --input 100 8308 5970 1409 7875 8633 6802 4987 2249 8843 3546 2519 5738 214 5185 6229 4843 8604 5121 4495 40 8045 3028 1327 8160 9376 6845 5219 6010 2220 253 5913 8682 1031 6173 690 1235 8918 5215 2276 1228 4315 9814 4099 9322 9672 5389 5795 9779 4535 5385 3787 6393 5306 7019 5447 7366 9283 7893 5210 2696 323 1824 2665 6720 7457 2627 1784 2730 2100 7622 8957 3193 8833 6583 428 5015 9026 6353 8905 5935 3224 7475 5910 5129 8137 9669 5646 4841 2318 7741 2280 9086 5248 7178 4496 1003 934 2803 9022 8656 --account admin --max_fee 100000000000000000 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
 starknet invoke --function set_random_values --address 0x02d0e25abe31cebb145aa9cc4bf776825babc727f2b8588c5c7530ee943ff867 --input 100 8308 5970 1409 7875 8633 6802 4987 2249 8843 3546 2519 5738 214 5185 6229 4843 8604 5121 4495 40 8045 3028 1327 8160 9376 6845 5219 6010 2220 253 5913 8682 1031 6173 690 1235 8918 5215 2276 1228 4315 9814 4099 9322 9672 5389 5795 9779 4535 5385 3787 6393 5306 7019 5447 7366 9283 7893 5210 2696 323 1824 2665 6720 7457 2627 1784 2730 2100 7622 8957 3193 8833 6583 428 5015 9026 6353 8905 5935 3224 7475 5910 5129 8137 9669 5646 4841 2318 7741 2280 9086 5248 7178 4496 1003 934 2803 9022 8656 --account admin --max_fee 100000000000000000 --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
 
