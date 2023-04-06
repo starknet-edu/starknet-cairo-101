@@ -14,7 +14,7 @@ Este taller está diseñado para ayudarte a leer el código de Cairo 1 y los con
 
 Los ejercicios son un conjunto de contratos inteligentes desplegados en Starknet Alpha en testnet. Cada contrato inteligente es un ejercicio/puzzle que describe una característica del lenguaje de contratos inteligentes de Cairo.
 
-Completando los ejercicios ganarás puntos en forma de un [token ERC20](contracts/token/TDERC20.cairo). El token no tiene ningún valor monetario, pero es una forma divertida de seguir tus progresos en el aprendizaje.
+Completando los ejercicios ganarás puntos en forma de un [token ERC20](src/token/TDERC20.cairo). El token no tiene ningún valor monetario, pero es una forma divertida de seguir tus progresos en el aprendizaje.
 
 ¡Esperamos que te diviertas participando en este taller!
 
