@@ -19,7 +19,7 @@ mod Ex10b {
 
     ////////////////////////////////
     // Internal imports
-    // These function become part of the set of function of the current contract
+    // These functions become part of the set of functions of the current contract
     ////////////////////////////////
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
