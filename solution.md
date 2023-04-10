@@ -61,7 +61,7 @@ starknet invoke --function claim_points --address 0x01ec8e981b1b6a7256a71f21790d
 ## Ex9
 ```bash
 
-# get sum potentail bug, need to fix.
+# get sum potential bug, need to fix.
 
 ```
 
