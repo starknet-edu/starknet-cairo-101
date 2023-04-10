@@ -1,6 +1,6 @@
 // ######## Ex 13
 // Privacy
-// The terminology "Zero knowldge" can be confusing. Devs tend to assume things are private on Zk Rollups.
+// The terminology "Zero knowledge" can be confusing. Devs tend to assume things are private on Zk Rollups.
 // They are not. They can be; but they are not by default.
 // In this exercise, you need to:
 // - Use past data from transactions sent to the contract to find a value that is supposed to be "secret"
