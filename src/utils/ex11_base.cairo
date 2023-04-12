@@ -60,8 +60,7 @@ mod Ex11Base {
         exercise_id_storage::read()
     }
 
-    #[view]
-    fn secret_value() -> u128 {
+    fn secret_value_internal() -> u128 {
         let secret_value = ex11_secret_value::read();
         // There is a trick here
         return secret_value + 42069_u128;
