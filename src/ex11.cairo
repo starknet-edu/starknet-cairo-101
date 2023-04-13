@@ -25,7 +25,16 @@ mod Ex11 {
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_exercise;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::ex_initializer;
     use starknet_cairo_101::utils::ex11_base::Ex11Base::validate_answers;
+    use starknet_cairo_101::utils::ex11_base::Ex11Base::secret_value_internal;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
+    ////////////////////////////////
+    // View Functions
+    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
+    ////////////////////////////////
+    #[view]
+    fn secret_value() -> u128 {
+        return secret_value_internal();
+    }
     ////////////////////////////////
     // Constructor
     // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
@@ -60,4 +69,5 @@ mod Ex11 {
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);
     }
+    
 }

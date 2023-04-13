@@ -1,6 +1,6 @@
 # Deploying the tutorial
 ## Deployed addresses and class hashes
-starknet call --function balanceOf --address 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf --input 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79
+starknet call --function balanceOf --address 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de --input 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79
 
 | Contract | Class hash | Deployed contract | Permissions |
 | ------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -32,7 +32,7 @@ export STARKNET_WALLET=starkware.starknet.wallets.open_zeppelin.OpenZeppelinAcco
 ```
 Declaring ex 1
 ```bash
-starknet declare --contract target/release/starknet_cairo_101_Ex14.json --account version_11
+starknet declare --contract target/release/starknet_cairo_101_Ex11.json --account version_11
 ```
 Deploying players registry and ERC20 and checking admin is registered
 ```bash
@@ -40,41 +40,41 @@ Deploying players registry and ERC20 and checking admin is registered
 starknet deploy --class_hash 0x7a6e514bb54d60ac1cfe8c53a872fbc23ebf25137d093c23c3bf01a6ae5b1c6 --inputs 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79 --account version_11 --max_fee 100000000000000000
 #ERC20
 starknet deploy --class_hash 0x6b1cea5c54aef607edc926dec33a205d3da187ad8c1514706ab1e28db425138 --inputs 0x434149524f312d313031 0x434149524f312d313031 18 0 0 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79 --account version_11 --max_fee 100000000000000000
-starknet call --function is_exercise_or_admin --address 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba --input 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79
-starknet call --function is_teacher_or_exercise --address 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf --input 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79
+starknet call --function is_exercise_or_admin --address 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 --input 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79
+starknet call --function is_teacher_or_exercise --address 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de --input 0x0360C4F27Bd9af2a05b416ff573738E8587883862A90965A1716DfA9D17F3E79
 ```
 Declaring exercices
 ```bash
 # Ex01
-starknet deploy --class_hash 0x27956db0c99ea0959280a6b3b14bdd1615a96bcf318e2d0826ed90abbd399a9 --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 1 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x27956db0c99ea0959280a6b3b14bdd1615a96bcf318e2d0826ed90abbd399a9 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 1 --account version_11 --max_fee 100000000000000000
 # Ex02
-starknet deploy --class_hash 0x5acbc7548d1fc3f189427ce2c7480e4f7e4bda2844833cd8e57f5b918eadfdc --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 2 0x4b454b --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x5acbc7548d1fc3f189427ce2c7480e4f7e4bda2844833cd8e57f5b918eadfdc --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 2 0x4b454b --account version_11 --max_fee 100000000000000000
 # Ex03
-starknet deploy --class_hash 0x5df061a4185d402e0b211ea6a7c772f837a028444c03e376b4dc066be5a40ec --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 3 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x5df061a4185d402e0b211ea6a7c772f837a028444c03e376b4dc066be5a40ec --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 3 --account version_11 --max_fee 100000000000000000
 # Ex04
-starknet deploy --class_hash 0x23e5c477e3892b705e1c16831ebecc2d2e534c6563e1e528fd2f3b8b7d06ed5 --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 4 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x23e5c477e3892b705e1c16831ebecc2d2e534c6563e1e528fd2f3b8b7d06ed5 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 4 --account version_11 --max_fee 100000000000000000
 # Ex 05
-starknet deploy --class_hash 0x5e805c2c57f5b7040401bef5af5439bb70add3403374d47eb1b9ead1b2f553c --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 5 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x5e805c2c57f5b7040401bef5af5439bb70add3403374d47eb1b9ead1b2f553c --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 5 --account version_11 --max_fee 100000000000000000
 # Ex06
-starknet deploy --class_hash 0x7d0b5a20ff1bccb2e568779cfc24f35b6f4ffd4b97a3ab0b3f02cb072c08077 --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 6 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x7d0b5a20ff1bccb2e568779cfc24f35b6f4ffd4b97a3ab0b3f02cb072c08077 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 6 --account version_11 --max_fee 100000000000000000
 # Ex07
-starknet deploy --class_hash 0x25dbaec22271885e5329a359537668c28c7474a3c4c92cf8b9f5efdfdb9f4b --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 7 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x25dbaec22271885e5329a359537668c28c7474a3c4c92cf8b9f5efdfdb9f4b --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 7 --account version_11 --max_fee 100000000000000000
 # Ex08
-starknet deploy --class_hash 0x18c34d459b1a86f1e7579692e989a8cde55448f39f506d00ad69731c857e481 --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 8 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x18c34d459b1a86f1e7579692e989a8cde55448f39f506d00ad69731c857e481 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 8 --account version_11 --max_fee 100000000000000000
 # Ex09
-starknet deploy --class_hash 0x14bfacc68ba10a1de50de173f11eaf5e2ddedb9df1a7ed220f7c0139c1cea --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 9 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x14bfacc68ba10a1de50de173f11eaf5e2ddedb9df1a7ed220f7c0139c1cea --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 9 --account version_11 --max_fee 100000000000000000
 # Ex10
-starknet deploy --class_hash 0x7df7072e0f054ae1f6cefe4d57a118bb4fd2e4caa43adcdd36e5d71fe5de5e7 --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 10 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x7df7072e0f054ae1f6cefe4d57a118bb4fd2e4caa43adcdd36e5d71fe5de5e7 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 10 --account version_11 --max_fee 100000000000000000
 # Ex10b
 starknet deploy --class_hash 0x32a35c4bf9c8148689002ca501c973a135a30457c6507e28261bed0c3a1f35 --inputs 0x0307dbe1012a45617af8a708266eb3c300ab3bf9efe3d6e5a2a5693999daa962 --account version_11 --max_fee 100000000000000000
 # Ex11
-starknet deploy --class_hash 0x7373764393f1307fa9730f2a3deabf8505826bddb162d3f9051b8d449669a5 --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 11 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x6de39b2235e3c865129a90fcc94c425f85b8d1bc1d825cc6bd7e53a8c90a9e6 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 11 --account version_11 --max_fee 100000000000000000
 # Ex 12
-starknet deploy --class_hash 0x3174b379c0dae73d2ea25bd6d3546e67b859b710bcd7a92eaf8bda068c0f484 --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 12 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x3174b379c0dae73d2ea25bd6d3546e67b859b710bcd7a92eaf8bda068c0f484 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 12 --account version_11 --max_fee 100000000000000000
 # Ex 13
-starknet deploy --class_hash 0x5d4af31df1011e23e90bccf721f8dd7040c468d3f9df8eb4a175c0002c339ca --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 13 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x5d4af31df1011e23e90bccf721f8dd7040c468d3f9df8eb4a175c0002c339ca --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 13 --account version_11 --max_fee 100000000000000000
 # Ex 14
-starknet deploy --class_hash 0x46150b73087b1ea48e6748f4d77749590107e336f525c5fca5683da18d3cd70 --inputs 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba 1 14 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x46150b73087b1ea48e6748f4d77749590107e336f525c5fca5683da18d3cd70 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 14 --account version_11 --max_fee 100000000000000000
 ```
 Adding exercices as admin in ERC20 and players registry
 ```bash
@@ -86,8 +86,8 @@ starknet invoke --function set_exercises_or_admins --address 0x04732b911740d44f8
 To check the status:
 ```bash
 # ERC20
-starknet call --function is_exercise_or_admin --address 0x00ad0cae6669edbf0aa57a37dbea0566f4e11f131bf4be8cc2efdfcb27b6d0ba --input 0x042b34fe6f5e03d25c0adfdf7149ce21942f725f94dbfe4454e9ea793ff99cb8
-starknet call --function is_teacher_or_exercise --address 0x03a4cfde2be18b3d49cf56b60910f8a9f2fb35528a6bae0a3d039d8a2421b1cf --input 0x042b34fe6f5e03d25c0adfdf7149ce21942f725f94dbfe4454e9ea793ff99cb8
+starknet call --function is_exercise_or_admin --address 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 --input 0x042b34fe6f5e03d25c0adfdf7149ce21942f725f94dbfe4454e9ea793ff99cb8
+starknet call --function is_teacher_or_exercise --address 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de --input 0x042b34fe6f5e03d25c0adfdf7149ce21942f725f94dbfe4454e9ea793ff99cb8
 
 ```
 Setting random values
