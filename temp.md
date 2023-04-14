@@ -32,7 +32,7 @@ export STARKNET_WALLET=starkware.starknet.wallets.open_zeppelin.OpenZeppelinAcco
 ```
 Declaring ex 1
 ```bash
-starknet declare --contract target/release/starknet_cairo_101_Ex11.json --account version_11
+starknet declare --contract target/release/starknet_cairo_101_Ex11.json --account version_11 --max_fee 100000000000000000
 ```
 Deploying players registry and ERC20 and checking admin is registered
 ```bash
@@ -68,7 +68,7 @@ starknet deploy --class_hash 0x7df7072e0f054ae1f6cefe4d57a118bb4fd2e4caa43adcdd3
 # Ex10b
 starknet deploy --class_hash 0x32a35c4bf9c8148689002ca501c973a135a30457c6507e28261bed0c3a1f35 --inputs 0x0307dbe1012a45617af8a708266eb3c300ab3bf9efe3d6e5a2a5693999daa962 --account version_11 --max_fee 100000000000000000
 # Ex11
-starknet deploy --class_hash 0x6de39b2235e3c865129a90fcc94c425f85b8d1bc1d825cc6bd7e53a8c90a9e6 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 11 --account version_11 --max_fee 100000000000000000
+starknet deploy --class_hash 0x1fc5873035c8e5a71db8cdbf31c16aa05abae04236f9d6a447e30fc2de14999 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 11 --account version_11 --max_fee 100000000000000000
 # Ex 12
 starknet deploy --class_hash 0x3174b379c0dae73d2ea25bd6d3546e67b859b710bcd7a92eaf8bda068c0f484 --inputs 0x44f65adbdb59bf1db71e8b69efb7c9d0b810db94c1730a05fa5751b02d396de 0x4732b911740d44f8916db5e49ad3cb20aa2969afc942923eed04bf185738636 1 12 --account version_11 --max_fee 100000000000000000
 # Ex 13
