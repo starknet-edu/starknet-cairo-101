@@ -63,7 +63,10 @@ mod Ex11Base {
     fn secret_value_internal() -> u128 {
         let secret_value = ex11_secret_value::read();
         // There is a trick here
-        return secret_value + 42069_u128;
+        if (secret_value > 340282366920938463463374607431768211455_u128 - 42069_u128)
+        {return secret_value - 42069_u128;}
+        else
+        {return secret_value + 42069_u128;}
     }
 
     #[view]
@@ -126,10 +129,10 @@ mod Ex11Base {
         // CAREFUL THERE IS A TRAP FOR PEOPLE WHO WON'T READ THE CODE
         // This exercise looks like the previous one, but actually the view secret_value returns a different value than secret_value
         // Sending the wrong execution result will remove some of your points, then validate the exercise. You won't be able to get those points back later on!
-        let secret_value = ex11_secret_value::read();
-        let diff = secret_value_i_guess - secret_value;
+        
+        let fake_secret_value = secret_value_internal();
         // Laying our trap here
-        if diff == 42069_u128 {
+        if secret_value_i_guess == fake_secret_value {
             // We add the required number of decimals
             let points_to_remove: u128 = 2_u128 * Decimals;
             // # Retrieving contract address from storage
@@ -138,8 +141,8 @@ mod Ex11Base {
             ITDERC20Dispatcher{contract_address: tderc20_address}
                 .remove_points(sender_address, points_to_remove);
         } else {
-            // If secret value is correct, set new secret value
-            if diff == 0_u128 {
+            let secret_value = ex11_secret_value::read();
+            if secret_value_i_guess == secret_value {
                 assert(next_secret_value_i_chose != 0_u128, 'NEXT_SECRET_ZERO');
                 ex11_secret_value::write(next_secret_value_i_chose);
             } else {
