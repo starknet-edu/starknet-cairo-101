@@ -12,7 +12,7 @@ Welcome to Starknet, a general-purpose Validity Rollup on top of Ethereum mainne
 
 This workshop is designed to help you read Cairo 1 code and Starknet smart contracts, and understand their syntax. Don't worry, you don't need to code or install anything on your machine to follow and complete it. **You can do it all from your browser**.
 
-The exercices are a set of smart contracts deployed on Starknet Alpha on testnet. Each smart contract is an exercise/puzzle that outlines a feature of the Cairo Smart contract language.
+The exercises are a set of smart contracts deployed on Starknet Alpha on testnet. Each smart contract is an exercise/puzzle that outlines a feature of the Cairo Smart contract language.
 
 Completing the exercises will earn you points in the form of an [ERC20 token](contracts/token/TDERC20.cairo). The token does not have any monetary value, but it's a fun way to track your learning progresses.
 
@@ -26,7 +26,7 @@ We hope you have fun participating in this workshop!
 
 ### Disclaimer
 
-​Don’t expect any benefit from using this other than learning some cool stuff about Starknet, the first general-purpose Validity Rollup on the Ethereum mainnnet.
+​Don’t expect any benefit from using this other than learning some cool stuff about Starknet, the first general-purpose Validity Rollup on the Ethereum mainnet.
 
 ## Steps
 
@@ -59,7 +59,7 @@ When looking for a contract/transaction, always ensure you are on the Goerli ver
 ​
 **Each exercise is a separate smart contract.** It contains code that, when executed correctly, will distribute points to your address.
 
-To solve an exercise, follow the link below to read its code. Read the comments, and follow the instructions to understand the code. Your goal is to get each exercice to call succesfully the function `distribute_points()`, which will send you ERC20 points.
+To solve an exercise, follow the link below to read its code. Read the comments, and follow the instructions to understand the code. Your goal is to get each exercise to call successfully the function `distribute_points()`, which will send you ERC20 points.
 
 During validation, exercises often also call `validate_exercise()`, which records that you completed an exercise and prohibit you from collecting points various times.
 

@@ -5,7 +5,7 @@
 // TODO (omar) - improve description
 // - This exercise is a bit different from the others. It is a bit more open-ended and you will have to use your creativity to solve it.
 // - Deploy a contract that validates various exercises in a single transaction to get 2 points
-// - Do you want to agregate your points in a single account? Use this https://github.com/starknet-edu/points-migrator
+// - Do you want to aggregate your points in a single account? Use this https://github.com/starknet-edu/points-migrator
 ////////////////////////////////
 
 ////////////////////////////////
