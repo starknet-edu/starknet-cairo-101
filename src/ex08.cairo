@@ -6,7 +6,6 @@
 // - Your points are credited by the contract
 ////////////////////////////////
 
-
 #[contract]
 mod Ex08 {
     ////////////////////////////////
@@ -43,7 +42,10 @@ mod Ex08 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
+        _tderc20_address: ContractAddress,
+        _players_registry: ContractAddress,
+        _workshop_id: u128,
+        _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -74,11 +76,20 @@ mod Ex08 {
         distribute_points(sender_address, 2_u128);
     }
 
+    // This function takes an array as a parameter
+    #[external]
+    fn set_user_values(account: ContractAddress, values: Array::<u128>) {
+        let mut idx = 0_u128;
+        set_user_values_internal(account, idx, values);
+    }
+
     ////////////////////////////////
     // Internal functions
     // These functions are not accessible to external calls only callable inside the contracts or be used in other contracts using "use statement" (similar to "private" in Solidity)
     ////////////////////////////////
-    fn set_user_values_internal(account: ContractAddress, mut idx: u128, mut values: Array::<u128>) {
+    fn set_user_values_internal(
+        account: ContractAddress, mut idx: u128, mut values: Array::<u128>
+    ) {
         helper::check_gas();
         if !values.is_empty() {
             user_values::write((account, idx), values.pop_front().unwrap());
@@ -94,12 +105,5 @@ mod Ex08 {
     #[external]
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);
-    }
-
-    // This function takes an array as a parameter
-    #[external]
-    fn set_user_values(account: ContractAddress, values: Array::<u128>) {
-        let mut idx = 0_u128;
-        set_user_values_internal(account, idx, values);
     }
 }
