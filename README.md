@@ -2,6 +2,11 @@
 
 ![banner](assets/banner.png)
 
+- A Simplified Chinese version is available [here](./README.zh.md).
+- A Spanish version is available [here](./README.es.md).
+- (not updated) A Portuguese version is available [here](./README.pt.md).
+- (not updated) A Korean version is available [here](./README.kr.md).
+
 Welcome!
 
 This tutorial is made for developers who are interested in learning how to read Cairo 1 code and Starknet smart contracts. By following it, you'll be able to get started in no time. Have fun!
@@ -131,10 +136,3 @@ And if you struggle to move forward, do let us know! This workshop is meant to b
 Do you have a question? Join our [Discord server](https://starknet.io/discord), register, and join channel #tutorials-support.
 
 Are you interested in attending online workshops about dev on Starknet? [Subscribe here](https://starknet.substack.com/)
-
-
-## Languages
-
-- (not updated) A Spanish version is available [here](https://github.com/starknet-edu/starknet-cairo-101/tree/spanish).
-- (not updated) A Portuguese version is available [here](./README.pt.md).
-- (not updated) A Korean version is available [here](./README.kr.md).
