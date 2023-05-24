@@ -4,7 +4,7 @@
 ////////////////////////////////
 // In this exercise, you need to:
 // - Follow this contract's claim_points() function to understand how to finish the exercise
-// - You need to the exact same thing as the previous exercice
+// - You need to the exact same thing as the previous exercise
 // - But this time, the external function you will call will call an inner function
 ////////////////////////////////
 
