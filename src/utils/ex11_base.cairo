@@ -21,8 +21,8 @@ mod Ex11Base {
     // Internal Imports
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcherTrait;
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcher;
-    use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
-    use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
+    use starknet_cairo_101::token::TDERC20::ITDERC20DispatcherTrait;
+    use starknet_cairo_101::token::TDERC20::ITDERC20Dispatcher;
 
     const Decimals: u128 = 1000000000000000000_u128;
 

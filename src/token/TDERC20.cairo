@@ -1,10 +1,35 @@
-////////////////////////////////
-// TDERC20
-// Main ERC20 contract to utilise ERC20_base contracts
-// The contract is used to distribute points etc.
-////////////////////////////////
+use starknet::ContractAddress;
 
-#[contract]
+//###################
+// ITDERC20 INTERFACE
+//###################
+
+#[starknet::interface]
+trait ITDERC20<TContractState> {
+    fn distribute_points(ref self: TContractState, to: ContractAddress, amount: u128);
+    fn remove_points(ref self: TContractState, to: ContractAddress, amount: u128);
+    fn set_teacher(ref self: TContractState, account: ContractAddress, permission: bool);
+    fn transfer(ref self: TContractState, recipient: ContractAddress, amount: u256) -> bool;
+    fn transferFrom(ref self: TContractState, sender: ContractAddress, recipient: ContractAddress, amount: u256) -> bool;
+    fn approve(ref self: TContractState, spender: ContractAddress, amount: u256) -> bool;
+    fn increaseAllowance(ref self: TContractState, spender: ContractAddress, added_value: u256) -> bool;
+    fn decreaseAllowance(ref self: TContractState, spender: ContractAddress, subtracted_value: u256) -> bool;
+    fn set_teachers(ref self: TContractState, accounts: Array::<ContractAddress>, permissions: Array::<bool>);
+    fn set_transferable(ref self: TContractState, permission: bool);
+    fn update_class_hash_by_admin(ref self: TContractState, class_hash_in_felt: felt252);    
+
+    fn is_teacher_or_exercise(self: @TContractState, account: ContractAddress) -> bool;
+    fn is_transferable(self: @TContractState) -> bool;
+    fn name(self: @TContractState) -> felt252;
+    fn symbol(self: @TContractState) -> felt252;
+    fn decimals(self: @TContractState) -> u8;
+    fn totalSupply(self: @TContractState) -> u256;
+    fn balanceOf(self: @TContractState, account: ContractAddress) -> u256;
+    fn allowance(self: @TContractState, owner: ContractAddress, spender: ContractAddress) -> u256;
+}
+
+
+#[starknet::contract]
 mod TDERC20 {
     // Core library Imports
     use starknet::get_caller_address;
@@ -21,6 +46,7 @@ mod TDERC20 {
 
 
     // Internal Imports
+  //  use starknet_cairo_101::token::ERC20_base::ERC20Base;
     use starknet_cairo_101::token::ERC20_base::ERC20Base::ERC20_name;
     use starknet_cairo_101::token::ERC20_base::ERC20Base::ERC20_symbol;
     use starknet_cairo_101::token::ERC20_base::ERC20Base::ERC20_totalSupply;
@@ -37,6 +63,7 @@ mod TDERC20 {
     use starknet_cairo_101::token::ERC20_base::ERC20Base::ERC20_transferFrom;
     use starknet_cairo_101::utils::helper;
 
+    #[storage]
     struct Storage {
         is_transferable_storage: bool,
         teachers_and_exercises_accounts: LegacyMap<ContractAddress, bool>,
@@ -46,161 +73,144 @@ mod TDERC20 {
     // Events
     ////////////////////////////////
     #[event]
-    fn Transfer(from: ContractAddress, to: ContractAddress, value: u256) {}
-
-    #[event]
-    fn Approval(owner: ContractAddress, spender: ContractAddress, value: u256) {}
-
-    ////////////////////////////////
-    // View FUNCTIONS
-    ////////////////////////////////
-    #[view]
-    fn is_transferable() -> bool {
-        is_transferable_storage::read()
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+        Transfer: Transfer,
+        Approval: Approval
     }
 
-    #[view]
-    fn name() -> felt252 {
-        ERC20_name()
+    #[derive(Drop, starknet::Event)]
+    struct Transfer {
+        from: ContractAddress,
+        to: ContractAddress,
+        value: u256
     }
 
-    #[view]
-    fn symbol() -> felt252 {
+    #[derive(Drop, starknet::Event)]
+    struct Approval {
+        owner: ContractAddress,
+        spender: ContractAddress,
+        value: u256
+    }
+
+    ////////////////////////////////
+    // Views and Externals
+    ////////////////////////////////
+   #[external(v0)]
+   impl TDERC20 of super::ITDERC20<ContractState> {
+    fn is_transferable(self: @ContractState) -> bool {
+        self.is_transferable_storage.read()
+    }
+    fn name(self: @ContractState) -> felt252 {
+        ERC20_name(self)
+    }
+    fn symbol(self: @ContractState) -> felt252 {
         ERC20_symbol()
     }
-
-    #[view]
-    fn decimals() -> u8 {
+    fn decimals(self: @ContractState) -> u8 {
         ERC20_decimals()
     }
-
-    #[view]
-    fn totalSupply() -> u256 {
+    fn totalSupply(self: @ContractState) -> u256 {
         ERC20_totalSupply()
     }
-
-    #[view]
-    fn balanceOf(account: ContractAddress) -> u256 {
+    fn balanceOf(self: @ContractState, account: ContractAddress) -> u256 {
         ERC20_balanceOf(account)
     }
-
-    #[view]
-    fn allowance(owner: ContractAddress, spender: ContractAddress) -> u256 {
+    fn allowance(self: @ContractState, owner: ContractAddress, spender: ContractAddress) -> u256 {
         ERC20_allowance(owner, spender)
     }
-
-    #[view]
-    fn is_teacher_or_exercise(account: ContractAddress) -> bool {
-        teachers_and_exercises_accounts::read(account)
+    fn is_teacher_or_exercise(self: @ContractState, account: ContractAddress) -> bool {
+        self.teachers_and_exercises_accounts.read(account)
     }
+
+
+    fn transfer(ref self: ContractState, recipient: ContractAddress, amount: u256) -> bool {
+       _is_transferable(ref self);
+       ERC20_transfer(recipient, amount);
+       return true;
+    }
+    fn transferFrom(ref self: ContractState, sender: ContractAddress, recipient: ContractAddress, amount: u256) -> bool {
+        _is_transferable(ref self);
+        ERC20_transferFrom(sender, recipient, amount);
+        self.emit(Transfer { from: sender, to: recipient, value: amount });
+        return true;
+    }
+    fn approve(ref self: ContractState, spender: ContractAddress, amount: u256) -> bool {
+        ERC20_approve(spender, amount);
+        let owner: ContractAddress = get_caller_address();
+        self.emit(Approval { owner, spender, value: amount });
+        return true;
+    }
+    fn increaseAllowance(ref self: ContractState, spender: ContractAddress, added_value: u256) -> bool {
+        ERC20_increaseAllowance(spender, added_value);
+        return true;
+    }
+    fn decreaseAllowance(ref self: ContractState, spender: ContractAddress, subtracted_value: u256) -> bool {
+        ERC20_decreaseAllowance(spender, subtracted_value);
+        return true;
+    }
+    fn distribute_points(ref self: ContractState, to: ContractAddress, amount: u128) {
+        only_teacher_or_exercise(ref self);
+        ERC20_mint(to, u256 { low: amount, high: 0_u128 });
+    }
+    fn remove_points(ref self: ContractState, to: ContractAddress, amount: u128) {
+        only_teacher_or_exercise(ref self);
+        ERC20_burn(to, u256 { low: amount, high: 0_u128 });
+    }
+    fn set_teachers(ref self: ContractState, accounts: Array::<ContractAddress>, permissions: Array::<bool>) {
+        only_teacher_or_exercise(ref self);
+        set_single_teacher(ref self, accounts, permissions);
+    }
+    
+    fn set_teacher(ref self: ContractState, account: ContractAddress, permission: bool) {
+        only_teacher_or_exercise(ref self);
+        self.teachers_and_exercises_accounts.write(account, permission);
+    }
+    fn set_transferable(ref self: ContractState, permission: bool) {
+        only_teacher_or_exercise(ref self);
+        self.is_transferable_storage.write(permission);
+        return ();
+    }
+    fn update_class_hash_by_admin(ref self: ContractState, class_hash_in_felt: felt252) {
+        only_teacher_or_exercise(ref self);
+        let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
+        replace_class_syscall(class_hash);
+    }
+   }
+
 
     ////////////////////////////////
     // Constructor
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        name_: felt252, symbol_: felt252, decimals_: u8, initial_supply: u256, recipient: ContractAddress, owner: ContractAddress
+        ref self: ContractState, name_: felt252, symbol_: felt252, decimals_: u8, initial_supply: u256, recipient: ContractAddress, owner: ContractAddress
     ) {
         ERC20_initializer(name_, symbol_, decimals_, initial_supply, recipient);
-        teachers_and_exercises_accounts::write(owner, true);
-        Transfer(contract_address_const::<0>(), recipient, initial_supply);
+        self.teachers_and_exercises_accounts.write(owner, true);
+        self.emit(Transfer {from: contract_address_const::<0>(), to: recipient, value: initial_supply});
     }
 
-
-    ////////////////////////////////
-    // EXTERNAL FUNCTIONS
-    ////////////////////////////////
-    #[external]
-    fn transfer(recipient: ContractAddress, amount: u256) -> bool {
-       _is_transferable();
-       ERC20_transfer(recipient, amount);
-       return true;
-    }
-
-    #[external]
-    fn transferFrom(sender: ContractAddress, recipient: ContractAddress, amount: u256) -> bool {
-        _is_transferable();
-        ERC20_transferFrom(sender, recipient, amount);
-        Transfer(sender, recipient, amount);
-        return true;
-    }
-
-    #[external]
-    fn approve(spender: ContractAddress, amount: u256) -> bool {
-        ERC20_approve(spender, amount);
-        let owner: ContractAddress = get_caller_address();
-        Approval(owner, spender, amount);
-        return true;
-    }
-
-    #[external]
-    fn increaseAllowance(spender: ContractAddress, added_value: u256) -> bool {
-        ERC20_increaseAllowance(spender, added_value);
-        return true;
-    }
-
-    #[external]
-    fn decreaseAllowance(spender: ContractAddress, subtracted_value: u256) -> bool {
-        ERC20_decreaseAllowance(spender, subtracted_value);
-        return true;
-    }
-
-    #[external]
-    fn distribute_points(to: ContractAddress, amount: u128) {
-        only_teacher_or_exercise();
-        ERC20_mint(to, u256 { low: amount, high: 0_u128 });
-    }
-
-    #[external]
-    fn remove_points(to: ContractAddress, amount: u128) {
-        only_teacher_or_exercise();
-        ERC20_burn(to, u256 { low: amount, high: 0_u128 });
-    }
-
-    #[external]
-    fn set_teachers(accounts: Array::<ContractAddress>, permissions: Array::<bool>) {
-        only_teacher_or_exercise();
-        set_single_teacher(accounts, permissions);
-    }
-    
-    fn set_single_teacher(mut accounts: Array::<ContractAddress>,mut permissions: Array::<bool>) {
-        helper::check_gas();
-        if !accounts.is_empty() {
-            teachers_and_exercises_accounts::write(accounts.pop_front().unwrap(), permissions.pop_front().unwrap());
-            set_single_teacher(accounts, permissions);
-        }
-    }
-
-    #[external]
-    fn set_teacher(account: ContractAddress, permission: bool) {
-        only_teacher_or_exercise();
-        teachers_and_exercises_accounts::write(account, permission);
-    }
-
-    #[external]
-    fn set_transferable(permission: bool) {
-        only_teacher_or_exercise();
-        is_transferable_storage::write(permission);
-        return ();
-    }
 
     ////////////////////////////////
     // INTERNAL FUNCTIONS
     ////////////////////////////////
-    fn only_teacher_or_exercise() {
+    fn set_single_teacher(ref self: ContractState, mut accounts: Array::<ContractAddress>,mut permissions: Array::<bool>) {
+        helper::check_gas();
+        if !accounts.is_empty() {
+            self.teachers_and_exercises_accounts.write(accounts.pop_front().unwrap(), permissions.pop_front().unwrap());
+            set_single_teacher(ref self, accounts, permissions);
+        }
+    }
+
+    fn only_teacher_or_exercise(ref self: ContractState) {
         let caller = get_caller_address();
-        let permission = teachers_and_exercises_accounts::read(caller);
+        let permission = self.teachers_and_exercises_accounts.read(caller);
         assert(permission == true, 'NO_PERMISSION');
     }
 
-    fn _is_transferable() {
-        let permission = is_transferable_storage::read();
+    fn _is_transferable(ref self: ContractState) {
+        let permission = self.is_transferable_storage.read();
         assert(permission == true, 'NOT_TRANSFERABLE');
-    }
-    #[external]
-    fn update_class_hash_by_admin(class_hash_in_felt: felt252) {
-        only_teacher_or_exercise();
-        let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
-        replace_class_syscall(class_hash);
     }
 }

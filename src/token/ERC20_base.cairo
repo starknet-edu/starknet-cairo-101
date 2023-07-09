@@ -4,7 +4,7 @@
 // such as `transfer`, `transfer_from`, `mint`, 'burn', 'approve' etc.
 ////////////////////////////////
 
-#[contract]
+#[starknet::contract]
 mod ERC20Base {
     // Core library Imports
     use starknet::get_caller_address;
@@ -25,6 +25,7 @@ mod ERC20Base {
     // This variable is a felt and is called my_secret_value_storage. It is stored in the contract's Storage struct
     // From within a smart contract, it can be read with my_secret_value_storage::read() or written to with my_secret_value_storage::write()
 
+    #[storage]
     struct Storage {
         name: felt252,
         symbol: felt252,
@@ -34,8 +35,8 @@ mod ERC20Base {
         allowances: LegacyMap::<(ContractAddress, ContractAddress), u256>,
     }
 
-    fn ERC20_name() -> felt252 {
-        name::read()
+    fn ERC20_name(ref self: ContractState) -> felt252 {
+        self.name.read()
     }
 
     fn ERC20_symbol() -> felt252 {
