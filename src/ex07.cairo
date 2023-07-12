@@ -5,9 +5,14 @@
 // - Use this contract's claim_points() function
 // - Your points are credited by the contract
 ////////////////////////////////
+#[starknet
+:: interface ] trait Ex07Trait<T> {
+    fn claim_points(value_a: u128, value_b: u128);
+    fn update_class_hash(class_hash: felt252);
+}
 
-#[contract]
-mod Ex07 {
+#[starknet
+:: contract ] mod Ex07 {
     ////////////////////////////////
     // Core Library imports
     // These are syscalls and functionalities that allow you to write Starknet contracts
@@ -30,42 +35,44 @@ mod Ex07 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
+        ref self: ContractState,
         _tderc20_address: ContractAddress,
         _players_registry: ContractAddress,
         _workshop_id: u128,
         _exercise_id: u128
     ) {
-        ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
+        self.ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
     ////////////////////////////////
     // External functions
     // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
-    #[external]
-    fn claim_points(value_a: u128, value_b: u128) {
-        // Reading caller address
-        let sender_address: ContractAddress = get_caller_address();
-        // Checking that value_a and value_b fit the desired properties
-        assert(value_a != 0_u128, 'ZERO_VALUE');
-        assert(value_b >= 0_u128, 'LESS_THAN_ZERO_VALUE');
-        assert(value_a != value_b, 'EQUAL_VALUE');
-        assert(value_a <= 75_u128, 'GREATER_VALUE');
-        assert(value_a >= 40_u128 & value_a <= 70_u128, 'NOT_IN_BETWEEN_VALUE');
-        assert(value_b < 1_u128, 'LESS_THAN_VALUE');
+    #[external(v0)]
+    impl Ex07Impl of super::Ex07Trait<ContractState> {
+        fn claim_points(ref self: ContractState, value_a: u128, value_b: u128) {
+            // Reading caller address
+            let sender_address: ContractAddress = get_caller_address();
+            // Checking that value_a and value_b fit the desired properties
+            assert(value_a != 0_u128, 'ZERO_VALUE');
+            assert(value_b >= 0_u128, 'LESS_THAN_ZERO_VALUE');
+            assert(value_a != value_b, 'EQUAL_VALUE');
+            assert(value_a <= 75_u128, 'GREATER_VALUE');
+            assert(value_a >= 40_u128 & value_a <= 70_u128, 'NOT_IN_BETWEEN_VALUE');
+            assert(value_b < 1_u128, 'LESS_THAN_VALUE');
 
-        // Checking if the user has validated the exercise before
-        validate_exercise(sender_address);
-        // Sending points to the address specified as parameter
-        distribute_points(sender_address, 2_u128);
-    }
+            // Checking if the user has validated the exercise before
+            self.validate_exercise(sender_address);
+            // Sending points to the address specified as parameter
+            self.distribute_points(sender_address, 2_u128);
+        }
 
-    ////////////////////////////////
-    // External functions - Administration
-    // Only admins can call these. You don't need to understand them to finish the exercise.
-    ////////////////////////////////
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
+        ////////////////////////////////
+        // External functions - Administration
+        // Only admins can call these. You don't need to understand them to finish the exercise.
+        ////////////////////////////////
+        fn update_class_hash(ref self: ContractState, class_hash: felt252) {
+            self.update_class_hash_by_admin(class_hash);
+        }
     }
 }
