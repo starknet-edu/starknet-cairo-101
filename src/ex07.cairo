@@ -5,14 +5,14 @@
 // - Use this contract's claim_points() function
 // - Your points are credited by the contract
 ////////////////////////////////
-#[starknet
-:: interface ] trait Ex07Trait<T> {
+#[starknet::interface] 
+trait Ex07Trait<T> {
     fn claim_points(value_a: u128, value_b: u128);
     fn update_class_hash(class_hash: felt252);
 }
 
-#[starknet
-:: contract ] mod Ex07 {
+#[starknet::contract] 
+mod Ex07 {
     ////////////////////////////////
     // Core Library imports
     // These are syscalls and functionalities that allow you to write Starknet contracts
