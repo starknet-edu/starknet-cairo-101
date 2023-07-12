@@ -2,11 +2,10 @@ use starknet::ContractAddress;
 //###################
 // ITDERC20 INTERFACE
 //###################
-#[abi]
-trait ITDERC20 {
-    fn distribute_points(to: ContractAddress, amount: u128);
-    fn remove_points(to: ContractAddress, amount: u128);
-    fn set_teacher(account: ContractAddress, permission: bool);
-    fn is_teacher_or_exercise(account: ContractAddress) -> bool;
-
+#[starknet::interface]
+trait ITDERC20 <TContractState>{
+    fn distribute_points(ref self:TContractState, to: ContractAddress, amount: u128);
+    fn remove_points(ref self:TContractState , to: ContractAddress, amount: u128);
+    fn set_teacher(ref self: TContractState, account: ContractAddress, permission: bool);
+    fn is_teacher_or_exercise(self:@TContractState, account: ContractAddress) -> bool;
 }
