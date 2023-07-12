@@ -5,13 +5,13 @@
 ////////////////////////////////
 
 
-#[contract]
+#[starknet::contract]
 mod Ex00Base {
     // Core Library Imports
     use starknet::get_caller_address;
     use zeroable::Zeroable;
     use starknet::ContractAddress;
-    use starknet::ContractAddressZeroable;
+    use starknet::contract_address::ContractAddressZeroable;
     use starknet::syscalls::replace_class_syscall;
     use starknet::ClassHash;
     use starknet::class_hash::Felt252TryIntoClassHash;
@@ -26,6 +26,7 @@ mod Ex00Base {
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcher;
     use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
     use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
+     use starknet_cairo_101::utils::Iex00_base::Iex00_base;
 
     const Decimals: u128 = 1000000000000000000_u128;
 
@@ -33,6 +34,7 @@ mod Ex00Base {
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
+    #[storage]
     struct Storage {
         tderc20_address_storage: ContractAddress,
         players_registry_storage: ContractAddress,
@@ -40,69 +42,56 @@ mod Ex00Base {
         exercise_id_storage: u128,
     }
 
-    ////////////////////////////////
-    // View Functions
-    ////////////////////////////////
-    #[view]
-    fn tderc20_address() -> ContractAddress {
-        tderc20_address_storage::read()
+    impl Iex00_baseImpl of Iex00_base<ContractState>{
+        fn tderc20_address(self:@ContractState) -> ContractAddress{
+            return self.tderc20_address_storage.read();
+        } 
+
+        fn players_registry(self: @ContractState) -> ContractAddress{
+            return self.players_registry_storage.read();
+        }
+
+    fn workshop_id(self: @ContractState) -> u128 {
+      return  self.workshop_id_storage.read();
     }
 
-    #[view]
-    fn players_registry() -> ContractAddress {
-        players_registry_storage::read()
+    fn exercise_id(self:@ContractState) -> u128 {
+      return  self.exercise_id_storage.read();
     }
 
-    #[view]
-    fn workshop_id() -> u128 {
-        workshop_id_storage::read()
-    }
-
-    #[view]
-    fn exercise_id() -> u128 {
-        exercise_id_storage::read()
-    }
-
-    #[view]
-    fn has_validated_exercise(account: ContractAddress) -> bool {
+      fn has_validated_exercise(self: @ContractState, account: ContractAddress) -> bool {
         // reading player registry
-        let players_registry = players_registry_storage::read();
-        let workshop_id = workshop_id_storage::read();
-        let exercise_id = exercise_id_storage::read();
+        let players_registry = self.players_registry_storage.read();
+        let workshop_id = self.workshop_id_storage.read();
+        let exercise_id = self.exercise_id_storage.read();
 
         Iplayers_registryDispatcher{contract_address: players_registry}
             .has_validated_exercise(account, workshop_id, exercise_id)
     }
 
-    ////////////////////////////////
-    // Internal Constructor
-    ////////////////////////////////
     fn ex_initializer(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
-    ) {
-        tderc20_address_storage::write(_tderc20_address);
-        players_registry_storage::write(_players_registry);
-        workshop_id_storage::write(_workshop_id);
-        exercise_id_storage::write(_exercise_id);
+    ref self:ContractState, _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
+    ){
+    self.tderc20_address_storage.write(_tderc20_address);
+    self.players_registry_storage.write(_players_registry);
+    self.workshop_id_storage.write(_workshop_id);
+    self.exercise_id_storage.write(_exercise_id);
     }
 
-    ////////////////////////////////
-    // Internal Functions
-    ////////////////////////////////
-    fn distribute_points(to: ContractAddress, amount: u128) {
+    fn distribute_points(ref self:ContractState,to: ContractAddress, amount: u128) {
         // Retrieving contract address from storage
-        let tderc20_address = tderc20_address_storage::read();
+        let tderc20_address = self.tderc20_address_storage.read();
         let points_to_credit: u128 = amount * Decimals;
 
         ITDERC20Dispatcher{contract_address: tderc20_address}
             .distribute_points(to, points_to_credit);
     }
 
-    fn validate_exercise(account: ContractAddress) {
+        fn validate_exercise(ref self: ContractState,account: ContractAddress) {
         // reading player registry
-        let players_registry = players_registry_storage::read();
-        let workshop_id = workshop_id_storage::read();
-        let exercise_id = exercise_id_storage::read();
+        let players_registry = self.players_registry_storage.read();
+        let workshop_id = self.workshop_id_storage.read();
+        let exercise_id = self.exercise_id_storage.read();
 
         let has_current_user_validated_exercise =
             Iplayers_registryDispatcher{contract_address: players_registry}
@@ -113,8 +102,8 @@ mod Ex00Base {
             .validate_exercise(account, workshop_id, exercise_id);
     }
 
-    fn update_class_hash_by_admin(class_hash_in_felt: felt252) {
-        let players_registry = players_registry_storage::read();
+        fn update_class_hash_by_admin(ref self: ContractState,class_hash_in_felt: felt252) {
+        let players_registry = self.players_registry_storage.read();
         let sender_address = get_caller_address();
 
         let is_admin = Iplayers_registryDispatcher{contract_address: players_registry}
@@ -124,4 +113,8 @@ mod Ex00Base {
         let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
         replace_class_syscall(class_hash);
     }
+
+    }
+
+
 }
