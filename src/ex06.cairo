@@ -7,8 +7,8 @@
 // - You need to the exact same thing as the previous exercise
 // - But this time, the external function you will call will call an inner function
 ////////////////////////////////
-#[starknet
-:: interface ] trait Ex06Trait<T> {
+#[starknet::interface] 
+trait Ex06Trait<T> {
     fn claim_points(ref self: ContractState, expected_value: u128);
     fn assign_user_slot(ref self: ContractState);
     fn external_handler_for_internal_function(ref self: ContractState, a_value: u128);
@@ -19,8 +19,8 @@
 }
 
 
-#[starknet
-:: contract ] mod Ex06 {
+#[starknet::contract] 
+mod Ex06 {
     ////////////////////////////////
     // Core Library imports
     // These are syscalls and functionalities that allow you to write Starknet contracts
