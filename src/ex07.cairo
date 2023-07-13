@@ -6,9 +6,9 @@
 // - Your points are credited by the contract
 ////////////////////////////////
 #[starknet::interface] 
-trait Ex07Trait<T> {
-    fn claim_points(value_a: u128, value_b: u128);
-    fn update_class_hash(class_hash: felt252);
+trait Ex07Trait<TContractState> {
+    fn claim_points(ref self: TContractState, value_a: u128, value_b: u128);
+    fn update_class_hash(ref self: TContractState, class_hash: felt252);
 }
 
 #[starknet::contract] 
@@ -28,6 +28,9 @@ mod Ex07 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::validate_exercise;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::ex_initializer;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
+
+    #[storage]
+    struct Storage {}
 
     ////////////////////////////////
     // Constructor
