@@ -81,7 +81,7 @@ mod ERC20Base {
 
         fn ERC20_transfer(ref self: ContractState, recipient: ContractAddress, amount: u256) {
             let sender = get_caller_address();
-            transfer_helper(ref self, sender, recipient, amount);
+            InternalFunctions::transfer_helper(ref self, sender, recipient, amount);
         }
 
         fn ERC20_transferFrom(
@@ -91,20 +91,20 @@ mod ERC20Base {
             amount: u256
         ) {
             let caller = get_caller_address();
-            spend_allowance(ref self, sender, caller, amount);
-            transfer_helper(ref self, sender, recipient, amount);
+            InternalFunctions::spend_allowance(ref self, sender, caller, amount);
+            InternalFunctions::transfer_helper(ref self, sender, recipient, amount);
         }
 
         fn ERC20_approve(ref self: ContractState, spender: ContractAddress, amount: u256) {
             let caller = get_caller_address();
-            approve_helper(ref self, caller, spender, amount);
+            InternalFunctions::approve_helper(ref self, caller, spender, amount);
         }
 
         fn ERC20_increaseAllowance(
             ref self: ContractState, spender: ContractAddress, added_value: u256
         ) {
             let caller = get_caller_address();
-            approve_helper(
+            InternalFunctions::approve_helper(
                 ref self, caller, spender, self.allowances.read((caller, spender)) + added_value
             );
         }
@@ -113,7 +113,7 @@ mod ERC20Base {
             ref self: ContractState, spender: ContractAddress, subtracted_value: u256
         ) {
             let caller = get_caller_address();
-            approve_helper(
+            InternalFunctions::approve_helper(
                 ref self,
                 caller,
                 spender,
@@ -156,31 +156,39 @@ mod ERC20Base {
         }
     }
 
-    fn transfer_helper(
-        ref self: ContractState, sender: ContractAddress, recipient: ContractAddress, amount: u256
-    ) {
-        assert(!sender.is_zero(), 'ERC20: transfer from 0');
-        assert(!recipient.is_zero(), 'ERC20: transfer to 0');
-        self.balances.write(sender, self.balances.read(sender) - amount);
-        self.balances.write(recipient, self.balances.read(recipient) + amount);
-    }
-
-    fn spend_allowance(
-        ref self: ContractState, owner: ContractAddress, spender: ContractAddress, amount: u256
-    ) {
-        let current_allowance = self.allowances.read((owner, spender));
-        let ONES_MASK = 0xffffffffffffffffffffffffffffffff_u128;
-        let is_unlimited_allowance = current_allowance.low == ONES_MASK
-            & current_allowance.high == ONES_MASK;
-        if !is_unlimited_allowance {
-            approve_helper(ref self, owner, spender, current_allowance - amount);
+    #[generate_trait]
+    impl InternalFunctions of InternalFunctionsTrait {
+        fn transfer_helper(
+            ref self: ContractState,
+            sender: ContractAddress,
+            recipient: ContractAddress,
+            amount: u256
+        ) {
+            assert(!sender.is_zero(), 'ERC20: transfer from 0');
+            assert(!recipient.is_zero(), 'ERC20: transfer to 0');
+            self.balances.write(sender, self.balances.read(sender) - amount);
+            self.balances.write(recipient, self.balances.read(recipient) + amount);
         }
-    }
 
-    fn approve_helper(
-        ref self: ContractState, owner: ContractAddress, spender: ContractAddress, amount: u256
-    ) {
-        assert(!spender.is_zero(), 'ERC20: approve from 0');
-        self.allowances.write((owner, spender), amount);
+        fn spend_allowance(
+            ref self: ContractState, owner: ContractAddress, spender: ContractAddress, amount: u256
+        ) {
+            let current_allowance = self.allowances.read((owner, spender));
+            let ONES_MASK = 0xffffffffffffffffffffffffffffffff_u128;
+            let is_unlimited_allowance = current_allowance.low == ONES_MASK
+                & current_allowance.high == ONES_MASK;
+            if !is_unlimited_allowance {
+                InternalFunctions::approve_helper(
+                    ref self, owner, spender, current_allowance - amount
+                );
+            }
+        }
+
+        fn approve_helper(
+            ref self: ContractState, owner: ContractAddress, spender: ContractAddress, amount: u256
+        ) {
+            assert(!spender.is_zero(), 'ERC20: approve from 0');
+            self.allowances.write((owner, spender), amount);
+        }
     }
 }
