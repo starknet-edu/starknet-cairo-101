@@ -9,8 +9,14 @@
 // - General smart contract syntax and structure
 ////////////////////////////////
 
+#[starknet::interface]
+trait Ex01Trait<T> {
+  fn claim_points(ref self:T);
+  fn update_class_hash(ref self:T, class_hash: felt252);
+}
+
 // Contracts are defined using the #[contract] attribute (similar to "contract" in Solidity) and are defined in a module
-#[contract]
+#[starknet::contract]
 mod Ex01 {
     ////////////////////////////////
     // Core Library imports
@@ -28,6 +34,10 @@ mod Ex01 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
+    #[storage]
+    struct Storage {
+    }
+
     ////////////////////////////////
     // Constructor
     // This function (indicated with #[constructor]) is called once, when the contract is deployed, and is used to initialize the contract's state
@@ -36,7 +46,7 @@ mod Ex01 {
     // When you deploy the contract, you need to pass these parameters to the constructor function
     // For these exercises you do not need to worry about the parameters, they are automatically passed to the constructor.
     #[constructor]
-    fn constructor(_tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128) {
+    fn constructor(ref self: ContractState, _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
@@ -44,22 +54,24 @@ mod Ex01 {
     // External functions
     // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
-    #[external]
-    fn claim_points() {
+    #[external(v0)]
+    impl Ex01Impl of super::Ex01Trait<ContractState> {
+      fn claim_points(ref self: ContractState) {
         // Reading caller address
         let sender_address = get_caller_address();
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
         distribute_points(sender_address, 2_u128);
-    }
-    ////////////////////////////////
-    // External functions - Administration
-    // Only admins can call these. You don't need to understand them to finish the exercise.
-    ////////////////////////////////
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
+      }
+
+      ////////////////////////////////
+      // External functions - Administration
+      // Only admins can call these. You don't need to understand them to finish the exercise.
+      ////////////////////////////////
+      fn update_class_hash(ref self: ContractState, class_hash: felt252) {
         update_class_hash_by_admin(class_hash);
+      }
     }
 
 }
