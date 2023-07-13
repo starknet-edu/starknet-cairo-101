@@ -46,7 +46,10 @@ mod Ex10 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
+        _tderc20_address: ContractAddress,
+        _players_registry: ContractAddress,
+        _workshop_id: u128,
+        _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -72,13 +75,15 @@ mod Ex10 {
         // Retrieve secret value by READING
         let ex10b_addr = ex10b_address::read();
 
-        let secret_value = Iex10bDispatcher{contract_address: ex10b_addr}.get_secret_value();
+        let secret_value = Iex10bDispatcher { contract_address: ex10b_addr }.get_secret_value();
         assert(secret_value == secret_value_i_guess, 'NOT_EXPECTED_SECRET_VALUE');
 
         // choosing next secret_value for contract 10b. We don't want 0, it's not funny
         assert(next_secret_value_i_chose != 0_u128, 'SECRET_VALUE_IS_ZERO');
 
-        Iex10bDispatcher{contract_address: ex10b_addr}.change_secret_value(next_secret_value_i_chose);
+        Iex10bDispatcher {
+            contract_address: ex10b_addr
+        }.change_secret_value(next_secret_value_i_chose);
 
         // Checking if the user has validated the exercise before
         validate_exercise(sender_address);

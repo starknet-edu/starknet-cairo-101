@@ -3,7 +3,6 @@
 // A contract to record all addresses who participated, and which exercises and workshops they completed
 ////////////////////////////////
 
-
 #[contract]
 mod PlayersRegistry {
     // Core Library Imports
@@ -22,8 +21,8 @@ mod PlayersRegistry {
     // Internal Imports
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcherTrait;
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcher;
-    use starknet_cairo_101::token::TDERC20::ITDERC20DispatcherTrait;
-    use starknet_cairo_101::token::TDERC20::ITDERC20Dispatcher;
+    use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
+    use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
     use core::hash::TupleSize3LegacyHash;
     use starknet_cairo_101::utils::helper;
 
@@ -97,16 +96,20 @@ mod PlayersRegistry {
         exercises_and_admins_accounts::write(account, permission);
         Modificate_Exercise_Or_Admin(account, permission);
     }
-     #[external]
+    #[external]
     fn set_exercises_or_admins(accounts: Array::<ContractAddress>, permissions: Array::<bool>) {
         only_exercise_or_admin();
         set_single_exercise_or_admin(accounts, permissions);
     }
 
-    fn set_single_exercise_or_admin(mut accounts: Array::<ContractAddress>,mut permissions: Array::<bool>) {
+    fn set_single_exercise_or_admin(
+        mut accounts: Array::<ContractAddress>, mut permissions: Array::<bool>
+    ) {
         helper::check_gas();
         if !accounts.is_empty() {
-            exercises_and_admins_accounts::write(accounts.pop_front().unwrap(), permissions.pop_front().unwrap());
+            exercises_and_admins_accounts::write(
+                accounts.pop_front().unwrap(), permissions.pop_front().unwrap()
+            );
             set_single_exercise_or_admin(accounts, permissions);
         }
     }
@@ -121,9 +124,7 @@ mod PlayersRegistry {
     fn validate_exercise(account: ContractAddress, workshop: u128, exercise: u128) {
         only_exercise_or_admin();
         // Checking if the user already validated this exercise
-        let is_validated = has_validated_exercise_storage::read(
-            (account, workshop, exercise)
-        );
+        let is_validated = has_validated_exercise_storage::read((account, workshop, exercise));
 
         assert(is_validated == false, 'USER_VALIDATED');
 
@@ -153,8 +154,6 @@ mod PlayersRegistry {
     fn only_exercise_or_admin() {
         let caller: ContractAddress = get_caller_address();
         let permission: bool = exercises_and_admins_accounts::read(caller);
-        assert (permission == true, 'You dont have permission.');
+        assert(permission == true, 'You dont have permission.');
     }
-
-
 }

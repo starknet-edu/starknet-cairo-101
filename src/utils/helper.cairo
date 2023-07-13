@@ -26,11 +26,11 @@ fn check_gas() {
 // For the simplicity, We dont want to include a third party lib to do pow()
 #[inline(always)]
 fn get_token_in_decimals(decimals: u8) -> u128 {
-  if decimals == 18_u8 {
-    DECIMALS_18
-  } else if decimals == 12_u8 {
-    DECIMALS_12
-  } else {
-    DECIMALS_6
-  }
+    if decimals == 18_u8 {
+        DECIMALS_18
+    } else if decimals == 12_u8 {
+        DECIMALS_12
+    } else {
+        DECIMALS_6
+    }
 }

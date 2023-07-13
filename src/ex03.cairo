@@ -54,7 +54,10 @@ mod Ex03 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
+        _tderc20_address: ContractAddress,
+        _players_registry: ContractAddress,
+        _workshop_id: u128,
+        _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -130,5 +133,4 @@ mod Ex03 {
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);
     }
-
 }

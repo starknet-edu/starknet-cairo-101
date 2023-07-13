@@ -4,7 +4,6 @@
 // such as `validate_exercise`, `distribute_points`
 ////////////////////////////////
 
-
 #[contract]
 mod Ex00Base {
     // Core Library Imports
@@ -24,8 +23,8 @@ mod Ex00Base {
     // Internal Imports
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcherTrait;
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcher;
-    use starknet_cairo_101::token::TDERC20::ITDERC20DispatcherTrait;
-    use starknet_cairo_101::token::TDERC20::ITDERC20Dispatcher;
+    use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
+    use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
 
     const Decimals: u128 = 1000000000000000000_u128;
 
@@ -70,15 +69,19 @@ mod Ex00Base {
         let workshop_id = workshop_id_storage::read();
         let exercise_id = exercise_id_storage::read();
 
-        Iplayers_registryDispatcher{contract_address: players_registry}
-            .has_validated_exercise(account, workshop_id, exercise_id)
+        Iplayers_registryDispatcher {
+            contract_address: players_registry
+        }.has_validated_exercise(account, workshop_id, exercise_id)
     }
 
     ////////////////////////////////
     // Internal Constructor
     ////////////////////////////////
     fn ex_initializer(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
+        _tderc20_address: ContractAddress,
+        _players_registry: ContractAddress,
+        _workshop_id: u128,
+        _exercise_id: u128
     ) {
         tderc20_address_storage::write(_tderc20_address);
         players_registry_storage::write(_players_registry);
@@ -94,8 +97,9 @@ mod Ex00Base {
         let tderc20_address = tderc20_address_storage::read();
         let points_to_credit: u128 = amount * Decimals;
 
-        ITDERC20Dispatcher{contract_address: tderc20_address}
-            .distribute_points(to, points_to_credit);
+        ITDERC20Dispatcher {
+            contract_address: tderc20_address
+        }.distribute_points(to, points_to_credit);
     }
 
     fn validate_exercise(account: ContractAddress) {
@@ -104,23 +108,25 @@ mod Ex00Base {
         let workshop_id = workshop_id_storage::read();
         let exercise_id = exercise_id_storage::read();
 
-        let has_current_user_validated_exercise =
-            Iplayers_registryDispatcher{contract_address: players_registry}
-            .has_validated_exercise(account, workshop_id, exercise_id);
+        let has_current_user_validated_exercise = Iplayers_registryDispatcher {
+            contract_address: players_registry
+        }.has_validated_exercise(account, workshop_id, exercise_id);
 
         assert(has_current_user_validated_exercise == false, 'Exercise previously validated');
-        Iplayers_registryDispatcher{contract_address: players_registry}
-            .validate_exercise(account, workshop_id, exercise_id);
+        Iplayers_registryDispatcher {
+            contract_address: players_registry
+        }.validate_exercise(account, workshop_id, exercise_id);
     }
 
     fn update_class_hash_by_admin(class_hash_in_felt: felt252) {
         let players_registry = players_registry_storage::read();
         let sender_address = get_caller_address();
 
-        let is_admin = Iplayers_registryDispatcher{contract_address: players_registry}
-            .is_exercise_or_admin(sender_address);
+        let is_admin = Iplayers_registryDispatcher {
+            contract_address: players_registry
+        }.is_exercise_or_admin(sender_address);
 
-        assert (is_admin == true, 'CALLER_NO_ADMIN_RIGHTS');
+        assert(is_admin == true, 'CALLER_NO_ADMIN_RIGHTS');
         let class_hash: ClassHash = class_hash_in_felt.try_into().unwrap();
         replace_class_syscall(class_hash);
     }

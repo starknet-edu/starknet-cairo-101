@@ -13,6 +13,8 @@ trait IERC20<TContractState> {
     fn balanceOf(self: @TContractState, account: ContractAddress) -> u256;
     fn allowance(self: @TContractState, owner: ContractAddress, spender: ContractAddress) -> u256;
     fn transfer(self: @TContractState, recipient: ContractAddress, amount: u256);
-    fn transferFrom(self: @TContractState, sender: ContractAddress, recipient: ContractAddress, amount: u256);
+    fn transferFrom(
+        self: @TContractState, sender: ContractAddress, recipient: ContractAddress, amount: u256
+    );
     fn approve(self: @TContractState, spender: ContractAddress, amount: u256);
 }

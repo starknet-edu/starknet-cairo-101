@@ -49,7 +49,10 @@ mod Ex12 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
+        _tderc20_address: ContractAddress,
+        _players_registry: ContractAddress,
+        _workshop_id: u128,
+        _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }

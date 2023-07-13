@@ -36,7 +36,12 @@ mod Ex01 {
     // When you deploy the contract, you need to pass these parameters to the constructor function
     // For these exercises you do not need to worry about the parameters, they are automatically passed to the constructor.
     #[constructor]
-    fn constructor(_tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128) {
+    fn constructor(
+        _tderc20_address: ContractAddress,
+        _players_registry: ContractAddress,
+        _workshop_id: u128,
+        _exercise_id: u128
+    ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
@@ -61,5 +66,4 @@ mod Ex01 {
     fn update_class_hash(class_hash: felt252) {
         update_class_hash_by_admin(class_hash);
     }
-
 }

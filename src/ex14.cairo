@@ -47,7 +47,10 @@ mod Ex14 {
     ////////////////////////////////
     #[constructor]
     fn constructor(
-        _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
+        _tderc20_address: ContractAddress,
+        _players_registry: ContractAddress,
+        _workshop_id: u128,
+        _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
@@ -64,27 +67,39 @@ mod Ex14 {
         let erc20_address = tderc20_address();
 
         // Reading contract balance before calling
-        let balance_before = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
+        let balance_before = IERC20Dispatcher {
+            contract_address: erc20_address
+        }.balanceOf(sender_address);
 
         // Calling caller's validate_various_exercises() function
-        IAllInOneContractDispatcher{contract_address: sender_address}.validate_various_exercises();
+        IAllInOneContractDispatcher {
+            contract_address: sender_address
+        }.validate_various_exercises();
 
         // Reading contract balance after calling
-        let balance_after = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
+        let balance_after = IERC20Dispatcher {
+            contract_address: erc20_address
+        }.balanceOf(sender_address);
 
         // Verifying that caller collected some points
-        assert(balance_before >= u256 { low: 0_u128, high: 0_u128 } & balance_after > balance_before, 'NO_POINTS_COLLECTED');
+        assert(
+            balance_before >= u256 { low: 0_u128, high: 0_u128 } & balance_after > balance_before,
+            'NO_POINTS_COLLECTED'
+        );
 
         // Read how many points were collected
         let collected_points = balance_after - balance_before;
 
         // Check that at least 20 points were collected
-        let decimals = IERC20Dispatcher{contract_address: erc20_address}.decimals();
+        let decimals = IERC20Dispatcher { contract_address: erc20_address }.decimals();
         let token_decimals = get_token_in_decimals(decimals);
         let token_amount = 20_u128 * token_decimals;
-        assert(collected_points >= u256 { low: token_amount, high: 0_u128 }, 'NO_ENOUGH_POINTS_COLLECTED');
+        assert(
+            collected_points >= u256 { low: token_amount, high: 0_u128 },
+            'NO_ENOUGH_POINTS_COLLECTED'
+        );
 
-         // Checking if the user has validated the exercise before
+        // Checking if the user has validated the exercise before
         validate_exercise(sender_address);
         // Sending points to the address specified as parameter
         distribute_points(sender_address, 2_u128);

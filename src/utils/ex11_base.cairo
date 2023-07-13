@@ -21,8 +21,8 @@ mod Ex11Base {
     // Internal Imports
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcherTrait;
     use starknet_cairo_101::utils::Iplayers_registry::Iplayers_registryDispatcher;
-    use starknet_cairo_101::token::TDERC20::ITDERC20DispatcherTrait;
-    use starknet_cairo_101::token::TDERC20::ITDERC20Dispatcher;
+    use starknet_cairo_101::token::ITDERC20::ITDERC20DispatcherTrait;
+    use starknet_cairo_101::token::ITDERC20::ITDERC20Dispatcher;
 
     const Decimals: u128 = 1000000000000000000_u128;
 
@@ -63,10 +63,11 @@ mod Ex11Base {
     fn secret_value_internal() -> u128 {
         let secret_value = ex11_secret_value::read();
         // There is a trick here
-        if (secret_value > 340282366920938463463374607431768211455_u128 - 42069_u128)
-        {return secret_value - 42069_u128;}
-        else
-        {return secret_value + 42069_u128;}
+        if (secret_value > 340282366920938463463374607431768211455_u128 - 42069_u128) {
+            return secret_value - 42069_u128;
+        } else {
+            return secret_value + 42069_u128;
+        }
     }
 
     #[view]
@@ -77,8 +78,9 @@ mod Ex11Base {
         let exercise_id = exercise_id_storage::read();
 
         // Checking if the user already validated this exercise
-        Iplayers_registryDispatcher{contract_address: players_registry}
-            .has_validated_exercise(account, workshop_id, exercise_id)
+        Iplayers_registryDispatcher {
+            contract_address: players_registry
+        }.has_validated_exercise(account, workshop_id, exercise_id)
     }
 
     //
@@ -86,12 +88,19 @@ mod Ex11Base {
     // This function is used to initialize the contract. It can be called from the constructor
     //
 
-    fn ex_initializer(_tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128) {
+    fn ex_initializer(
+        _tderc20_address: ContractAddress,
+        _players_registry: ContractAddress,
+        _workshop_id: u128,
+        _exercise_id: u128
+    ) {
         tderc20_address_storage::write(_tderc20_address);
         players_registry_storage::write(_players_registry);
         workshop_id_storage::write(_workshop_id);
         exercise_id_storage::write(_exercise_id);
-        ex11_secret_value::write(9811398123_u128); // wont be able to use contract address cause its cause u128_from OverFlow
+        ex11_secret_value::write(
+            9811398123_u128
+        ); // wont be able to use contract address cause its cause u128_from OverFlow
     }
 
     //
@@ -106,8 +115,9 @@ mod Ex11Base {
         // Retrieving contract address from storage
         let tderc20_address = tderc20_address_storage::read();
         // Calling the ERC20 contract to distribute points
-        ITDERC20Dispatcher{contract_address: tderc20_address}
-            .distribute_points(to, points_to_credit);
+        ITDERC20Dispatcher {
+            contract_address: tderc20_address
+        }.distribute_points(to, points_to_credit);
     }
 
     fn validate_exercise(account: ContractAddress) {
@@ -116,20 +126,24 @@ mod Ex11Base {
         let _workshop_id = workshop_id_storage::read();
         let _exercise_id = exercise_id_storage::read();
 
-        let has_validated_exercise = Iplayers_registryDispatcher{contract_address: _players_registry}
-            .has_validated_exercise(account, _workshop_id, _exercise_id);
+        let has_validated_exercise = Iplayers_registryDispatcher {
+            contract_address: _players_registry
+        }.has_validated_exercise(account, _workshop_id, _exercise_id);
 
         assert(has_validated_exercise == false, 'Exercise previously validated');
 
-        Iplayers_registryDispatcher{contract_address: _players_registry}
-            .validate_exercise(account, _workshop_id, _exercise_id);
+        Iplayers_registryDispatcher {
+            contract_address: _players_registry
+        }.validate_exercise(account, _workshop_id, _exercise_id);
     }
 
-    fn validate_answers(sender_address: ContractAddress, secret_value_i_guess: u128, next_secret_value_i_chose: u128) {
+    fn validate_answers(
+        sender_address: ContractAddress, secret_value_i_guess: u128, next_secret_value_i_chose: u128
+    ) {
         // CAREFUL THERE IS A TRAP FOR PEOPLE WHO WON'T READ THE CODE
         // This exercise looks like the previous one, but actually the view secret_value returns a different value than secret_value
         // Sending the wrong execution result will remove some of your points, then validate the exercise. You won't be able to get those points back later on!
-        
+
         let fake_secret_value = secret_value_internal();
         // Laying our trap here
         if secret_value_i_guess == fake_secret_value {
@@ -138,8 +152,9 @@ mod Ex11Base {
             // # Retrieving contract address from storage
             let tderc20_address = tderc20_address_storage::read();
             // # Calling the ERC20 contract to remove points
-            ITDERC20Dispatcher{contract_address: tderc20_address}
-                .remove_points(sender_address, points_to_remove);
+            ITDERC20Dispatcher {
+                contract_address: tderc20_address
+            }.remove_points(sender_address, points_to_remove);
         } else {
             let secret_value = ex11_secret_value::read();
             if secret_value_i_guess == secret_value {

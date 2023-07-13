@@ -47,7 +47,9 @@ mod Ex10b {
         ex10_address::write(ex10_addr);
         let current_contract_address = get_contract_address();
 
-        Iex10Dispatcher{contract_address: ex10_addr}.set_ex_10b_address(current_contract_address);
+        Iex10Dispatcher {
+            contract_address: ex10_addr
+        }.set_ex_10b_address(current_contract_address);
     }
 
     ////////////////////////////////

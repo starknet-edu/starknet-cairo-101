@@ -14,7 +14,6 @@
 // - How to use asserts; they are similar to require() in Solidity
 ////////////////////////////////
 
-
 #[contract]
 mod Ex02 {
     ////////////////////////////////
