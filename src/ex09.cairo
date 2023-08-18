@@ -2,9 +2,12 @@
 // Exercise 9
 // Recursions - advanced
 ////////////////////////////////
-// TODO (omar): Add a description of the exercise
-// - Use this contract's claim_points() function
-// - Your points are credited by the contract
+// In this exercise, you need to:
+// - Follow this contract's claim_points() function to understand how to finish the exercise
+// - Send the correct array to claim_points() to claim your points
+// - Your points are credited by the contract if you send the correct value
+// What you'll learn
+// - The relavent function of Array, such as is_empty(), len() and more
 ////////////////////////////////
 
 #[contract]
