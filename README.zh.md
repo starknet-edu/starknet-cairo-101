@@ -111,7 +111,7 @@
 
 | 主题                                       | GitHub 仓库                                                                            |
 | ------------------------------------------- | -------------------------------------------------------------------------------------- |
-| 学习如何阅读Cairo带吗 (你在这里) | [Cairo 101](https://github.com/starknet-edu/starknet-cairo-101)                        |
+| 学习如何阅读Cairo代码 (你在这里) | [Cairo 101](https://github.com/starknet-edu/starknet-cairo-101)                        |
 | 部署并自定义 ERC721 NFT          | [Starknet ERC721](https://github.com/starknet-edu/starknet-erc721)                     |
 | 部署并自定义 ERC20 token         | [Starknet ERC20](https://github.com/starknet-edu/starknet-erc20)                       |
 | 构建跨链应用程序             | [Starknet messaging bridge](https://github.com/starknet-edu/starknet-messaging-bridge) |
