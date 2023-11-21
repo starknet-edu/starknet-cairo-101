@@ -1,4 +1,4 @@
-# Smart Contract Devent Record
+# Smart Contract Devnet Record
 
 | Contract Name   | Class Hash                                                        | Contract Address                                                   | Test Passed? |
 | :-------------- | :---------------------------------------------------------------- | :----------------------------------------------------------------- | :----------- |
