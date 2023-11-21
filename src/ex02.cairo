@@ -14,8 +14,16 @@
 // - How to use asserts; they are similar to require() in Solidity
 ////////////////////////////////
 
+use starknet::ContractAddress;
 
-#[contract]
+#[starknet::interface]
+trait Ex02Trait<TContractState> {
+    fn my_secret_value(self: @TContractState) -> u128;
+    fn claim_points(ref self: TContractState, my_value: u128);
+    fn update_class_hash(ref self: TContractState, class_hash: felt252);
+}
+
+#[starknet::contract]
 mod Ex02 {
     ////////////////////////////////
     // Core Library imports
@@ -38,6 +46,7 @@ mod Ex02 {
     // In Cairo 1, storage is declared in a struct
     // Storage is not visible by default through the ABI
     ////////////////////////////////
+    #[storage]
     struct Storage {
         // This variable is a u128, an unsigned integer (only positive values) stored over 128 bits
         // You can use any of the following types: u8, u16, u32, u64, u128, bool, felt252, ContractAddress
@@ -48,59 +57,63 @@ mod Ex02 {
     }
 
     ////////////////////////////////
-    // View Functions
-    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
-    ////////////////////////////////
-    #[view]
-    fn my_secret_value() -> u128 {
-        // The contract read the value with ::read()
-        // You may have noticed that in Cairo 1 all lines end with a semicolon.
-        // But this one doesn't. Why?
-        // Because, in this case, the return value is the result of the function call. The semicolon is not needed.
-        my_secret_value_storage::read()
-    }
-
-    ////////////////////////////////
     // Constructor
     // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
     fn constructor(
+        ref self: ContractState,
         _tderc20_address: ContractAddress,
         _players_registry: ContractAddress,
         _workshop_id: u128,
         _exercise_id: u128,
         my_secret_value: u128,
     ) {
-        ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
-        my_secret_value_storage::write(my_secret_value);
+        self.ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
+        self.my_secret_value_storage.write(my_secret_value);
     }
 
-    ////////////////////////////////
-    // External functions
-    // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
-    ////////////////////////////////
-    #[external]
-    fn claim_points(my_value: u128) {
-        // Reading caller address using the Starknet core library function get_caller_address() (similar to msg.sender in Solidity)
-        // and storing it in a variable called sender_address.
-        let sender_address = get_caller_address();
-        // Reading the secret value from storage using the read function from the storage variable my_secret_value_storage
-        let my_secret_value = my_secret_value_storage::read();
-        // Checking that the value sent is the same as the secret value stored in storage using the assert function
-        // Using assert this way is similar to using "require" in Solidity
-        assert(my_value == my_secret_value, 'Wrong secret value');
-        // Checking if the user has validated the exercise before sending points using the validate_exercise function from the Ex00Base contract
-        validate_exercise(sender_address);
-        // Sending points to the address specified as parameter using the distribute_points function from the Ex00Base contract
-        distribute_points(sender_address, 2_u128);
+    #[external(v0)]
+    impl Ex02Impl of super::Ex02Trait<ContractState> {
+        ////////////////////////////////
+        // View Functions
+        // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
+        ////////////////////////////////
+        fn my_secret_value(self: @ContractState) -> u128 {
+            // The contract read the value with ::read()
+            // You may have noticed that in Cairo 1 all lines end with a semicolon.
+            // But this one doesn't. Why?
+            // Because, in this case, the return value is the result of the function call. The semicolon is not needed.
+            return self.my_secret_value_storage.read();
+        }
+
+        ////////////////////////////////
+        // External functions
+        // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
+        ////////////////////////////////
+        fn claim_points(ref self: ContractState, my_value: u128) {
+            // Reading caller address using the Starknet core library function get_caller_address() (similar to msg.sender in Solidity)
+            // and storing it in a variable called sender_address.
+            let sender_address = get_caller_address();
+            // Reading the secret value from storage using the read function from the storage variable my_secret_value_storage
+            let my_secret_value = self.my_secret_value_storage.read();
+            // Checking that the value sent is the same as the secret value stored in storage using the assert function
+            // Using assert this way is similar to using "require" in Solidity
+            assert(my_value == my_secret_value, 'Wrong secret value');
+            // Checking if the user has validated the exercise before sending points using the validate_exercise function from the Ex00Base contract
+            self.validate_exercise(sender_address);
+            // Sending points to the address specified as parameter using the distribute_points function from the Ex00Base contract
+            self.distribute_points(sender_address, 2_u128);
+        }
+
+        ////////////////////////////////
+        // External functions - Administration
+        // Only admins can call these. You don't need to understand them to finish the exercise.
+        ////////////////////////////////
+        fn update_class_hash(ref self: ContractState, class_hash: felt252) {
+            self.update_class_hash_by_admin(class_hash);
+        }
     }
-    ////////////////////////////////
-    // External functions - Administration
-    // Only admins can call these. You don't need to understand them to finish the exercise.
-    ////////////////////////////////
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
-    }
+
+
 }

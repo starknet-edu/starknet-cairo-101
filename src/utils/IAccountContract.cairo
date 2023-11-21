@@ -1,7 +1,7 @@
 ////////////////////////////////
 // IAccountContract INTERFACE
 ////////////////////////////////
-#[abi]
+#[starknet::interface]
 trait IAccountContract {
     fn get_signer() -> felt252;
 }
