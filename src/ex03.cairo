@@ -16,6 +16,8 @@
 // - How to throw an error using the Cairo assert function
 ////////////////////////////////
 
+use starknet::ContractAddress;
+
 #[contract]
 mod Ex03 {
     ////////////////////////////////

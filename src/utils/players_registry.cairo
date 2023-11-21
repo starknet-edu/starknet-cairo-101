@@ -3,8 +3,24 @@
 // A contract to record all addresses who participated, and which exercises and workshops they completed
 ////////////////////////////////
 
+use starknet::ContractAddress;
 
-#[contract]
+#[starknet::interface]
+trait PlayersRegistryTrait<T> {
+    fn has_validated_exercise(self: @T, account: ContractAddress, workshop: u128, exercise: u128) -> bool;
+    fn is_exercise_or_admin(self: @T, account: ContractAddress) -> bool;
+    fn get_next_player_rank(self: @T) -> u128;
+    fn get_players_registry(self: @T, rank: u128) -> ContractAddress;
+    fn players_ranks(self: @T, account: ContractAddress) -> u128;
+
+    fn set_exercise_or_admin(ref self: T, account: ContractAddress, permission: bool);
+
+    fn claim_points(ref self: T, secret_value_i_guess: u128, next_secret_value_i_chose: u128);
+    fn update_class_hash(ref self: T, class_hash: felt252);
+    fn set_ex_10b_address(ref self: T, ex10b_addr: ContractAddress);
+}
+
+#[starknet::contract]
 mod PlayersRegistry {
     // Core Library Imports
     use starknet::get_caller_address;
@@ -30,6 +46,7 @@ mod PlayersRegistry {
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
+    #[storage]
     struct Storage {
         has_validated_exercise_storage: LegacyMap::<(ContractAddress, u128, u128), bool>,
         exercises_and_admins_accounts: LegacyMap::<ContractAddress, bool>,

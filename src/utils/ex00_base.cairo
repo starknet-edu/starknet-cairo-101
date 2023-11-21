@@ -4,8 +4,24 @@
 // such as `validate_exercise`, `distribute_points`
 ////////////////////////////////
 
+use starknet::ContractAddress;
 
-#[contract]
+#[starknet::interface]
+trait Ex00Trait<T> {
+    fn tderc20_address(self: @T) -> ContractAddress;
+    fn players_registry(self: @T) -> ContractAddress;
+    fn workshop_id(self: @T) -> u128;
+    fn exercise_id(self: @T) -> u128;
+
+    
+
+    fn get_ex10b_address(self: @T) -> ContractAddress;
+    fn claim_points(ref self: T, secret_value_i_guess: u128, next_secret_value_i_chose: u128);
+    fn update_class_hash(ref self: T, class_hash: felt252);
+    fn set_ex_10b_address(ref self: T, ex10b_addr: ContractAddress);
+}
+
+#[starknet::contract]
 mod Ex00Base {
     // Core Library Imports
     use starknet::get_caller_address;
@@ -33,6 +49,7 @@ mod Ex00Base {
     ////////////////////////////////
     // STORAGE
     ////////////////////////////////
+    #[storage]
     struct Storage {
         tderc20_address_storage: ContractAddress,
         players_registry_storage: ContractAddress,
