@@ -45,7 +45,7 @@ mod Ex01 {
     // For these exercises you do not need to worry about the parameters, they are automatically passed to the constructor.
     #[constructor]
     fn constructor(ref self: ContractState, _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128) {
-        ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
+        self.ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
     #[external(v0)]
@@ -58,17 +58,17 @@ mod Ex01 {
             // Reading caller address
             let sender_address = get_caller_address();
             // Checking if the user has validated the exercise before
-            validate_exercise(sender_address);
+            self.validate_exercise(sender_address);
             // Sending points to the address specified as parameter
-            distribute_points(sender_address, 2_u128);
+            self.distribute_points(sender_address, 2_u128);
         }
-        
+
         ////////////////////////////////
         // External functions - Administration
         // Only admins can call these. You don't need to understand them to finish the exercise.
         ////////////////////////////////
         fn update_class_hash(ref self: ContractState, class_hash: felt252) {
-            update_class_hash_by_admin(class_hash);
+            self.update_class_hash_by_admin(class_hash);
         }
     }
 

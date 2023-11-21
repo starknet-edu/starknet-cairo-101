@@ -69,7 +69,7 @@ mod Ex05 {
     fn constructor(
         ref self: ContractState, _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
-        ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
+        self.ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
     #[external(v0)]
@@ -103,9 +103,9 @@ mod Ex05 {
             assert(value == expected_value + 32_u128, 'NOT_EXPECTED_SECRET_VALUE');
 
             // Checking if the user has validated the exercise before
-            validate_exercise(sender_address);
+            self.validate_exercise(sender_address);
             // Sending points to the address specified as parameter
-            distribute_points(sender_address, 2_u128);
+            self.distribute_points(sender_address, 2_u128);
         }
 
         fn assign_user_slot(ref self: ContractState) {
@@ -140,7 +140,7 @@ mod Ex05 {
         // Only admins can call these. You don't need to understand them to finish the exercise.
         ////////////////////////////////
         fn update_class_hash(ref self: ContractState, class_hash: felt252) {
-            update_class_hash_by_admin(class_hash);
+            self.update_class_hash_by_admin(class_hash);
         }
 
         fn set_random_values(ref self: ContractState, values: Array::<u128>) {
@@ -149,7 +149,7 @@ mod Ex05 {
             assert(was_initialized_read != true, 'NOT_INITIALISED');
 
             let mut idx = 0_u128;
-            set_a_random_value(idx, values);
+            self.set_a_random_value(idx, values);
 
             // Mark that value store was initialized
             self.was_initialized.write(true);
@@ -164,7 +164,7 @@ mod Ex05 {
             if !values.is_empty() {
                 self.values_mapped.write(idx, values.pop_front().unwrap());
                 idx = idx + 1_u128;
-                set_a_random_value(idx, values);
+                self.set_a_random_value(idx, values);
             }
         }
     }

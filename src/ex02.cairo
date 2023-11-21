@@ -69,8 +69,8 @@ mod Ex02 {
         _exercise_id: u128,
         my_secret_value: u128,
     ) {
-        ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
-        my_secret_value_storage::write(my_secret_value);
+        self.ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
+        self.my_secret_value_storage.write(my_secret_value);
     }
 
     #[external(v0)]
@@ -96,14 +96,14 @@ mod Ex02 {
             // and storing it in a variable called sender_address.
             let sender_address = get_caller_address();
             // Reading the secret value from storage using the read function from the storage variable my_secret_value_storage
-            let my_secret_value = my_secret_value_storage::read();
+            let my_secret_value = self.my_secret_value_storage.read();
             // Checking that the value sent is the same as the secret value stored in storage using the assert function
             // Using assert this way is similar to using "require" in Solidity
             assert(my_value == my_secret_value, 'Wrong secret value');
             // Checking if the user has validated the exercise before sending points using the validate_exercise function from the Ex00Base contract
-            validate_exercise(sender_address);
+            self.validate_exercise(sender_address);
             // Sending points to the address specified as parameter using the distribute_points function from the Ex00Base contract
-            distribute_points(sender_address, 2_u128);
+            self.distribute_points(sender_address, 2_u128);
         }
 
         ////////////////////////////////
@@ -111,7 +111,7 @@ mod Ex02 {
         // Only admins can call these. You don't need to understand them to finish the exercise.
         ////////////////////////////////
         fn update_class_hash(ref self: ContractState, class_hash: felt252) {
-            update_class_hash_by_admin(class_hash);
+            self.update_class_hash_by_admin(class_hash);
         }
     }
 
