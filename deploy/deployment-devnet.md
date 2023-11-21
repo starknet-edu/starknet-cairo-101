@@ -170,7 +170,7 @@ starknet invoke --address 0x05e8e1c965d59bc44f109f72b9e67cedfa069352c4704723e123
 ```
 
 
-### Do Exercies on dev-net
+### Do Exercises on dev-net
 ``` bash
 ## Ex01
 starknet invoke --function claim_points --address 0x066ac578cb51a1b96e2f6be5c7d046461db19827270cd598f232647189114fc6 --account test --gateway_url http://localhost:5050 --feeder_gateway_url http://localhost:5050
