@@ -7,7 +7,16 @@
 // Then use ex10 to claim points
 ////////////////////////////////
 
-#[contract]
+use starknet::ContractAddress;
+
+#[starknet::interface]
+trait Ex10bTrait<T> {
+    fn get_ex10_address(self: @T) -> ContractAddress;
+    fn get_secret_value(self: @T) -> u128;
+    fn change_secret_value(ref self: T, new_secret_value: u128);
+}
+
+#[starknet::contract]
 mod Ex10b {
     ////////////////////////////////
     // Core Library imports
@@ -16,6 +25,17 @@ mod Ex10b {
     use starknet::get_caller_address;
     use starknet::get_contract_address;
     use starknet::ContractAddress;
+
+    ////////////////////////////////
+    // Storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
+    ////////////////////////////////
+    #[storage]
+    struct Storage {
+        ex10_address: ContractAddress,
+        secret_value: u128,
+    }    
 
     ////////////////////////////////
     // Internal imports
@@ -28,62 +48,57 @@ mod Ex10b {
     use starknet_cairo_101::utils::Iex10::Iex10Dispatcher;
     use starknet_cairo_101::utils::Iex10::Iex10DispatcherTrait;
 
-    ////////////////////////////////
-    // Storage
-    // In Cairo 1, storage is declared in a struct
-    // Storage is not visible by default through the ABI
-    ////////////////////////////////
-    struct Storage {
-        ex10_address: ContractAddress,
-        secret_value: u128,
-    }
 
     ////////////////////////////////
     // Constructor
     // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
-    fn constructor(ex10_addr: ContractAddress) {
-        ex10_address::write(ex10_addr);
+    fn constructor(ref self: ContractState, ex10_addr: ContractAddress) {
+        self.ex10_address.write(ex10_addr);
         let current_contract_address = get_contract_address();
 
         Iex10Dispatcher{contract_address: ex10_addr}.set_ex_10b_address(current_contract_address);
     }
 
-    ////////////////////////////////
-    // View Functions
-    // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
-    ////////////////////////////////
-    #[view]
-    fn get_ex10_address() -> ContractAddress {
-        return ex10_address::read();
+    #[external(v0)]
+    impl Ex10bImpl of super::Ex10bTrait<ContractState> {
+
+        ////////////////////////////////
+        // View Functions
+        // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
+        ////////////////////////////////
+        fn get_ex10_address(self: @ContractState) -> ContractAddress {
+            return self.ex10_address.read();
+        }
+
+        fn get_secret_value(self: @ContractState) -> u128 {
+            return self.secret_value.read();
+        }
+
+        ////////////////////////////////
+        // External functions
+        // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
+        ////////////////////////////////
+        fn change_secret_value(ref self: ContractState, new_secret_value: u128) {
+            // Only ex10 can call this function
+            self.only_ex10();
+            // Changing secret value
+            self.secret_value.write(new_secret_value);
+            return ();
+        }        
     }
 
-    #[view]
-    fn get_secret_value() -> u128 {
-        return secret_value::read();
-    }
-
-    ////////////////////////////////
-    // External functions
-    // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
-    ////////////////////////////////
-    #[external]
-    fn change_secret_value(new_secret_value: u128) {
-        // Only ex10 can call this function
-        only_ex10();
-        // Changing secret value
-        secret_value::write(new_secret_value);
-        return ();
-    }
-
-    ////////////////////////////////
-    // Internal functions - Administration
-    // Only admins can call these. You don't need to understand them to finish the exercise.
-    ////////////////////////////////
-    fn only_ex10() {
-        let caller = get_caller_address();
-        let ex10_address = ex10_address::read();
-        assert(ex10_address == caller, 'ADDRESS_NOT_MATCH');
+    #[generate_trait]
+    impl InternalFunctions of InternalFunctionsTrait {
+        ////////////////////////////////
+        // Internal functions - Administration
+        // Only admins can call these. You don't need to understand them to finish the exercise.
+        ////////////////////////////////
+        fn only_ex10(self: @ContractState) {
+            let caller = get_caller_address();
+            let ex10_address = self.ex10_address.read();
+            assert(ex10_address == caller, 'ADDRESS_NOT_MATCH');
+        }
     }
 }

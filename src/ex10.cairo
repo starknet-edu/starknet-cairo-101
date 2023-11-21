@@ -11,11 +11,11 @@
 use starknet::ContractAddress;
 
 #[starknet::interface]
-trait Ex10Trait<TContractState> {
-    fn get_ex10b_address(self: @TContractState) -> ContractAddress;
-    fn claim_points(ref self: TContractState, secret_value_i_guess: u128, next_secret_value_i_chose: u128);
-    fn update_class_hash(ref self: TContractState, class_hash: felt252);
-    fn set_ex_10b_address(ref self: TContractState, ex10b_addr: ContractAddress);
+trait Ex10Trait<T> {
+    fn get_ex10b_address(self: @T) -> ContractAddress;
+    fn claim_points(ref self: T, secret_value_i_guess: u128, next_secret_value_i_chose: u128);
+    fn update_class_hash(ref self: T, class_hash: felt252);
+    fn set_ex_10b_address(ref self: T, ex10b_addr: ContractAddress);
 }
 
 #[starknet::contract]
@@ -30,6 +30,17 @@ mod Ex10 {
     use option::OptionTrait;
 
     ////////////////////////////////
+    // Storage
+    // In Cairo 1, storage is declared in a struct
+    // Storage is not visible by default through the ABI
+    ////////////////////////////////
+    #[storage]
+    struct Storage {
+        ex10b_address: ContractAddress,
+        setup_is_finished: bool,
+    }    
+
+    ////////////////////////////////
     // Internal imports
     // These functions become part of the set of functions of the current contract
     ////////////////////////////////
@@ -39,16 +50,6 @@ mod Ex10 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
     use starknet_cairo_101::utils::Iex10b::Iex10bDispatcher;
     use starknet_cairo_101::utils::Iex10b::Iex10bDispatcherTrait;
-
-    ////////////////////////////////
-    // Storage
-    // Storage is not visible by default through the ABI
-    ////////////////////////////////
-    #[storage]
-    struct Storage {
-        ex10b_address: ContractAddress,
-        setup_is_finished: bool,
-    }
 
     ////////////////////////////////
     // Constructor
@@ -63,6 +64,7 @@ mod Ex10 {
 
     #[external(v0)]
     impl Ex10Impl of super::Ex10Trait<ContractState> {
+
         ////////////////////////////////
         // View Functions
         // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
@@ -91,17 +93,18 @@ mod Ex10 {
             Iex10bDispatcher{contract_address: ex10b_addr}.change_secret_value(next_secret_value_i_chose);
 
             // Checking if the user has validated the exercise before
-            self.validate_exercise(sender_address);
+            validate_exercise(sender_address);
             // Sending points to the address specified as parameter
-            self.distribute_points(sender_address, 2_u128);
+            distribute_points(sender_address, 2_u128);
         }
 
         ////////////////////////////////
         // External functions - Administration
         // Only admins can call these. You don't need to understand them to finish the exercise.
         ////////////////////////////////
+        
         fn update_class_hash(ref self: ContractState, class_hash: felt252) {
-            self.update_class_hash_by_admin(class_hash);
+            update_class_hash_by_admin(class_hash);
         }
 
         fn set_ex_10b_address(ref self: ContractState, ex10b_addr: ContractAddress) {
