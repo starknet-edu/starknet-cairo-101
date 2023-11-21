@@ -1,6 +1,6 @@
 ////////////////////////////////
 // ERC20Base
-// A Base ERC20 contract to implement ERC20 standarded methods
+// A Base ERC20 contract to implement ERC20 standardised methods
 // such as `transfer`, `transfer_from`, `mint`, 'burn', 'approve' etc.
 ////////////////////////////////
 
