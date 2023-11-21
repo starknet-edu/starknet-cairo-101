@@ -157,7 +157,7 @@ mod Ex05 {
     }
 
     #[generate_trait]
-    impl InternalImpl<ContractState> of InternalTrait<ContractState> {
+    impl InternalImpl of InternalTrait {
         fn set_a_random_value(ref self: ContractState, mut idx: u128, mut values: Array::<u128>) {
             helper::check_gas();
             
