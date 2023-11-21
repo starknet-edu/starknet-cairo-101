@@ -36,6 +36,9 @@ mod Ex01 {
     use starknet_cairo_101::utils::ex00_base::Ex00Base::distribute_points;
     use starknet_cairo_101::utils::ex00_base::Ex00Base::update_class_hash_by_admin;
 
+    #[storage]
+    struct Storage {}
+
     ////////////////////////////////
     // Constructor
     // This function (indicated with #[constructor]) is called once, when the contract is deployed, and is used to initialize the contract's state
