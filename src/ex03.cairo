@@ -79,7 +79,6 @@ mod Ex03 {
         // View Functions
         // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
         ////////////////////////////////
-        #[view]
         fn get_user_counters(self: @ContractState, account: ContractAddress) -> u128 {
             // We are not calling the read function without any parameter (e.g. user_counters::read()) but with a parameter (e.g. user_counters::read(sender_address))
             // because we want to read the value of the mapping for a specific key (the sender address)
@@ -95,7 +94,6 @@ mod Ex03 {
         // You can alter the state of the contract by calling external functions such as increment_counter, decrement_counter and reset_counter
         // After you altered the state of the contract, you can read from the contract's storage using the get_user_counters function to check if the counter is equal to 3
         // Then you can call the claim_points function to check if the counter is equal to 3 and if so credit the user with points
-        #[external]
         fn increment_counter(ref self: ContractState) {
             // Reading caller address
             let sender_address: ContractAddress = get_caller_address();
@@ -105,7 +103,6 @@ mod Ex03 {
             self.user_counters.write(sender_address, current_counter_value + 2_u128);
         }
 
-        #[external]
         fn decrement_counter(ref self: ContractState) {
             // Reading caller address
             let sender_address: ContractAddress = get_caller_address();
@@ -115,7 +112,6 @@ mod Ex03 {
             self.user_counters.write(sender_address, current_counter_value - 1_u128);
         }
 
-        #[external]
         fn reset_counter(ref self: ContractState) {
             // Reading caller address
             let sender_address: ContractAddress = get_caller_address();
@@ -123,8 +119,6 @@ mod Ex03 {
             self.user_counters.write(sender_address, 0_u128);
         }
 
-
-        #[external]
         fn claim_points(ref self: ContractState) {
             // Reading caller address
             let sender_address: ContractAddress = get_caller_address();
@@ -143,7 +137,6 @@ mod Ex03 {
         // External functions - Administration
         // Only admins can call these. You don't need to understand them to finish the exercise.
         ////////////////////////////////
-        #[external]
         fn update_class_hash(ref self: ContractState, class_hash: felt252) {
             update_class_hash_by_admin(class_hash);
         }

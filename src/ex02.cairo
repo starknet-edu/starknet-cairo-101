@@ -79,7 +79,6 @@ mod Ex02 {
         // View Functions
         // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
         ////////////////////////////////
-        #[view]
         fn my_secret_value(self: @ContractState) -> u128 {
             // The contract read the value with ::read()
             // You may have noticed that in Cairo 1 all lines end with a semicolon.
@@ -92,7 +91,6 @@ mod Ex02 {
         // External functions
         // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
         ////////////////////////////////
-        #[external]
         fn claim_points(ref self: ContractState, my_value: u128) {
             // Reading caller address using the Starknet core library function get_caller_address() (similar to msg.sender in Solidity)
             // and storing it in a variable called sender_address.
@@ -107,12 +105,11 @@ mod Ex02 {
             // Sending points to the address specified as parameter using the distribute_points function from the Ex00Base contract
             distribute_points(sender_address, 2_u128);
         }
-        
+
         ////////////////////////////////
         // External functions - Administration
         // Only admins can call these. You don't need to understand them to finish the exercise.
         ////////////////////////////////
-        #[external]
         fn update_class_hash(ref self: ContractState, class_hash: felt252) {
             update_class_hash_by_admin(class_hash);
         }

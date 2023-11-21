@@ -54,7 +54,6 @@ mod Ex01 {
         // External functions
         // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
         ////////////////////////////////
-        #[external]
         fn claim_points(ref self: ContractState) {
             // Reading caller address
             let sender_address = get_caller_address();
@@ -63,11 +62,11 @@ mod Ex01 {
             // Sending points to the address specified as parameter
             distribute_points(sender_address, 2_u128);
         }
+        
         ////////////////////////////////
         // External functions - Administration
         // Only admins can call these. You don't need to understand them to finish the exercise.
         ////////////////////////////////
-        #[external]
         fn update_class_hash(ref self: ContractState, class_hash: felt252) {
             update_class_hash_by_admin(class_hash);
         }

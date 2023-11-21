@@ -67,7 +67,6 @@ mod Ex10 {
         // View Functions
         // Public variables should be declared explicitly with a getter function (indicated with #[view]) to be visible through the ABI and callable from other contracts
         ////////////////////////////////
-        #[view]
         fn get_ex10b_address(self: @ContractState) -> ContractAddress {
             return self.ex10b_address.read();
         }
@@ -76,7 +75,6 @@ mod Ex10 {
         // External functions
         // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
         ////////////////////////////////
-        #[external]
         fn claim_points(ref self: ContractState, secret_value_i_guess: u128, next_secret_value_i_chose: u128) {
             // Reading caller address
             let sender_address: ContractAddress = get_caller_address();
@@ -102,12 +100,10 @@ mod Ex10 {
         // External functions - Administration
         // Only admins can call these. You don't need to understand them to finish the exercise.
         ////////////////////////////////
-        #[external]
         fn update_class_hash(ref self: ContractState, class_hash: felt252) {
             update_class_hash_by_admin(class_hash);
         }
 
-        #[external]
         fn set_ex_10b_address(ref self: ContractState, ex10b_addr: ContractAddress) {
             let is_setup = self.setup_is_finished.read();
             assert(is_setup == false, 'SETUP_FINISHED');
