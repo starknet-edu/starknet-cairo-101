@@ -4,15 +4,15 @@ use starknet::ContractAddress;
 // IERC20 INTERFACE
 //###################
 
-#[abi]
-trait IERC20 {
-    fn name() -> felt252;
-    fn symbol() -> felt252;
-    fn decimals() -> u8;
-    fn totalSupply() -> u256;
-    fn balanceOf(account: ContractAddress) -> u256;
-    fn allowance(owner: ContractAddress, spender: ContractAddress) -> u256;
-    fn transfer(recipient: ContractAddress, amount: u256);
-    fn transferFrom(sender: ContractAddress, recipient: ContractAddress, amount: u256);
-    fn approve(spender: ContractAddress, amount: u256);
+#[starknet::interface]
+trait IERC20<T> {
+    fn name(self: @T) -> felt252;
+    fn symbol(self: @T) -> felt252;
+    fn decimals(self: @T) -> u8;
+    fn totalSupply(self: @T) -> u256;
+    fn balanceOf(self: @T, account: ContractAddress) -> u256;
+    fn allowance(self: @T, owner: ContractAddress, spender: ContractAddress) -> u256;
+    fn transfer(self: @T, recipient: ContractAddress, amount: u256);
+    fn transferFrom(self: @T, sender: ContractAddress, recipient: ContractAddress, amount: u256);
+    fn approve(self: @T, spender: ContractAddress, amount: u256);
 }

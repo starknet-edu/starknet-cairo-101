@@ -59,7 +59,7 @@ mod Ex10 {
     fn constructor(
         ref self: ContractState, _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
-        ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
+        self.ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
     }
 
     #[external(v0)]
