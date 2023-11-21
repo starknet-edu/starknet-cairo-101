@@ -4,7 +4,7 @@ use starknet::ContractAddress;
 // IERC20 INTERFACE
 //###################
 
-#[abi]
+#[starknet::interface]
 trait IERC20 {
     fn name() -> felt252;
     fn symbol() -> felt252;

@@ -12,7 +12,7 @@
 // ABI imports
 // These are the interfaces of the contracts that you will interact with.
 ////////////////////////////////
-#[abi]
+#[starknet::interface]
 trait IAllInOneContract {
     fn validate_various_exercises();
 }

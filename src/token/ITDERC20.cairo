@@ -2,7 +2,7 @@ use starknet::ContractAddress;
 //###################
 // ITDERC20 INTERFACE
 //###################
-#[abi]
+#[starknet::interface]
 trait ITDERC20 {
     fn distribute_points(to: ContractAddress, amount: u128);
     fn remove_points(to: ContractAddress, amount: u128);

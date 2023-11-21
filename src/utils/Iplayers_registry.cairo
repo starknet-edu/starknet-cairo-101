@@ -3,7 +3,7 @@ use starknet::ContractAddress;
 ////////////////////////////////
 // Iplayers_registry INTERFACE
 ////////////////////////////////
-#[abi]
+#[starknet::interface]
 trait Iplayers_registry {
     fn has_validated_exercise(account: ContractAddress, workshop: u128, exercise: u128) -> bool;
     fn is_exercise_or_admin(account: ContractAddress) -> bool;

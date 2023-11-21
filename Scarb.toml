@@ -5,3 +5,6 @@ description = "Workshop to learn the basics of Cairo."
 homepage = "https://github.com/starknet-edu/starknet-cairo-101"
 
 [[target.starknet-contract]]
+
+[dependencies]
+starknet = ">=2.3.1"
