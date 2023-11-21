@@ -4,7 +4,11 @@ version = "0.1.0"
 description = "Workshop to learn the basics of Cairo."
 homepage = "https://github.com/starknet-edu/starknet-cairo-101"
 
-[[target.starknet-contract]]
-
 [dependencies]
-starknet = ">=2.3.1"
+starknet = ">=2.0.1"
+
+[cairo]
+sierra-replace-ids = true
+
+[[target.starknet-contract]]
+sierra = true

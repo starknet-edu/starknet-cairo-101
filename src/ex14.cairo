@@ -12,19 +12,27 @@
 // ABI imports
 // These are the interfaces of the contracts that you will interact with.
 ////////////////////////////////
+
+use starknet::ContractAddress;
+
 #[starknet::interface]
-trait IAllInOneContract {
-    fn validate_various_exercises();
+trait IEx14<TContractState> {
+    fn claim_points(self: @TContractState);
+    fn update_class_hash(self: @TContractState, class_hash: felt252);
 }
 
-#[contract]
+#[starknet::interface]
+trait IAllInOneContract<TContractState> {
+    fn validate_various_exercises(self: @TContractState);
+}
+
+#[starknet::contract]
 mod Ex14 {
     ////////////////////////////////
     // Core Library imports
     // These are syscalls and functionalities that allow you to write Starknet contracts
     ////////////////////////////////
-    use starknet::get_caller_address;
-    use starknet::ContractAddress;
+    use starknet::{ContractAddress, get_caller_address};
 
     ////////////////////////////////
     // Internal imports
@@ -42,11 +50,19 @@ mod Ex14 {
     use super::IAllInOneContractDispatcherTrait;
 
     ////////////////////////////////
+    // Storage
+    // This is a struct that holds the contract state #[storage])
+    ////////////////////////////////
+    #[storage]
+    struct Storage {}
+
+    ////////////////////////////////
     // Constructor
     // This function (indicated with #[constructor]) is called when the contract is deployed and is used to initialize the contract's state
     ////////////////////////////////
     #[constructor]
     fn constructor(
+        ref self: ContractState,
         _tderc20_address: ContractAddress, _players_registry: ContractAddress, _workshop_id: u128, _exercise_id: u128
     ) {
         ex_initializer(_tderc20_address, _players_registry, _workshop_id, _exercise_id);
@@ -56,45 +72,46 @@ mod Ex14 {
     // External functions
     // These functions are callable by other contracts or external calls such as DAPP, which are indicated with #[external] (similar to "public" in Solidity)
     ////////////////////////////////
-    #[external]
-    fn claim_points() {
-        // Reading caller address
-        let sender_address: ContractAddress = get_caller_address();
-        // Retrieving ERC20 address
-        let erc20_address = tderc20_address();
+    #[external(v0)]
+    impl Ex14TraitImpl of super::IEx14<ContractState> {
+        fn claim_points(self: @ContractState) {
+            // Reading caller address
+            let sender_address: ContractAddress = get_caller_address();
+            // Retrieving ERC20 address
+            let erc20_address = tderc20_address();
 
-        // Reading contract balance before calling
-        let balance_before = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
+            // Reading contract balance before calling
+            let balance_before = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
 
-        // Calling caller's validate_various_exercises() function
-        IAllInOneContractDispatcher{contract_address: sender_address}.validate_various_exercises();
+            // Calling caller's validate_various_exercises() function
+            IAllInOneContractDispatcher{contract_address: sender_address}.validate_various_exercises();
 
-        // Reading contract balance after calling
-        let balance_after = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
+            // Reading contract balance after calling
+            let balance_after = IERC20Dispatcher{contract_address: erc20_address}.balanceOf(sender_address);
 
-        // Verifying that caller collected some points
-        assert(balance_before >= u256 { low: 0_u128, high: 0_u128 } & balance_after > balance_before, 'NO_POINTS_COLLECTED');
+            // Verifying that caller collected some points
+            assert(balance_before >= u256 { low: 0_u128, high: 0_u128 } && balance_after > balance_before, 'NO_POINTS_COLLECTED');
 
-        // Read how many points were collected
-        let collected_points = balance_after - balance_before;
+            // Read how many points were collected
+            let collected_points = balance_after - balance_before;
 
-        // Check that at least 20 points were collected
-        let decimals = IERC20Dispatcher{contract_address: erc20_address}.decimals();
-        let token_decimals = get_token_in_decimals(decimals);
-        let token_amount = 20_u128 * token_decimals;
-        assert(collected_points >= u256 { low: token_amount, high: 0_u128 }, 'NO_ENOUGH_POINTS_COLLECTED');
+            // Check that at least 20 points were collected
+            let decimals = IERC20Dispatcher{contract_address: erc20_address}.decimals();
+            let token_decimals = get_token_in_decimals(decimals);
+            let token_amount = 20_u128 * token_decimals;
+            assert(collected_points >= u256 { low: token_amount, high: 0_u128 }, 'NO_ENOUGH_POINTS_COLLECTED');
 
-         // Checking if the user has validated the exercise before
-        validate_exercise(sender_address);
-        // Sending points to the address specified as parameter
-        distribute_points(sender_address, 2_u128);
-    }
-    ////////////////////////////////
-    // External functions - Administration
-    // Only admins can call these. You don't need to understand them to finish the exercise.
-    ////////////////////////////////
-    #[external]
-    fn update_class_hash(class_hash: felt252) {
-        update_class_hash_by_admin(class_hash);
+            // Checking if the user has validated the exercise before
+            validate_exercise(sender_address);
+            // Sending points to the address specified as parameter
+            distribute_points(sender_address, 2_u128);
+        }    
+        ////////////////////////////////
+        // External functions - Administration
+        // Only admins can call these. You don't need to understand them to finish the exercise.
+        ////////////////////////////////
+        fn update_class_hash(self: @ContractState, class_hash: felt252) {
+            update_class_hash_by_admin(class_hash);
+        }
     }
 }
