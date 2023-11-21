@@ -8,7 +8,7 @@
 // - But this time, the external function you will call will call an inner function
 ////////////////////////////////
 #[starknet::interface] 
-trait Ex06Trait<T> {
+trait Ex06Trait<TContractState> {
     fn claim_points(ref self: ContractState, expected_value: u128);
     fn assign_user_slot(ref self: ContractState);
     fn external_handler_for_internal_function(ref self: ContractState, a_value: u128);

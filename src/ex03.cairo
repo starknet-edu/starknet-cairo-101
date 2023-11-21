@@ -19,14 +19,14 @@
 use starknet::ContractAddress;
 
 #[starknet::interface]
-trait Ex03Trait<T> {
-    fn get_user_counters(self: @T, account: ContractAddress) -> u128;
+trait Ex03Trait<TContractState> {
+    fn get_user_counters(self: @TContractState, account: ContractAddress) -> u128;
 
-    fn increment_counter(ref self: T);
-    fn decrement_counter(ref self: T);
-    fn reset_counter(ref self: T);
-    fn claim_points(ref self: T);
-    fn update_class_hash(ref self: T, class_hash: felt252);
+    fn increment_counter(ref self: TContractState);
+    fn decrement_counter(ref self: TContractState);
+    fn reset_counter(ref self: TContractState);
+    fn claim_points(ref self: TContractState);
+    fn update_class_hash(ref self: TContractState, class_hash: felt252);
 }
 
 #[starknet::contract]

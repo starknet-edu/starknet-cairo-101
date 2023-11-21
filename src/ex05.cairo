@@ -15,15 +15,15 @@
 use starknet::ContractAddress;
 
 #[starknet::interface]
-trait Ex05Trait<T> {
-    fn get_user_slots(self: @T, account: ContractAddress) -> u128;
-    fn get_user_values(self: @T, account: ContractAddress) -> u128;
+trait Ex05Trait<TContractState> {
+    fn get_user_slots(self: @TContractState, account: ContractAddress) -> u128;
+    fn get_user_values(self: @TContractState, account: ContractAddress) -> u128;
 
-    fn claim_points(ref self: T, expected_value: u128);
-    fn assign_user_slot(ref self: T);
-    fn copy_secret_value_to_readable_mapping(ref self: T);
-    fn update_class_hash(ref self: T, class_hash: felt252);
-    fn set_random_values(ref self: T, values: Array::<u128>);
+    fn claim_points(ref self: TContractState, expected_value: u128);
+    fn assign_user_slot(ref self: TContractState);
+    fn copy_secret_value_to_readable_mapping(ref self: TContractState);
+    fn update_class_hash(ref self: TContractState, class_hash: felt252);
+    fn set_random_values(ref self: TContractState, values: Array::<u128>);
 }
 
 #[starknet::contract]

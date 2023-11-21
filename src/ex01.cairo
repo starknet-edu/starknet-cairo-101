@@ -12,9 +12,9 @@
 use starknet::ContractAddress;
 
 #[starknet::interface]
-trait Ex01Trait<T> {
-    fn claim_points(ref self: T);
-    fn update_class_hash(ref self: T, class_hash: felt252);
+trait Ex01Trait<TContractState> {
+    fn claim_points(ref self: TContractState);
+    fn update_class_hash(ref self: TContractState, class_hash: felt252);
 }
 
 // Contracts are defined using the #[contract] attribute (similar to "contract" in Solidity) and are defined in a module

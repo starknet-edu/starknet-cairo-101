@@ -11,11 +11,11 @@
 use starknet::ContractAddress;
 
 #[starknet::interface]
-trait Ex10Trait<T> {
-    fn get_ex10b_address(self: @T) -> ContractAddress;
-    fn claim_points(ref self: T, secret_value_i_guess: u128, next_secret_value_i_chose: u128);
-    fn update_class_hash(ref self: T, class_hash: felt252);
-    fn set_ex_10b_address(ref self: T, ex10b_addr: ContractAddress);
+trait Ex10Trait<TContractState> {
+    fn get_ex10b_address(self: @TContractState) -> ContractAddress;
+    fn claim_points(ref self: TContractState, secret_value_i_guess: u128, next_secret_value_i_chose: u128);
+    fn update_class_hash(ref self: TContractState, class_hash: felt252);
+    fn set_ex_10b_address(ref self: TContractState, ex10b_addr: ContractAddress);
 }
 
 #[starknet::contract]

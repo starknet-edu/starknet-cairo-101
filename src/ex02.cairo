@@ -17,10 +17,10 @@
 use starknet::ContractAddress;
 
 #[starknet::interface]
-trait Ex02Trait<T> {
-    fn my_secret_value(self: @T) -> u128;
-    fn claim_points(ref self: T, my_value: u128);
-    fn update_class_hash(ref self: T, class_hash: felt252);
+trait Ex02Trait<TContractState> {
+    fn my_secret_value(self: @TContractState) -> u128;
+    fn claim_points(ref self: TContractState, my_value: u128);
+    fn update_class_hash(ref self: TContractState, class_hash: felt252);
 }
 
 #[starknet::contract]
