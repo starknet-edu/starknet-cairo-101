@@ -4,4 +4,11 @@ version = "0.1.0"
 description = "Workshop to learn the basics of Cairo."
 homepage = "https://github.com/starknet-edu/starknet-cairo-101"
 
+[dependencies]
+starknet = ">=2.3.1"
+openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git"}
+
 [[target.starknet-contract]]
+sierra = true
+casm = true
+casm-add-pythonic-hints = true
