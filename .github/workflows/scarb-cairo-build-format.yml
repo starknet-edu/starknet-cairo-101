@@ -1,0 +1,26 @@
+name: Scarb Cairo Build and Format
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Install Scarb
+      - name: Install Scarb
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+
+      # Build and format all .cairo files
+      - name: Build and Format Cairo Files
+        run: |
+          scarb build
+          scarb fmt
