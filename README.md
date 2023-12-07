@@ -4,7 +4,7 @@ This repository is **not updated** with the latest Cairo syntax and hence, we do
 You can find more details about the issue and exercises breakdown here:
 https://github.com/starknet-edu/starknet-cairo-101/issues/61
 
-You can also ping me(@gyanlakshmi) or Omar(@omarespejel) on Telegram to tag you on the right tasks.
+You can also ping me(@gyanlakshmi) or Omar(@omarespejel) on Telegram to tag you on the right task.
 
 # Starknet Cairo 101 Automated Workshop
 
